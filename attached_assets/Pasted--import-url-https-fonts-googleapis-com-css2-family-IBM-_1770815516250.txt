@@ -23,12 +23,12 @@
     --orange: #ffa940;
     --red: #ff6b6b;
   }
-
+  
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
   }
-
+  
   body {
     font-family: 'Manrope', 'IBM Plex Sans Arabic', sans-serif;
     background: var(--bg);
@@ -36,11 +36,11 @@
     line-height: 1.6;
     overflow-x: hidden;
   }
-
+  
   html[dir="rtl"] {
     direction: rtl;
   }
-
+  
   html[dir="rtl"] body {
     font-family: 'IBM Plex Sans Arabic', 'Manrope', sans-serif;
   }
@@ -52,33 +52,22 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-
+  
   .gradient-bg {
     background: linear-gradient(135deg, #7c5cfc 0%, #9b8afb 50%, #b4a5fd 100%);
   }
-
+  
   .glow {
     box-shadow: 0 4px 20px rgba(124, 92, 252, 0.35);
   }
-
+  
   .section-label {
     @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#b4a5fd];
   }
-
+  
   .section-label::before {
     content: '';
     @apply w-5 h-0.5 bg-gradient-to-r from-[#7c5cfc] to-[#b4a5fd] rounded-full;
-  }
-
-  .fi {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .fi.vis {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -86,15 +75,15 @@
   .animate-fade-up {
     animation: fadeUp 0.7s ease forwards;
   }
-
+  
   .animate-scroll-x {
     animation: scroll-x 35s linear infinite;
   }
-
+  
   .animate-wave {
     animation: wave 1.4s ease-in-out infinite;
   }
-
+  
   .animation-delay-100 { animation-delay: 0.1s; }
   .animation-delay-200 { animation-delay: 0.2s; }
   .animation-delay-300 { animation-delay: 0.3s; }
@@ -129,10 +118,6 @@
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #7c5cfc, #9b8afb);
   border-radius: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg);
 }
 
 ::selection {

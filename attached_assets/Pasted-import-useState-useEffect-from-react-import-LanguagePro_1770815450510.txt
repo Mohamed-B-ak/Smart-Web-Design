@@ -1,0 +1,117 @@
+import { useState, useEffect } from 'react';
+import { LanguageProvider } from '@/context/LanguageContext';
+import type { BlogPost as BlogPostType } from '@/data/blog';
+import { getBlogPostBySlug } from '@/data/blog';
+import Navigation from '@/sections/Navigation';
+import Hero from '@/sections/Hero';
+import LogoCarousel from '@/sections/LogoCarousel';
+import ScaleBanner from '@/sections/ScaleBanner';
+import WhatIs from '@/sections/WhatIs';
+import Demo from '@/sections/Demo';
+import Testimonials from '@/sections/Testimonials';
+import TalksLikePeople from '@/sections/TalksLikePeople';
+import Highlights from '@/sections/Highlights';
+import Features from '@/sections/Features';
+import QA from '@/sections/QA';
+import Omnichannel from '@/sections/Omnichannel';
+import Telephony from '@/sections/Telephony';
+import Security from '@/sections/Security';
+import Integrations from '@/sections/Integrations';
+import FAQ from '@/sections/FAQ';
+import CTABanner from '@/sections/CTABanner';
+import Footer from '@/sections/Footer';
+import BlogList from '@/sections/BlogList';
+import BlogPost from '@/sections/BlogPost';
+
+type Page = 'home' | 'blog' | 'blog-post';
+
+function AppContent() {
+  const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [currentPost, setCurrentPost] = useState<BlogPostType | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('vis');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.fi').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [currentPage]);
+
+  const handleBlogClick = (slug: string) => {
+    const post = getBlogPostBySlug(slug);
+    if (post) {
+      setCurrentPost(post);
+      setCurrentPage('blog-post');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleBackToBlog = () => {
+    setCurrentPage('blog');
+    setCurrentPost(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <div className="min-h-screen bg-[#09090f]">
+      <Navigation />
+      
+      {currentPage === 'home' && (
+        <main>
+          <Hero />
+          <LogoCarousel />
+          <ScaleBanner />
+          <WhatIs />
+          <Demo />
+          <Testimonials />
+          <TalksLikePeople />
+          <Highlights />
+          <Features />
+          <QA />
+          <Omnichannel />
+          <Telephony />
+          <Security />
+          <Integrations />
+          <FAQ />
+          <CTABanner />
+        </main>
+      )}
+
+      {currentPage === 'blog' && (
+        <main>
+          <BlogList onPostClick={handleBlogClick} />
+        </main>
+      )}
+
+      {currentPage === 'blog-post' && currentPost && (
+        <main>
+          <BlogPost post={currentPost} onBack={handleBackToBlog} />
+        </main>
+      )}
+
+      <Footer />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
+  );
+}
+
+export default App;

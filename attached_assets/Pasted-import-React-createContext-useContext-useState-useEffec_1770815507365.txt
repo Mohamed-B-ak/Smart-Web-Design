@@ -1,0 +1,89 @@
+import React, { createContext, useContext, useState, useEffect } from 'react';
+
+type Language = 'en' | 'ar';
+
+interface LanguageContextType {
+  lang: Language;
+  setLang: (lang: Language) => void;
+  t: (key: string) => string;
+}
+
+const translations: Record<Language, Record<string, string>> = {
+  en: {
+    'nav.product': 'Product',
+    'nav.pricing': 'Pricing',
+    'nav.for_business': 'For Business',
+    'nav.for_developers': 'For Developers',
+    'nav.resources': 'Resources',
+    'nav.company': 'Company',
+    'nav.login': 'Login',
+    'nav.contact_sales': 'Contact Sales',
+    'nav.try_free': 'Try For Free',
+    'hero.badge': '#1 AI Voice Agent Platform for Automating Calls',
+    'hero.title': 'Meet Your AI Call Center',
+    'hero.title_span': 'Future',
+    'hero.subtitle': 'Build, deploy, and manage next-generation AI voice agents that sound human, execute tasks, and scale effortlessly.',
+    'hero.cta_demo': 'Try Our Live Demo',
+    'hero.cta_sales': 'Contact Sales',
+    // ... more translations
+  },
+  ar: {
+    'nav.product': 'المنتج',
+    'nav.pricing': 'الأسعار',
+    'nav.for_business': 'للأعمال',
+    'nav.for_developers': 'للمطورين',
+    'nav.resources': 'الموارد',
+    'nav.company': 'الشركة',
+    'nav.login': 'دخول',
+    'nav.contact_sales': 'تواصل معنا',
+    'nav.try_free': 'جرّب مجاناً',
+    'hero.badge': 'المنصة الأولى لوكيل الصوت الذكي لأتمتة المكالمات',
+    'hero.title': 'مركز الاتصال الذكي',
+    'hero.title_span': 'المستقبل',
+    'hero.subtitle': 'ابنِ وأطلق وأدِر وكلاء صوتيين بالذكاء الاصطناعي يبدون كالبشر، ينفذون المهام، ويتوسعون بسهولة.',
+    'hero.cta_demo': 'جرّب العرض المباشر',
+    'hero.cta_sales': 'تواصل مع المبيعات',
+    // ... more translations
+  }
+};
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const [lang, setLangState] = useState<Language>('en');
+
+  useEffect(() => {
+    const savedLang = localStorage.getItem('sondos-lang') as Language;
+    if (savedLang && (savedLang === 'en' || savedLang === 'ar')) {
+      setLangState(savedLang);
+    }
+  }, []);
+
+  const setLang = (newLang: Language) => {
+    setLangState(newLang);
+    localStorage.setItem('sondos-lang', newLang);
+    document.documentElement.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', newLang);
+  };
+
+  const t = (key: string): string => translations[lang][key] || key;
+
+  useEffect(() => {
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', lang);
+  }, [lang]);
+
+  return (
+    <LanguageContext.Provider value={{ lang, setLang, t }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+}
+
+export function useLanguage() {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+}
