@@ -1,0 +1,63 @@
+import { useLanguage } from '@/context/LanguageContext';
+import type { BlogPost as BlogPostType } from '@/data/blog';
+import { ArrowLeft, ArrowRight, Clock, User } from 'lucide-react';
+
+interface BlogPostProps {
+  post: BlogPostType;
+  onBack: () => void;
+}
+
+export default function BlogPost({ post, onBack }: BlogPostProps) {
+  const { lang, t } = useLanguage();
+
+  return (
+    <article className="pt-32 pb-24 px-6" data-testid="section-blog-post">
+      <div className="max-w-[760px] mx-auto">
+        <button
+          onClick={onBack}
+          className="inline-flex items-center gap-2 text-[14px] text-[#9b8afb] hover:text-white mb-8 transition-colors"
+          data-testid="button-back-blog"
+        >
+          {lang === 'en' ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
+          {t('blog.back')}
+        </button>
+
+        <div className="mb-8">
+          <span className="text-[12px] font-medium text-[#9b8afb] bg-[rgba(124,92,252,0.1)] px-3 py-1 rounded-full">
+            {lang === 'ar' ? post.categoryAr : post.category}
+          </span>
+        </div>
+
+        <h1 className="text-3xl md:text-4xl font-bold mb-6">
+          {lang === 'ar' ? post.titleAr : post.title}
+        </h1>
+
+        <div className="flex items-center gap-6 mb-8 text-[13px] text-[#6e6e85]">
+          <span className="flex items-center gap-1.5">
+            <User className="w-4 h-4" />
+            {post.author}
+          </span>
+          <span>{post.date}</span>
+          <span className="flex items-center gap-1.5">
+            <Clock className="w-4 h-4" />
+            {post.readTime} {t('blog.min_read')}
+          </span>
+        </div>
+
+        <div className="aspect-[2/1] rounded-2xl overflow-hidden mb-10">
+          <img
+            src={post.image}
+            alt={lang === 'ar' ? post.titleAr : post.title}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="prose prose-invert max-w-none text-[#d1d1d8] leading-relaxed text-[16px] space-y-4">
+          {(lang === 'ar' ? post.contentAr : post.content).split('\n').map((paragraph, i) => (
+            paragraph.trim() ? <p key={i}>{paragraph}</p> : null
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
