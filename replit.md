@@ -12,7 +12,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Frontend Architecture
 - **Framework**: React with TypeScript, built using Vite
-- **Routing**: The app uses a custom state-based page navigation system (`currentPage` state in App.tsx) for the main landing page sections, plus `wouter` for the Contact page and other standalone pages
+- **Routing**: The app uses a custom state-based page navigation system (`currentPage` state in App.tsx) with three pages: `home` (landing page), `blog` (blog list), and `blog-post` (individual blog post). Navigation component accepts `onNavigate` callback for page transitions. Blog link is in the main nav bar.
 - **Styling**: Tailwind CSS with CSS custom properties for theming. The design uses a dark theme (backgrounds: `#09090f` range, accent: `#7c5cfc` purple). shadcn/ui components are available in `client/src/components/ui/`
 - **Component Organization**: 
   - `client/src/sections/` — Full-page sections (Hero, Features, Demo, FAQ, etc.) used on the landing page
