@@ -14,13 +14,13 @@ export default function BlogList({ onPostClick }: BlogListProps) {
       <div className="max-w-[1100px] mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('blog.title')}</h1>
-          <p className="text-[#a1a1b5] text-lg">{t('blog.subtitle')}</p>
+          <p className="text-[#5a5a72] text-lg">{t('blog.subtitle')}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post) => (
             <article
               key={post.slug}
-              className="fi bg-[#12121c] border border-[rgba(124,92,252,0.1)] rounded-2xl overflow-hidden hover:border-[rgba(124,92,252,0.25)] transition-all cursor-pointer group"
+              className="fi bg-white border border-[rgba(124,92,252,0.1)] rounded-2xl overflow-hidden hover:border-[rgba(124,92,252,0.25)] transition-all cursor-pointer group"
               onClick={() => onPostClick(post.slug)}
               data-testid={`card-blog-${post.slug}`}
             >
@@ -36,7 +36,7 @@ export default function BlogList({ onPostClick }: BlogListProps) {
                   <span className="text-[12px] font-medium text-[#9b8afb] bg-[rgba(124,92,252,0.1)] px-2.5 py-1 rounded-full">
                     {lang === 'ar' ? post.categoryAr : post.category}
                   </span>
-                  <span className="flex items-center gap-1 text-[12px] text-[#6e6e85]">
+                  <span className="flex items-center gap-1 text-[12px] text-[#8a8aa0]">
                     <Clock className="w-3 h-3" />
                     {post.readTime} {t('blog.min_read')}
                   </span>
@@ -44,7 +44,7 @@ export default function BlogList({ onPostClick }: BlogListProps) {
                 <h3 className="text-lg font-semibold mb-2 group-hover:text-[#9b8afb] transition-colors">
                   {lang === 'ar' ? post.titleAr : post.title}
                 </h3>
-                <p className="text-[14px] text-[#a1a1b5] leading-relaxed mb-4 line-clamp-2">
+                <p className="text-[14px] text-[#5a5a72] leading-relaxed mb-4 line-clamp-2">
                   {lang === 'ar' ? post.excerptAr : post.excerpt}
                 </p>
                 <span className="inline-flex items-center gap-1 text-[13px] font-medium text-[#9b8afb]">

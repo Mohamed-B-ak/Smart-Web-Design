@@ -40,18 +40,18 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="border-t border-[rgba(255,255,255,0.06)] pt-16 pb-8 px-6" data-testid="section-footer">
+    <footer className="border-t border-[rgba(0,0,0,0.08)] pt-16 pb-8 px-6" data-testid="section-footer">
       <div className="max-w-[1100px] mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-14">
           <div className="col-span-2 md:col-span-1">
             <img src={logoImg} alt="Sondos AI" className="h-10 mb-4 object-contain" />
-            <p className="text-[13px] text-[#6e6e85] leading-relaxed max-w-[240px]">
+            <p className="text-[13px] text-[#8a8aa0] leading-relaxed max-w-[240px]">
               {t('footer.desc')}
             </p>
           </div>
           {columns.map((col, i) => (
             <div key={i}>
-              <h4 className="text-[13px] font-semibold text-[#a1a1b5] uppercase tracking-wider mb-4">
+              <h4 className="text-[13px] font-semibold text-[#5a5a72] uppercase tracking-wider mb-4">
                 {col.title}
               </h4>
               <ul className="space-y-2.5">
@@ -59,7 +59,7 @@ export default function Footer() {
                   <li key={j}>
                     <a
                       href={link.href}
-                      className="text-[14px] text-[#6e6e85] hover:text-white transition-colors"
+                      className="text-[14px] text-[#8a8aa0] hover:text-[#1a1a2e] transition-colors"
                     >
                       {link.label}
                     </a>
@@ -69,8 +69,8 @@ export default function Footer() {
             </div>
           ))}
         </div>
-        <div className="border-t border-[rgba(255,255,255,0.06)] pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[13px] text-[#6e6e85]">
+        <div className="border-t border-[rgba(0,0,0,0.08)] pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[13px] text-[#8a8aa0]">
             &copy; {new Date().getFullYear()} Sondos AI. {t('footer.rights')}
           </p>
           <div className="flex items-center gap-5">
@@ -78,7 +78,7 @@ export default function Footer() {
               <a
                 key={social}
                 href="#"
-                className="text-[13px] text-[#6e6e85] hover:text-white transition-colors"
+                className="text-[13px] text-[#8a8aa0] hover:text-[#1a1a2e] transition-colors"
               >
                 {social}
               </a>

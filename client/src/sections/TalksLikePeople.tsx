@@ -26,17 +26,17 @@ export default function TalksLikePeople() {
           <div>
             <span className="section-label mb-4 block">{t('talks.label')}</span>
             <h2 className="text-3xl md:text-4xl font-bold mb-5">{t('talks.title')}</h2>
-            <p className="text-[#a1a1b5] text-lg leading-relaxed">{t('talks.desc')}</p>
+            <p className="text-[#5a5a72] text-lg leading-relaxed">{t('talks.desc')}</p>
           </div>
 
-          <div className="fi bg-[#12121c] border border-[rgba(124,92,252,0.15)] rounded-2xl p-6 space-y-4">
+          <div className="fi bg-white border border-[rgba(124,92,252,0.15)] rounded-2xl p-6 space-y-4">
             {conversation.map((msg, i) => (
               <div
                 key={i}
                 className={`flex ${msg.role === 'customer' ? 'justify-end' : 'justify-start'}`}
               >
                 <div className={`max-w-[85%] ${msg.role === 'customer' ? '' : ''}`}>
-                  <p className="text-[11px] text-[#6e6e85] mb-1 px-1">
+                  <p className="text-[11px] text-[#8a8aa0] mb-1 px-1">
                     {msg.role === 'ai'
                       ? (lang === 'en' ? 'Sondos AI' : 'سندس AI')
                       : (lang === 'en' ? 'Customer' : 'العميل')}
@@ -44,8 +44,8 @@ export default function TalksLikePeople() {
                   <div
                     className={`px-4 py-3 rounded-2xl text-[14px] leading-relaxed ${
                       msg.role === 'ai'
-                        ? 'bg-[rgba(124,92,252,0.12)] text-[#e8e4fd] rounded-bl-sm'
-                        : 'bg-[rgba(255,255,255,0.06)] text-[#d1d1d8] rounded-br-sm'
+                        ? 'bg-[rgba(124,92,252,0.12)] text-[#2a2a42] rounded-bl-sm'
+                        : 'bg-[rgba(0,0,0,0.04)] text-[#3a3a52] rounded-br-sm'
                     }`}
                   >
                     {msg.text}

@@ -39,16 +39,16 @@ export default function Demo() {
       <div className="max-w-[900px] mx-auto text-center">
         <span className="section-label mb-4 block">{t('demo.label')}</span>
         <h2 className="text-3xl md:text-5xl font-bold mb-5">{t('demo.title')}</h2>
-        <p className="text-[#a1a1b5] text-lg mb-12">{t('demo.desc')}</p>
+        <p className="text-[#5a5a72] text-lg mb-12">{t('demo.desc')}</p>
 
-        <div className="fi bg-[#12121c] border border-[rgba(124,92,252,0.15)] rounded-3xl p-6 md:p-8">
+        <div className="fi bg-white border border-[rgba(124,92,252,0.15)] rounded-3xl p-6 md:p-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className={`w-10 h-10 rounded-full gradient-bg flex items-center justify-center ${active ? 'animate-pulse' : ''}`}>
                 <Mic className="w-5 h-5 text-white" />
               </div>
               <div className="text-left">
-                <p className="text-[14px] font-semibold text-white">{t('demo.agent')}</p>
+                <p className="text-[14px] font-semibold text-[#1a1a2e]">{t('demo.agent')}</p>
                 {active && <p className="text-[12px] text-[#00d68f]">{t('demo.speaking')}</p>}
               </div>
             </div>
@@ -68,7 +68,7 @@ export default function Demo() {
             )}
           </div>
 
-          <div className="min-h-[280px] bg-[rgba(9,9,15,0.5)] rounded-2xl p-5 mb-6 text-left space-y-4 overflow-y-auto max-h-[360px]">
+          <div className="min-h-[280px] bg-[#f0f2f8] rounded-2xl p-5 mb-6 text-left space-y-4 overflow-y-auto max-h-[360px]">
             {messages.map((msg, i) => (
               <div
                 key={i}
@@ -77,8 +77,8 @@ export default function Demo() {
                 <div
                   className={`max-w-[80%] px-4 py-3 rounded-2xl text-[14px] leading-relaxed ${
                     msg.role === 'agent'
-                      ? 'bg-[rgba(124,92,252,0.15)] text-[#e8e4fd] rounded-bl-sm'
-                      : 'bg-[rgba(255,255,255,0.08)] text-[#d1d1d8] rounded-br-sm'
+                      ? 'bg-[rgba(124,92,252,0.15)] text-[#2a2a42] rounded-bl-sm'
+                      : 'bg-[rgba(0,0,0,0.05)] text-[#3a3a52] rounded-br-sm'
                   }`}
                 >
                   {msg.text}
@@ -86,7 +86,7 @@ export default function Demo() {
               </div>
             ))}
             {messages.length === 0 && !active && (
-              <div className="flex items-center justify-center h-full text-[#6e6e85] text-[14px]">
+              <div className="flex items-center justify-center h-full text-[#8a8aa0] text-[14px]">
                 {lang === 'en' ? 'Click start to begin the demo' : 'انقر على ابدأ لبدء العرض'}
               </div>
             )}

@@ -61,7 +61,7 @@ export default function AnimatedBackground() {
       gradient.addColorStop(0, 'rgba(124, 92, 252, 0.15)');
       gradient.addColorStop(0.3, 'rgba(124, 92, 252, 0.08)');
       gradient.addColorStop(0.6, 'rgba(124, 92, 252, 0.03)');
-      gradient.addColorStop(1, 'rgba(9, 9, 15, 0)');
+      gradient.addColorStop(1, 'rgba(248, 249, 252, 0)');
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -88,7 +88,7 @@ export default function AnimatedBackground() {
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+        ctx.fillStyle = `rgba(124, 92, 252, ${particle.opacity * 0.4})`;
         ctx.fill();
 
         particlesRef.current.slice(i + 1).forEach((other) => {

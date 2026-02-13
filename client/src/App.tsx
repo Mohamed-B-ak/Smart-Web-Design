@@ -75,7 +75,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#09090f]">
+    <div className="min-h-screen bg-[#f8f9fc]">
       <Navigation onNavigate={handleNavigate} />
 
       {currentPage === 'home' && (

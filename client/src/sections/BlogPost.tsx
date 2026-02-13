@@ -15,7 +15,7 @@ export default function BlogPost({ post, onBack }: BlogPostProps) {
       <div className="max-w-[760px] mx-auto">
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-2 text-[14px] text-[#9b8afb] hover:text-white mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-[14px] text-[#9b8afb] hover:text-[#1a1a2e] mb-8 transition-colors"
           data-testid="button-back-blog"
         >
           {lang === 'en' ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
@@ -32,7 +32,7 @@ export default function BlogPost({ post, onBack }: BlogPostProps) {
           {lang === 'ar' ? post.titleAr : post.title}
         </h1>
 
-        <div className="flex items-center gap-6 mb-8 text-[13px] text-[#6e6e85]">
+        <div className="flex items-center gap-6 mb-8 text-[13px] text-[#8a8aa0]">
           <span className="flex items-center gap-1.5">
             <User className="w-4 h-4" />
             {post.author}
@@ -52,7 +52,7 @@ export default function BlogPost({ post, onBack }: BlogPostProps) {
           />
         </div>
 
-        <div className="prose prose-invert max-w-none text-[#d1d1d8] leading-relaxed text-[16px] space-y-4">
+        <div className="prose max-w-none text-[#3a3a52] leading-relaxed text-[16px] space-y-4">
           {(lang === 'ar' ? post.contentAr : post.content).split('\n').map((paragraph, i) => (
             paragraph.trim() ? <p key={i}>{paragraph}</p> : null
           ))}

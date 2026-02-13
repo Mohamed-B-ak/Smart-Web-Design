@@ -48,21 +48,21 @@ export default function Testimonials() {
           {testimonialsData.map((item, i) => (
             <div
               key={i}
-              className="fi bg-[#12121c] border border-[rgba(124,92,252,0.1)] rounded-2xl p-7 hover:border-[rgba(124,92,252,0.25)] transition-all"
+              className="fi bg-white border border-[rgba(124,92,252,0.1)] rounded-2xl p-7 hover:border-[rgba(124,92,252,0.25)] transition-all"
             >
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: item.rating }).map((_, j) => (
                   <Star key={j} className="w-4 h-4 fill-[#ffa940] text-[#ffa940]" />
                 ))}
               </div>
-              <p className="text-[15px] text-[#d1d1d8] leading-relaxed mb-6">
+              <p className="text-[15px] text-[#3a3a52] leading-relaxed mb-6">
                 "{lang === 'ar' ? item.quoteAr : item.quote}"
               </p>
               <div>
-                <p className="text-[14px] font-semibold text-white">
+                <p className="text-[14px] font-semibold text-[#1a1a2e]">
                   {lang === 'ar' ? item.nameAr : item.name}
                 </p>
-                <p className="text-[13px] text-[#6e6e85]">
+                <p className="text-[13px] text-[#8a8aa0]">
                   {lang === 'ar' ? item.roleAr : item.role} — {item.company}
                 </p>
               </div>

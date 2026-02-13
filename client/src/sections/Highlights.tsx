@@ -22,7 +22,7 @@ export default function Highlights() {
           {items.map((item, i) => (
             <div
               key={i}
-              className="fi bg-[#12121c] border border-[rgba(124,92,252,0.1)] rounded-2xl p-7 text-center hover:border-[rgba(124,92,252,0.25)] transition-all group"
+              className="fi bg-white border border-[rgba(124,92,252,0.1)] rounded-2xl p-7 text-center hover:border-[rgba(124,92,252,0.25)] transition-all group"
             >
               <div
                 className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-colors"
@@ -31,7 +31,7 @@ export default function Highlights() {
                 <item.icon className="w-7 h-7" style={{ color: item.color }} />
               </div>
               <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-              <p className="text-[14px] text-[#a1a1b5] leading-relaxed">{item.desc}</p>
+              <p className="text-[14px] text-[#5a5a72] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>

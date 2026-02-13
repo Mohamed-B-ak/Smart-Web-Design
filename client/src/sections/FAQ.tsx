@@ -25,7 +25,7 @@ export default function FAQ() {
           {faqs.map((faq, i) => (
             <div
               key={i}
-              className="fi bg-[#12121c] border border-[rgba(124,92,252,0.1)] rounded-xl overflow-hidden"
+              className="fi bg-white border border-[rgba(124,92,252,0.1)] rounded-xl overflow-hidden"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
@@ -34,14 +34,14 @@ export default function FAQ() {
               >
                 <span className="text-[15px] font-medium">{faq.q}</span>
                 <ChevronDown
-                  className={`w-5 h-5 text-[#6e6e85] shrink-0 transition-transform ${
+                  className={`w-5 h-5 text-[#8a8aa0] shrink-0 transition-transform ${
                     openIndex === i ? 'rotate-180' : ''
                   }`}
                 />
               </button>
               {openIndex === i && (
                 <div className="px-5 pb-5">
-                  <p className="text-[14px] text-[#a1a1b5] leading-relaxed">{faq.a}</p>
+                  <p className="text-[14px] text-[#5a5a72] leading-relaxed">{faq.a}</p>
                 </div>
               )}
             </div>

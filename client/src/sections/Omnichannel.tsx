@@ -17,13 +17,13 @@ export default function Omnichannel() {
         <div className="text-center mb-16">
           <span className="section-label mb-4 block">{t('omni.label')}</span>
           <h2 className="text-3xl md:text-5xl font-bold mb-5">{t('omni.title')}</h2>
-          <p className="text-[#a1a1b5] text-lg max-w-[580px] mx-auto">{t('omni.desc')}</p>
+          <p className="text-[#5a5a72] text-lg max-w-[580px] mx-auto">{t('omni.desc')}</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {channels.map((ch, i) => (
             <div
               key={i}
-              className="fi bg-[#12121c] border border-[rgba(124,92,252,0.1)] rounded-2xl p-6 text-center hover:border-[rgba(124,92,252,0.25)] transition-all"
+              className="fi bg-white border border-[rgba(124,92,252,0.1)] rounded-2xl p-6 text-center hover:border-[rgba(124,92,252,0.25)] transition-all"
             >
               <div
                 className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
@@ -32,13 +32,13 @@ export default function Omnichannel() {
                 <ch.icon className="w-7 h-7" style={{ color: ch.color }} />
               </div>
               <p className="text-[15px] font-semibold mb-3">{ch.label}</p>
-              <div className="w-full bg-[rgba(255,255,255,0.05)] rounded-full h-2">
+              <div className="w-full bg-[rgba(0,0,0,0.04)] rounded-full h-2">
                 <div
                   className="h-2 rounded-full transition-all duration-1000"
                   style={{ width: `${ch.pct}%`, backgroundColor: ch.color }}
                 />
               </div>
-              <p className="text-[13px] text-[#6e6e85] mt-2">{ch.pct}%</p>
+              <p className="text-[13px] text-[#8a8aa0] mt-2">{ch.pct}%</p>
             </div>
           ))}
         </div>

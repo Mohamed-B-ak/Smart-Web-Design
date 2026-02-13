@@ -49,7 +49,7 @@ export default function Navigation({ onNavigate }: NavigationProps) {
       data-testid="navigation"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[rgba(9,9,15,0.85)] backdrop-blur-xl border-b border-[rgba(255,255,255,0.06)]'
+          ? 'bg-[rgba(255,255,255,0.92)] backdrop-blur-xl border-b border-[rgba(0,0,0,0.08)]'
           : 'bg-transparent'
       }`}
     >
@@ -64,7 +64,7 @@ export default function Navigation({ onNavigate }: NavigationProps) {
               key={i}
               href={link.href}
               onClick={(e) => handleNavClick(e, link)}
-              className="text-[14px] font-medium text-[#a1a1b5] hover:text-white transition-colors"
+              className="text-[14px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors"
               data-testid={`link-nav-${link.page || link.href.replace('#', '')}`}
             >
               {link.label}
@@ -75,7 +75,7 @@ export default function Navigation({ onNavigate }: NavigationProps) {
         <div className="hidden lg:flex items-center gap-3">
           <button
             onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
-            className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-medium text-[#a1a1b5] hover:text-white rounded-full border border-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.2)] transition-all"
+            className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] rounded-full border border-[rgba(0,0,0,0.1)] hover:border-[rgba(0,0,0,0.15)] transition-all"
             data-testid="button-language-toggle"
           >
             <Globe className="w-3.5 h-3.5" />
@@ -83,7 +83,7 @@ export default function Navigation({ onNavigate }: NavigationProps) {
           </button>
           <a
             href="#"
-            className="text-[14px] font-medium text-[#a1a1b5] hover:text-white transition-colors px-4 py-2"
+            className="text-[14px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors px-4 py-2"
             data-testid="link-login"
           >
             {t('nav.login')}
@@ -99,7 +99,7 @@ export default function Navigation({ onNavigate }: NavigationProps) {
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden text-white p-2"
+          className="lg:hidden text-[#1a1a2e] p-2"
           data-testid="button-mobile-menu"
         >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -107,21 +107,21 @@ export default function Navigation({ onNavigate }: NavigationProps) {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden bg-[rgba(9,9,15,0.95)] backdrop-blur-xl border-t border-[rgba(255,255,255,0.06)] px-6 py-6 space-y-4">
+        <div className="lg:hidden bg-[rgba(255,255,255,0.97)] backdrop-blur-xl border-t border-[rgba(0,0,0,0.08)] px-6 py-6 space-y-4">
           {navLinks.map((link, i) => (
             <a
               key={i}
               href={link.href}
-              className="block text-[15px] font-medium text-[#a1a1b5] hover:text-white transition-colors py-2"
+              className="block text-[15px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors py-2"
               onClick={(e) => { handleNavClick(e, link); setMobileOpen(false); }}
             >
               {link.label}
             </a>
           ))}
-          <div className="pt-4 border-t border-[rgba(255,255,255,0.06)] space-y-3">
+          <div className="pt-4 border-t border-[rgba(0,0,0,0.08)] space-y-3">
             <button
               onClick={() => { setLang(lang === 'en' ? 'ar' : 'en'); setMobileOpen(false); }}
-              className="flex items-center gap-2 text-[14px] text-[#a1a1b5] hover:text-white"
+              className="flex items-center gap-2 text-[14px] text-[#5a5a72] hover:text-[#1a1a2e]"
             >
               <Globe className="w-4 h-4" />
               {lang === 'en' ? 'العربية' : 'English'}
