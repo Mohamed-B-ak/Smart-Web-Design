@@ -2,26 +2,41 @@
 
 ## Overview
 
-Sondos AI is a marketing/product website for an AI-powered call center platform. It's a full-stack application with a React frontend showcasing the product (hero, features, demos, testimonials, blog, FAQ, contact form) and an Express backend that handles contact form submissions. The site supports bilingual content (English and Arabic with RTL support) and uses a dark theme with purple accent colors.
+Sondos AI is a marketing/product website for an AI-powered call center platform. It's a full-stack application with a React frontend showcasing the product across 14+ pages (homepage, pricing, partner/white-label, 9 industry verticals, blog) and an Express backend that handles contact form submissions. The site supports bilingual content (English and Arabic with RTL support) and uses a light theme with purple accent colors.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+- **Feb 2026**: Migrated from state-based navigation to wouter routing with 14+ routes
+- **Feb 2026**: Created reusable IndustryPage template component for 9 industry verticals
+- **Feb 2026**: Built comprehensive Pricing page with 4 plans, savings calculator, and feature comparison table
+- **Feb 2026**: Created Partner/White Label page with profit calculator and partnership details
+- **Feb 2026**: Updated Hero section with new bilingual content and stats bar
+- **Feb 2026**: Added Industries dropdown to Navigation with all 9 industry links
+- **Feb 2026**: Switched to light color theme (bg #f8f9fc, purple accent #7c5cfc)
+- **Feb 2026**: Added FinalCTA component shared across all pages
+
 ## System Architecture
 
 ### Frontend Architecture
 - **Framework**: React with TypeScript, built using Vite
-- **Routing**: The app uses a custom state-based page navigation system (`currentPage` state in App.tsx) with three pages: `home` (landing page), `blog` (blog list), and `blog-post` (individual blog post). Navigation component accepts `onNavigate` callback for page transitions. Blog link is in the main nav bar.
-- **Styling**: Tailwind CSS with CSS custom properties for theming. The design uses a dark theme (backgrounds: `#09090f` range, accent: `#7c5cfc` purple). shadcn/ui components are available in `client/src/components/ui/`
+- **Routing**: wouter-based routing with 14+ routes defined in App.tsx. Routes include: `/` (home), `/pricing`, `/partner`, `/healthcare`, `/ecommerce`, `/call-center`, `/real-estate`, `/services`, `/restaurant`, `/legal`, `/car-dealership`, `/debt-collection`, `/blog`, `/blog/:slug`
+- **Styling**: Tailwind CSS with CSS custom properties for theming. Light theme (background: `#f8f9fc`, accent: `#7c5cfc` purple). shadcn/ui components available in `client/src/components/ui/`
 - **Component Organization**: 
   - `client/src/sections/` — Full-page sections (Hero, Features, Demo, FAQ, etc.) used on the landing page
-  - `client/src/components/` — Reusable components (Navbar, Footer, FeatureCard) and shadcn/ui primitives
-  - `client/src/pages/` — Standalone pages (Home, Contact, NotFound)
-- **Internationalization**: Custom context-based i18n system (`client/src/context/LanguageContext`) supporting English (`en`) and Arabic (`ar`) with RTL layout support. Translation keys are used via a `t()` function
-- **Animations**: Framer Motion for component animations, plus a custom canvas-based particle background (`AnimatedBackground.tsx`). Intersection Observer is used for scroll-triggered fade-in animations (`.fi` class → `.vis` class)
-- **State Management**: TanStack React Query for server state, React local state for UI
+  - `client/src/components/` — Reusable components (IndustryPage template, FinalCTA, Navbar, Footer, FeatureCard) and shadcn/ui primitives
+  - `client/src/pages/` — Standalone pages (Pricing, Partner, Healthcare, Ecommerce, CallCenter, RealEstate, Services, Restaurant, Legal, CarDealership, DebtCollection)
+- **Internationalization**: Custom context-based i18n system (`client/src/context/LanguageContext`) supporting English (`en`) and Arabic (`ar`) with RTL layout support. Translation keys used via `t()` function. Extensive translations for all pages.
+- **Animations**: Framer Motion for component animations, plus custom canvas-based particle background (`AnimatedBackground.tsx`). Intersection Observer for scroll-triggered fade-in animations (`.fi` class → `.vis` class)
+- **State Management**: TanStack React Query for server state, React local state for UI (pricing toggles, calculator sliders, etc.)
 - **Fonts**: Manrope (Latin), IBM Plex Sans Arabic (Arabic), Instrument Sans (headings)
+- **Key Components**:
+  - `IndustryPage.tsx` — Reusable template for all 9 industry pages (hero, use cases grid, cost comparison, served list, FinalCTA)
+  - `FinalCTA.tsx` — Shared call-to-action section at bottom of all pages
+  - `Navigation.tsx` — Top nav with Industries dropdown (hover-based), language toggle, mobile menu
 
 ### Backend Architecture
 - **Framework**: Express 5 on Node.js with TypeScript (run via `tsx`)
@@ -47,7 +62,7 @@ Preferred communication style: Simple, everyday language.
 - `DATABASE_URL` — PostgreSQL connection string (required)
 
 ### Key NPM Packages
-- **Frontend**: React, Vite, TanStack React Query, Framer Motion, shadcn/ui (Radix UI primitives), Tailwind CSS, wouter (routing), lucide-react (icons), react-hook-form with zod resolver
+- **Frontend**: React, Vite, TanStack React Query, Framer Motion, shadcn/ui (Radix UI primitives), Tailwind CSS, wouter (routing), lucide-react (icons), react-hook-form with zod resolver, @radix-ui/react-slider
 - **Backend**: Express 5, drizzle-orm, node-postgres (pg), zod, drizzle-zod
 - **Build**: esbuild (server bundling), tsx (TypeScript execution)
 
