@@ -322,12 +322,12 @@ export default function Pricing() {
   const savings = employeeCost - sondosCost;
 
   return (
-    <div className="min-h-screen bg-[#f8f9fc]">
+    <div className="min-h-screen bg-[#f4f0fa]">
       <section data-testid="section-pricing-hero" className="pt-32 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1
             data-testid="text-pricing-title"
-            className="fi text-4xl md:text-6xl font-bold text-[#1a1a2e] mb-6"
+            className="fi text-4xl md:text-6xl font-bold text-[#1a0a2e] mb-6"
           >
             {isAr
               ? 'ابدأ مركز اتصالك الذكي — بأسعار تناسب كل ميزانية'
@@ -335,7 +335,7 @@ export default function Pricing() {
           </h1>
           <p
             data-testid="text-pricing-subtitle"
-            className="fi text-lg text-[#5a5a72] max-w-3xl mx-auto mb-10"
+            className="fi text-lg text-[#4a3a62] max-w-3xl mx-auto mb-10"
           >
             {isAr
               ? 'اختر الخطة المناسبة لحجم أعمالك. كل الخطط تشمل وكلاء صوتيين بالعربية، تكاملات مع أنظمتك، وتقارير مفصلة. ابدأ بالتجربة المجانية — وارتقِ عندما تكون جاهزاً.'
@@ -344,15 +344,15 @@ export default function Pricing() {
 
           <div
             data-testid="toggle-billing"
-            className="fi inline-flex items-center gap-3 bg-white rounded-full p-1.5 border border-[rgba(0,0,0,0.08)]"
+            className="fi inline-flex items-center gap-3 bg-white rounded-full p-1.5 border border-[rgba(90,24,154,0.08)]"
           >
             <button
               data-testid="button-monthly"
               onClick={() => setIsAnnual(false)}
               className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
                 !isAnnual
-                  ? 'bg-[#7c5cfc] text-white shadow-md'
-                  : 'text-[#5a5a72]'
+                  ? 'bg-[#5a189a] text-white shadow-md'
+                  : 'text-[#4a3a62]'
               }`}
             >
               {isAr ? 'شهري' : 'Monthly'}
@@ -362,8 +362,8 @@ export default function Pricing() {
               onClick={() => setIsAnnual(true)}
               className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
                 isAnnual
-                  ? 'bg-[#7c5cfc] text-white shadow-md'
-                  : 'text-[#5a5a72]'
+                  ? 'bg-[#5a189a] text-white shadow-md'
+                  : 'text-[#4a3a62]'
               }`}
             >
               {isAr ? 'سنوي' : 'Annual'}
@@ -383,16 +383,16 @@ export default function Pricing() {
               <div
                 key={p.id}
                 data-testid={`card-plan-${p.id}`}
-                className={`fi relative bg-white rounded-2xl p-6 flex flex-col ${
+                className={`fi group relative bg-white rounded-2xl p-6 flex flex-col hover:-translate-y-1 transition-all duration-500 ${
                   p.popular
-                    ? 'border-2 border-[#7c5cfc] shadow-lg shadow-purple-200/50'
-                    : 'border border-[rgba(0,0,0,0.06)]'
+                    ? 'border-2 border-[#5a189a] shadow-lg shadow-[rgba(90,24,154,0.2)]'
+                    : 'border border-[rgba(90,24,154,0.06)]'
                 }`}
               >
                 {p.popular && (
                   <div
                     data-testid="badge-popular"
-                    className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#7c5cfc] text-white text-xs font-bold px-4 py-1 rounded-full"
+                    className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#5a189a] text-white text-xs font-bold px-4 py-1 rounded-full"
                   >
                     {isAr ? 'الأكثر شعبية' : 'Most Popular'}
                   </div>
@@ -401,11 +401,11 @@ export default function Pricing() {
                 <div className="mb-4">
                   <h3
                     data-testid={`text-plan-name-${p.id}`}
-                    className="text-lg font-bold text-[#1a1a2e]"
+                    className="text-lg font-bold text-[#1a0a2e]"
                   >
                     {isAr ? p.nameAr : p.nameEn}
                   </h3>
-                  <p className="text-xs text-[#5a5a72] mt-1">
+                  <p className="text-xs text-[#4a3a62] mt-1">
                     {isAr ? p.bestForAr : p.bestForEn}
                   </p>
                 </div>
@@ -414,16 +414,16 @@ export default function Pricing() {
                   <div className="flex items-baseline gap-1">
                     <span
                       data-testid={`text-plan-price-${p.id}`}
-                      className="text-4xl font-bold text-[#1a1a2e]"
+                      className="text-4xl font-bold text-[#1a0a2e]"
                     >
                       {price}
                     </span>
-                    <span className="text-sm text-[#5a5a72]">
+                    <span className="text-sm text-[#4a3a62]">
                       {isAr ? 'ريال/شهر' : 'SAR/mo'}
                     </span>
                   </div>
                   {isAnnual && (
-                    <p className="text-xs text-[#5a5a72] mt-1 line-through">
+                    <p className="text-xs text-[#4a3a62] mt-1 line-through">
                       {p.monthlyPrice} {isAr ? 'ريال/شهر' : 'SAR/mo'}
                     </p>
                   )}
@@ -431,8 +431,8 @@ export default function Pricing() {
 
                 <ul className="flex-1 space-y-3 mb-6">
                   {(isAr ? p.featuresListAr : p.featuresListEn).map((feat, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-[#5a5a72]">
-                      <Check className="h-4 w-4 text-[#7c5cfc] mt-0.5 flex-shrink-0" />
+                    <li key={i} className="flex items-start gap-2 text-sm text-[#4a3a62]">
+                      <Check className="h-4 w-4 text-[#5a189a] mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -442,8 +442,8 @@ export default function Pricing() {
                   data-testid={`button-plan-cta-${p.id}`}
                   className={`w-full ${
                     p.popular
-                      ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg shadow-purple-500/25 border-purple-700'
-                      : 'bg-white text-[#7c5cfc] border-2 border-[#7c5cfc]'
+                      ? 'shimmer bg-gradient-to-r from-[#5a189a] to-[#7b2cbf] text-white shadow-lg shadow-[rgba(90,24,154,0.25)] border-[#5a189a]'
+                      : 'bg-white text-[#5a189a] border-2 border-[#5a189a]'
                   }`}
                 >
                   {isAr ? (
@@ -473,23 +473,23 @@ export default function Pricing() {
             </span>
             <h2
               data-testid="text-calculator-title"
-              className="fi text-3xl md:text-5xl font-bold text-[#1a1a2e]"
+              className="fi text-3xl md:text-5xl font-bold text-[#1a0a2e]"
             >
               {isAr ? 'احسب توفيرك مع سندس AI' : 'Calculate Your Savings with Sondos AI'}
             </h2>
-            <p className="fi text-[#5a5a72] mt-4 max-w-2xl mx-auto">
+            <p className="fi text-[#4a3a62] mt-4 max-w-2xl mx-auto">
               {isAr
                 ? 'اكتشف كم يمكنك توفيره بأتمتة مكالماتك بالذكاء الاصطناعي مقارنة بتوظيف موظفين.'
                 : 'Discover how much you can save by automating your calls with AI compared to hiring employees.'}
             </p>
           </div>
 
-          <div className="fi bg-white rounded-2xl border border-[rgba(0,0,0,0.06)] p-8">
+          <div className="fi bg-white rounded-2xl border border-[rgba(90,24,154,0.06)] p-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
               <div>
                 <label
                   data-testid="label-monthly-calls"
-                  className="block text-sm font-semibold text-[#1a1a2e] mb-3"
+                  className="block text-sm font-semibold text-[#1a0a2e] mb-3"
                 >
                   {isAr ? 'عدد المكالمات الشهرية' : 'Monthly Calls'}
                 </label>
@@ -501,11 +501,11 @@ export default function Pricing() {
                   step={100}
                   value={monthlyCalls}
                   onChange={(e) => setMonthlyCalls(Number(e.target.value))}
-                  className="w-full accent-[#7c5cfc]"
+                  className="w-full accent-[#5a189a]"
                 />
                 <div
                   data-testid="text-monthly-calls-value"
-                  className="text-center text-lg font-bold text-[#7c5cfc] mt-2"
+                  className="text-center text-lg font-bold text-[#5a189a] mt-2"
                 >
                   {monthlyCalls.toLocaleString()}
                 </div>
@@ -514,7 +514,7 @@ export default function Pricing() {
               <div>
                 <label
                   data-testid="label-avg-duration"
-                  className="block text-sm font-semibold text-[#1a1a2e] mb-3"
+                  className="block text-sm font-semibold text-[#1a0a2e] mb-3"
                 >
                   {isAr ? 'متوسط مدة المكالمة (دقيقة)' : 'Avg Call Duration (min)'}
                 </label>
@@ -526,11 +526,11 @@ export default function Pricing() {
                   step={1}
                   value={avgDuration}
                   onChange={(e) => setAvgDuration(Number(e.target.value))}
-                  className="w-full accent-[#7c5cfc]"
+                  className="w-full accent-[#5a189a]"
                 />
                 <div
                   data-testid="text-avg-duration-value"
-                  className="text-center text-lg font-bold text-[#7c5cfc] mt-2"
+                  className="text-center text-lg font-bold text-[#5a189a] mt-2"
                 >
                   {avgDuration}
                 </div>
@@ -539,7 +539,7 @@ export default function Pricing() {
               <div>
                 <label
                   data-testid="label-employee-salary"
-                  className="block text-sm font-semibold text-[#1a1a2e] mb-3"
+                  className="block text-sm font-semibold text-[#1a0a2e] mb-3"
                 >
                   {isAr ? 'راتب الموظف الشهري (ريال)' : 'Monthly Employee Salary (SAR)'}
                 </label>
@@ -551,11 +551,11 @@ export default function Pricing() {
                   step={500}
                   value={employeeSalary}
                   onChange={(e) => setEmployeeSalary(Number(e.target.value))}
-                  className="w-full accent-[#7c5cfc]"
+                  className="w-full accent-[#5a189a]"
                 />
                 <div
                   data-testid="text-employee-salary-value"
-                  className="text-center text-lg font-bold text-[#7c5cfc] mt-2"
+                  className="text-center text-lg font-bold text-[#5a189a] mt-2"
                 >
                   {employeeSalary.toLocaleString()} {isAr ? 'ريال' : 'SAR'}
                 </div>
@@ -565,16 +565,16 @@ export default function Pricing() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div
                 data-testid="card-sondos-cost"
-                className="bg-[rgba(124,92,252,0.05)] rounded-xl p-6 text-center"
+                className="bg-[rgba(90,24,154,0.05)] rounded-xl p-6 text-center"
               >
-                <p className="text-sm text-[#5a5a72] mb-2">
+                <p className="text-sm text-[#4a3a62] mb-2">
                   {isAr ? 'تكلفة سندس AI المقدرة' : 'Sondos AI Estimated Cost'}
                 </p>
-                <p className="text-3xl font-bold text-[#7c5cfc]">
+                <p className="text-3xl font-bold text-[#5a189a]">
                   {Math.round(sondosCost).toLocaleString()}{' '}
                   <span className="text-sm font-normal">{isAr ? 'ريال' : 'SAR'}</span>
                 </p>
-                <p className="text-xs text-[#5a5a72] mt-1">
+                <p className="text-xs text-[#4a3a62] mt-1">
                   {isAr
                     ? `خطة ${plan.nameAr}`
                     : `${plan.nameEn} plan`}
@@ -585,14 +585,14 @@ export default function Pricing() {
                 data-testid="card-employee-cost"
                 className="bg-[rgba(239,68,68,0.05)] rounded-xl p-6 text-center"
               >
-                <p className="text-sm text-[#5a5a72] mb-2">
+                <p className="text-sm text-[#4a3a62] mb-2">
                   {isAr ? 'تكلفة الموظف التقليدي' : 'Traditional Employee Cost'}
                 </p>
                 <p className="text-3xl font-bold text-red-500">
                   {employeeCost.toLocaleString()}{' '}
                   <span className="text-sm font-normal">{isAr ? 'ريال' : 'SAR'}</span>
                 </p>
-                <p className="text-xs text-[#5a5a72] mt-1">
+                <p className="text-xs text-[#4a3a62] mt-1">
                   {isAr
                     ? `${employeesNeeded} موظف مطلوب`
                     : `${employeesNeeded} employee(s) needed`}
@@ -603,7 +603,7 @@ export default function Pricing() {
                 data-testid="card-savings"
                 className="bg-[rgba(0,214,143,0.08)] rounded-xl p-6 text-center"
               >
-                <p className="text-sm text-[#5a5a72] mb-2">
+                <p className="text-sm text-[#4a3a62] mb-2">
                   {isAr ? 'التوفير الشهري' : 'Monthly Savings'}
                 </p>
                 <p className="text-3xl font-bold text-[#00d68f]">
@@ -630,20 +630,20 @@ export default function Pricing() {
             </span>
             <h2
               data-testid="text-comparison-title"
-              className="fi text-3xl md:text-5xl font-bold text-[#1a1a2e]"
+              className="fi text-3xl md:text-5xl font-bold text-[#1a0a2e]"
             >
               {isAr ? 'مقارنة تفصيلية للخطط' : 'Detailed Plan Comparison'}
             </h2>
           </div>
 
-          <div className="fi bg-white rounded-2xl border border-[rgba(0,0,0,0.06)] overflow-hidden">
+          <div className="fi bg-white rounded-2xl border border-[rgba(90,24,154,0.06)] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[700px]">
                 <thead>
-                  <tr className="bg-[rgba(124,92,252,0.08)]">
+                  <tr className="bg-[rgba(90,24,154,0.08)]">
                     <th
                       data-testid="header-feature"
-                      className="px-6 py-4 text-left font-semibold text-[#1a1a2e] text-sm"
+                      className="px-6 py-4 text-left font-semibold text-[#1a0a2e] text-sm"
                     >
                       {isAr ? 'الميزة' : 'Feature'}
                     </th>
@@ -652,7 +652,7 @@ export default function Pricing() {
                         key={p.id}
                         data-testid={`header-plan-${p.id}`}
                         className={`px-4 py-4 text-center font-semibold text-sm ${
-                          p.popular ? 'text-[#7c5cfc]' : 'text-[#5a5a72]'
+                          p.popular ? 'text-[#5a189a]' : 'text-[#4a3a62]'
                         }`}
                       >
                         {isAr ? p.nameAr : p.nameEn}
@@ -665,9 +665,9 @@ export default function Pricing() {
                     <tr
                       key={feat.key}
                       data-testid={`row-feature-${feat.key}`}
-                      className={rowIdx % 2 === 0 ? 'bg-white' : 'bg-[rgba(124,92,252,0.02)]'}
+                      className={rowIdx % 2 === 0 ? 'bg-white' : 'bg-[rgba(90,24,154,0.02)]'}
                     >
-                      <td className="px-6 py-3.5 text-sm font-medium text-[#1a1a2e] border-t border-[rgba(0,0,0,0.04)]">
+                      <td className="px-6 py-3.5 text-sm font-medium text-[#1a0a2e] border-t border-[rgba(90,24,154,0.04)]">
                         {isAr ? feat.labelAr : feat.labelEn}
                       </td>
                       {plans.map((p) => {
@@ -676,8 +676,8 @@ export default function Pricing() {
                           <td
                             key={p.id}
                             data-testid={`cell-${feat.key}-${p.id}`}
-                            className={`px-4 py-3.5 text-center text-sm border-t border-[rgba(0,0,0,0.04)] ${
-                              p.popular ? 'bg-[rgba(124,92,252,0.03)]' : ''
+                            className={`px-4 py-3.5 text-center text-sm border-t border-[rgba(90,24,154,0.04)] ${
+                              p.popular ? 'bg-[rgba(90,24,154,0.03)]' : ''
                             }`}
                           >
                             {typeof val === 'boolean' ? (
@@ -687,7 +687,7 @@ export default function Pricing() {
                                 <X className="h-4 w-4 text-gray-300 mx-auto" />
                               )
                             ) : (
-                              <span className="font-medium text-[#1a1a2e]">
+                              <span className="font-medium text-[#1a0a2e]">
                                 {val === 'Unlimited'
                                   ? isAr
                                     ? 'غير محدود'
@@ -715,7 +715,7 @@ export default function Pricing() {
             </span>
             <h2
               data-testid="text-faq-title"
-              className="fi text-3xl md:text-5xl font-bold text-[#1a1a2e]"
+              className="fi text-3xl md:text-5xl font-bold text-[#1a0a2e]"
             >
               {isAr ? 'أسئلة التسعير الشائعة' : 'Pricing FAQ'}
             </h2>
@@ -726,26 +726,26 @@ export default function Pricing() {
               <div
                 key={idx}
                 data-testid={`card-faq-${idx}`}
-                className="bg-white rounded-2xl border border-[rgba(0,0,0,0.06)] overflow-hidden"
+                className="bg-white rounded-2xl border border-[rgba(90,24,154,0.06)] overflow-hidden"
               >
                 <button
                   data-testid={`button-faq-${idx}`}
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
                   className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
                 >
-                  <span className="font-semibold text-[#1a1a2e]">
+                  <span className="font-semibold text-[#1a0a2e]">
                     {isAr ? item.qAr : item.qEn}
                   </span>
                   {openFaq === idx ? (
-                    <ChevronUp className="h-5 w-5 text-[#7c5cfc] flex-shrink-0" />
+                    <ChevronUp className="h-5 w-5 text-[#5a189a] flex-shrink-0" />
                   ) : (
-                    <ChevronDown className="h-5 w-5 text-[#5a5a72] flex-shrink-0" />
+                    <ChevronDown className="h-5 w-5 text-[#4a3a62] flex-shrink-0" />
                   )}
                 </button>
                 {openFaq === idx && (
                   <div
                     data-testid={`text-faq-answer-${idx}`}
-                    className="px-6 pb-5 text-[#5a5a72] leading-relaxed"
+                    className="px-6 pb-5 text-[#4a3a62] leading-relaxed"
                   >
                     {isAr ? item.aAr : item.aEn}
                   </div>

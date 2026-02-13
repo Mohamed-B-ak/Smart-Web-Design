@@ -65,8 +65,8 @@ export default function Partner() {
     <main data-testid="page-partner">
       {/* Hero Section */}
       <section data-testid="section-partner-hero" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-visible">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-purple-100/60" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(124,92,252,0.1)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#f4f0fa] via-white to-[rgba(90,24,154,0.1)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(90,24,154,0.1)_0%,_transparent_60%)]" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <h1
             data-testid="text-partner-hero-title"
@@ -83,7 +83,7 @@ export default function Partner() {
           <div className="fi mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Button
               data-testid="button-partner-start"
-              className="w-full bg-gradient-to-r from-[#7c5cfc] to-[#9b87f5] text-white shadow-lg shadow-purple-500/25 border-[#7c5cfc] sm:w-auto"
+              className="w-full bg-gradient-to-r from-[#5a189a] to-[#7b2cbf] text-white shadow-lg shadow-[rgba(90,24,154,0.25)] border-[#5a189a] sm:w-auto"
             >
               {isRTL ? <ArrowRight className="h-4 w-4 rotate-180" /> : null}
               {t('partner.hero_cta1')}
@@ -92,7 +92,7 @@ export default function Partner() {
             <Button
               data-testid="button-partner-book"
               variant="outline"
-              className="w-full border-purple-300 text-purple-700 sm:w-auto"
+              className="w-full border-[rgba(90,24,154,0.2)] text-[#5a189a] sm:w-auto"
             >
               <Phone className="h-4 w-4" />
               {t('partner.hero_cta2')}
@@ -123,10 +123,10 @@ export default function Partner() {
                 <Card
                   key={idx}
                   data-testid={`card-partner-feature-${idx}`}
-                  className="fi p-6 rounded-2xl border border-gray-100 bg-white transition-shadow duration-300 hover:shadow-md"
+                  className="fi group p-6 rounded-2xl border border-gray-100 bg-white transition-shadow duration-300 hover:shadow-md hover:-translate-y-1 transition-all duration-500"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-100">
-                    <Icon className="h-6 w-6 text-[#7c5cfc]" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(90,24,154,0.06)]">
+                    <Icon className="h-6 w-6 text-[#5a189a] group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <h3 className="mt-4 text-base font-semibold text-gray-900">
                     {t(card.titleKey)}
@@ -142,7 +142,7 @@ export default function Partner() {
       </section>
 
       {/* The Opportunity Section */}
-      <section data-testid="section-partner-opportunity" className="py-20 md:py-28 px-6 bg-gradient-to-b from-purple-50/50 to-white">
+      <section data-testid="section-partner-opportunity" className="py-20 md:py-28 px-6 bg-gradient-to-b from-[rgba(90,24,154,0.05)] to-white">
         <div className="mx-auto max-w-5xl">
           <h2
             data-testid="text-partner-opp-title"
@@ -157,7 +157,7 @@ export default function Partner() {
                 <Card
                   key={idx}
                   data-testid={`card-partner-opp-${idx}`}
-                  className="fi relative overflow-visible rounded-2xl border-0 bg-gradient-to-br from-[#7c5cfc] to-[#9b87f5] p-8 text-white"
+                  className="fi group relative overflow-visible rounded-2xl border-0 bg-gradient-to-br from-[#5a189a] to-[#7b2cbf] p-8 text-white hover:-translate-y-1 transition-all duration-500"
                 >
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20">
                     <Icon className="h-7 w-7 text-white" />
@@ -183,24 +183,24 @@ export default function Partner() {
             {t('partner.pricing_title')}
           </h2>
           <div className="fi mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="p-6 rounded-2xl border border-gray-100 bg-white text-center">
-              <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-full bg-purple-100">
-                <Banknote className="h-6 w-6 text-[#7c5cfc]" />
+            <Card className="group p-6 rounded-2xl border border-gray-100 bg-white text-center hover:-translate-y-1 transition-all duration-500">
+              <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-full bg-[rgba(90,24,154,0.06)]">
+                <Banknote className="h-6 w-6 text-[#5a189a] group-hover:scale-110 transition-transform duration-300" />
               </div>
               <p className="mt-4 text-sm text-gray-500">{t('partner.price_per_min_label')}</p>
-              <p data-testid="text-partner-per-min" className="mt-1 text-3xl font-bold text-[#7c5cfc]">0.35 <span className="text-base font-normal text-gray-500">{t('partner.sar_min')}</span></p>
+              <p data-testid="text-partner-per-min" className="mt-1 text-3xl font-bold text-[#5a189a]">0.35 <span className="text-base font-normal text-gray-500">{t('partner.sar_min')}</span></p>
             </Card>
-            <Card className="p-6 rounded-2xl border border-gray-100 bg-white text-center">
-              <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-full bg-purple-100">
-                <Calculator className="h-6 w-6 text-[#7c5cfc]" />
+            <Card className="group p-6 rounded-2xl border border-gray-100 bg-white text-center hover:-translate-y-1 transition-all duration-500">
+              <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-full bg-[rgba(90,24,154,0.06)]">
+                <Calculator className="h-6 w-6 text-[#5a189a] group-hover:scale-110 transition-transform duration-300" />
               </div>
               <p className="mt-4 text-sm text-gray-500">{t('partner.monthly_sub_label')}</p>
-              <p data-testid="text-partner-monthly-price" className="mt-1 text-3xl font-bold text-[#7c5cfc]">1,570 <span className="text-base font-normal text-gray-500">{t('partner.sar_month')}</span></p>
+              <p data-testid="text-partner-monthly-price" className="mt-1 text-3xl font-bold text-[#5a189a]">1,570 <span className="text-base font-normal text-gray-500">{t('partner.sar_month')}</span></p>
               <p className="mt-1 text-sm text-gray-400">{t('partner.annual_price')}: 1,330 {t('partner.sar_month')}</p>
             </Card>
-            <Card className="p-6 rounded-2xl border border-gray-100 bg-white text-center">
-              <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-full bg-purple-100">
-                <CreditCard className="h-6 w-6 text-[#7c5cfc]" />
+            <Card className="group p-6 rounded-2xl border border-gray-100 bg-white text-center hover:-translate-y-1 transition-all duration-500">
+              <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-full bg-[rgba(90,24,154,0.06)]">
+                <CreditCard className="h-6 w-6 text-[#5a189a] group-hover:scale-110 transition-transform duration-300" />
               </div>
               <p className="mt-4 text-sm text-gray-500">{t('partner.billing_label')}</p>
               <p data-testid="text-partner-billing" className="mt-1 text-base font-semibold text-gray-900">{t('partner.billing_desc')}</p>
@@ -210,7 +210,7 @@ export default function Partner() {
       </section>
 
       {/* Partner Profit Calculator */}
-      <section data-testid="section-partner-calculator" className="py-20 md:py-28 px-6 bg-gradient-to-b from-purple-50/50 to-white">
+      <section data-testid="section-partner-calculator" className="py-20 md:py-28 px-6 bg-gradient-to-b from-[rgba(90,24,154,0.05)] to-white">
         <div className="mx-auto max-w-3xl">
           <h2
             data-testid="text-partner-calc-title"
@@ -228,7 +228,7 @@ export default function Partner() {
               <div>
                 <div className="flex items-center justify-between gap-4 flex-wrap mb-3">
                   <label className="text-sm font-medium text-gray-700">{t('partner.calc_price_label')}</label>
-                  <span data-testid="text-partner-client-price" className="text-sm font-bold text-[#7c5cfc]">{clientPrice.toFixed(2)} {t('partner.sar')}</span>
+                  <span data-testid="text-partner-client-price" className="text-sm font-bold text-[#5a189a]">{clientPrice.toFixed(2)} {t('partner.sar')}</span>
                 </div>
                 <Slider
                   data-testid="slider-partner-price"
@@ -237,7 +237,7 @@ export default function Partner() {
                   step={0.05}
                   value={[clientPrice]}
                   onValueChange={(val) => setClientPrice(val[0])}
-                  className="[&_[role=slider]]:border-[#7c5cfc] [&_[data-orientation=horizontal]>[data-orientation=horizontal]]:bg-[#7c5cfc]"
+                  className="[&_[role=slider]]:border-[#5a189a] [&_[data-orientation=horizontal]>[data-orientation=horizontal]]:bg-[#5a189a]"
                 />
                 <div className="flex items-center justify-between gap-4 mt-1 text-xs text-gray-400">
                   <span>0.35</span>
@@ -249,7 +249,7 @@ export default function Partner() {
               <div>
                 <div className="flex items-center justify-between gap-4 flex-wrap mb-3">
                   <label className="text-sm font-medium text-gray-700">{t('partner.calc_minutes_label')}</label>
-                  <span data-testid="text-partner-monthly-minutes" className="text-sm font-bold text-[#7c5cfc]">{monthlyMinutes.toLocaleString()} {t('partner.minutes')}</span>
+                  <span data-testid="text-partner-monthly-minutes" className="text-sm font-bold text-[#5a189a]">{monthlyMinutes.toLocaleString()} {t('partner.minutes')}</span>
                 </div>
                 <Slider
                   data-testid="slider-partner-minutes"
@@ -258,7 +258,7 @@ export default function Partner() {
                   step={500}
                   value={[monthlyMinutes]}
                   onValueChange={(val) => setMonthlyMinutes(val[0])}
-                  className="[&_[role=slider]]:border-[#7c5cfc] [&_[data-orientation=horizontal]>[data-orientation=horizontal]]:bg-[#7c5cfc]"
+                  className="[&_[role=slider]]:border-[#5a189a] [&_[data-orientation=horizontal]>[data-orientation=horizontal]]:bg-[#5a189a]"
                 />
                 <div className="flex items-center justify-between gap-4 mt-1 text-xs text-gray-400">
                   <span>1,000</span>
@@ -277,13 +277,13 @@ export default function Partner() {
                 <p className="text-xs text-gray-500">{t('partner.calc_cost')}</p>
                 <p data-testid="text-partner-cost" className="mt-1 text-lg font-bold text-gray-900">{cost.toLocaleString(undefined, { maximumFractionDigits: 0 })} <span className="text-xs text-gray-500">{t('partner.sar')}</span></p>
               </div>
-              <div className="rounded-xl bg-[#7c5cfc]/10 p-4 text-center">
-                <p className="text-xs text-[#7c5cfc]">{t('partner.calc_monthly_profit')}</p>
-                <p data-testid="text-partner-monthly-profit" className="mt-1 text-lg font-bold text-[#7c5cfc]">{monthlyProfit.toLocaleString(undefined, { maximumFractionDigits: 0 })} <span className="text-xs">{t('partner.sar')}</span></p>
+              <div className="rounded-xl bg-[rgba(90,24,154,0.1)] p-4 text-center">
+                <p className="text-xs text-[#5a189a]">{t('partner.calc_monthly_profit')}</p>
+                <p data-testid="text-partner-monthly-profit" className="mt-1 text-lg font-bold text-[#5a189a]">{monthlyProfit.toLocaleString(undefined, { maximumFractionDigits: 0 })} <span className="text-xs">{t('partner.sar')}</span></p>
               </div>
-              <div className="rounded-xl bg-[#7c5cfc]/10 p-4 text-center">
-                <p className="text-xs text-[#7c5cfc]">{t('partner.calc_annual_profit')}</p>
-                <p data-testid="text-partner-annual-profit" className="mt-1 text-lg font-bold text-[#7c5cfc]">{annualProfit.toLocaleString(undefined, { maximumFractionDigits: 0 })} <span className="text-xs">{t('partner.sar')}</span></p>
+              <div className="rounded-xl bg-[rgba(90,24,154,0.1)] p-4 text-center">
+                <p className="text-xs text-[#5a189a]">{t('partner.calc_annual_profit')}</p>
+                <p data-testid="text-partner-annual-profit" className="mt-1 text-lg font-bold text-[#5a189a]">{annualProfit.toLocaleString(undefined, { maximumFractionDigits: 0 })} <span className="text-xs">{t('partner.sar')}</span></p>
               </div>
             </div>
           </Card>
@@ -313,7 +313,7 @@ export default function Partner() {
                 >
                   <span className="text-base font-semibold text-gray-900">{t(faq.qKey)}</span>
                   {openFaq === idx ? (
-                    <ChevronUp className="h-5 w-5 text-[#7c5cfc] shrink-0" />
+                    <ChevronUp className="h-5 w-5 text-[#5a189a] shrink-0" />
                   ) : (
                     <ChevronDown className="h-5 w-5 text-gray-400 shrink-0" />
                   )}

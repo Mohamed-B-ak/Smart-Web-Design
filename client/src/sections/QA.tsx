@@ -14,19 +14,19 @@ export default function QA() {
     <section className="py-24 px-6" data-testid="section-qa">
       <div className="max-w-[1100px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="fi bg-white border border-[rgba(124,92,252,0.15)] rounded-2xl p-7">
+          <div className="fi bg-white border border-[rgba(90,24,154,0.15)] rounded-2xl p-7">
             <div className="flex items-center gap-3 mb-6">
-              <Shield className="w-6 h-6 text-[#9b8afb]" />
+              <Shield className="w-6 h-6 text-[#7b2cbf]" />
               <span className="text-[14px] font-semibold">{lang === 'en' ? 'Quality Monitor' : 'مراقب الجودة'}</span>
             </div>
             <div className="space-y-4">
               {metrics.map((m, i) => (
                 <div key={i} className="flex items-center justify-between bg-[#f0f2f8] rounded-xl p-4">
                   <div className="flex items-center gap-3">
-                    <m.icon className="w-5 h-5 text-[#8a8aa0]" />
-                    <span className="text-[14px] text-[#5a5a72]">{m.label}</span>
+                    <m.icon className="w-5 h-5 text-[#8878a0]" />
+                    <span className="text-[14px] text-[#4a3a62]">{m.label}</span>
                   </div>
-                  <span className="text-[16px] font-bold text-[#1a1a2e]">{m.value}</span>
+                  <span className="text-[16px] font-bold text-[#1a0a2e]">{m.value}</span>
                 </div>
               ))}
             </div>
@@ -43,7 +43,7 @@ export default function QA() {
           <div>
             <span className="section-label mb-4 block">{t('qa.label')}</span>
             <h2 className="text-3xl md:text-4xl font-bold mb-5">{t('qa.title')}</h2>
-            <p className="text-[#5a5a72] text-lg leading-relaxed">{t('qa.desc')}</p>
+            <p className="text-[#4a3a62] text-lg leading-relaxed">{t('qa.desc')}</p>
           </div>
         </div>
       </div>

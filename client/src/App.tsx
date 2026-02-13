@@ -125,7 +125,7 @@ function AppContent() {
   }, [location]);
 
   return (
-    <div className="min-h-screen bg-[#f8f9fc]">
+    <div className="min-h-screen bg-[#f4f0fa]">
       <Navigation />
       <Switch>
         <Route path="/" component={HomePage} />

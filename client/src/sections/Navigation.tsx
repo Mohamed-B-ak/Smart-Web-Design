@@ -44,9 +44,9 @@ export default function Navigation() {
   return (
     <nav
       data-testid="navigation"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-[rgba(255,255,255,0.92)] backdrop-blur-xl border-b border-[rgba(0,0,0,0.08)]'
+          ? 'bg-[rgba(255,255,255,0.88)] backdrop-blur-2xl border-b border-[rgba(90,24,154,0.08)] shadow-[0_4px_30px_rgba(90,24,154,0.05)]'
           : 'bg-transparent'
       }`}
     >
@@ -65,19 +65,19 @@ export default function Navigation() {
                   data-testid="dropdown-industries"
                 >
                   <button
-                    className="flex items-center gap-1 text-[14px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors"
+                    className="flex items-center gap-1 text-[14px] font-medium text-[#4a3a62] hover:text-[#5a189a] transition-colors duration-300"
                     data-testid="link-nav-industries"
                   >
                     {link.label}
-                    <ChevronDown className="w-3.5 h-3.5" />
+                    <ChevronDown className="w-3.5 h-3.5 group-hover:rotate-180 transition-transform duration-300" />
                   </button>
-                  <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 absolute top-full left-1/2 -translate-x-1/2 pt-3">
-                    <div className="bg-white border border-[rgba(0,0,0,0.08)] rounded-xl shadow-lg py-2 min-w-[200px]">
+                  <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 absolute top-full left-1/2 -translate-x-1/2 pt-3 pointer-events-none group-hover:pointer-events-auto">
+                    <div className="bg-white/95 backdrop-blur-xl border border-[rgba(90,24,154,0.1)] rounded-xl shadow-[0_20px_60px_rgba(90,24,154,0.12)] py-2 min-w-[220px] pointer-events-auto">
                       {industryLinks.map((industry) => (
                         <Link
                           key={industry.href}
                           href={industry.href}
-                          className="block px-4 py-2.5 text-[13px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] hover:bg-[#f8f9fc] transition-colors"
+                          className="block px-4 py-2.5 text-[13px] font-medium text-[#4a3a62] hover:text-[#5a189a] hover:bg-[rgba(90,24,154,0.04)] transition-all duration-200"
                           data-testid={`link-industry-${industry.href.slice(1)}`}
                         >
                           {lang === 'ar' ? industry.ar : industry.en}
@@ -94,7 +94,7 @@ export default function Navigation() {
                 <a
                   key={i}
                   href={link.href}
-                  className="text-[14px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors"
+                  className="text-[14px] font-medium text-[#4a3a62] hover:text-[#5a189a] transition-colors duration-300"
                   data-testid={`link-nav-${link.href.replace('/#', '')}`}
                 >
                   {link.label}
@@ -106,10 +106,10 @@ export default function Navigation() {
               <Link
                 key={i}
                 href={link.href}
-                className={`text-[14px] font-medium transition-colors ${
+                className={`text-[14px] font-medium transition-colors duration-300 ${
                   location === link.href
-                    ? 'text-[#1a1a2e]'
-                    : 'text-[#5a5a72] hover:text-[#1a1a2e]'
+                    ? 'text-[#5a189a]'
+                    : 'text-[#4a3a62] hover:text-[#5a189a]'
                 }`}
                 data-testid={`link-nav-${link.href.slice(1)}`}
               >
@@ -122,7 +122,7 @@ export default function Navigation() {
         <div className="hidden lg:flex items-center gap-3">
           <button
             onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
-            className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] rounded-full border border-[rgba(0,0,0,0.1)] hover:border-[rgba(0,0,0,0.15)] transition-all"
+            className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-medium text-[#4a3a62] hover:text-[#5a189a] rounded-full border border-[rgba(90,24,154,0.12)] hover:border-[rgba(90,24,154,0.3)] transition-all duration-300"
             data-testid="button-language-toggle"
           >
             <Globe className="w-3.5 h-3.5" />
@@ -130,14 +130,14 @@ export default function Navigation() {
           </button>
           <a
             href="#"
-            className="text-[14px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors px-4 py-2"
+            className="text-[14px] font-medium text-[#4a3a62] hover:text-[#5a189a] transition-colors duration-300 px-4 py-2"
             data-testid="link-login"
           >
             {t('nav.login')}
           </a>
           <a
             href="#demo"
-            className="inline-flex items-center px-5 py-2.5 text-[13px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-0.5 transition-all"
+            className="inline-flex items-center px-5 py-2.5 text-[13px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-0.5 transition-all duration-300"
             data-testid="link-try-free"
           >
             {t('nav.try_free')}
@@ -146,7 +146,7 @@ export default function Navigation() {
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden text-[#1a1a2e] p-2"
+          className="lg:hidden text-[#1a0a2e] p-2"
           data-testid="button-mobile-menu"
         >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -154,18 +154,18 @@ export default function Navigation() {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden bg-[rgba(255,255,255,0.97)] backdrop-blur-xl border-t border-[rgba(0,0,0,0.08)] px-6 py-6 space-y-4">
+        <div className="lg:hidden bg-[rgba(255,255,255,0.95)] backdrop-blur-2xl border-t border-[rgba(90,24,154,0.08)] px-6 py-6 space-y-4">
           {navLinks.map((link, i) => {
             if (link.isDropdown) {
               return (
                 <div key={i}>
                   <button
                     onClick={() => setIndustriesOpen(!industriesOpen)}
-                    className="flex items-center gap-1 w-full text-[15px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors py-2"
+                    className="flex items-center gap-1 w-full text-[15px] font-medium text-[#4a3a62] hover:text-[#5a189a] transition-colors py-2"
                     data-testid="button-mobile-industries"
                   >
                     {link.label}
-                    <ChevronDown className={`w-4 h-4 transition-transform ${industriesOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${industriesOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {industriesOpen && (
                     <div className="pl-4 space-y-1 mt-1">
@@ -173,7 +173,7 @@ export default function Navigation() {
                         <Link
                           key={industry.href}
                           href={industry.href}
-                          className="block text-[14px] text-[#5a5a72] hover:text-[#1a1a2e] transition-colors py-1.5"
+                          className="block text-[14px] text-[#4a3a62] hover:text-[#5a189a] transition-colors py-1.5"
                           data-testid={`link-mobile-industry-${industry.href.slice(1)}`}
                         >
                           {lang === 'ar' ? industry.ar : industry.en}
@@ -190,7 +190,7 @@ export default function Navigation() {
                 <a
                   key={i}
                   href={link.href}
-                  className="block text-[15px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors py-2"
+                  className="block text-[15px] font-medium text-[#4a3a62] hover:text-[#5a189a] transition-colors py-2"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
@@ -202,16 +202,16 @@ export default function Navigation() {
               <Link
                 key={i}
                 href={link.href}
-                className="block text-[15px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors py-2"
+                className="block text-[15px] font-medium text-[#4a3a62] hover:text-[#5a189a] transition-colors py-2"
               >
                 {link.label}
               </Link>
             );
           })}
-          <div className="pt-4 border-t border-[rgba(0,0,0,0.08)] space-y-3">
+          <div className="pt-4 border-t border-[rgba(90,24,154,0.08)] space-y-3">
             <button
               onClick={() => { setLang(lang === 'en' ? 'ar' : 'en'); setMobileOpen(false); }}
-              className="flex items-center gap-2 text-[14px] text-[#5a5a72] hover:text-[#1a1a2e]"
+              className="flex items-center gap-2 text-[14px] text-[#4a3a62] hover:text-[#5a189a]"
             >
               <Globe className="w-4 h-4" />
               {lang === 'en' ? 'العربية' : 'English'}
