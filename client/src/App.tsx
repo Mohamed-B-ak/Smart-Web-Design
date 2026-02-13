@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { Switch, Route, useLocation } from 'wouter';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@/lib/queryClient';
 import { Toaster } from '@/components/ui/toaster';
-import type { BlogPost as BlogPostType } from '@/data/blog';
 import { getBlogPostBySlug } from '@/data/blog';
 import Navigation from '@/sections/Navigation';
 import Hero from '@/sections/Hero';
@@ -22,95 +22,128 @@ import Security from '@/sections/Security';
 import Integrations from '@/sections/Integrations';
 import FAQ from '@/sections/FAQ';
 import CTABanner from '@/sections/CTABanner';
+import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/sections/Footer';
 import BlogList from '@/sections/BlogList';
 import BlogPost from '@/sections/BlogPost';
+import Healthcare from '@/pages/Healthcare';
+import Ecommerce from '@/pages/Ecommerce';
+import CallCenter from '@/pages/CallCenter';
+import RealEstate from '@/pages/RealEstate';
+import Services from '@/pages/Services';
+import Restaurant from '@/pages/Restaurant';
+import Legal from '@/pages/Legal';
+import CarDealership from '@/pages/CarDealership';
+import DebtCollection from '@/pages/DebtCollection';
+import Pricing from '@/pages/Pricing';
+import Partner from '@/pages/Partner';
 
-type Page = 'home' | 'blog' | 'blog-post';
+function HomePage() {
+  return (
+    <main>
+      <Hero />
+      <LogoCarousel />
+      <ScaleBanner />
+      <WhatIs />
+      <Demo />
+      <Testimonials />
+      <TalksLikePeople />
+      <Highlights />
+      <Features />
+      <QA />
+      <Omnichannel />
+      <Telephony />
+      <Security />
+      <Integrations />
+      <FAQ />
+      <CTABanner />
+      <FinalCTA />
+    </main>
+  );
+}
+
+function PlaceholderPage({ title }: { title: string }) {
+  return (
+    <main className="pt-32 pb-16 px-6 text-center">
+      <h1 className="text-4xl font-bold">{title}</h1>
+      <p className="text-[#5a5a72] mt-4">Coming soon...</p>
+    </main>
+  );
+}
+
+function BlogListPage() {
+  const [, navigate] = useLocation();
+  return (
+    <main>
+      <BlogList onPostClick={(slug) => navigate(`/blog/${slug}`)} />
+    </main>
+  );
+}
+
+function BlogPostPage({ slug }: { slug: string }) {
+  const [, navigate] = useLocation();
+  const post = getBlogPostBySlug(slug);
+
+  if (!post) {
+    return <PlaceholderPage title="404 - Post Not Found" />;
+  }
+
+  return (
+    <main>
+      <BlogPost post={post} onBack={() => navigate('/blog')} />
+    </main>
+  );
+}
 
 function AppContent() {
-  const [currentPage, setCurrentPage] = useState<Page>('home');
-  const [currentPost, setCurrentPost] = useState<BlogPostType | null>(null);
+  const [location] = useLocation();
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('vis');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-    );
+    window.scrollTo({ top: 0 });
 
-    document.querySelectorAll('.fi').forEach((el) => {
-      observer.observe(el);
-    });
+    const timer = setTimeout(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('vis');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      );
 
-    return () => observer.disconnect();
-  }, [currentPage]);
+      document.querySelectorAll('.fi').forEach((el) => {
+        observer.observe(el);
+      });
 
-  const handleNavigate = (page: string) => {
-    if (page === 'home' || page === 'blog') {
-      setCurrentPage(page as Page);
-      setCurrentPost(null);
-    }
-  };
+      return () => observer.disconnect();
+    }, 100);
 
-  const handleBlogClick = (slug: string) => {
-    const post = getBlogPostBySlug(slug);
-    if (post) {
-      setCurrentPost(post);
-      setCurrentPage('blog-post');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const handleBackToBlog = () => {
-    setCurrentPage('blog');
-    setCurrentPost(null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+    return () => clearTimeout(timer);
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-[#f8f9fc]">
-      <Navigation onNavigate={handleNavigate} />
-
-      {currentPage === 'home' && (
-        <main>
-          <Hero />
-          <LogoCarousel />
-          <ScaleBanner />
-          <WhatIs />
-          <Demo />
-          <Testimonials />
-          <TalksLikePeople />
-          <Highlights />
-          <Features />
-          <QA />
-          <Omnichannel />
-          <Telephony />
-          <Security />
-          <Integrations />
-          <FAQ />
-          <CTABanner />
-        </main>
-      )}
-
-      {currentPage === 'blog' && (
-        <main>
-          <BlogList onPostClick={handleBlogClick} />
-        </main>
-      )}
-
-      {currentPage === 'blog-post' && currentPost && (
-        <main>
-          <BlogPost post={currentPost} onBack={handleBackToBlog} />
-        </main>
-      )}
-
+      <Navigation />
+      <Switch>
+        <Route path="/" component={HomePage} />
+        <Route path="/pricing" component={Pricing} />
+        <Route path="/partner" component={Partner} />
+        <Route path="/healthcare" component={Healthcare} />
+        <Route path="/ecommerce" component={Ecommerce} />
+        <Route path="/call-center" component={CallCenter} />
+        <Route path="/real-estate" component={RealEstate} />
+        <Route path="/services" component={Services} />
+        <Route path="/restaurant" component={Restaurant} />
+        <Route path="/legal" component={Legal} />
+        <Route path="/car-dealership" component={CarDealership} />
+        <Route path="/debt-collection" component={DebtCollection} />
+        <Route path="/blog">{() => <BlogListPage />}</Route>
+        <Route path="/blog/:slug">{(params) => <BlogPostPage slug={params.slug} />}</Route>
+        <Route>{() => <PlaceholderPage title="404 - Page Not Found" />}</Route>
+      </Switch>
       <Footer />
     </div>
   );

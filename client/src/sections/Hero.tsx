@@ -1,5 +1,5 @@
 import { useLanguage } from '@/context/LanguageContext';
-import { Play, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Phone, ArrowRight, ArrowLeft } from 'lucide-react';
 import AnimatedBackground from './AnimatedBackground';
 
 export default function Hero() {
@@ -24,23 +24,25 @@ export default function Hero() {
           {t('hero.badge')}
         </div>
 
-        <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-5 animate-fade-up animation-delay-100">
-          {t('hero.title')}<br />
-          {lang === 'en' ? 'From The ' : 'من '}
-          <span className="gradient-text">{t('hero.title_span')}</span>
+        <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-3 animate-fade-up animation-delay-100">
+          {t('hero.title_new')}
         </h1>
 
-        <p className="text-[clamp(16px,1.8vw,19px)] text-[#5a5a72] max-w-[580px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
-          {t('hero.subtitle')}
+        <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[#1a1a2e] max-w-[580px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-150">
+          {t('hero.subtitle_new')}
+        </p>
+
+        <p className="text-[clamp(14px,1.6vw,17px)] text-[#5a5a72] max-w-[680px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
+          {t('hero.desc')}
         </p>
 
         <div className="flex items-center justify-center gap-3.5 mb-12 flex-wrap animate-fade-up animation-delay-300">
-          <a href="#demo" className="inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(124,92,252,0.35)] transition-all" data-testid="button-hero-demo">
-            <Play className="w-4 h-4 fill-current" />
-            {t('hero.cta_demo')}
+          <a href="#demo" className="inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(124,92,252,0.35)] transition-all" data-testid="button-hero-try">
+            <Phone className="w-4 h-4" />
+            {t('hero.cta_try')}
           </a>
-          <a href="#" className="inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-[#1a1a2e] border border-[rgba(0,0,0,0.12)] rounded-full hover:bg-[rgba(0,0,0,0.05)] hover:border-[rgba(0,0,0,0.18)] transition-all backdrop-blur-sm" data-testid="button-hero-sales">
-            {t('hero.cta_sales')}
+          <a href="#" className="inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-[#1a1a2e] border border-[rgba(0,0,0,0.12)] rounded-full hover:bg-[rgba(0,0,0,0.05)] hover:border-[rgba(0,0,0,0.18)] transition-all backdrop-blur-sm" data-testid="button-hero-book">
+            {t('hero.cta_book')}
             {lang === 'en' ? <ArrowRight className="w-4 h-4" /> : <ArrowLeft className="w-4 h-4" />}
           </a>
         </div>
@@ -84,6 +86,30 @@ export default function Hero() {
                 }}
               />
             ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 max-w-[1060px] w-full mx-auto mt-12 animate-fade-up animation-delay-600">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-0">
+          <div className="flex-1 text-center sm:text-left">
+            <p className="text-4xl sm:text-5xl font-bold text-[#1a1a2e]">{t('hero.stat1_val')}</p>
+            <p className="text-sm text-[#5a5a72] mt-2">{t('hero.stat1_label')}</p>
+          </div>
+          <div className="hidden sm:block w-px h-16 bg-gradient-to-b from-transparent via-[rgba(124,92,252,0.2)] to-transparent" />
+          <div className="flex-1 text-center">
+            <p className="text-4xl sm:text-5xl font-bold text-[#1a1a2e]">{t('hero.stat2_val')}</p>
+            <p className="text-sm text-[#5a5a72] mt-2">{t('hero.stat2_label')}</p>
+          </div>
+          <div className="hidden sm:block w-px h-16 bg-gradient-to-b from-transparent via-[rgba(124,92,252,0.2)] to-transparent" />
+          <div className="flex-1 text-center">
+            <p className="text-4xl sm:text-5xl font-bold text-[#1a1a2e]">{t('hero.stat3_val')}</p>
+            <p className="text-sm text-[#5a5a72] mt-2">{t('hero.stat3_label')}</p>
+          </div>
+          <div className="hidden sm:block w-px h-16 bg-gradient-to-b from-transparent via-[rgba(124,92,252,0.2)] to-transparent" />
+          <div className="flex-1 text-center sm:text-right">
+            <p className="text-4xl sm:text-5xl font-bold text-[#1a1a2e]">{t('hero.stat4_val')}</p>
+            <p className="text-sm text-[#5a5a72] mt-2">{t('hero.stat4_label')}</p>
           </div>
         </div>
       </div>

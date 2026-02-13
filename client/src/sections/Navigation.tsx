@@ -1,16 +1,27 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'wouter';
 import { useLanguage } from '@/context/LanguageContext';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown } from 'lucide-react';
 import logoImg from '@assets/logo_smart_(1)_1770814555470.jpg';
 
-interface NavigationProps {
-  onNavigate?: (page: string) => void;
-}
+const industryLinks = [
+  { en: 'Healthcare', ar: 'القطاع الصحي', href: '/healthcare' },
+  { en: 'E-commerce', ar: 'التجارة الإلكترونية', href: '/ecommerce' },
+  { en: 'Call Center', ar: 'مراكز الاتصال', href: '/call-center' },
+  { en: 'Real Estate', ar: 'العقارات', href: '/real-estate' },
+  { en: 'Services', ar: 'الخدمات', href: '/services' },
+  { en: 'Restaurant', ar: 'المطاعم', href: '/restaurant' },
+  { en: 'Legal', ar: 'القطاع القانوني', href: '/legal' },
+  { en: 'Car Dealership', ar: 'معارض السيارات', href: '/car-dealership' },
+  { en: 'Debt Collection', ar: 'تحصيل الديون', href: '/debt-collection' },
+];
 
-export default function Navigation({ onNavigate }: NavigationProps) {
+export default function Navigation() {
   const { lang, setLang, t } = useLanguage();
+  const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [industriesOpen, setIndustriesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -18,31 +29,17 @@ export default function Navigation({ onNavigate }: NavigationProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location]);
+
   const navLinks = [
-    { label: t('nav.product'), href: '#whatis', page: null },
-    { label: t('nav.pricing'), href: '#highlights', page: null },
-    { label: t('nav.for_business'), href: '#features', page: null },
-    { label: t('nav.resources'), href: '#faq', page: null },
-    { label: t('footer.blog'), href: '#', page: 'blog' },
+    { label: t('nav.product'), href: '/#whatis', isHash: true },
+    { label: t('nav.pricing'), href: '/pricing', isHash: false },
+    { label: t('nav.industries'), href: '#', isHash: false, isDropdown: true },
+    { label: t('nav.partner'), href: '/partner', isHash: false },
+    { label: t('footer.blog'), href: '/blog', isHash: false },
   ];
-
-  const handleNavClick = (e: React.MouseEvent, link: { href: string; page: string | null }) => {
-    if (link.page && onNavigate) {
-      e.preventDefault();
-      onNavigate(link.page);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (link.href.startsWith('#') && onNavigate) {
-      onNavigate('home');
-    }
-  };
-
-  const handleLogoClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (onNavigate) {
-      onNavigate('home');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
 
   return (
     <nav
@@ -54,22 +51,72 @@ export default function Navigation({ onNavigate }: NavigationProps) {
       }`}
     >
       <div className="max-w-[1200px] mx-auto px-6 h-[72px] flex items-center justify-between gap-4">
-        <a href="#" onClick={handleLogoClick} className="flex items-center gap-2 shrink-0" data-testid="link-home">
+        <Link href="/" className="flex items-center gap-2 shrink-0" data-testid="link-home">
           <img src={logoImg} alt="Sondos AI" className="h-10 object-contain" />
-        </a>
+        </Link>
 
         <div className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link, i) => (
-            <a
-              key={i}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link)}
-              className="text-[14px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors"
-              data-testid={`link-nav-${link.page || link.href.replace('#', '')}`}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link, i) => {
+            if (link.isDropdown) {
+              return (
+                <div
+                  key={i}
+                  className="relative group"
+                  data-testid="dropdown-industries"
+                >
+                  <button
+                    className="flex items-center gap-1 text-[14px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors"
+                    data-testid="link-nav-industries"
+                  >
+                    {link.label}
+                    <ChevronDown className="w-3.5 h-3.5" />
+                  </button>
+                  <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 absolute top-full left-1/2 -translate-x-1/2 pt-3">
+                    <div className="bg-white border border-[rgba(0,0,0,0.08)] rounded-xl shadow-lg py-2 min-w-[200px]">
+                      {industryLinks.map((industry) => (
+                        <Link
+                          key={industry.href}
+                          href={industry.href}
+                          className="block px-4 py-2.5 text-[13px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] hover:bg-[#f8f9fc] transition-colors"
+                          data-testid={`link-industry-${industry.href.slice(1)}`}
+                        >
+                          {lang === 'ar' ? industry.ar : industry.en}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            if (link.isHash) {
+              return (
+                <a
+                  key={i}
+                  href={link.href}
+                  className="text-[14px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors"
+                  data-testid={`link-nav-${link.href.replace('/#', '')}`}
+                >
+                  {link.label}
+                </a>
+              );
+            }
+
+            return (
+              <Link
+                key={i}
+                href={link.href}
+                className={`text-[14px] font-medium transition-colors ${
+                  location === link.href
+                    ? 'text-[#1a1a2e]'
+                    : 'text-[#5a5a72] hover:text-[#1a1a2e]'
+                }`}
+                data-testid={`link-nav-${link.href.slice(1)}`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="hidden lg:flex items-center gap-3">
@@ -108,16 +155,59 @@ export default function Navigation({ onNavigate }: NavigationProps) {
 
       {mobileOpen && (
         <div className="lg:hidden bg-[rgba(255,255,255,0.97)] backdrop-blur-xl border-t border-[rgba(0,0,0,0.08)] px-6 py-6 space-y-4">
-          {navLinks.map((link, i) => (
-            <a
-              key={i}
-              href={link.href}
-              className="block text-[15px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors py-2"
-              onClick={(e) => { handleNavClick(e, link); setMobileOpen(false); }}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link, i) => {
+            if (link.isDropdown) {
+              return (
+                <div key={i}>
+                  <button
+                    onClick={() => setIndustriesOpen(!industriesOpen)}
+                    className="flex items-center gap-1 w-full text-[15px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors py-2"
+                    data-testid="button-mobile-industries"
+                  >
+                    {link.label}
+                    <ChevronDown className={`w-4 h-4 transition-transform ${industriesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {industriesOpen && (
+                    <div className="pl-4 space-y-1 mt-1">
+                      {industryLinks.map((industry) => (
+                        <Link
+                          key={industry.href}
+                          href={industry.href}
+                          className="block text-[14px] text-[#5a5a72] hover:text-[#1a1a2e] transition-colors py-1.5"
+                          data-testid={`link-mobile-industry-${industry.href.slice(1)}`}
+                        >
+                          {lang === 'ar' ? industry.ar : industry.en}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            if (link.isHash) {
+              return (
+                <a
+                  key={i}
+                  href={link.href}
+                  className="block text-[15px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors py-2"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.label}
+                </a>
+              );
+            }
+
+            return (
+              <Link
+                key={i}
+                href={link.href}
+                className="block text-[15px] font-medium text-[#5a5a72] hover:text-[#1a1a2e] transition-colors py-2"
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <div className="pt-4 border-t border-[rgba(0,0,0,0.08)] space-y-3">
             <button
               onClick={() => { setLang(lang === 'en' ? 'ar' : 'en'); setMobileOpen(false); }}
