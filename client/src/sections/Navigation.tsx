@@ -4,6 +4,8 @@ import { useLanguage } from '@/context/LanguageContext';
 import { Menu, X, Globe, ChevronDown } from 'lucide-react';
 import logoImg from '@assets/logo_smart_(1)_1770814555470.jpg';
 
+import t_l_chargement__8_ from "@assets/téléchargement (8).png";
+
 const industryLinks = [
   { en: 'Healthcare', ar: 'القطاع الصحي', href: '/healthcare' },
   { en: 'E-commerce', ar: 'التجارة الإلكترونية', href: '/ecommerce' },
@@ -52,7 +54,7 @@ export default function Navigation() {
     >
       <div className="max-w-[1200px] mx-auto px-6 h-[72px] flex items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2 shrink-0" data-testid="link-home">
-          <img src={logoImg} alt="Sondos AI" className="h-10 object-contain" />
+          <img src={t_l_chargement__8_} alt="Sondos AI" className="h-10 object-contain" />
         </Link>
 
         <div className="hidden lg:flex items-center gap-8">
@@ -152,7 +154,6 @@ export default function Navigation() {
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
-
       {mobileOpen && (
         <div className="lg:hidden bg-[rgba(255,255,255,0.95)] backdrop-blur-2xl border-t border-[rgba(90,24,154,0.08)] px-6 py-6 space-y-4">
           {navLinks.map((link, i) => {
