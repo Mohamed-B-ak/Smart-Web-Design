@@ -8,7 +8,6 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden" data-testid="section-hero">
       <AnimatedBackground />
-
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
@@ -17,11 +16,9 @@ export default function Hero() {
           maskImage: 'radial-gradient(ellipse at center, black 20%, transparent 65%)'
         }}
       />
-
       <div className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20 float-gentle" style={{ background: 'radial-gradient(circle, rgba(90,24,154,0.3), transparent 70%)', animationDelay: '0s' }} />
       <div className="absolute top-40 right-[15%] w-24 h-24 rounded-full opacity-15 float-slow" style={{ background: 'radial-gradient(circle, rgba(157,78,221,0.3), transparent 70%)', animationDelay: '2s' }} />
       <div className="absolute bottom-32 left-[20%] w-20 h-20 rounded-full opacity-10 float-gentle" style={{ background: 'radial-gradient(circle, rgba(123,44,191,0.4), transparent 70%)', animationDelay: '4s' }} />
-
       <div className="relative z-10 max-w-[820px] mx-auto">
         <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
           <Sparkles className="w-3.5 h-3.5" style={{ animation: 'pulseGlow 2s infinite' }} />
@@ -52,7 +49,6 @@ export default function Hero() {
           </a>
         </div>
       </div>
-
       <div className="relative z-10 max-w-[1060px] w-full mx-auto rounded-3xl overflow-hidden border border-[rgba(90,24,154,0.15)] bg-[rgba(255,255,255,0.85)] backdrop-blur-xl shadow-[0_0_100px_rgba(90,24,154,0.15),0_40px_80px_rgba(0,0,0,0.08)] animate-fade-up animation-delay-500 ai-glow">
         <div className="p-6 md:p-8">
           <div className="flex items-center gap-3 mb-6">
@@ -94,12 +90,11 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
       <div className="relative z-10 max-w-[1060px] w-full mx-auto mt-12 animate-fade-up animation-delay-600">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-0">
           <div className="flex-1 text-center sm:text-left">
             <p className="text-4xl sm:text-5xl font-bold gradient-text">{t('hero.stat1_val')}</p>
-            <p className="text-sm text-[#4a3a62] mt-2">{t('hero.stat1_label')}</p>
+            <p className="text-sm text-[#4a3a62] mt-2 text-center">{t('hero.stat1_label')}</p>
           </div>
           <div className="hidden sm:block w-px h-16 bg-gradient-to-b from-transparent via-[rgba(90,24,154,0.2)] to-transparent" />
           <div className="flex-1 text-center">
