@@ -243,7 +243,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.subtitle': 'ابنِ وأطلق وأدِر وكلاء صوتيين بالذكاء الاصطناعي يبدون كالبشر، ينفذون المهام، ويتوسعون بسهولة.',
     'hero.cta_demo': 'جرّب العرض المباشر',
     'hero.cta_sales': 'تواصل مع المبيعات',
-    'logo_carousel.title': 'موثوق من قبل شركات رائدة حول العالم',
+    'logo_carousel.title': 'تكامل سلس مع أنظمتك الحالية',
     'scale.title': 'مبني للتوسع',
     'scale.subtitle': 'تعامل مع ملايين المكالمات بموثوقية على مستوى المؤسسات',
     'scale.calls': 'مكالمة معالجة',
