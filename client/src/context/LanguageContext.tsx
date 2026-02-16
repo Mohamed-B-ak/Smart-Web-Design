@@ -228,7 +228,7 @@ const translations: Record<Language, Record<string, string>> = {
     'partner.faq4_a': 'Yes. We provide white-label documentation, marketing templates, and sales materials that you can customize with your brand.',
   },
   ar: {
-    'nav.product': 'المنتج',
+    'nav.product': 'الرئيسية',
     'nav.pricing': 'الأسعار',
     'nav.for_business': 'للأعمال',
     'nav.for_developers': 'للمطورين',
