@@ -1,31 +1,47 @@
-import { useLanguage } from '@/context/LanguageContext';
+import { useLanguage } from "@/context/LanguageContext";
 
 const logos = [
-  'Microsoft', 'Google', 'Amazon', 'Salesforce', 'HubSpot',
-  'Zendesk', 'Twilio', 'Slack', 'Shopify', 'Oracle',
+  "YouTube",
+  "WordPress",
+  "WhatsApp Business",
+  "Salesforce",
+  "HubSpot",
+  "Zendesk",
+  "Twilio",
+  "Slack",
+  "Shopify",
+  "OpenAI",
 ];
 
 export default function LogoCarousel() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-16 overflow-hidden" data-testid="section-logo-carousel">
+    <section className="py-16 overflow-hidden">
       <p className="text-center text-[13px] font-medium text-[#8878a0] uppercase tracking-widest mb-10">
-        {t('logo_carousel.title')}
+        {t("logo_carousel.title")}
       </p>
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#f4f0fa] to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#f4f0fa] to-transparent z-10" />
-        <div className="flex animate-scroll-x">
-          {[...logos, ...logos].map((logo, i) => (
-            <div
-              key={i}
-              className="flex-shrink-0 mx-10 flex items-center justify-center h-12"
-            >
-              <span className="text-[18px] font-semibold text-[#3a3a4a] tracking-wider whitespace-nowrap">
-                {logo}
-              </span>
-            </div>
+
+      <div className="marquee-wrapper">
+        {/* fade edges */}
+        <div className="marquee-fade left" />
+        <div className="marquee-fade right" />
+
+        {/* TRACK 1 */}
+        <div className="marquee-track">
+          {logos.map((logo, i) => (
+            <span key={i} className="marquee-item">
+              {logo}
+            </span>
+          ))}
+        </div>
+
+        {/* TRACK 2 (clone parfait) */}
+        <div className="marquee-track marquee-track-2">
+          {logos.map((logo, i) => (
+            <span key={i} className="marquee-item">
+              {logo}
+            </span>
           ))}
         </div>
       </div>

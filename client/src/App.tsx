@@ -1,42 +1,45 @@
-import { useEffect } from 'react';
-import { Switch, Route, useLocation } from 'wouter';
-import { LanguageProvider } from '@/context/LanguageContext';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '@/lib/queryClient';
-import { Toaster } from '@/components/ui/toaster';
-import { getBlogPostBySlug } from '@/data/blog';
-import Navigation from '@/sections/Navigation';
-import Hero from '@/sections/Hero';
-import LogoCarousel from '@/sections/LogoCarousel';
-import ScaleBanner from '@/sections/ScaleBanner';
-import WhatIs from '@/sections/WhatIs';
-import Demo from '@/sections/Demo';
-import Testimonials from '@/sections/Testimonials';
-import TalksLikePeople from '@/sections/TalksLikePeople';
-import Highlights from '@/sections/Highlights';
-import Features from '@/sections/Features';
-import QA from '@/sections/QA';
-import Omnichannel from '@/sections/Omnichannel';
-import Telephony from '@/sections/Telephony';
-import Security from '@/sections/Security';
-import Integrations from '@/sections/Integrations';
-import FAQ from '@/sections/FAQ';
-import CTABanner from '@/sections/CTABanner';
-import FinalCTA from '@/components/FinalCTA';
-import Footer from '@/sections/Footer';
-import BlogList from '@/sections/BlogList';
-import BlogPost from '@/sections/BlogPost';
-import Healthcare from '@/pages/Healthcare';
-import Ecommerce from '@/pages/Ecommerce';
-import CallCenter from '@/pages/CallCenter';
-import RealEstate from '@/pages/RealEstate';
-import Services from '@/pages/Services';
-import Restaurant from '@/pages/Restaurant';
-import Legal from '@/pages/Legal';
-import CarDealership from '@/pages/CarDealership';
-import DebtCollection from '@/pages/DebtCollection';
-import Pricing from '@/pages/Pricing';
-import Partner from '@/pages/Partner';
+import { useEffect } from "react";
+import { Switch, Route, useLocation } from "wouter";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/lib/queryClient";
+import { Toaster } from "@/components/ui/toaster";
+import { getBlogPostBySlug } from "@/data/blog";
+import Navigation from "@/sections/Navigation";
+import Hero from "@/sections/Hero";
+import LogoCarousel from "@/sections/LogoCarousel";
+import ScaleBanner from "@/sections/ScaleBanner";
+import WhatIs from "@/sections/WhatIs";
+
+import Testimonials from "@/sections/Testimonials";
+import TalksLikePeople from "@/sections/TalksLikePeople";
+import Highlights from "@/sections/Highlights";
+import Features from "@/sections/Features";
+import QA from "@/sections/QA";
+import Omnichannel from "@/sections/Omnichannel";
+import Telephony from "@/sections/Telephony";
+
+import Integrations from "@/sections/Integrations";
+import FAQ from "@/sections/FAQ";
+import CTABanner from "@/sections/CTABanner";
+
+import Footer from "@/sections/Footer";
+import BlogList from "@/sections/BlogList";
+import BlogPost from "@/sections/BlogPost";
+import Healthcare from "@/pages/Healthcare";
+import Ecommerce from "@/pages/Ecommerce";
+import CallCenter from "@/pages/CallCenter";
+import RealEstate from "@/pages/RealEstate";
+import Services from "@/pages/Services";
+import Restaurant from "@/pages/Restaurant";
+import Legal from "@/pages/Legal";
+import CarDealership from "@/pages/CarDealership";
+import DebtCollection from "@/pages/DebtCollection";
+import Pricing from "@/pages/Pricing";
+import Partner from "@/pages/Partner";
+import SavingsCalculator from "@/sections/SavingsCalculator";
+import IntegrationsPage from "@/pages/IntegrationsPage";
+import Demo from "@/pages/Demo";
 
 function HomePage() {
   return (
@@ -45,19 +48,19 @@ function HomePage() {
       <LogoCarousel />
       <ScaleBanner />
       <WhatIs />
-      <Demo />
+      <SavingsCalculator />
       <Testimonials />
       <TalksLikePeople />
+
       <Highlights />
       <Features />
       <QA />
       <Omnichannel />
       <Telephony />
-      <Security />
+
       <Integrations />
       <FAQ />
       <CTABanner />
-      <FinalCTA />
     </main>
   );
 }
@@ -90,7 +93,7 @@ function BlogPostPage({ slug }: { slug: string }) {
 
   return (
     <main>
-      <BlogPost post={post} onBack={() => navigate('/blog')} />
+      <BlogPost post={post} onBack={() => navigate("/blog")} />
     </main>
   );
 }
@@ -106,15 +109,15 @@ function AppContent() {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('vis');
+              entry.target.classList.add("vis");
               observer.unobserve(entry.target);
             }
           });
         },
-        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
       );
 
-      document.querySelectorAll('.fi').forEach((el) => {
+      document.querySelectorAll(".fi").forEach((el) => {
         observer.observe(el);
       });
 
@@ -141,7 +144,13 @@ function AppContent() {
         <Route path="/car-dealership" component={CarDealership} />
         <Route path="/debt-collection" component={DebtCollection} />
         <Route path="/blog">{() => <BlogListPage />}</Route>
-        <Route path="/blog/:slug">{(params) => <BlogPostPage slug={params.slug} />}</Route>
+        <Route path="/blog/:slug">
+          {(params) => <BlogPostPage slug={params.slug} />}
+        </Route>
+        <Route path="/integrations" component={IntegrationsPage} />
+        {/* ✅ AJOUTE CETTE LIGNE */}
+        <Route path="/Demo" component={Demo} />
+
         <Route>{() => <PlaceholderPage title="404 - Page Not Found" />}</Route>
       </Switch>
       <Footer />

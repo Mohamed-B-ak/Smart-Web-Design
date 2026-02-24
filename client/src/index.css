@@ -139,7 +139,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
     animation: shimmer 3s ease-in-out infinite;
   }
 }
@@ -157,9 +157,7 @@
     animation: scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .animate-scroll-x {
-    animation: scroll-x 35s linear infinite;
-  }
+
 
   .animate-wave {
     animation: wave 1.4s ease-in-out infinite;
@@ -169,89 +167,221 @@
     animation: spin 20s linear infinite;
   }
 
-  .animation-delay-100 { animation-delay: 0.1s; }
-  .animation-delay-150 { animation-delay: 0.15s; }
-  .animation-delay-200 { animation-delay: 0.2s; }
-  .animation-delay-300 { animation-delay: 0.3s; }
-  .animation-delay-400 { animation-delay: 0.4s; }
-  .animation-delay-500 { animation-delay: 0.5s; }
-  .animation-delay-600 { animation-delay: 0.6s; }
-  .animation-delay-700 { animation-delay: 0.7s; }
+  .animation-delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .animation-delay-150 {
+    animation-delay: 0.15s;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 0.7s;
+  }
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes scroll-x {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
+.animate-scroll-x {
+  animation: scroll-x 18s linear infinite;
+}
+
+
 @keyframes wave {
-  0%, 100% { height: 16px; opacity: 0.3; }
-  50% { height: 70px; opacity: 1; }
+
+  0%,
+  100% {
+    height: 16px;
+    opacity: 0.3;
+  }
+
+  50% {
+    height: 70px;
+    opacity: 1;
+  }
 }
 
 @keyframes dot-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 214, 143, 0.5); }
-  50% { box-shadow: 0 0 0 8px rgba(0, 214, 143, 0); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 214, 143, 0.5);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(0, 214, 143, 0);
+  }
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes borderGlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes floatGentle {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 @keyframes floatSlow {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-8px) rotate(1deg); }
-  66% { transform: translateY(-4px) rotate(-1deg); }
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+
+  66% {
+    transform: translateY(-4px) rotate(-1deg);
+  }
 }
 
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(90, 24, 154, 0.15); }
-  50% { box-shadow: 0 0 40px rgba(90, 24, 154, 0.3), 0 0 80px rgba(90, 24, 154, 0.1); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(90, 24, 154, 0.15);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(90, 24, 154, 0.3), 0 0 80px rgba(90, 24, 154, 0.1);
+  }
 }
 
 @keyframes shimmer {
-  0% { left: -100%; }
-  50%, 100% { left: 100%; }
+  0% {
+    left: -100%;
+  }
+
+  50%,
+  100% {
+    left: 100%;
+  }
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes morphBlob {
-  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-  50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
-  75% { border-radius: 60% 40% 60% 30% / 60% 40% 30% 60%; }
+
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+
+  50% {
+    border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%;
+  }
+
+  75% {
+    border-radius: 60% 40% 60% 30% / 60% 40% 30% 60%;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -271,4 +401,71 @@
 ::selection {
   background: rgba(90, 24, 154, 0.3);
   color: white;
+}
+
+/* =========================
+   MARQUEE INFINI CONTINU
+========================= */
+
+
+/* =========================
+   MARQUEE CONTINU SANS VIDE
+========================= */
+
+.marquee-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 48px;
+}
+
+.marquee-track {
+  position: absolute;
+  display: flex;
+  gap: 96px;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee-move 18s linear infinite;
+  padding-right: 85px;
+}
+
+.marquee-track-2 {
+  left: 100%;
+}
+
+.marquee-item {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3a3a4a;
+}
+
+/* animation continue droite → gauche */
+@keyframes marquee-move {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* fades */
+.marquee-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 128px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.marquee-fade.left {
+  left: 0;
+  background: linear-gradient(to right, #f4f0fa, transparent);
+}
+
+.marquee-fade.right {
+  right: 0;
+  background: linear-gradient(to left, #f4f0fa, transparent);
 }
