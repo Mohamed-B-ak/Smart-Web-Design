@@ -47,6 +47,18 @@ const translations: Record<Language, Record<string, string>> = {
     "whatis.f3_title": "Real-time Analytics",
     "whatis.f3_desc":
       "Live dashboards with actionable insights and performance metrics",
+    "whatis.f4_title": "Smart Agents",
+    "whatis.f4_desc":
+      "Voice and text AI agents that interact naturally with customers.",
+
+    "whatis.f5_title": "Advanced Security",
+    "whatis.f5_desc":
+      "Your data protected with the highest global security standards.",
+
+    "whatis.f6_title": "Lightning Speed",
+    "whatis.f6_desc":
+      "Instant responses and real-time analysis of every interaction.",
+    "common.read_more": "Read More",
     "demo.label": "Live Demo",
     "demo.title": "See Sondos AI in Action",
     "demo.desc":
@@ -142,7 +154,6 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.api": "API Reference",
     "footer.privacy": "Privacy Policy",
     "footer.terms": "Terms of Service",
-    "footer.rights": "All rights reserved.",
     "blog.title": "Blog",
     "blog.subtitle":
       "Insights, updates, and best practices from the Sondos AI team",
@@ -166,10 +177,10 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.stat4_val": "24/7",
     "hero.stat4_label": "Non-stop Service",
     "hero.cta_try": "Try a Free Call Now",
-    "hero.cta_book": "Book Your Free Demo",
+    "hero.cta_book": "Book Your Demo",
     "whysondos.title": "Why Choose Sondos AI for Your Business in Saudi?",
     "whysondos.desc":
-      "In a world where digital transformation is accelerating — and in a kingdom leading Vision 2030 — it is no longer acceptable for your customers to wait on hold or miss a call. Sondos AI turns every call into an opportunity.",
+      "In a world where digital transformation is accelerating c�� and in a kingdom leading Vision 2030 — it is no longer acceptable for your customers to wait on hold or miss a call. Sondos AI turns every call into an opportunity.",
     "whysondos.f1_title": "Designed for Saudi Market",
     "whysondos.f1_desc":
       "Understands Saudi dialect and local culture. Your voice agent speaks your customers language naturally.",
@@ -207,6 +218,53 @@ const translations: Record<Language, Record<string, string>> = {
     "finalcta.btn1": "Start Free — No Credit Card",
     "finalcta.btn2": "Talk to Our Advisor",
     "finalcta.btn3": "Message Us on WhatsApp",
+    "agents.title": "Choose your smart assistant",
+    "agents.choose_dialect": "Choose dialect to start",
+    "agents.ready": "Ready",
+    "agents.soon": "Coming soon",
+    "agents.voice_ready": "Voice assistant is ready",
+    "agents.press_to_start": "Press to start",
+    "agents.start_conversation": "Start conversation",
+    "agents.connecting": "Connecting…",
+    "agents.please_wait": "Please wait a moment",
+    "agents.in_call": "In conversation",
+    "agents.end_call": "Press to end call",
+    "agents.coming_soon": "Assistant coming soon…",
+    "agents.saudi": "Speak Saudi",
+    "agents.emirati": "Speak Emirati",
+    "agents.egyptian": "Speak Egyptian",
+    "demo.title1": "Book Your Demo",
+    "demo.subtitle":
+      "Fill out the form and our team will contact you within 24 hours",
+
+    "demo.full_name": "Full Name *",
+    "demo.full_name_placeholder": "Enter your name",
+
+    "demo.email": "Email Address *",
+    "demo.phone": "Phone Number *",
+
+    "demo.company": "Company Name *",
+    "demo.company_placeholder": "Enter your company name",
+
+    "demo.industry": "Industry *",
+    "demo.industry_placeholder":
+      "Example: Real estate, Healthcare, E-commerce...",
+
+    "demo.questions": "Questions (Optional)",
+    "demo.questions_placeholder":
+      "Write your question or any additional details...",
+
+    "demo.submit": "Submit Request 🚀",
+    "footer.description_line1": "AI-powered smart contact center platform",
+    "footer.description_line2":
+      "Redefining how you communicate with your customers.",
+
+    "footer.contact": "Contact Us",
+    "footer.email": "Email",
+    "footer.phone": "Phone Number",
+
+    "footer.follow_us": "Follow Us",
+    "footer.rights": "All rights reserved © 2026 Sondos AI",
     "partner.hero_title":
       "Launch Your Own Smart Calls Platform — Under Your Brand",
     "partner.hero_desc":
@@ -283,6 +341,67 @@ const translations: Record<Language, Record<string, string>> = {
       "Yes. We provide white-label documentation, marketing templates, and sales materials that you can customize with your brand.",
   },
   ar: {
+    "footer.description_line1": "منصة مركز اتصال ذكية مدعومة بالذكاء الاصطناعي",
+    "footer.description_line2": "تعيد تعريف تجربة التواصل مع عملائك.",
+
+    "footer.contact": "تواصل معنا",
+    "footer.email": "البريد الإلكتروني",
+    "footer.phone": "رقم الهاتف",
+
+    "footer.follow_us": "تابعنا",
+    "footer.rights": "جميع الحقوق محفوظة © 2026 Sondos AI",
+    "demo.title1": "احجز عرضك التجريبي",
+    "demo.subtitle": "املأ النموذج وسيتواصل معك فريقنا خلال 24 ساعة",
+
+    "demo.full_name": "الاسم الكامل *",
+    "demo.full_name_placeholder": "اكتب اسمك",
+
+    "demo.email": "البريد الإلكتروني *",
+    "demo.phone": "رقم الهاتف *",
+
+    "demo.company": "اسم الشركة *",
+    "demo.company_placeholder": "اكتب اسم شركتك",
+
+    "demo.industry": "القطاع *",
+    "demo.industry_placeholder":
+      "مثال: العقارات، الصحة، التجارة الإلكترونية...",
+
+    "demo.questions": "استفسارات (اختياري)",
+    "demo.questions_placeholder": "اكتب سؤالك أو أي تفاصيل إضافية...",
+
+    "demo.submit": "إرسال الطلب 🚀",
+    "common.read_more": "اقرأ المزيد",
+    "agents.egyptian": "تحدث بالمصرية",
+
+    "agents.egyptian.voice_ready": "المساعد المصري جاهز ✨",
+    "agents.egyptian.press_to_start": "دوس وهنبدأ",
+    "agents.egyptian.start_conversation": "يلا بينا",
+    "agents.egyptian.connecting": "بنتصل دلوقتي…",
+    "agents.egyptian.please_wait": "استنى ثانية",
+    "agents.egyptian.in_call": "إحنا بنتكلم",
+    "agents.egyptian.end_call": "دوس عشان تقفل المكالمة",
+    "agents.emirati": "تحدث بالإماراتية",
+
+    "agents.emirati.voice_ready": "المساعد الإماراتي جاهز 👋",
+    "agents.emirati.press_to_start": "اضغط وخلّنا نبدأ",
+    "agents.emirati.start_conversation": "يلا نبدأ",
+    "agents.emirati.connecting": "قاعدين نتصل…",
+    "agents.emirati.please_wait": "لحظة بس",
+    "agents.emirati.in_call": "نتكلم الحين",
+    "agents.emirati.end_call": "اضغط عشان تسكر المكالمة",
+    "agents.title": "اختر مساعدك الذكي",
+    "agents.choose_dialect": "اختر اللهجة للبدء",
+    "agents.ready": "جاهز",
+    "agents.soon": "قريباً",
+    "agents.voice_ready": "المساعد الصوتي جاهز",
+    "agents.press_to_start": "اضغط للبدء",
+    "agents.start_conversation": "ابدأ المحادثة",
+    "agents.connecting": "جارٍ الاتصال…",
+    "agents.please_wait": "يرجى الانتظار لحظة",
+    "agents.in_call": "في المحادثة",
+    "agents.end_call": "اضغط لإنهاء المكالمة",
+    "agents.coming_soon": "المساعد قادم قريباً…",
+    "agents.saudi": "تحدث بالسعودية",
     "nav.product": "الرئيسية",
     "nav.pricing": "الأسعار",
     "nav.for_business": "للأعمال",
@@ -316,6 +435,15 @@ const translations: Record<Language, Record<string, string>> = {
     "whatis.f2_desc": "توجيه مكالمات ذكي بناءً على نية العميل واحتياجه",
     "whatis.f3_title": "تحليلات فورية",
     "whatis.f3_desc": "لوحات معلومات حية مع رؤى قابلة للتنفيذ ومقاييس الأداء",
+    "whatis.f4_title": "وكلاء ذكيون",
+    "whatis.f4_desc":
+      "روبوتات صوتية وكتابية قادرة على التعامل مع العملاء بشكل طبيعي.",
+
+    "whatis.f5_title": "أمان متقدم",
+    "whatis.f5_desc": "حماية بياناتك وفق أعلى معايير الأمان العالمية.",
+
+    "whatis.f6_title": "سرعة فائقة",
+    "whatis.f6_desc": "استجابة فورية وتحليل لحظي لكل مكالمة وتفاعل.",
     "demo.label": "عرض مباشر",
     "demo.title": "شاهد سندس AI في بث مباشر",
     "demo.desc": "اختبر قوة وكلائنا الصوتيين الذكيين مع عرض توضيحي مباشر",
@@ -353,7 +481,7 @@ const translations: Record<Language, Record<string, string>> = {
     "omni.label": "قنوات متعددة",
     "omni.title": "منصة واحدة، كل القنوات",
     "omni.desc":
-      "إدارة المكالمات الصوتية والدردشة والبريد الإلكتروني ووسائل التواصل من لوحة واحدة.",
+      "إدارة المكا؄مات الصوتية والدردشة والبريد الإلكتروني ووسائل التواصل من لوحة واحدة.",
     "omni.voice": "مكالمات صوتية",
     "omni.chat": "دردشة مباشرة",
     "omni.email": "بريد إلكتروني",
@@ -361,7 +489,7 @@ const translations: Record<Language, Record<string, string>> = {
     "telephony.label": "الاتصالات",
     "telephony.title": "اتصالات سحابية",
     "telephony.desc":
-      "بنية تحتية للاتصالات على مستوى المؤسسات مبنية لعصر السحابة الحديث.",
+      "بنية تحتية للاتصالات على مستوى الم �سسات مبنية لعصر السحابة الحديث.",
     "security.label": "الأمان",
     "security.title": "أمان بمستوى البنوك",
     "security.desc": "بياناتك محمية بأعلى معايير الأمان وشهادات الامتثال.",
@@ -386,9 +514,7 @@ const translations: Record<Language, Record<string, string>> = {
     "faq.q4": "ماذا يحدث عندما لا يستطيع الذكاء الاصطناعي حل المشكلة؟",
     "faq.a4":
       "نظام التصعيد الذكي ينقل المكالمة بسلاسة إلى وكيل بشري مع السياق الكامل.",
-    "faq.q5": "هل هناك تجربة مجانية؟",
-    "faq.a5":
-      "نعم، نقدم تجربة مجانية لمدة 14 يوماً مع وصول كامل لجميع الميزات. لا حاجة لبطاقة ائتمان.",
+
     "cta.title": "مستعد لتحويل مركز اتصالك؟",
     "cta.desc":
       "انضم إلى مئات الشركات التي تستخدم سندس AI بالفعل لتقديم تجارب عملاء استثنائية.",
@@ -429,7 +555,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.stat4_val": "24/7",
     "hero.stat4_label": "خدمة بلا توقف",
     "hero.cta_try": "جرّب مكالمة مجانية الآن",
-    "hero.cta_book": "احجز عرضك التجريبي المجاني",
+    "hero.cta_book": "احجز عرضك التجريبي ",
     "whysondos.title": "لماذا تختار سندس AI لأعمالك في المملكة؟",
     "whysondos.desc":
       "في عالم يتسارع فيه التحول الرقمي — وفي مملكة تقود رؤية 2030 هذا التحول — لم يعد مقبولاً أن ينتظر عملاؤك على الخط أو يفوتهم الرد. سندس AI تحوّل كل مكالمة إلى فرصة، وكل تفاعل إلى تجربة استثنائية.",

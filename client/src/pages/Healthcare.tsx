@@ -1,12 +1,8 @@
 import React, { useMemo, useState } from "react";
+import { Link } from "wouter";
 import "../index.css";
 
-type FacilityCategory = {
-  id: string;
-  name: string;
-  icon: string;
-};
-
+type FacilityCategory = { id: string; name: string; icon: string };
 type FacilityType = {
   category: string;
   officialName: string;
@@ -14,7 +10,6 @@ type FacilityType = {
   solution: string;
   license: string;
 };
-
 type RoiInputs = {
   dailyCalls: number;
   missedPercent: number;
@@ -22,31 +17,24 @@ type RoiInputs = {
   monthlyNoShows: number;
   staffCount: number;
 };
-
 type RoiResults = {
   monthlyMissedCalls: number;
   missedCallsLoss: number;
   noShowLoss: number;
   totalCurrentLoss: number;
-
   recoveredCalls: number;
   recoveredRevenue: number;
-
   reducedNoShows: number;
   noShowSavings: number;
-
   staffSavings: number;
-
   sondosCost: number;
   tierName: string;
-
   netSavings: number;
   roiPercent: number;
   annualSavings: number;
 };
 
 export default function Healthcare() {
-  // ==================== DATA ====================
   const facilityCategories: FacilityCategory[] = useMemo(
     () => [
       { id: "hospitals", name: "المستشفيات", icon: "🏥" },
@@ -145,12 +133,6 @@ export default function Healthcare() {
   const integrations = useMemo(
     () => [
       {
-        name: "HIS / EMR",
-        icon: "🏥",
-        desc: "ربط السجلات والملفات",
-        status: "beta" as const,
-      },
-      {
         name: "واتساب",
         icon: "💬",
         desc: "تذكير وتأكيد المواعيد",
@@ -211,10 +193,8 @@ export default function Healthcare() {
     [],
   );
 
-  // ==================== STATE ====================
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedFacility, setSelectedFacility] = useState<string | null>(null);
-
   const [roiInputs, setRoiInputs] = useState<RoiInputs>({
     dailyCalls: 60,
     missedPercent: 35,
@@ -222,7 +202,6 @@ export default function Healthcare() {
     monthlyNoShows: 25,
     staffCount: 2,
   });
-
   const [showROIResults, setShowROIResults] = useState(false);
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
 
@@ -231,79 +210,63 @@ export default function Healthcare() {
     setShowROIResults(false);
   };
 
-  // ==================== ROI LOGIC ====================
   const roiResults: RoiResults = useMemo(() => {
     const daysPerMonth = 30;
-
     const monthlyCalls = roiInputs.dailyCalls * daysPerMonth;
     const monthlyMissedCalls = Math.round(
       (monthlyCalls * roiInputs.missedPercent) / 100,
     );
-
     const conversionFromRecoveredCalls = 0.55;
     const recoveredCalls = Math.round(
       monthlyMissedCalls * conversionFromRecoveredCalls,
     );
     const recoveredRevenue = recoveredCalls * roiInputs.avgValue;
-
     const missedCallsLoss = monthlyMissedCalls * roiInputs.avgValue * 0.55;
     const noShowLoss = roiInputs.monthlyNoShows * roiInputs.avgValue;
     const totalCurrentLoss = Math.round(missedCallsLoss + noShowLoss);
-
     const reduceNoShowRate = 0.65;
     const reducedNoShows = Math.round(
       roiInputs.monthlyNoShows * reduceNoShowRate,
     );
     const noShowSavings = reducedNoShows * roiInputs.avgValue;
-
     const staffUnitCost = 4500;
     const staffSavings =
       roiInputs.staffCount >= 3 ? Math.round(staffUnitCost * 0.5) : 0;
-
     let tierName = "Starter";
-    let sondosCost = 1500;
-
+    let sondosCost = 6900;
     if (roiInputs.dailyCalls > 50 && roiInputs.dailyCalls <= 150) {
       tierName = "Pro";
-      sondosCost = 3500;
+      sondosCost = 17450;
     } else if (roiInputs.dailyCalls > 150) {
       tierName = "Business";
-      sondosCost = 7500;
+      sondosCost = 48000;
     }
-
     const totalSavings = Math.round(
       recoveredRevenue + noShowSavings + staffSavings,
     );
     const netSavings = Math.round(totalSavings - sondosCost);
-
     const roiPercent =
       sondosCost > 0 ? Math.round((netSavings / sondosCost) * 100) : 0;
     const annualSavings = netSavings * 12;
-
     return {
       monthlyMissedCalls,
       missedCallsLoss: Math.round(missedCallsLoss),
       noShowLoss: Math.round(noShowLoss),
       totalCurrentLoss,
-
       recoveredCalls,
       recoveredRevenue: Math.round(recoveredRevenue),
-
       reducedNoShows,
       noShowSavings: Math.round(noShowSavings),
-
       staffSavings,
-
       sondosCost,
       tierName,
-
       netSavings,
       roiPercent,
       annualSavings,
     };
   }, [roiInputs]);
 
-  // ==================== HELPERS (CLASSES) ====================
+  // ── shared style tokens (kept for non-Hero sections) ──────────────────────
   const pageBg = "bg-[var(--bg)] text-[var(--t1)]";
   const sectionSoft = "bg-[var(--bg2)]";
   const card = "bg-[var(--card)] border border-[var(--bg4)]";
@@ -312,225 +275,170 @@ export default function Healthcare() {
   const muted = "text-[var(--t2)]";
   const subtle = "text-[var(--t3)]";
 
-  // ==================== RENDER ====================
   return (
-    <div dir="rtl" className={`min-h-screen ${pageBg}`}>
+    <div dir="rtl" className={`min-h-screen font-arabic ${pageBg}`}>
       {/* ==================== HERO ==================== */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        {/* Background Effects (glow violet basé sur tes variables) */}
-        <div className="absolute inset-0">
-          <div
-            className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-70"
-            style={{ background: "var(--accent-glow)" }}
-          />
-          <div
-            className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-40"
-            style={{ background: "rgba(157, 78, 221, 0.25)" }}
-          />
-        </div>
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden">
+        {/* gradient glow — same as Hero.jsx */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(90,24,154,0.15) 0%, transparent 70%)",
+          }}
+        />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Badge */}
-            <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-8"
-              style={{
-                background: "rgba(90, 24, 154, 0.10)",
-                border: "1px solid rgba(90, 24, 154, 0.22)",
-                color: "var(--accent3)",
-              }}
+        {/* GRID BACKGROUND — copied from Hero.jsx */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(90,24,154,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(90,24,154,.04) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+            maskImage:
+              "radial-gradient(ellipse at center, black 20%, transparent 65%)",
+          }}
+        />
+
+        {/* FLOATING BLOBS — copied from Hero.jsx */}
+        <div
+          className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20 float-gentle"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(90,24,154,0.3), transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute top-40 right-[15%] w-24 h-24 rounded-full opacity-15 float-slow"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(157,78,221,0.3), transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute bottom-32 left-[20%] w-20 h-20 rounded-full opacity-10 float-gentle"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(123,44,191,0.4), transparent 70%)",
+          }}
+        />
+
+        {/* HERO CONTENT */}
+        <div className="relative z-10 max-w-[820px] mx-auto">
+          {/* BADGE — same as Hero.jsx */}
+          <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
+            معتمد من عملاء موثوقين
+          </div>
+
+          {/* H1 — same font + clamp as Hero.jsx */}
+          <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto animate-fade-up animation-delay-100">
+            حوّل المكالمات الفائتة إلى{" "}
+            <span className="text-[#9d4edd]">مواعيد محجوزة</span>
+          </h1>
+
+          {/* SUBTITLE — same as Hero.jsx subtitle_new */}
+          <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[#1a0a2e] max-w-[580px] mx-auto leading-relaxed mb-4 animate-fade-up animation-delay-150">
+            نظام استقبال صوتي بالذكاء الاصطناعي يرد على مرضاك 24/7 بلهجة سعودية
+            طبيعية ويحجز المواعيد تلقائياً
+          </p>
+
+          {/* SOCIAL PROOF — same style as Hero.jsx desc */}
+          <p className="text-[clamp(14px,1.6vw,17px)] text-[#4a3a62] max-w-[680px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
+            ✓ +150 منشأة صحية &nbsp;·&nbsp; ✓ +500,000 مكالمة شهرياً
+            &nbsp;·&nbsp; ✓ 97% دقة التعرف
+          </p>
+
+          {/* CTA BUTTON — same shimmer/glow style as Hero.jsx */}
+          <div className="flex items-center justify-center gap-3.5 mb-12 flex-wrap animate-fade-up animation-delay-300">
+            <Link
+              to="/demo"
+              className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
             >
-              <span
-                className="w-2 h-2 rounded-full animate-pulse"
-                style={{ background: "var(--accent3)" }}
-              ></span>
-              معتمد من وزارة الصحة السعودية
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              <span className="text-[var(--t1)]">حوّل المكالمات الفائتة</span>
-              <br />
-              <span className="gradient-text">إلى مواعيد محجوزة</span>
-            </h1>
-
-            {/* Subheadline */}
-            <p
-              className={`text-xl ${muted} mb-10 max-w-2xl mx-auto leading-relaxed`}
-            >
-              نظام استقبال صوتي بالذكاء الاصطناعي يرد على مرضاك 24/7
-              <br />
-              بلهجة سعودية طبيعية ويحجز المواعيد تلقائياً
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <button className="px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 gradient-bg text-white glow">
-                جرّب مجاناً - 14 يوم
-              </button>
-              <button
-                className={`px-8 py-4 rounded-xl font-medium transition-all flex items-center justify-center gap-2 ${card}`}
-              >
-                <span>🎧</span>
-                استمع لعينة صوتية
-              </button>
-            </div>
-
-            {/* Trust Badges */}
-            <div
-              className={`flex flex-wrap justify-center gap-8 ${subtle} text-sm`}
-            >
-              <div className="flex items-center gap-2">
-                <span style={{ color: "var(--green)" }}>✓</span>
-                <span>+150 منشأة صحية</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span style={{ color: "var(--green)" }}>✓</span>
-                <span>+500,000 مكالمة شهرياً</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span style={{ color: "var(--green)" }}>✓</span>
-                <span>97% دقة التعرف</span>
-              </div>
-            </div>
+              جرّب الآن
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ==================== PROBLEM/SOLUTION ==================== */}
-      <section className={`py-20 ${sectionSoft}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Problem */}
-            <div
-              className="p-8 rounded-2xl"
-              style={{
-                background: "rgba(255, 107, 107, 0.06)",
-                border: "1px solid rgba(255, 107, 107, 0.25)",
-              }}
-            >
-              <div className="text-4xl mb-4" style={{ color: "var(--red)" }}>
-                📉
-              </div>
-              <h3
-                className="text-2xl font-bold mb-4"
-                style={{ color: "var(--red)" }}
-              >
-                المشكلة
-              </h3>
-              <ul className={`space-y-3 ${muted}`}>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1" style={{ color: "var(--red)" }}>
-                    ✗
-                  </span>
-                  <span>40% من المكالمات لا يُرد عليها</span>
+      {/* ==================== PROBLEM / SOLUTION ==================== */}
+      <section className={`py-24 px-6 ${sectionSoft}`}>
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+          <div className={`p-8 rounded-2xl ${card}`}>
+            <div className="text-4xl mb-4">📉</div>
+            <h3 className="font-['Instrument_Sans',sans-serif] text-[clamp(18px,2vw,22px)] font-bold leading-[1.08] tracking-tight mb-6 text-red-400">
+              المشكلة
+            </h3>
+            <ul className="space-y-3">
+              {[
+                "✗ 40% من المكالمات لا يُرد عليها",
+                "✗ 25% من المرضى لا يحضرون مواعيدهم",
+                "✗ موظفو الاستقبال مشغولون أو غير متاحين",
+                "✗ خسارة شهرية تصل لـ 50,000 ريال",
+              ].map((item, i) => (
+                <li key={i} className={`${muted} flex items-start gap-2`}>
+                  {item}
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1" style={{ color: "var(--red)" }}>
-                    ✗
-                  </span>
-                  <span>25% من المرضى لا يحضرون مواعيدهم</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1" style={{ color: "var(--red)" }}>
-                    ✗
-                  </span>
-                  <span>موظفو الاستقبال مشغولون أو غير متاحين</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1" style={{ color: "var(--red)" }}>
-                    ✗
-                  </span>
-                  <span>خسارة شهرية تصل لـ 50,000 ريال</span>
-                </li>
-              </ul>
-            </div>
+              ))}
+            </ul>
+          </div>
 
-            {/* Solution */}
-            <div
-              className="p-8 rounded-2xl"
-              style={{
-                background: "rgba(0, 214, 143, 0.06)",
-                border: "1px solid rgba(0, 214, 143, 0.22)",
-              }}
-            >
-              <div className="text-4xl mb-4" style={{ color: "var(--green)" }}>
-                ✨
-              </div>
-              <h3
-                className="text-2xl font-bold mb-4"
-                style={{ color: "var(--green)" }}
-              >
-                الحل مع سندس
-              </h3>
-              <ul className={`space-y-3 ${muted}`}>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1" style={{ color: "var(--green)" }}>
-                    ✓
-                  </span>
-                  <span>رد على 100% من المكالمات 24/7</span>
+          <div
+            className="p-8 rounded-2xl border"
+            style={{
+              background: "rgba(90,24,154,0.08)",
+              borderColor: "rgba(157,78,221,0.4)",
+            }}
+          >
+            <div className="text-4xl mb-4">✨</div>
+            <h3 className="font-['Instrument_Sans',sans-serif] text-[clamp(18px,2vw,22px)] font-bold leading-[1.08] tracking-tight mb-6 text-[#9d4edd]">
+              الحل مع سندس
+            </h3>
+            <ul className="space-y-3">
+              {[
+                "✓ رد على 100% من المكالمات 24/7",
+                "✓ تقليل عدم الحضور بنسبة 65%",
+                "✓ حجز تلقائي دون تدخل بشري",
+                "✓ ROI إيجابي من الشهر الأول",
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-[#1a0a2e]">
+                  {item}
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1" style={{ color: "var(--green)" }}>
-                    ✓
-                  </span>
-                  <span>تقليل عدم الحضور بنسبة 65%</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1" style={{ color: "var(--green)" }}>
-                    ✓
-                  </span>
-                  <span>حجز تلقائي دون تدخل بشري</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1" style={{ color: "var(--green)" }}>
-                    ✓
-                  </span>
-                  <span>ROI إيجابي من الشهر الأول</span>
-                </li>
-              </ul>
-            </div>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* ==================== FACILITY TYPES SECTION ==================== */}
-      <section id="solutions" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              حلول مخصصة لكل <span className="gradient-text">نوع منشأة</span>
+      {/* ==================== FACILITY TYPES ==================== */}
+      <section className="py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              حلول مخصصة لكل نوع منشأة
             </h2>
-            <p className={`${muted} text-lg`}>
-              حسب تصنيفات وزارة الصحة السعودية الرسمية
-            </p>
+            <p className={muted}>حسب تصنيفات وزارة الصحة السعودية الرسمية</p>
           </div>
 
-          {/* Category Tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
             {facilityCategories.map((cat) => {
               const isActive = selectedCategory === cat.id;
               return (
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(isActive ? null : cat.id)}
-                  className={`px-5 py-3 rounded-xl flex items-center gap-2 transition-all border ${
-                    isActive ? "text-white" : "text-[var(--t2)]"
+                  className={`px-5 py-2.5 rounded-full flex items-center gap-2 text-[13px] font-medium transition-all duration-300 border backdrop-blur-sm ${
+                    isActive
+                      ? "bg-[rgba(90,24,154,0.15)] border-[rgba(90,24,154,0.4)] text-[#9d4edd]"
+                      : "bg-[rgba(90,24,154,0.04)] border-[rgba(90,24,154,0.12)] text-[#4a3a62] hover:border-[rgba(90,24,154,0.25)]"
                   }`}
-                  style={{
-                    background: isActive ? "var(--accent)" : "var(--card)",
-                    borderColor: isActive ? "var(--accent2)" : "var(--bg4)",
-                  }}
                 >
-                  <span className="text-xl">{cat.icon}</span>
-                  <span className="font-medium">{cat.name}</span>
+                  {cat.icon} {cat.name}
                 </button>
               );
             })}
           </div>
 
-          {/* Facility Cards */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Object.entries(facilityTypes)
               .filter(
@@ -544,22 +452,18 @@ export default function Healthcare() {
                   <div
                     key={name}
                     onClick={() => handleFacilitySelect(name)}
-                    className={`p-6 rounded-2xl cursor-pointer transition-all ${
-                      isSelected ? "ai-glow" : ""
+                    className={`p-6 rounded-2xl cursor-pointer transition-all bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border ${
+                      isSelected
+                        ? "border-[rgba(90,24,154,0.5)] shadow-[0_0_30px_rgba(90,24,154,0.12)] ai-glow"
+                        : "border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)]"
                     }`}
-                    style={{
-                      background: "var(--card)",
-                      border: isSelected
-                        ? "2px solid var(--accent2)"
-                        : "1px solid var(--bg4)",
-                    }}
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h3 className="text-lg font-semibold text-[var(--t1)] mb-1">
+                        <h4 className="font-['Instrument_Sans',sans-serif] font-bold text-[17px] tracking-tight text-[#1a0a2e]">
                           {name}
-                        </h3>
-                        <p className={`text-xs ${subtle}`}>
+                        </h4>
+                        <p className="text-xs mt-1 text-[#8878a0]">
                           {facility.officialName}
                         </p>
                       </div>
@@ -571,31 +475,32 @@ export default function Healthcare() {
                         }
                       </span>
                     </div>
-
-                    <p className="text-sm mb-2" style={{ color: "var(--red)" }}>
-                      ⚠️ {facility.painPoint}
-                    </p>
-                    <p className="text-sm" style={{ color: "var(--green)" }}>
-                      ✨ {facility.solution}
-                    </p>
-
+                    <div className="text-sm p-3 rounded-xl mb-3 bg-[rgba(255,255,255,0.06)] border border-[rgba(90,24,154,0.08)]">
+                      <span className="text-orange-400">⚠️ </span>
+                      <span className="text-[#4a3a62]">
+                        {facility.painPoint}
+                      </span>
+                    </div>
                     <div
-                      className="mt-4 pt-4 text-xs"
+                      className="text-sm p-3 rounded-xl mb-3"
                       style={{
-                        borderTop: "1px solid var(--bg4)",
-                        color: "var(--t3)",
+                        background: "rgba(90,24,154,0.06)",
+                        border: "1px solid rgba(90,24,154,0.15)",
                       }}
                     >
-                      {facility.license}
+                      <span>✨ </span>
+                      <span className="text-[#1a0a2e]">
+                        {facility.solution}
+                      </span>
                     </div>
+                    <p className="text-xs text-[#8878a0]">{facility.license}</p>
                   </div>
                 );
               })}
           </div>
 
-          {/* Show More Button */}
           <div className="text-center mt-8">
-            <button className={`px-6 py-3 rounded-xl transition-all ${card}`}>
+            <button className="text-sm text-[#4a3a62] underline">
               عرض جميع التصنيفات ({Object.keys(facilityTypes).length})
             </button>
           </div>
@@ -603,398 +508,256 @@ export default function Healthcare() {
       </section>
 
       {/* ==================== ROI CALCULATOR ==================== */}
-      <section id="calculator" className={`py-20 ${sectionSoft}`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          {/* Section Header */}
+      <section className={`py-24 px-6 ${sectionSoft}`}>
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-4"
-              style={{
-                background: "rgba(255, 169, 64, 0.12)",
-                border: "1px solid rgba(255, 169, 64, 0.25)",
-                color: "var(--orange)",
-              }}
-            >
-              <span>🧮</span>
-              حاسبة مبنية على بيانات حقيقية
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              احسب <span className="gradient-text">خسائرك الحالية</span> وتوفيرك
-              مع سندس
+            <p className="text-[13px] font-medium mb-3 text-[#9d4edd]">
+              🧮 حاسبة مبنية على بيانات حقيقية
+            </p>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight">
+              احسب خسائرك الحالية وتوفيرك مع سندس
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Inputs Panel */}
-            <div className={`rounded-2xl p-6 ${card}`}>
-              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                <span>⚙️</span>
-                بيانات منشأتك
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* LEFT — inputs */}
+            <div className="p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.08)]">
+              <h3 className="font-['Instrument_Sans',sans-serif] font-bold text-[17px] tracking-tight mb-6 text-[#1a0a2e]">
+                ⚙️ بيانات منشأتك
               </h3>
 
               {selectedFacility && (
                 <div
-                  className="mb-6 p-4 rounded-xl"
+                  className="flex items-center justify-between p-3 rounded-xl mb-6 text-sm"
                   style={{
-                    background: "rgba(90, 24, 154, 0.08)",
-                    border: "1px solid rgba(90, 24, 154, 0.18)",
+                    background: "rgba(90,24,154,0.08)",
+                    border: "1px solid rgba(157,78,221,0.35)",
                   }}
                 >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p
-                        className="text-sm"
-                        style={{ color: "var(--accent3)" }}
-                      >
-                        المنشأة المختارة
-                      </p>
-                      <p className="text-lg font-semibold">
-                        {selectedFacility}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => setSelectedFacility(null)}
-                      className="hover:opacity-80"
-                      style={{ color: "var(--t2)" }}
-                    >
-                      تغيير
-                    </button>
+                  <div>
+                    <p className="text-xs text-[#8878a0]">المنشأة المختارة</p>
+                    <p className="font-semibold text-[#1a0a2e]">
+                      {selectedFacility}
+                    </p>
                   </div>
+                  <button
+                    onClick={() => setSelectedFacility(null)}
+                    className="hover:opacity-80 text-[#4a3a62]"
+                  >
+                    تغيير
+                  </button>
                 </div>
               )}
 
-              <div className="space-y-6">
-                {/* Daily Calls */}
-                <div>
+              {[
+                {
+                  label: "المكالمات اليومية",
+                  key: "dailyCalls",
+                  min: 10,
+                  max: 500,
+                  step: 5,
+                  val: roiInputs.dailyCalls,
+                  suffix: "",
+                },
+                {
+                  label: "نسبة المكالمات الفائتة",
+                  key: "missedPercent",
+                  min: 5,
+                  max: 80,
+                  step: 5,
+                  val: roiInputs.missedPercent,
+                  suffix: "%",
+                },
+                {
+                  label: "متوسط قيمة الموعد (ريال)",
+                  key: "avgValue",
+                  min: 50,
+                  max: 2000,
+                  step: 50,
+                  val: roiInputs.avgValue,
+                  suffix: "",
+                },
+                {
+                  label: "حالات عدم الحضور الشهرية",
+                  key: "monthlyNoShows",
+                  min: 0,
+                  max: 200,
+                  step: 5,
+                  val: roiInputs.monthlyNoShows,
+                  suffix: "",
+                },
+                {
+                  label: "عدد موظفي الاستقبال",
+                  key: "staffCount",
+                  min: 1,
+                  max: 10,
+                  step: 1,
+                  val: roiInputs.staffCount,
+                  suffix: "",
+                },
+              ].map((slider) => (
+                <div key={slider.key} className="mb-6">
                   <div className="flex justify-between mb-2">
-                    <label className={`text-sm ${muted}`}>
-                      المكالمات اليومية
+                    <label className="text-sm text-[#4a3a62]">
+                      {slider.label}
                     </label>
-                    <span
-                      style={{ color: "var(--green)" }}
-                      className="font-mono"
-                    >
-                      {roiInputs.dailyCalls}
+                    <span className="font-bold text-[#1a0a2e]">
+                      {slider.val}
+                      {slider.suffix}
                     </span>
                   </div>
                   <input
                     type="range"
-                    min="10"
-                    max="300"
-                    value={roiInputs.dailyCalls}
+                    min={slider.min}
+                    max={slider.max}
+                    step={slider.step}
+                    value={slider.val}
                     onChange={(e) =>
                       setRoiInputs({
                         ...roiInputs,
-                        dailyCalls: parseInt(e.target.value, 10),
+                        [slider.key]: parseInt(e.target.value, 10),
                       })
                     }
                     className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                    style={{ background: "var(--bg3)" }}
+                    style={{ background: "rgba(90,24,154,0.12)" }}
                   />
                 </div>
-
-                {/* Missed Calls % */}
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <label className={`text-sm ${muted}`}>
-                      نسبة المكالمات الفائتة
-                    </label>
-                    <span style={{ color: "var(--red)" }} className="font-mono">
-                      {roiInputs.missedPercent}%
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="10"
-                    max="60"
-                    value={roiInputs.missedPercent}
-                    onChange={(e) =>
-                      setRoiInputs({
-                        ...roiInputs,
-                        missedPercent: parseInt(e.target.value, 10),
-                      })
-                    }
-                    className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                    style={{ background: "var(--bg3)" }}
-                  />
-                </div>
-
-                {/* Average Value */}
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <label className={`text-sm ${muted}`}>
-                      متوسط قيمة الموعد (ريال)
-                    </label>
-                    <span
-                      style={{ color: "var(--orange)" }}
-                      className="font-mono"
-                    >
-                      {roiInputs.avgValue}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="50"
-                    max="2000"
-                    step="50"
-                    value={roiInputs.avgValue}
-                    onChange={(e) =>
-                      setRoiInputs({
-                        ...roiInputs,
-                        avgValue: parseInt(e.target.value, 10),
-                      })
-                    }
-                    className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                    style={{ background: "var(--bg3)" }}
-                  />
-                </div>
-
-                {/* Monthly No-Shows */}
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <label className={`text-sm ${muted}`}>
-                      حالات عدم الحضور الشهرية
-                    </label>
-                    <span
-                      style={{ color: "var(--orange)" }}
-                      className="font-mono"
-                    >
-                      {roiInputs.monthlyNoShows}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={roiInputs.monthlyNoShows}
-                    onChange={(e) =>
-                      setRoiInputs({
-                        ...roiInputs,
-                        monthlyNoShows: parseInt(e.target.value, 10),
-                      })
-                    }
-                    className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                    style={{ background: "var(--bg3)" }}
-                  />
-                </div>
-
-                {/* Staff Count */}
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <label className={`text-sm ${muted}`}>
-                      عدد موظفي الاستقبال
-                    </label>
-                    <span
-                      style={{ color: "var(--blue)" }}
-                      className="font-mono"
-                    >
-                      {roiInputs.staffCount}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="1"
-                    max="10"
-                    value={roiInputs.staffCount}
-                    onChange={(e) =>
-                      setRoiInputs({
-                        ...roiInputs,
-                        staffCount: parseInt(e.target.value, 10),
-                      })
-                    }
-                    className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                    style={{ background: "var(--bg3)" }}
-                  />
-                </div>
-              </div>
+              ))}
 
               <button
                 onClick={() => setShowROIResults(true)}
-                className="w-full mt-8 py-4 rounded-xl font-semibold text-lg gradient-bg text-white glow"
+                className="w-full mt-8 py-4 rounded-full font-semibold text-[15px] text-white gradient-bg glow hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
               >
                 احسب الآن
               </button>
             </div>
 
-            {/* Results Panel */}
-            <div
-              className={`rounded-2xl p-6 border transition-all ${card}`}
-              style={{
-                borderColor: showROIResults ? "var(--accent2)" : "var(--bg4)",
-              }}
-            >
+            {/* RIGHT — results */}
+            <div className="p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.08)]">
               {!showROIResults ? (
-                <div
-                  className={`h-full flex flex-col items-center justify-center ${subtle} py-12`}
-                >
-                  <div className="text-6xl mb-4">📊</div>
-                  <p className="text-lg">أدخل بياناتك واضغط "احسب الآن"</p>
-                  <p className="text-sm">
+                <div className="h-full flex flex-col items-center justify-center text-center gap-4">
+                  <div className="text-6xl">📊</div>
+                  <p className="text-[#4a3a62]">
+                    أدخل بياناتك واضغط "احسب الآن"
+                  </p>
+                  <p className="text-[#8878a0] text-sm">
                     لمعرفة خسائرك الحالية وتوفيرك المتوقع
                   </p>
                 </div>
               ) : (
                 <div className="space-y-6">
-                  {/* Current Losses */}
-                  <div
-                    className="p-4 rounded-xl"
-                    style={{
-                      background: "rgba(255, 107, 107, 0.08)",
-                      border: "1px solid rgba(255, 107, 107, 0.25)",
-                    }}
-                  >
-                    <h4
-                      className="font-semibold mb-3 flex items-center gap-2"
-                      style={{ color: "var(--red)" }}
-                    >
-                      <span>📉</span> خسائرك الشهرية الحالية
+                  <div>
+                    <h4 className="font-['Instrument_Sans',sans-serif] font-bold text-[15px] tracking-tight mb-4 text-red-400">
+                      📉 خسائرك الشهرية الحالية
                     </h4>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className={muted}>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-[#4a3a62]">
                           مكالمات فائتة ({roiResults.monthlyMissedCalls})
                         </span>
-                        <span
-                          className="font-mono"
-                          style={{ color: "var(--red)" }}
-                        >
+                        <span className="text-red-400 font-semibold">
                           -{roiResults.missedCallsLoss.toLocaleString()} ر.س
                         </span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className={muted}>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-[#4a3a62]">
                           عدم حضور ({roiInputs.monthlyNoShows})
                         </span>
-                        <span
-                          className="font-mono"
-                          style={{ color: "var(--red)" }}
-                        >
+                        <span className="text-red-400 font-semibold">
                           -{roiResults.noShowLoss.toLocaleString()} ر.س
                         </span>
                       </div>
-                      <div
-                        className="flex justify-between pt-2 font-semibold"
-                        style={{
-                          borderTop: "1px solid rgba(255,107,107,0.25)",
-                        }}
-                      >
-                        <span>إجمالي الخسارة</span>
-                        <span style={{ color: "var(--red)" }}>
+                      <div className="flex justify-between font-bold pt-2 border-t border-[rgba(90,24,154,0.1)]">
+                        <span className="text-[#1a0a2e]">إجمالي الخسارة</span>
+                        <span className="text-red-400">
                           -{roiResults.totalCurrentLoss.toLocaleString()} ر.س
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Savings */}
-                  <div
-                    className="p-4 rounded-xl"
-                    style={{
-                      background: "rgba(0, 214, 143, 0.08)",
-                      border: "1px solid rgba(0, 214, 143, 0.22)",
-                    }}
-                  >
-                    <h4
-                      className="font-semibold mb-3 flex items-center gap-2"
-                      style={{ color: "var(--green)" }}
-                    >
-                      <span>✨</span> توفيرك مع سندس
+                  <div>
+                    <h4 className="font-['Instrument_Sans',sans-serif] font-bold text-[15px] tracking-tight mb-4 text-[#9d4edd]">
+                      ✨ توفيرك مع سندس
                     </h4>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className={muted}>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-[#4a3a62]">
                           إيرادات مستردة ({roiResults.recoveredCalls} مكالمة)
                         </span>
-                        <span
-                          className="font-mono"
-                          style={{ color: "var(--green)" }}
-                        >
+                        <span className="font-semibold text-[#9d4edd]">
                           +{roiResults.recoveredRevenue.toLocaleString()} ر.س
                         </span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className={muted}>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-[#4a3a62]">
                           توفير عدم الحضور ({roiResults.reducedNoShows})
                         </span>
-                        <span
-                          className="font-mono"
-                          style={{ color: "var(--green)" }}
-                        >
+                        <span className="font-semibold text-[#9d4edd]">
                           +{roiResults.noShowSavings.toLocaleString()} ر.س
                         </span>
                       </div>
-
                       {roiResults.staffSavings > 0 && (
-                        <div className="flex justify-between">
-                          <span className={muted}>توفير الموظفين</span>
-                          <span
-                            className="font-mono"
-                            style={{ color: "var(--green)" }}
-                          >
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[#4a3a62]">توفير الموظفين</span>
+                          <span className="font-semibold text-[#9d4edd]">
                             +{roiResults.staffSavings.toLocaleString()} ر.س
                           </span>
                         </div>
                       )}
-
-                      <div
-                        className="flex justify-between"
-                        style={{ color: "var(--t3)" }}
-                      >
-                        <span>تكلفة سندس ({roiResults.tierName})</span>
-                        <span className="font-mono">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-[#4a3a62]">
+                          تكلفة سندس ({roiResults.tierName})
+                        </span>
+                        <span className="text-red-400 font-semibold">
                           -{roiResults.sondosCost.toLocaleString()} ر.س
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Net Result */}
                   <div
-                    className="p-6 rounded-xl"
+                    className="p-6 rounded-2xl text-center"
                     style={{
-                      background:
-                        "linear-gradient(135deg, rgba(90,24,154,0.18), rgba(157,78,221,0.10))",
-                      border: "1px solid rgba(90,24,154,0.22)",
+                      background: "rgba(90,24,154,0.08)",
+                      border: "1px solid rgba(157,78,221,0.35)",
                     }}
                   >
-                    <div className="text-center">
-                      <p className={muted + " mb-2"}>صافي التوفير الشهري</p>
-                      <p
-                        className="text-4xl font-bold mb-2"
-                        style={{ color: "var(--accent3)" }}
-                      >
-                        +{roiResults.netSavings.toLocaleString()} ر.س
-                      </p>
-                      <p
-                        className="text-lg"
-                        style={{ color: "var(--accent2)" }}
-                      >
-                        ROI: {roiResults.roiPercent}%
-                      </p>
-                    </div>
-
-                    <div
-                      className="mt-4 pt-4 grid grid-cols-2 gap-4 text-center"
-                      style={{ borderTop: "1px solid rgba(90,24,154,0.22)" }}
-                    >
+                    <p className="text-sm mb-1 text-[#4a3a62]">
+                      صافي التوفير الشهري
+                    </p>
+                    <p className="text-[clamp(28px,3.5vw,42px)] font-['Instrument_Sans',sans-serif] font-bold leading-[1.08] tracking-tight mb-1 text-[#9d4edd]">
+                      +{roiResults.netSavings.toLocaleString()} ر.س
+                    </p>
+                    <p className="text-sm text-[#4a3a62]">
+                      ROI: {roiResults.roiPercent}%
+                    </p>
+                    <div className="mt-4 grid grid-cols-2 gap-4">
                       <div>
-                        <p className="text-2xl font-bold text-[var(--t1)]">
+                        <p className="text-2xl font-bold text-[#1a0a2e]">
                           {(roiResults.annualSavings / 1000).toFixed(0)}K
                         </p>
-                        <p className={`text-xs ${subtle}`}>توفير سنوي (ر.س)</p>
+                        <p className="text-xs text-[#8878a0]">
+                          توفير سنوي (ر.س)
+                        </p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-[var(--t1)]">
+                        <p className="text-2xl font-bold text-[#1a0a2e]">
                           {roiResults.tierName}
                         </p>
-                        <p className={`text-xs ${subtle}`}>الباقة المقترحة</p>
+                        <p className="text-xs text-[#8878a0]">
+                          الباقة المقترحة
+                        </p>
                       </div>
                     </div>
                   </div>
 
-                  <button className="w-full py-4 rounded-xl font-semibold gradient-bg text-white glow">
+                  <Link
+                    to="/demo"
+                    className="block w-full py-4 rounded-full font-semibold text-[15px] gradient-bg text-white glow text-center hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
+                  >
                     احصل على عرض سعر مخصص
-                  </button>
+                  </Link>
                 </div>
               )}
             </div>
@@ -1003,38 +766,25 @@ export default function Healthcare() {
       </section>
 
       {/* ==================== INTEGRATIONS ==================== */}
-      <section id="integrations" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              يتكامل مع <span className="gradient-text">أنظمتك الحالية</span>
-            </h2>
-            <p className={muted}>تكامل سلس مع أنظمة المستشفيات والعيادات</p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <section className="py-24 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+            يتكامل مع أنظمتك الحالية
+          </h2>
+          <p className="mb-12 text-[#4a3a62]">
+            تكامل سلس مع أنظمة المستشفيات والعيادات
+          </p>
+          <div className="flex flex-wrap justify-center gap-6">
             {integrations.map((int, idx) => (
               <div
                 key={idx}
-                className={`p-6 rounded-xl transition-all text-center group ${card}`}
+                className="p-6 rounded-2xl flex flex-col items-center gap-3 min-w-[140px] bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300"
               >
-                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">
-                  {int.icon}
-                </div>
-                <h4 className="font-semibold text-[var(--t1)] mb-1">
-                  {int.name}
-                </h4>
-                <p className={`text-xs ${subtle}`}>{int.desc}</p>
-
+                <span className="text-3xl">{int.icon}</span>
+                <span className="font-semibold text-[#1a0a2e]">{int.name}</span>
+                <span className="text-xs text-[#8878a0]">{int.desc}</span>
                 {int.status === "beta" && (
-                  <span
-                    className="inline-block mt-2 px-2 py-0.5 text-xs rounded-full"
-                    style={{
-                      background: "rgba(255,169,64,0.18)",
-                      color: "var(--orange)",
-                      border: "1px solid rgba(255,169,64,0.25)",
-                    }}
-                  >
+                  <span className="text-xs px-2 py-1 rounded-full bg-[rgba(90,24,154,0.12)] text-[#9d4edd]">
                     Beta
                   </span>
                 )}
@@ -1044,29 +794,17 @@ export default function Healthcare() {
         </div>
       </section>
 
-      {/* ==================== SECURITY & COMPLIANCE ==================== */}
-      <section id="security" className={`py-20 ${sectionSoft}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Content */}
+      {/* ==================== SECURITY ==================== */}
+      <section className={`py-24 px-6 ${sectionSoft}`}>
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-6"
-                style={{
-                  background: "rgba(79, 172, 254, 0.12)",
-                  border: "1px solid rgba(79, 172, 254, 0.25)",
-                  color: "var(--blue)",
-                }}
-              >
-                <span>🔒</span>
-                أمان على مستوى المؤسسات
-              </div>
-
-              <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-                حماية بيانات المرضى <br />
-                <span className="gradient-text">أولويتنا القصوى</span>
+              <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+                🔒 أمان على مستوى المؤسسات
               </h2>
-
+              <p className="mb-8 text-[#4a3a62]">
+                حماية بيانات المرضى أولويتنا القصوى
+              </p>
               <ul className="space-y-4">
                 {[
                   {
@@ -1084,347 +822,321 @@ export default function Healthcare() {
                   },
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="mt-1" style={{ color: "var(--green)" }}>
+                    <span className="mt-1 w-5 h-5 rounded-full flex items-center justify-center text-xs text-white flex-shrink-0 bg-[rgba(90,24,154,0.7)]">
                       ✓
                     </span>
                     <div>
-                      <strong className="text-[var(--t1)]">{item.title}</strong>
-                      <p className={`text-sm ${muted}`}>{item.desc}</p>
+                      <p className="font-semibold text-[#1a0a2e]">
+                        {item.title}
+                      </p>
+                      <p className="text-sm text-[#4a3a62]">{item.desc}</p>
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
-
-            {/* Certifications */}
             <div className="grid grid-cols-2 gap-4">
               {certifications.map((cert, idx) => (
-                <div key={idx} className={`p-6 rounded-xl text-center ${card}`}>
-                  <div className="text-4xl mb-3">{cert.icon}</div>
-                  <h4 className="text-xl font-bold text-[var(--t1)] mb-1">
-                    {cert.name}
-                  </h4>
-                  <p className={`text-sm ${muted}`}>{cert.desc}</p>
+                <div
+                  key={idx}
+                  className="p-6 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)]"
+                >
+                  <div className="text-3xl mb-2">{cert.icon}</div>
+                  <p className="font-bold text-[#1a0a2e]">{cert.name}</p>
+                  <p className="text-xs mt-1 text-[#8878a0]">{cert.desc}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== DASHBOARD ==================== */}
+      <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              لوحة تحكم ذكية وشاملة
+            </h2>
+            <p className="text-[#4a3a62]">راقب أداء منشأتك في الوقت الفعلي</p>
+          </div>
+
+          {/* Dashboard card — same style as Hero dashboard card */}
+          <div className="rounded-3xl overflow-hidden border border-[rgba(90,24,154,0.15)] bg-[rgba(255,255,255,0.85)] backdrop-blur-xl shadow-[0_0_100px_rgba(90,24,154,0.15),0_40px_80px_rgba(0,0,0,0.08)] ai-glow">
+            {/* top bar */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(90,24,154,0.1)]">
+              <div className="flex items-center gap-3">
+                {/* macOS dots */}
+                <div className="w-3 h-3 rounded-full bg-[#ff6b6b]" />
+                <div className="w-3 h-3 rounded-full bg-[#ffa940]" />
+                <div className="w-3 h-3 rounded-full bg-[#00d68f]" />
+                <span className="text-[12px] text-[#8878a0] ml-2 font-mono">
+                  sondos-healthcare-dashboard
+                </span>
+              </div>
+              <span className="text-xs px-3 py-1 rounded-full bg-[rgba(34,197,94,0.15)] text-[#22c55e]">
+                نشط
+              </span>
+            </div>
+
+            {/* stats grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[rgba(90,24,154,0.06)]">
+              {[
+                { label: "المكالمات اليوم", value: "127", sub: "↑ 12% من أمس" },
+                { label: "معدل الرد", value: "98.5%", sub: "الهدف: 95%" },
+                { label: "حجوزات جديدة", value: "34", sub: "↑ 8 عن أمس" },
+                { label: "رضا المرضى", value: "4.8", sub: "من 5.0" },
+              ].map((stat, i) => (
+                <div
+                  key={i}
+                  className="p-6 text-center bg-[rgba(255,255,255,0.85)]"
+                >
+                  <p className="text-xs mb-2 text-[#8878a0]">{stat.label}</p>
+                  <p className="text-2xl font-black text-[#1a0a2e]">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs mt-1 text-[#9d4edd]">{stat.sub}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* activity feed */}
+            <div className="p-6">
+              <h4 className="text-sm font-semibold mb-4 text-[#4a3a62]">
+                آخر النشاطات
+              </h4>
+              <div className="space-y-3">
+                {[
+                  {
+                    time: "قبل دقيقة",
+                    action: "حجز موعد جديد",
+                    detail: "عيادة الباطنية - د. أحمد",
+                    type: "success",
+                  },
+                  {
+                    time: "قبل 3 دقائق",
+                    action: "تأكيد موعد",
+                    detail: "غداً 10:30 ص - محمد العلي",
+                    type: "info",
+                  },
+                  {
+                    time: "قبل 5 دقائق",
+                    action: "تحويل لموظف",
+                    detail: "استفسار معقد - تم التحويل",
+                    type: "warning",
+                  },
+                  {
+                    time: "قبل 8 دقائق",
+                    action: "إرسال تذكير",
+                    detail: "موعد خلال ساعتين - 5 مرضى",
+                    type: "info",
+                  },
+                ].map((activity, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between py-3 border-b last:border-0 border-[rgba(90,24,154,0.08)]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="w-2 h-2 rounded-full"
+                        style={{
+                          background:
+                            activity.type === "success"
+                              ? "#22c55e"
+                              : activity.type === "warning"
+                                ? "#f59e0b"
+                                : "#9d4edd",
+                        }}
+                      />
+                      <div>
+                        <p className="text-sm font-medium text-[#1a0a2e]">
+                          {activity.action}
+                        </p>
+                        <p className="text-xs text-[#8878a0]">
+                          {activity.detail}
+                        </p>
+                      </div>
+                    </div>
+                    <span className="text-xs text-[#8878a0]">
+                      {activity.time}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== PRICING ==================== */}
+      <section className={`py-24 px-6 ${sectionSoft}`}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              أسعار شفافة وواضحة
+            </h2>
+            <p className="text-[#4a3a62]">ابدأ مجاناً، ترقّى حسب نموك</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Starter */}
+            <div className="p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.12)]">
+              <h3 className="font-['Instrument_Sans',sans-serif] text-xl font-bold tracking-tight mb-2 text-[#1a0a2e]">
+                Starter
+              </h3>
+              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-[#1a0a2e]">
+                6,900 ر.س
+              </p>
+              <p className="text-sm mb-6 text-[#4a3a62]">
+                /شهر · للعيادات والمراكز الصغيرة
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  { text: "رد آلي 24/7", ok: true },
+                  { text: "واتساب + ويب شات", ok: true },
+                  { text: "تحويل لموظف بشري", ok: true },
+                  { text: "3 تخصصات", ok: true },
+                  { text: "3 سيناريوهات جاهزة", ok: true },
+                  { text: "تأكيد حجز فوري", ok: true },
+                  { text: "تذكير قبل 24 ساعة", ok: true },
+                  { text: "2 مكالمات متزامنة", ok: true },
+                  { text: "حتى 2,300 دقيقة AI شهريًا", ok: true },
+                  { text: "1,000 رسالة AI", ok: true },
+                  { text: "لا يشمل حملات Tele-Sales", ok: false },
+                  { text: "لا يشمل Upselling", ok: false },
+                ].map((f, i) => (
+                  <li
+                    key={i}
+                    className={`text-sm flex gap-2 ${f.ok ? "text-[#1a0a2e]" : "text-[#8878a0]"}`}
+                  >
+                    <span>{f.ok ? "✓" : "✗"}</span> {f.text}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to="/demo"
+                className="block w-full py-3 rounded-full text-center font-semibold border border-[rgba(90,24,154,0.2)] text-[#1a0a2e] hover:bg-[rgba(90,24,154,0.05)] hover:border-[rgba(90,24,154,0.35)] transition-all duration-300"
+              >
+                ابدأ الآن
+              </Link>
+            </div>
+
+            {/* Pro — Popular */}
+            <div className="p-8 rounded-3xl relative gradient-bg glow border-2 border-[rgba(157,78,221,0.6)]">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs px-3 py-1 rounded-full bg-white text-[#5a189a] font-bold shadow">
+                الأكثر طلبًا
+              </span>
+              <h3 className="font-['Instrument_Sans',sans-serif] text-xl font-bold tracking-tight mb-2 text-white">
+                Pro
+              </h3>
+              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-white">
+                17,450 ر.س
+              </p>
+              <p className="text-sm mb-6 text-purple-200">
+                /شهر · للمجمعات الطبية المتوسطة
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  "كل مزايا Starter",
+                  "10 تخصصات",
+                  "10 سيناريوهات مخصصة",
+                  "تذكير 48 ساعة + تذكير مزدوج",
+                  "متابعة مرضى بعد الزيارة",
+                  "استبيان رضا المرضى",
+                  "حملات صوتية تذكيرية",
+                  "Web Widget",
+                  "5 مكالمات متزامنة",
+                  "حتى 7,000 دقيقة AI شهريًا",
+                  "3,500 رسالة AI",
+                ].map((f, i) => (
+                  <li key={i} className="text-sm flex gap-2 text-white">
+                    <span>✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to="/demo"
+                className="block w-full py-3 rounded-full text-center font-semibold bg-white text-[#5a189a] hover:opacity-90 transition-opacity"
+              >
+                ابدأ الآن
+              </Link>
+            </div>
+
+            {/* Business */}
+            <div className="p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.12)]">
+              <h3 className="font-['Instrument_Sans',sans-serif] text-xl font-bold tracking-tight mb-2 text-[#1a0a2e]">
+                Business
+              </h3>
+              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-[#1a0a2e]">
+                48,000 ر.س
+              </p>
+              <p className="text-sm mb-6 text-[#4a3a62]">
+                /شهر · للمستشفيات والمنشآت الكبيرة
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  "كل مزايا Pro",
+                  "تخصصات غير محدودة",
+                  "سيناريوهات غير محدودة",
+                  "Tele-Sales",
+                  "Upselling",
+                  "حملات دورية",
+                  "12 مكالمة متزامنة",
+                  "حتى 24,000 دقيقة AI شهريًا",
+                  "10,000 رسالة AI",
+                  "تقارير رضا المرضى للإدارة",
+                  "تخصيص كامل للسيناريوهات",
+                ].map((f, i) => (
+                  <li key={i} className="text-sm flex gap-2 text-[#1a0a2e]">
+                    <span>✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to="/demo"
+                className="block w-full py-3 rounded-full text-center font-semibold border border-[rgba(90,24,154,0.2)] text-[#1a0a2e] hover:bg-[rgba(90,24,154,0.05)] hover:border-[rgba(90,24,154,0.35)] transition-all duration-300"
+              >
+                تواصل معنا
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* ==================== FAQ ==================== */}
-      <section className="py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6">
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">أسئلة شائعة</h2>
-            <p className={muted}>كل شيء تحتاج معرفته قبل البدء</p>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              أسئلة شائعة
+            </h2>
+            <p className="text-[#4a3a62]">كل شيء تحتاج معرفته قبل البدء</p>
           </div>
-
           <div className="space-y-4">
             {faqs.map((f, idx) => {
               const open = activeFAQ === idx;
               return (
-                <div key={idx} className={`rounded-xl overflow-hidden ${card}`}>
+                <div
+                  key={idx}
+                  className="rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300"
+                >
                   <button
-                    className="w-full text-right px-5 py-4 flex items-center justify-between"
+                    className="w-full flex items-center justify-between px-6 py-5 text-right font-semibold text-[#1a0a2e]"
                     onClick={() => setActiveFAQ(open ? null : idx)}
                   >
-                    <span className="font-semibold text-[var(--t1)]">
-                      {f.q}
+                    {f.q}
+                    <span className="text-xl ml-4 flex-shrink-0 text-[#9d4edd]">
+                      {open ? "−" : "+"}
                     </span>
-                    <span className={subtle}>{open ? "−" : "+"}</span>
                   </button>
-                  {open && <div className={`px-5 pb-4 ${muted}`}>{f.a}</div>}
+                  {open && (
+                    <div className="px-6 pb-5 text-sm leading-relaxed text-[#4a3a62]">
+                      {f.a}
+                    </div>
+                  )}
                 </div>
               );
             })}
-          </div>
-        </div>
-      </section>
-      {/* ==================== DASHBOARD PREVIEW ==================== */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              لوحة تحكم
-              <span className="gradient-text"> ذكية وشاملة</span>
-            </h2>
-            <p className="text-[var(--t2)]">راقب أداء منشأتك في الوقت الفعلي</p>
-          </div>
-
-          {/* Dashboard Mockup */}
-          <div className="rounded-2xl border border-[var(--bg4)] bg-[var(--card)] p-6 overflow-hidden">
-            {/* Dashboard Header */}
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-[var(--bg4)]">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center text-white font-bold">
-                  س
-                </div>
-                <div>
-                  <h4 className="font-semibold text-[var(--t1)]">
-                    مجمع الشفاء الطبي
-                  </h4>
-                  <p className="text-xs text-[var(--t3)]">آخر تحديث: الآن</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <span
-                  className="w-2 h-2 rounded-full animate-pulse"
-                  style={{ background: "var(--green)" }}
-                ></span>
-                <span className="text-sm" style={{ color: "var(--green)" }}>
-                  نشط
-                </span>
-              </div>
-            </div>
-
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              <div className="p-4 rounded-xl bg-[var(--bg2)]">
-                <p className="text-[var(--t3)] text-sm mb-1">المكالمات اليوم</p>
-                <p className="text-2xl font-bold text-[var(--t1)]">127</p>
-                <p className="text-xs" style={{ color: "var(--green)" }}>
-                  ↑ 12% من أمس
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[var(--bg2)]">
-                <p className="text-[var(--t3)] text-sm mb-1">معدل الرد</p>
-                <p
-                  className="text-2xl font-bold"
-                  style={{ color: "var(--green)" }}
-                >
-                  98.5%
-                </p>
-                <p className="text-xs text-[var(--t2)]">الهدف: 95%</p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[var(--bg2)]">
-                <p className="text-[var(--t3)] text-sm mb-1">حجوزات جديدة</p>
-                <p className="text-2xl font-bold text-[var(--t1)]">34</p>
-                <p className="text-xs" style={{ color: "var(--green)" }}>
-                  ↑ 8 عن أمس
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[var(--bg2)]">
-                <p className="text-[var(--t3)] text-sm mb-1">رضا المرضى</p>
-                <p
-                  className="text-2xl font-bold"
-                  style={{ color: "var(--orange)" }}
-                >
-                  4.8
-                </p>
-                <p className="text-xs text-[var(--t2)]">من 5.0</p>
-              </div>
-            </div>
-
-            {/* Activity Feed */}
-            <div className="space-y-3">
-              <h5 className="text-sm font-semibold text-[var(--t2)] mb-3">
-                آخر النشاطات
-              </h5>
-
-              {[
-                {
-                  time: "قبل دقيقة",
-                  action: "حجز موعد جديد",
-                  detail: "عيادة الباطنية - د. أحمد",
-                  type: "success",
-                },
-                {
-                  time: "قبل 3 دقائق",
-                  action: "تأكيد موعد",
-                  detail: "غداً 10:30 ص - محمد العلي",
-                  type: "info",
-                },
-                {
-                  time: "قبل 5 دقائق",
-                  action: "تحويل لموظف",
-                  detail: "استفسار معقد - تم التحويل",
-                  type: "warning",
-                },
-                {
-                  time: "قبل 8 دقائق",
-                  action: "إرسال تذكير",
-                  detail: "موعد خلال ساعتين - 5 مرضى",
-                  type: "info",
-                },
-              ].map((activity, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center gap-4 p-3 rounded-lg bg-[var(--bg2)]"
-                >
-                  <div
-                    className="w-2 h-2 rounded-full"
-                    style={{
-                      background:
-                        activity.type === "success"
-                          ? "var(--green)"
-                          : activity.type === "warning"
-                            ? "var(--orange)"
-                            : "var(--blue)",
-                    }}
-                  ></div>
-
-                  <div className="flex-1">
-                    <p className="text-sm text-[var(--t1)]">
-                      {activity.action}
-                    </p>
-                    <p className="text-xs text-[var(--t3)]">
-                      {activity.detail}
-                    </p>
-                  </div>
-
-                  <span className="text-xs text-[var(--t3)]">
-                    {activity.time}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* ==================== PRICING ==================== */}
-      <section id="pricing" className={`py-20 ${sectionSoft}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              أسعار <span className="gradient-text">شفافة وواضحة</span>
-            </h2>
-            <p className={muted}>ابدأ مجاناً، ترقّى حسب نموك</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Starter */}
-            <div className={`p-6 rounded-2xl ${card}`}>
-              <div
-                className="text-sm font-medium mb-2"
-                style={{ color: "var(--accent3)" }}
-              >
-                Starter
-              </div>
-              <div className="mb-4">
-                <span className="text-4xl font-bold text-[var(--t1)]">
-                  1,500
-                </span>
-                <span className={`ml-2 ${muted}`}>ر.س/شهر</span>
-              </div>
-              <p className={`${muted} text-sm mb-6`}>مثالي للعيادات الفردية</p>
-              <ul className={`space-y-3 mb-6 ${muted}`}>
-                <li className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "var(--green)" }}>✓</span>
-                  <span>حتى 50 مكالمة يومياً</span>
-                </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "var(--green)" }}>✓</span>
-                  <span>حجز مواعيد آلي</span>
-                </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "var(--green)" }}>✓</span>
-                  <span>تذكيرات واتساب</span>
-                </li>
-                <li className={`flex items-center gap-2 text-sm ${subtle}`}>
-                  <span>✗</span>
-                  <span>تكامل HIS/EMR</span>
-                </li>
-              </ul>
-              <button className="w-full py-3 rounded-xl font-medium transition-colors gradient-bg text-white">
-                ابدأ مجاناً
-              </button>
-            </div>
-
-            {/* Pro - Popular */}
-            <div
-              className="p-6 rounded-2xl relative"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(90,24,154,0.12), rgba(255,255,255,0))",
-                border: "2px solid var(--accent2)",
-              }}
-            >
-              <div
-                className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-sm font-medium rounded-full text-white"
-                style={{ background: "var(--accent)" }}
-              >
-                الأكثر شعبية
-              </div>
-
-              <div
-                className="text-sm font-medium mb-2"
-                style={{ color: "var(--accent3)" }}
-              >
-                Pro
-              </div>
-              <div className="mb-4">
-                <span className="text-4xl font-bold text-[var(--t1)]">
-                  3,500
-                </span>
-                <span className={`ml-2 ${muted}`}>ر.س/شهر</span>
-              </div>
-              <p className={`${muted} text-sm mb-6`}>للمجمعات الطبية</p>
-              <ul className={`space-y-3 mb-6 ${muted}`}>
-                <li className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "var(--green)" }}>✓</span>
-                  <span>حتى 150 مكالمة يومياً</span>
-                </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "var(--green)" }}>✓</span>
-                  <span>كل مميزات Starter</span>
-                </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "var(--green)" }}>✓</span>
-                  <span>تكامل HIS/EMR</span>
-                </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "var(--green)" }}>✓</span>
-                  <span>تقارير متقدمة</span>
-                </li>
-              </ul>
-              <button className="w-full py-3 rounded-xl font-medium gradient-bg text-white glow">
-                ابدأ الآن
-              </button>
-            </div>
-
-            {/* Business */}
-            <div className={`p-6 rounded-2xl ${card}`}>
-              <div
-                className="text-sm font-medium mb-2"
-                style={{ color: "var(--accent3)" }}
-              >
-                Business
-              </div>
-              <div className="mb-4">
-                <span className="text-4xl font-bold text-[var(--t1)]">
-                  7,500
-                </span>
-                <span className={`ml-2 ${muted}`}>ر.س/شهر</span>
-              </div>
-              <p className={`${muted} text-sm mb-6`}>
-                للمستشفيات والمنشآت الكبيرة
-              </p>
-              <ul className={`space-y-3 mb-6 ${muted}`}>
-                <li className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "var(--green)" }}>✓</span>
-                  <span>مكالمات غير محدودة</span>
-                </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "var(--green)" }}>✓</span>
-                  <span>كل مميزات Pro</span>
-                </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "var(--green)" }}>✓</span>
-                  <span>مدير حساب مخصص</span>
-                </li>
-                <li className="flex items-center gap-2 text-sm">
-                  <span style={{ color: "var(--green)" }}>✓</span>
-                  <span>SLA مضمون 99.9%</span>
-                </li>
-              </ul>
-              <button className="w-full py-3 rounded-xl font-medium transition-colors gradient-bg text-white">
-                تواصل معنا
-              </button>
-            </div>
           </div>
         </div>
       </section>

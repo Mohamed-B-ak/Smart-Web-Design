@@ -2,22 +2,24 @@ import { useLanguage } from "@/context/LanguageContext";
 import { Link } from "wouter";
 
 const integrations = [
-  { name: "Salesforce", color: "#00A1E0" },
-  { name: "HubSpot", color: "#FF7A59" },
-  { name: "Zendesk", color: "#03363D" },
-  { name: "Slack", color: "#4A154B" },
-  { name: "Microsoft Teams", color: "#6264A7" },
-  { name: "Twilio", color: "#F22F46" },
-  { name: "Zapier", color: "#FF4F00" },
-  { name: "Freshdesk", color: "#25C16F" },
-  { name: "Zoho", color: "#C8202B" },
-  { name: "Intercom", color: "#6AFDEF" },
-  { name: "Jira", color: "#0052CC" },
-  { name: "Shopify", color: "#7AB55C" },
+  { name: "Zuora", color: "#FF6B00", logo: "/logos/zuora.png" },
+  { name: "Zoom", color: "#2D8CFF", logo: "/logos/zoom.png" },
+  { name: "Zoo", color: "#6C5CE7", logo: "/logos/zoo.png" },
+  { name: "Zoho Invoice", color: "#C8202B", logo: "/logos/zohoinvoice.png" },
+  { name: "Zoho CRM", color: "#C8202B", logo: "/logos/zohocrm.png" },
+  { name: "Zoho Books", color: "#C8202B", logo: "/logos/zohobooks.png" },
+  { name: "Zendesk", color: "#03363D", logo: "/logos/zendesk.png" },
+  { name: "YouTube", color: "#FF0000", logo: "/logos/youtube.png" },
+  { name: "Zagomail", color: "#00B894", logo: "/logos/zagomail.png" },
+  { name: "ZeroBounce", color: "#34495E", logo: "/logos/zerobounce.png" },
+  { name: "WordPress", color: "#21759B", logo: "/logos/wordpress.png" },
+  { name: "Xero", color: "#13B5EA", logo: "/logos/xero.png" },
 ];
 
 export default function Integrations() {
   const { t } = useLanguage();
+
+  const firstTwelve = integrations.slice(0, 12);
 
   return (
     <section className="py-24 px-6" data-testid="section-integrations">
@@ -26,7 +28,6 @@ export default function Integrations() {
           {t("integrations.label")}
         </span>
 
-        {/* ✅ Titre fluide */}
         <h2 className="font-bold mb-5 leading-tight tracking-tight text-[clamp(2rem,3.5vw,3.5rem)]">
           {t("integrations.title")}
         </h2>
@@ -37,16 +38,18 @@ export default function Integrations() {
 
         {/* GRID ITEMS */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {integrations.map((item, i) => (
+          {firstTwelve.map((item) => (
             <div
-              key={i}
+              key={item.name}
               className="fi flex items-center gap-3 bg-white border border-[rgba(90,24,154,0.08)] rounded-xl p-4 hover:border-[rgba(90,24,154,0.25)] hover:shadow-[0_12px_40px_rgba(90,24,154,0.1)] hover:-translate-y-1 transition-all duration-500"
             >
-              <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center text-white text-[13px] font-bold shrink-0"
-                style={{ backgroundColor: item.color }}
-              >
-                {item.name.charAt(0)}
+              {/* LOGO */}
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-white border shrink-0">
+                <img
+                  src={item.logo}
+                  alt={item.name}
+                  className="w-5 h-5 object-contain"
+                />
               </div>
 
               <span className="text-[14px] font-medium text-[#3a3a52] truncate">
@@ -56,10 +59,13 @@ export default function Integrations() {
           ))}
         </div>
 
-        {/* ✅ BOUTON VOIR PLUS — WOUTER */}
+        {/* BOUTON VOIR PLUS */}
         <div className="mt-12 flex justify-center">
-          <Link href="/integrations" className="px-7 py-3 rounded-full bg-gradient-to-r from-[#7b2cbf] to-[#9d4edd] text-white font-medium shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
-            اقرأ المزيد
+          <Link
+            href="/integrations"
+            className="px-7 py-3 rounded-full bg-gradient-to-r from-[#7b2cbf] to-[#9d4edd] text-white font-medium shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
+          >
+            {t("common.read_more")}
           </Link>
         </div>
       </div>

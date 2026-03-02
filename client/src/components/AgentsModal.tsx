@@ -1,95 +1,434 @@
 import { useState, useEffect, useRef } from "react";
-
+import { useLanguage } from "@/context/LanguageContext";
 type Props = {
   open: boolean;
   onClose: () => void;
 };
 
-export default function AgentsModal({ open, onClose }: Props) {
-  const [activeAgent, setActiveAgent] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+type CallState = "idle" | "connecting" | "talking";
 
-  const agents = [
-    {
-      name: "Speak in Saudi",
-      lang: "🇸🇦",
-      assistantId: "4d8090a4-75c1-49e8-b912-70595ac5f6c9",
-    },
-  ];
+export default function AgentsModal({ open, onClose }: Props) {
+  const { lang, t } = useLanguage();
+  const [activeAgent, setActiveAgent] = useState<string | null>(null);
+  const [callState, setCallState] = useState<CallState>("idle");
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    if (!open || !activeAgent) return;
-
-    const script = document.createElement("script");
-    script.src = "https://app.sondos-ai.com/embed.js";
-    script.async = true;
-    script.setAttribute(
-      "data-assistant-id",
-      "4d8090a4-75c1-49e8-b912-70595ac5f6c9",
-    );
-
-    containerRef.current?.appendChild(script);
-
-    return () => {
-      if (containerRef.current) {
-        containerRef.current.innerHTML = "";
-      }
-    };
-  }, [open, activeAgent]);
+    setCallState("idle");
+  }, [activeAgent]);
 
   if (!open) return null;
 
-  return (
-    <div className="fixed inset-0 z-[999] flex items-center justify-center bg-violet-50/60 backdrop-blur-lg">
-      <div className="w-[380px] rounded-3xl bg-white shadow-[0_20px_60px_rgba(124,58,237,0.2)] border border-violet-100 overflow-hidden">
-        <div className="px-6 py-4 flex justify-between items-center border-b border-violet-100">
-          <span className="font-semibold text-violet-600">
-            Choose your AI Agent
-          </span>
+  const agents = [
+    {
+      id: "saudi",
+      name: t("agents.saudi"),
+      lang: "🇸🇦",
+      color: "#10b981",
+      colorEnd: "#0d9488",
+      bg: "bg-emerald-50",
+      border: "border-emerald-200",
+      iframe:
+        "https://app.sondos-ai.com/widget/index.html?assistant_id=4d8090a4-75c1-49e8-b912-70595ac5f6c9&theme=light",
+    },
+    {
+      id: "emirati",
+      name: t("agents.emirati"),
+      lang: "🇦🇪",
+      color: "#f43f5e",
+      colorEnd: "#e11d48",
+      bg: "bg-red-50",
+      border: "border-red-200",
+      iframe: "",
+    },
+    {
+      id: "egyptian",
+      name: t("agents.egyptian"),
+      lang: "🇪🇬",
+      color: "#f59e0b",
+      colorEnd: "#d97706",
+      bg: "bg-amber-50",
+      border: "border-amber-200",
+      iframe: "",
+    },
+  ];
 
+  const selectedAgent = agents.find((a) => a.id === activeAgent);
+  const translateAgent = (key: string) => {
+    if (!activeAgent) return t(`agents.${key}`);
+
+    const dialectKey = `agents.${activeAgent}.${key}`;
+    const fallbackKey = `agents.${key}`;
+
+    const dialectTranslation = t(dialectKey);
+
+    // Si la traduction n'existe pas, ton t() retourne la clé elle-même
+    if (dialectTranslation === dialectKey) {
+      return t(fallbackKey);
+    }
+
+    return dialectTranslation;
+  };
+  const handleStartClick = () => {
+    if (callState === "idle") {
+      setCallState("connecting");
+      setTimeout(() => setCallState("talking"), 2500);
+    }
+  };
+
+  const handleEndCall = () => {
+    setCallState("idle");
+  };
+
+  return (
+    <div className="fixed inset-0 z-[999] flex items-center justify-center bg-violet-950/40 backdrop-blur-md">
+      <style>{`
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(16px) scale(0.97); }
+          to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes ripple {
+          0%   { transform: scale(1);   opacity: 0.6; }
+          100% { transform: scale(2.2); opacity: 0; }
+        }
+        @keyframes ripple2 {
+          0%   { transform: scale(1);   opacity: 0.4; }
+          100% { transform: scale(2.8); opacity: 0; }
+        }
+        @keyframes wave {
+          0%, 100% { transform: scaleY(0.3); }
+          50%       { transform: scaleY(1); }
+        }
+        @keyframes wave-talk {
+          0%, 100% { transform: scaleY(0.4); }
+          50%       { transform: scaleY(1.3); }
+        }
+        @keyframes breathe {
+          0%, 100% { transform: scale(1); }
+          50%       { transform: scale(1.06); }
+        }
+        @keyframes pulse-dot {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0.3; }
+        }
+        @keyframes btn-press {
+          0%   { transform: scale(1); }
+          50%  { transform: scale(0.95); }
+          100% { transform: scale(1); }
+        }
+        .modal-enter { animation: fadeUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        .ripple-1 {
+          position: absolute; inset: -16px; border-radius: 50%;
+          background: rgba(139,92,246,0.25);
+          animation: ripple 2s ease-out infinite;
+        }
+        .ripple-2 {
+          position: absolute; inset: -16px; border-radius: 50%;
+          background: rgba(139,92,246,0.15);
+          animation: ripple2 2s ease-out 0.6s infinite;
+        }
+        .avatar-breathe { animation: breathe 2.5s ease-in-out infinite; }
+        .bar-idle {
+          width: 4px; border-radius: 4px; height: 20px;
+          animation: wave 1.4s ease-in-out infinite;
+          background: linear-gradient(to top, #8b5cf6, #c4b5fd);
+        }
+        .bar-idle:nth-child(2) { animation-delay: 0.15s; }
+        .bar-idle:nth-child(3) { animation-delay: 0.3s; }
+        .bar-idle:nth-child(4) { animation-delay: 0.45s; }
+        .bar-idle:nth-child(5) { animation-delay: 0.6s; }
+        .bar-talk {
+          width: 5px; border-radius: 4px;
+          animation: wave-talk 0.5s ease-in-out infinite;
+          background: linear-gradient(to top, #6d28d9, #a78bfa);
+        }
+        .bar-talk:nth-child(1) { height: 28px; animation-delay: 0s; }
+        .bar-talk:nth-child(2) { height: 40px; animation-delay: 0.07s; }
+        .bar-talk:nth-child(3) { height: 52px; animation-delay: 0.14s; }
+        .bar-talk:nth-child(4) { height: 44px; animation-delay: 0.21s; }
+        .bar-talk:nth-child(5) { height: 32px; animation-delay: 0.28s; }
+        .bar-talk:nth-child(6) { height: 48px; animation-delay: 0.35s; }
+        .bar-talk:nth-child(7) { height: 36px; animation-delay: 0.42s; }
+        .bar-talk:nth-child(8) { height: 24px; animation-delay: 0.49s; }
+        .connecting-ring {
+          position: absolute; inset: -6px; border-radius: 50%;
+          border: 3px solid transparent;
+          border-top-color: #8b5cf6;
+          border-right-color: #8b5cf6;
+          animation: spin-slow 1s linear infinite;
+        }
+        .pulse-dot { animation: pulse-dot 1s ease-in-out infinite; }
+        .btn-start:active { animation: btn-press 0.15s ease-in-out; }
+      `}</style>
+
+      <div
+        className="modal-enter w-[400px] rounded-3xl overflow-hidden shadow-2xl"
+        style={{
+          background: "linear-gradient(145deg, #ffffff 0%, #faf5ff 100%)",
+          border: "1px solid rgba(139,92,246,0.15)",
+        }}
+      >
+        {/* HEADER */}
+        <div
+          className="px-6 py-4 flex justify-between items-center"
+          dir="rtl"
+          style={{
+            borderBottom: "1px solid rgba(139,92,246,0.1)",
+            background: "rgba(255,255,255,0.85)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          <div className="flex items-center gap-2">
+            {activeAgent && (
+              <button
+                onClick={() => {
+                  setActiveAgent(null);
+                  setCallState("idle");
+                }}
+                className="ml-1 w-7 h-7 rounded-full flex items-center justify-center text-violet-400 hover:bg-violet-100 transition text-sm"
+              >
+                →
+              </button>
+            )}
+            <div
+              className="w-2 h-2 rounded-full pulse-dot"
+              style={{
+                background:
+                  callState === "talking"
+                    ? "#10b981"
+                    : callState === "connecting"
+                      ? "#f59e0b"
+                      : "#8b5cf6",
+              }}
+            />
+            <span className="font-semibold text-violet-700 text-sm tracking-wide">
+              {activeAgent ? selectedAgent?.name : t("agents.title")}
+            </span>
+          </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full hover:bg-violet-50"
+            className="w-7 h-7 rounded-full flex items-center justify-center text-gray-400 hover:bg-violet-50 hover:text-violet-500 transition text-sm"
           >
             ✕
           </button>
         </div>
 
+        {/* AGENT LIST */}
         {!activeAgent && (
-          <div className="p-4 space-y-2">
-            {agents.map((a, i) => (
+          <div className="p-5 space-y-3" dir="rtl">
+            <p className="text-xs text-gray-400 text-center mb-4 tracking-wider">
+              {t("agents.choose_dialect")}
+            </p>
+            {agents.map((a) => (
               <button
-                key={i}
-                onClick={() => setActiveAgent(true)}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-violet-50 transition"
+                key={a.id}
+                onClick={() => setActiveAgent(a.id)}
+                className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl ${a.bg} ${a.border} border hover:scale-[1.02] active:scale-[0.99] transition-all duration-200 group`}
               >
-                <span className="text-lg">{a.lang}</span>
-                <span className="font-medium text-gray-700">{a.name}</span>
+                <span className="text-2xl">{a.lang}</span>
+                <div className="flex-1 text-right">
+                  <span className="font-semibold text-gray-700 group-hover:text-gray-900 transition">
+                    {a.name}
+                  </span>
+                  <div className="text-xs text-gray-400 mt-0.5">
+                    {a.iframe ? t("agents.ready") : t("agents.soon")}
+                  </div>
+                </div>
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm opacity-80 group-hover:opacity-100 transition"
+                  style={{
+                    background: `linear-gradient(135deg, ${a.color}, ${a.colorEnd})`,
+                  }}
+                >
+                  ←
+                </div>
               </button>
             ))}
           </div>
         )}
 
-        {activeAgent && (
-          <div className="p-5">
-            <div className="text-center mb-4">
-              <div className="mx-auto w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center text-violet-600">
-                🎙️
+        {/* CHAT VIEW */}
+        {activeAgent && selectedAgent && (
+          <div className="p-6" dir="rtl">
+            {selectedAgent.iframe ? (
+              <>
+                <iframe
+                  ref={iframeRef}
+                  src={selectedAgent.iframe}
+                  allow="microphone; autoplay"
+                  style={{
+                    position: "fixed",
+                    top: "-9999px",
+                    left: "-9999px",
+                    width: "400px",
+                    height: "400px",
+                    opacity: 0,
+                  }}
+                />
+
+                {/* === IDLE === */}
+                {callState === "idle" && (
+                  <div className="flex flex-col items-center gap-6 py-4">
+                    <div className="relative flex items-center justify-center w-24 h-24">
+                      <div
+                        className="w-20 h-20 rounded-full flex items-center justify-center text-3xl shadow-xl"
+                        style={{
+                          background: `linear-gradient(135deg, ${selectedAgent.color}, ${selectedAgent.colorEnd})`,
+                        }}
+                      >
+                        {selectedAgent.lang}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <div key={n} className="bar-idle" />
+                      ))}
+                    </div>
+                    <div className="text-center">
+                      <p className="text-gray-700 font-semibold">
+                        {translateAgent("voice_ready")}
+                      </p>
+                      <p className="text-gray-400 text-sm mt-1">
+                        {translateAgent("press_to_start")}
+                      </p>
+                    </div>
+
+                    <div
+                      className="relative w-full flex justify-center"
+                      onClick={handleStartClick}
+                    >
+                      <iframe
+                        src={selectedAgent.iframe}
+                        allow="microphone; autoplay"
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          opacity: 0.01,
+                          zIndex: 10,
+                          border: "none",
+                          borderRadius: "16px",
+                        }}
+                      />
+                      <button
+                        className="btn-start relative z-0 px-8 py-4 rounded-2xl text-white font-bold text-sm tracking-wide flex items-center gap-3 transition-all duration-150 hover:scale-[1.03] active:scale-95"
+                        style={{
+                          background:
+                            "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
+                          boxShadow: "0 8px 24px rgba(139,92,246,0.5)",
+                          pointerEvents: "none",
+                        }}
+                      >
+                        <span className="text-lg">🎙️</span>
+                        {translateAgent("start_conversation")}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* === CONNECTING === */}
+                {callState === "connecting" && (
+                  <div className="flex flex-col items-center gap-6 py-6">
+                    <div className="relative flex items-center justify-center w-28 h-28">
+                      <div className="connecting-ring" />
+                      <div
+                        className="w-20 h-20 rounded-full flex items-center justify-center text-3xl shadow-xl"
+                        style={{
+                          background: `linear-gradient(135deg, ${selectedAgent.color}, ${selectedAgent.colorEnd})`,
+                        }}
+                      >
+                        {selectedAgent.lang}
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-violet-700 font-semibold">
+                        {translateAgent("connecting")}
+                      </p>
+                      <p className="text-gray-400 text-sm mt-1 flex items-center justify-center gap-1">
+                        <span className="pulse-dot w-1.5 h-1.5 rounded-full bg-amber-400 inline-block" />
+                        {translateAgent("please_wait")}
+                      </p>
+                    </div>
+                    <div className="flex gap-2">
+                      {[0, 0.2, 0.4].map((d, i) => (
+                        <div
+                          key={i}
+                          className="w-2 h-2 rounded-full bg-violet-400"
+                          style={{
+                            animation: `pulse-dot 1s ease-in-out ${d}s infinite`,
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* === TALKING === */}
+                {callState === "talking" && (
+                  <div className="flex flex-col items-center gap-5 py-4">
+                    <div className="relative flex items-center justify-center w-28 h-28">
+                      <div className="ripple-1" />
+                      <div className="ripple-2" />
+                      <div
+                        className="avatar-breathe w-20 h-20 rounded-full flex items-center justify-center text-3xl shadow-2xl"
+                        style={{
+                          background: `linear-gradient(135deg, ${selectedAgent.color}, ${selectedAgent.colorEnd})`,
+                          boxShadow: `0 0 0 4px white, 0 0 0 6px ${selectedAgent.color}44`,
+                        }}
+                      >
+                        {selectedAgent.lang}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="w-2 h-2 rounded-full"
+                        style={{
+                          background: "#10b981",
+                          boxShadow: "0 0 6px #10b981",
+                          animation: "pulse-dot 1.5s ease-in-out infinite",
+                        }}
+                      />
+                      <span className="text-emerald-600 font-semibold text-sm">
+                        {translateAgent("in_call")}
+                      </span>
+                    </div>
+                    <div className="flex items-end justify-center gap-1.5 h-14">
+                      {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+                        <div key={n} className="bar-talk" />
+                      ))}
+                    </div>
+                    <button
+                      onClick={handleEndCall}
+                      className="mt-2 w-14 h-14 rounded-full flex items-center justify-center text-2xl transition-all hover:scale-110 active:scale-95"
+                      style={{
+                        background: "linear-gradient(135deg, #ef4444, #dc2626)",
+                        boxShadow: "0 6px 20px rgba(239,68,68,0.5)",
+                      }}
+                    >
+                      📵
+                    </button>
+                    <p className="text-xs text-gray-400">
+                      {translateAgent("end_call")}
+                    </p>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div
+                className={`h-[260px] rounded-2xl ${selectedAgent.bg} border ${selectedAgent.border} flex flex-col items-center justify-center gap-3`}
+              >
+                <span className="text-4xl">{selectedAgent.lang}</span>
+                <p className="text-gray-400 font-medium">
+                  {t("agents.coming_soon")}
+                </p>
               </div>
-              <p className="text-sm text-gray-500 mt-2">Voice AI Assistant</p>
-            </div>
-
-            <div
-              ref={containerRef}
-              className="rounded-2xl border border-violet-100 bg-white overflow-hidden min-h-[420px]"
-            />
-
-            <button
-              onClick={() => setActiveAgent(false)}
-              className="mt-4 text-sm text-violet-600 hover:underline"
-            >
-              ← Back
-            </button>
+            )}
           </div>
         )}
       </div>

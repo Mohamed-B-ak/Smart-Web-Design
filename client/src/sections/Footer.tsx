@@ -3,24 +3,27 @@ import { Mail, Twitter, Linkedin, Phone } from "lucide-react";
 import logoImg from "@assets/LOGO-SONDoS_AI-Photoroom_1770977931329.png";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
 
   const brandColor = "#5a189a"; // ⚠️ Mets ici la vraie couleur exacte de ton logo si différente
 
   return (
-    <footer className="relative border-t py-16 px-6 bg-white">
+    <footer
+      dir={lang === "ar" ? "rtl" : "ltr"}
+      className="relative border-t py-16 px-6 bg-white"
+    >
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center gap-12">
         {/* Brand Section */}
         <div className="flex items-start gap-4 md:ml-auto">
           <img src={logoImg} alt="Sondos AI" className="h-14 object-contain" />
 
           <p className="text-[16px] text-black leading-relaxed max-w-md font-semibold">
-            منصة مركز اتصال ذكية مدعومة بالذكاء الاصطناعي
+            {t("footer.description_line1")}
             <span
               className="block font-bold mt-1"
               style={{ color: brandColor }}
             >
-              تعيد تعريف تجربة التواصل مع عملائك.
+              {t("footer.description_line2")}
             </span>
           </p>
         </div>

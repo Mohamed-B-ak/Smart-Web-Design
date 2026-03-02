@@ -211,7 +211,7 @@ const SondosEcommerce = () => {
     },
     {
       q: "هل يقدر يتعامل مع طلبات الإرجاع؟",
-      a: "نعم! سندس يسأل عن سبب الإرجاع، يجمع صور المنتج إذا لزم، ويفتح تذكرة في نظا �ك. يمكنه أيضاً تقديم بدائل مثل الاستبدال أو رصيد متجر قبل الموافقة على الإرجاع.",
+      a: "نعم! سندس يسأل عن سبب الإرجاع، يجمع صور المنتج إذا لزم، ويفتح تذكرة في نظامك. يمكنه أيضاً تقديم بدائل مثل الاستبدال أو رصيد متجر قبل الموافقة على الإرجاع.",
     },
     {
       q: "هل يتكامل مع منصتي الحالية؟",
@@ -295,28 +295,23 @@ const SondosEcommerce = () => {
       returnRate,
     } = roiInputs;
 
-    // Current costs
     const monthlyOrders = dailyOrders * 30;
     const monthlySupportCalls = supportCalls * 30;
-    const supportCostPerCall = 8; // SAR
+    const supportCostPerCall = 8;
     const currentSupportCost = monthlySupportCalls * supportCostPerCall;
 
-    // Cart abandonment loss
     const abandonedCarts = monthlyOrders * (cartAbandonment / 100);
     const potentialLostRevenue = abandonedCarts * avgOrderValue;
 
-    // With Sondos
-    const recoveredCarts = abandonedCarts * 0.35; // 35% recovery
+    const recoveredCarts = abandonedCarts * 0.35;
     const recoveredRevenue = recoveredCarts * avgOrderValue;
 
-    const automatedSupport = monthlySupportCalls * 0.8; // 80% automated
+    const automatedSupport = monthlySupportCalls * 0.8;
     const supportSavings = automatedSupport * supportCostPerCall;
 
-    // Reduced returns through proactive support
-    const reducedReturns = monthlyOrders * (returnRate / 100) * 0.2; // 20% reduction
-    const returnSavings = reducedReturns * avgOrderValue * 0.3; // 30% of order value
+    const reducedReturns = monthlyOrders * (returnRate / 100) * 0.2;
+    const returnSavings = reducedReturns * avgOrderValue * 0.3;
 
-    // Sondos cost
     const sondosCost =
       dailyOrders <= 50 ? 1500 : dailyOrders <= 150 ? 3500 : 7500;
 
@@ -427,28 +422,18 @@ const SondosEcommerce = () => {
               ))}
             </div>
 
-            {/* CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                className="px-8 py-4 rounded-2xl font-semibold text-lg text-white shadow-xl"
+            {/* ===== CTA — زر واحد فقط يوجه نحو /demo ===== */}
+            <div className="flex justify-center">
+              <a
+                href="/demo"
+                className="px-10 py-4 rounded-2xl font-semibold text-lg text-white shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 text-center"
                 style={{
                   background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
+                  boxShadow: `0 10px 40px ${colors.primary}40`,
                 }}
               >
-                ابدأ مجاناً - 14 يوم
-              </button>
-
-              <button
-                className="px-8 py-4 rounded-2xl font-semibold border-2 flex items-center justify-center gap-3"
-                style={{
-                  borderColor: colors.primary,
-                  color: colors.primary,
-                  background: "rgba(255,255,255,0.8)",
-                }}
-              >
-                <span className="text-xl">🎬</span>
-                <span>شاهد كيف يعمل</span>
-              </button>
+                احجز عرضك التجريبي
+              </a>
             </div>
           </div>
         </div>
@@ -1369,12 +1354,13 @@ const SondosEcommerce = () => {
                   </li>
                 ))}
               </ul>
-              <button
-                className="w-full py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
+              <a
+                href="/demo"
+                className="block w-full text-center py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
                 style={{ borderColor: colors.primary, color: colors.primary }}
               >
                 ابدأ مجاناً
-              </button>
+              </a>
             </div>
 
             {/* متجر نامي */}
@@ -1439,15 +1425,16 @@ const SondosEcommerce = () => {
                   </li>
                 ))}
               </ul>
-              <button
-                className="w-full py-4 rounded-2xl font-semibold text-white transition-all hover:shadow-xl"
+              <a
+                href="/demo"
+                className="block w-full text-center py-4 rounded-2xl font-semibold text-white transition-all hover:shadow-xl"
                 style={{
                   background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
                   boxShadow: `0 8px 24px ${colors.primary}40`,
                 }}
               >
                 ابدأ الآن
-              </button>
+              </a>
             </div>
 
             {/* متجر كبير */}
@@ -1499,12 +1486,13 @@ const SondosEcommerce = () => {
                   </li>
                 ))}
               </ul>
-              <button
-                className="w-full py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
+              <a
+                href="/demo"
+                className="block w-full text-center py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
                 style={{ borderColor: colors.accent, color: colors.accent }}
               >
                 تواصل معنا
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -1593,16 +1581,16 @@ const SondosEcommerce = () => {
           <p className="text-white/80 text-xl mb-10 max-w-2xl mx-auto">
             انضم لأكثر من 200 متجر إلكتروني يستخدمون سندس لزيادة مبيعاتهم
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              className="px-10 py-5 bg-white rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1"
+
+          {/* ===== CTA — زر واحد فقط يوجه نحو /demo ===== */}
+          <div className="flex justify-center">
+            <a
+              href="/demo"
+              className="px-10 py-5 bg-white rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl"
               style={{ color: colors.primary }}
             >
-              ابدأ مجاناً - 14 يوم
-            </button>
-            <button className="px-10 py-5 border-2 border-white/50 text-white rounded-2xl font-semibold hover:bg-white/10 transition-all">
-              احجز عرض توضيحي
-            </button>
+              احجز عرضك التجريبي
+            </a>
           </div>
 
           {/* Trust badges */}

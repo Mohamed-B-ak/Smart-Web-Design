@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-
-// ==================== SONDOS AI - REAL ESTATE LANDING PAGE ====================
-// Style: Violet theme | Arabic RTL | SaaS Landing
+import "../index.css";
 
 type FAQItem = { q: string; a: string };
 type Segment = {
@@ -32,14 +30,11 @@ type UseCaseMessage = { role: "ai" | "user"; text: string };
 type UseCase = { title: string; conversation: UseCaseMessage[] };
 
 export default function Realstate() {
-  // ==================== UI STATE ====================
   const [activeSegment, setActiveSegment] = useState<number>(0);
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
   const [statsVisible, setStatsVisible] = useState<boolean>(false);
   const [currentTestimonial, setCurrentTestimonial] = useState<number>(0);
 
-  // ROI Calculator State
   const [roiInputs, setRoiInputs] = useState({
     dailyCalls: 80,
     missedPercent: 35,
@@ -48,7 +43,6 @@ export default function Realstate() {
     conversionRate: 15,
   });
 
-  // ==================== BRAND COLORS ====================
   const colors = useMemo(
     () => ({
       primary: "#5B4E9F",
@@ -66,7 +60,6 @@ export default function Realstate() {
     [],
   );
 
-  // ==================== DATA ====================
   const segments: Segment[] = useMemo(
     () => [
       {
@@ -305,8 +298,6 @@ export default function Realstate() {
     [],
   );
 
-  // ==================== EFFECTS ====================
-  // Auto-rotate testimonials
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
@@ -314,7 +305,6 @@ export default function Realstate() {
     return () => clearInterval(interval);
   }, [testimonials.length]);
 
-  // Animate stats on scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -327,30 +317,21 @@ export default function Realstate() {
     return () => observer.disconnect();
   }, []);
 
-  // ==================== ROI CALC ====================
   const roiResults = useMemo(() => {
     const { dailyCalls, missedPercent, avgDealValue, conversionRate } =
       roiInputs;
-
-    // Current losses
     const monthlyMissedCalls = dailyCalls * (missedPercent / 100) * 30;
-    const potentialLeadsLost = monthlyMissedCalls * 0.3; // 30% leads qualifiés perdus
+    const potentialLeadsLost = monthlyMissedCalls * 0.3;
     const lostDeals = potentialLeadsLost * (conversionRate / 100);
     const currentLoss = lostDeals * avgDealValue;
-
-    // With Sondos
-    const recoveredCalls = monthlyMissedCalls * 0.95; // 95% answer rate
-    const newQualifiedLeads = recoveredCalls * 0.35; // 35% qualification
-    const additionalDeals = newQualifiedLeads * (conversionRate / 100) * 0.6; // 60% réaliste
+    const recoveredCalls = monthlyMissedCalls * 0.95;
+    const newQualifiedLeads = recoveredCalls * 0.35;
+    const additionalDeals = newQualifiedLeads * (conversionRate / 100) * 0.6;
     const recoveredRevenue = additionalDeals * avgDealValue;
-
-    // Pricing tier
     const sondosCost =
       dailyCalls <= 50 ? 1500 : dailyCalls <= 120 ? 3500 : 7500;
-
     const netGain = recoveredRevenue - sondosCost;
     const roi = sondosCost > 0 ? (netGain / sondosCost) * 100 : 0;
-
     return {
       monthlyMissedCalls: Math.round(monthlyMissedCalls),
       currentLoss: Math.round(currentLoss),
@@ -362,26 +343,19 @@ export default function Realstate() {
     };
   }, [roiInputs]);
 
-  // ==================== NAV ITEMS (IDs sans espaces) ====================
-  const navItems = useMemo(
-    () => [
-      { label: "الحلول", href: "#solutions" },
-      { label: "المميزات", href: "#features" },
-      { label: "حاسبة ROI", href: "#roi" },
-      { label: "الأسعار", href: "#pricing" },
-    ],
-    [],
-  );
-
   return (
     <div className="min-h-screen bg-white font-sans" dir="rtl">
       {/* ==================== HERO SECTION ==================== */}
       <section
-        className="relative py-24 overflow-hidden"
-        style={{ background: colors.bgLighter }}
+        className="relative overflow-hidden"
+        style={{
+          background: colors.bgLighter,
+          paddingTop: "5rem",
+          paddingBottom: "8rem",
+        }}
       >
         {/* Background Decorations */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div
             className="absolute top-20 right-10 w-72 h-72 rounded-full blur-3xl opacity-40"
             style={{ background: colors.bgLight }}
@@ -390,7 +364,6 @@ export default function Realstate() {
             className="absolute bottom-20 left-10 w-96 h-96 rounded-full blur-3xl opacity-30"
             style={{ background: colors.accent }}
           />
-          {/* Building Pattern */}
           <div className="absolute bottom-0 left-0 right-0 h-32 opacity-5">
             <div className="flex justify-around items-end h-full">
               {Array.from({ length: 12 }).map((_, i) => (
@@ -408,123 +381,107 @@ export default function Realstate() {
           </div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex justify-center items-center min-h-[70vh]">
-            {/* Content */}
-            <div className="text-center lg:text-right">
-              {/* Badge */}
-              <div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8"
-                style={{
-                  background: colors.white,
-                  color: colors.primary,
-                  boxShadow: "0 2px 12px rgba(91, 78, 159, 0.15)",
-                }}
-              >
-                <span className="text-lg">🏢</span>
-                <span>الحل الأمثل للقطاع العقاري</span>
-              </div>
-
-              <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
-                style={{ color: colors.textDark }}
-              >
-                لا تفقد
-                <span
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  {" "}
-                  عميل عقاري{" "}
-                </span>
-                <br />
-                واحد بعد اليوم
-              </h1>
-
-              <p
-                className="text-lg sm:text-xl mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0"
-                style={{ color: colors.textMuted }}
-              >
-                سندس يرد على استفسارات العملاء 24/7، يأهّل المشترين الجادين،
-                ويحجز مواعيد المعاينة تلقائياً — حتى وأنت نايم
-              </p>
-
-              <div
-                className="flex flex-wrap justify-center lg:justify-start gap-6 mb-10 p-6 rounded-2xl"
-                style={{
-                  background: "white",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-                }}
-              >
-                {[
-                  { value: "+45%", label: "عملاء مؤهلين" },
-                  { value: "100%", label: "معدل الرد" },
-                  { value: "+30%", label: "صفقات مغلقة" },
-                ].map((stat, i) => (
-                  <div key={i} className="text-center px-4">
-                    <div
-                      className="text-2xl font-bold"
-                      style={{ color: colors.primary }}
-                    >
-                      {stat.value}
-                    </div>
-                    <div
-                      className="text-sm"
-                      style={{ color: colors.textMuted }}
-                    >
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a
-                  href="#roi"
-                  className="px-8 py-4 rounded-2xl font-semibold text-lg text-white shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 text-center"
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                    boxShadow: `0 10px 40px ${colors.primary}40`,
-                  }}
-                >
-                  ابدأ مجاناً - 14 يوم
-                </a>
-
-                <a
-                  href="#usecases"
-                  className="px-8 py-4 rounded-2xl font-semibold border-2 flex items-center justify-center gap-3 transition-all duration-300 hover:shadow-lg hover:bg-white"
-                  style={{
-                    borderColor: colors.primary,
-                    color: colors.primary,
-                    background: "rgba(255,255,255,0.8)",
-                  }}
-                >
-                  <span className="text-xl">▶️</span>
-                  <span>شاهد العرض</span>
-                </a>
-              </div>
-            </div>
+        {/* Content - fully centered */}
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
+          {/* Badge */}
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8"
+            style={{
+              background: colors.white,
+              color: colors.primary,
+              boxShadow: "0 2px 12px rgba(91, 78, 159, 0.15)",
+            }}
+          >
+            <span className="text-lg">🏢</span>
+            <span>الحل الأمثل للقطاع العقاري</span>
           </div>
 
-          {/* Wave Divider */}
-          <div className="absolute bottom-0 left-0 right-0">
-            <svg
-              viewBox="0 0 1440 100"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="none"
-              className="w-full h-16"
+          {/* Headline */}
+          <h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+            style={{ color: colors.textDark }}
+          >
+            لا تفقد
+            <span
+              style={{
+                background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
             >
-              <path
-                d="M0 100L60 90C120 80 240 60 360 55C480 50 600 60 720 65C840 70 960 70 1080 65C1200 60 1320 50 1380 45L1440 40V100H1380C1320 100 1200 100 1080 100C960 100 840 100 720 100C600 100 480 100 360 100C240 100 120 100 60 100H0Z"
-                fill="white"
-              />
-            </svg>
+              {" "}
+              عميل عقاري{" "}
+            </span>
+            <br />
+            واحد بعد اليوم
+          </h1>
+
+          {/* Subheadline */}
+          <p
+            className="text-lg sm:text-xl mb-10 leading-relaxed max-w-2xl mx-auto"
+            style={{ color: colors.textMuted }}
+          >
+            سندس يرد على استفسارات العملاء 24/7، يأهّل المشترين الجادين، ويحجز
+            مواعيد المعاينة تلقائياً
+          </p>
+
+          {/* Stats row */}
+          <div
+            className="inline-flex flex-wrap justify-center gap-8 mb-10 px-8 py-6 rounded-2xl"
+            style={{
+              background: "white",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
+            }}
+          >
+            {[
+              { value: "+45%", label: "عملاء مؤهلين" },
+              { value: "100%", label: "معدل الرد" },
+              { value: "+30%", label: "صفقات مغلقة" },
+            ].map((stat, i) => (
+              <div key={i} className="text-center px-4">
+                <div
+                  className="text-2xl font-bold"
+                  style={{ color: colors.primary }}
+                >
+                  {stat.value}
+                </div>
+                <div className="text-sm" style={{ color: colors.textMuted }}>
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
+
+          {/* CTA */}
+          <div className="flex justify-center">
+            <a
+              href="/demo"
+              className="px-10 py-4 rounded-2xl font-semibold text-lg text-white shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 text-center"
+              style={{
+                background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
+                boxShadow: `0 10px 40px ${colors.primary}40`,
+              }}
+            >
+              احجز عرضك التجريبي
+            </a>
+          </div>
+        </div>
+
+        {/* Wave Divider */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg
+            viewBox="0 0 1440 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            className="w-full h-16"
+          >
+            <path
+              d="M0 100L60 90C120 80 240 60 360 55C480 50 600 60 720 65C840 70 960 70 1080 65C1200 60 1320 50 1380 45L1440 40V100H1380C1320 100 1200 100 1080 100C960 100 840 100 720 100C600 100 480 100 360 100C240 100 120 100 60 100H0Z"
+              fill="white"
+            />
+          </svg>
         </div>
       </section>
 
@@ -568,7 +525,7 @@ export default function Realstate() {
               {
                 icon: "😤",
                 title: "عملاء غير مؤهلين",
-                desc: "وقت طويل في محادثات مع عم �اء غير جادين",
+                desc: "وقت طويل في محادثات مع عملاء غير جادين",
                 color: "#8B5CF6",
               },
               {
@@ -782,7 +739,6 @@ export default function Realstate() {
                   ))}
                 </ul>
               </div>
-
               <div
                 className="p-8 sm:p-10"
                 style={{ background: colors.bgLight }}
@@ -806,7 +762,6 @@ export default function Realstate() {
                 </ul>
               </div>
             </div>
-
             <div
               className="p-6 bg-white border-t"
               style={{ borderColor: colors.bgLight }}
@@ -874,7 +829,6 @@ export default function Realstate() {
               </span>
             </h2>
           </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, idx) => (
               <div
@@ -944,7 +898,6 @@ export default function Realstate() {
             className="rounded-3xl p-8 sm:p-10 shadow-xl"
             style={{ background: colors.bgLighter }}
           >
-            {/* Inputs */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
               <div>
                 <label
@@ -976,7 +929,6 @@ export default function Realstate() {
                   {roiInputs.dailyCalls} مكالمة
                 </div>
               </div>
-
               <div>
                 <label
                   className="block text-sm font-medium mb-2"
@@ -1007,7 +959,6 @@ export default function Realstate() {
                   {roiInputs.missedPercent}%
                 </div>
               </div>
-
               <div>
                 <label
                   className="block text-sm font-medium mb-2"
@@ -1029,7 +980,7 @@ export default function Realstate() {
                   }
                   className="w-full h-2 rounded-full appearance-none cursor-pointer"
                   style={{
-                    background: `linear-gradient(90deg, ${colors.primary} ${roiInputs.avgDealValue / 1000}%, ${colors.bgLight} ${roiInputs.avgDealValue / 1000}%)A`,
+                    background: `linear-gradient(90deg, ${colors.primary} ${roiInputs.avgDealValue / 1000}%, ${colors.bgLight} ${roiInputs.avgDealValue / 1000}%)`,
                   }}
                 />
                 <div
@@ -1041,7 +992,6 @@ export default function Realstate() {
               </div>
             </div>
 
-            {/* Results */}
             <div className="grid md:grid-cols-3 gap-6">
               <div
                 className="p-6 rounded-2xl text-center"
@@ -1057,7 +1007,6 @@ export default function Realstate() {
                   {roiResults.currentLoss.toLocaleString()} ر.س
                 </div>
               </div>
-
               <div
                 className="p-6 rounded-2xl text-center"
                 style={{ background: colors.bgLight }}
@@ -1072,7 +1021,6 @@ export default function Realstate() {
                   {roiResults.sondosCost.toLocaleString()} ر.س
                 </div>
               </div>
-
               <div
                 className="p-6 rounded-2xl text-center"
                 style={{ background: "#D1FAE5" }}
@@ -1135,7 +1083,6 @@ export default function Realstate() {
               </span>
             </h2>
           </div>
-
           <div className="grid md:grid-cols-2 gap-8">
             {useCases.map((useCase, idx) => (
               <div
@@ -1153,11 +1100,7 @@ export default function Realstate() {
                   {useCase.conversation.map((msg, i) => (
                     <div
                       key={i}
-                      className={`p-4 rounded-2xl text-sm ${
-                        msg.role === "ai"
-                          ? "rounded-tr-md max-w-[85%] mr-auto"
-                          : "rounded-tl-md max-w-[75%] ml-auto"
-                      }`}
+                      className={`p-4 rounded-2xl text-sm ${msg.role === "ai" ? "rounded-tr-md max-w-[85%] mr-auto" : "rounded-tl-md max-w-[75%] ml-auto"}`}
                       style={{
                         background:
                           msg.role === "ai" ? colors.bgLight : colors.primary,
@@ -1196,7 +1139,6 @@ export default function Realstate() {
               </span>
             </h2>
           </div>
-
           <div
             className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl shadow-2xl relative"
             style={{ background: colors.bgLight }}
@@ -1207,14 +1149,12 @@ export default function Realstate() {
             >
               "
             </div>
-
             <p
               className="text-xl sm:text-2xl leading-relaxed mb-8"
               style={{ color: colors.textDark }}
             >
               {testimonials[currentTestimonial].quote}
             </p>
-
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
                 <div
@@ -1238,7 +1178,6 @@ export default function Realstate() {
                   </div>
                 </div>
               </div>
-
               <div
                 className="px-4 py-2 rounded-xl font-bold"
                 style={{
@@ -1249,7 +1188,6 @@ export default function Realstate() {
                 {testimonials[currentTestimonial].metric}
               </div>
             </div>
-
             <div className="flex justify-center gap-3 mt-10">
               {testimonials.map((_, idx) => (
                 <button
@@ -1297,37 +1235,49 @@ export default function Realstate() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Plan 1 */}
-            <div className="p-8 rounded-3xl bg-white transition-all hover:shadow-xl">
-              <div
-                className="text-sm font-bold mb-3"
-                style={{ color: colors.primary }}
-              >
-                وسيط فردي
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* ===== Starter ===== */}
+            <div
+              className="p-8 rounded-3xl bg-white transition-all hover:shadow-xl border-2"
+              style={{ borderColor: "#10B981" }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xl">🟢</span>
+                <span
+                  className="text-sm font-bold"
+                  style={{ color: "#10B981" }}
+                >
+                  Starter
+                </span>
               </div>
               <div className="mb-2">
                 <span
-                  className="text-5xl font-bold"
+                  className="text-4xl font-bold"
                   style={{ color: colors.textDark }}
                 >
-                  1,500
+                  2,499
                 </span>
                 <span style={{ color: colors.textMuted }} className="mr-1">
                   {" "}
                   ر.س/شهر
                 </span>
               </div>
-              <p className="text-sm mb-8" style={{ color: colors.textMuted }}>
-                للوسطاء المستقلين والمكاتب الصغيرة
+              <p className="text-sm mb-6" style={{ color: colors.textMuted }}>
+                للمكاتب العقارية الصغيرة
               </p>
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-3 mb-8">
                 {[
-                  "حتى 50 مكالمة/يوم",
-                  "تأهيل العملاء",
-                  "جدولة المعاينات",
-                  "واتساب تلقائي",
-                  "لوحة تحكم",
+                  "رد آلي 24/7 على جميع الاستفسارات",
+                  "استقبال فوري بدون انتظار",
+                  "تحويل للوسيط عند الحاجة",
+                  "2 أنواع عقارات",
+                  "سيناريو بيع واحد",
+                  "تسجيل بيانات العملاء في CRM",
+                  "تأكيد زيارة عبر واتساب + SMS",
+                  "تذكير قبل 24 ساعة",
+                  "Web Widget للموقع",
+                  "1,000 دقيقة AI شهريًا",
+                  "500 رسالة AI",
                 ].map((item, i) => (
                   <li
                     key={i}
@@ -1335,11 +1285,8 @@ export default function Realstate() {
                     style={{ color: colors.textMuted }}
                   >
                     <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs"
-                      style={{
-                        background: colors.bgLight,
-                        color: colors.primary,
-                      }}
+                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0"
+                      style={{ background: "#D1FAE5", color: "#10B981" }}
                     >
                       ✓
                     </span>
@@ -1348,15 +1295,15 @@ export default function Realstate() {
                 ))}
               </ul>
               <a
-                href="#roi"
+                href="/demo"
                 className="block w-full text-center py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
-                style={{ borderColor: colors.primary, color: colors.primary }}
+                style={{ borderColor: "#10B981", color: "#10B981" }}
               >
-                ابدأ مجاناً
+                ابدأ الآن
               </a>
             </div>
 
-            {/* Plan 2 */}
+            {/* ===== Professional ===== */}
             <div
               className="p-8 rounded-3xl relative shadow-2xl scale-105"
               style={{
@@ -1373,35 +1320,42 @@ export default function Realstate() {
               >
                 الأكثر شعبية ⭐
               </div>
-              <div
-                className="text-sm font-bold mb-3 mt-2"
-                style={{ color: colors.primary }}
-              >
-                مكتب عقاري
+              <div className="flex items-center gap-2 mb-3 mt-2">
+                <span className="text-xl">🟣</span>
+                <span
+                  className="text-sm font-bold"
+                  style={{ color: colors.primary }}
+                >
+                  Professional
+                </span>
               </div>
               <div className="mb-2">
                 <span
-                  className="text-5xl font-bold"
+                  className="text-4xl font-bold"
                   style={{ color: colors.textDark }}
                 >
-                  3,500
+                  7,999
                 </span>
                 <span style={{ color: colors.textMuted }} className="mr-1">
                   {" "}
                   ر.س/شهر
                 </span>
               </div>
-              <p className="text-sm mb-8" style={{ color: colors.textMuted }}>
-                للمكاتب العقارية المتوسطة
+              <p className="text-sm mb-6" style={{ color: colors.textMuted }}>
+                لشركات الوساطة المتوسطة
               </p>
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-3 mb-8">
                 {[
-                  "حتى 150 مكالمة/يوم",
-                  "كل مميزات الوسيط",
-                  "تكامل CRM",
-                  "تقارير متقدمة",
-                  "دعم أولوية",
-                  "متابعة تلقائية",
+                  "كل مزايا Starter",
+                  "5 أنواع عقارات",
+                  "5 سيناريوهات بيع",
+                  "تذكير مزدوج للزيارة",
+                  "متابعة بعد الزيارة",
+                  "استبيان رضا العملاء",
+                  "حملات تذكير صوتية",
+                  "3,000 دقيقة AI شهريًا",
+                  "2,000 رسالة AI",
+                  "3 مكالمات متزامنة",
                 ].map((item, i) => (
                   <li
                     key={i}
@@ -1409,7 +1363,7 @@ export default function Realstate() {
                     style={{ color: colors.textMuted }}
                   >
                     <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white"
+                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white flex-shrink-0"
                       style={{ background: colors.primary }}
                     >
                       ✓
@@ -1419,7 +1373,7 @@ export default function Realstate() {
                 ))}
               </ul>
               <a
-                href="#roi"
+                href="/demo"
                 className="block w-full text-center py-4 rounded-2xl font-semibold text-white transition-all hover:shadow-xl"
                 style={{
                   background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
@@ -1430,33 +1384,47 @@ export default function Realstate() {
               </a>
             </div>
 
-            {/* Plan 3 */}
-            <div className="p-8 rounded-3xl bg-white transition-all hover:shadow-xl">
-              <div
-                className="text-sm font-bold mb-3"
-                style={{ color: colors.accent }}
-              >
-                شركة تطوير
+            {/* ===== Enterprise ===== */}
+            <div
+              className="p-8 rounded-3xl bg-white transition-all hover:shadow-xl border-2"
+              style={{ borderColor: "#374151" }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xl">⚫</span>
+                <span
+                  className="text-sm font-bold"
+                  style={{ color: "#374151" }}
+                >
+                  Enterprise
+                </span>
               </div>
               <div className="mb-2">
                 <span
-                  className="text-5xl font-bold"
+                  className="text-4xl font-bold"
                   style={{ color: colors.textDark }}
                 >
-                  مخصص
+                  24,999
+                </span>
+                <span style={{ color: colors.textMuted }} className="mr-1">
+                  {" "}
+                  ر.س/شهر
                 </span>
               </div>
-              <p className="text-sm mb-8" style={{ color: colors.textMuted }}>
-                لشركات التطوير والمجموعات الكبيرة
+              <p className="text-sm mb-6" style={{ color: colors.textMuted }}>
+                للمطورين العقاريين والشركات الكبرى
               </p>
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-3 mb-8">
                 {[
-                  "مكالمات غير محدودة",
-                  "كل مميزات المكتب",
-                  "مدير حساب مخصص",
-                  "SLA مضمون",
-                  "تخصيص كامل",
-                  "تكامل ERP",
+                  "كل مزايا Professional",
+                  "أنواع عقارات غير محدودة",
+                  "سيناريوهات بيع غير محدودة",
+                  "حملات تسويقية صوتية",
+                  "Tele-Sales",
+                  "Upselling للوحدات الأعلى",
+                  "تقارير تحويل متقدمة للإدارة",
+                  "15,000 دقيقة AI شهريًا",
+                  "7,000 رسالة AI",
+                  "10 مكالمات متزامنة",
                 ].map((item, i) => (
                   <li
                     key={i}
@@ -1464,11 +1432,8 @@ export default function Realstate() {
                     style={{ color: colors.textMuted }}
                   >
                     <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs"
-                      style={{
-                        background: colors.bgLight,
-                        color: colors.accent,
-                      }}
+                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0"
+                      style={{ background: "#F3F4F6", color: "#374151" }}
                     >
                       ✓
                     </span>
@@ -1476,12 +1441,13 @@ export default function Realstate() {
                   </li>
                 ))}
               </ul>
-              <button
-                className="w-full py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
-                style={{ borderColor: colors.accent, color: colors.accent }}
+              <a
+                href="/demo"
+                className="block w-full text-center py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
+                style={{ borderColor: "#374151", color: "#374151" }}
               >
                 تواصل معنا
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -1509,7 +1475,6 @@ export default function Realstate() {
               </span>
             </h2>
           </div>
-
           <div className="space-y-4">
             {faqs.map((faq, idx) => (
               <div
@@ -1528,7 +1493,7 @@ export default function Realstate() {
                     {faq.q}
                   </span>
                   <span
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300"
+                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 mr-4"
                     style={{
                       background: activeFAQ === idx ? colors.primary : "white",
                       color: activeFAQ === idx ? "white" : colors.primary,
@@ -1570,17 +1535,15 @@ export default function Realstate() {
           <p className="text-white/80 text-xl mb-10 max-w-2xl mx-auto">
             انضم لأكثر من 150 شركة عقارية سعودية تستخدم سندس لزيادة مبيعاتها
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+          <div className="flex justify-center">
             <a
-              href="#roi"
-              className="px-10 py-5 bg-white rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1"
+              href="/demo"
+              className="px-10 py-5 bg-white rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl"
               style={{ color: colors.primary }}
             >
-              ابدأ مجاناً - 14 يوم
+              احجز عرضك التجريبي
             </a>
-            <button className="px-10 py-5 border-2 border-white/50 text-white rounded-2xl font-semibold hover:bg-white/10 transition-all">
-              احجز عرض توضيحي
-            </button>
           </div>
         </div>
       </section>

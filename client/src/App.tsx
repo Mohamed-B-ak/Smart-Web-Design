@@ -30,16 +30,18 @@ import Healthcare from "@/pages/Healthcare";
 import Ecommerce from "@/pages/Ecommerce";
 import CallCenter from "@/pages/CallCenter";
 import RealEstate from "@/pages/RealEstate";
-import Services from "@/pages/Services";
+
 import Restaurant from "@/pages/Restaurant";
 import Legal from "@/pages/Legal";
 import CarDealership from "@/pages/CarDealership";
 import DebtCollection from "@/pages/DebtCollection";
-import Pricing from "@/pages/Pricing";
+
 import Partner from "@/pages/Partner";
 import SavingsCalculator from "@/sections/SavingsCalculator";
 import IntegrationsPage from "@/pages/IntegrationsPage";
 import Demo from "@/pages/Demo";
+import Technology from "@/pages/Technology";
+import Governance from "@/pages/Governance";
 
 function HomePage() {
   return (
@@ -132,13 +134,15 @@ function AppContent() {
       <Navigation />
       <Switch>
         <Route path="/" component={HomePage} />
-        <Route path="/pricing" component={Pricing} />
+
         <Route path="/partner" component={Partner} />
         <Route path="/healthcare" component={Healthcare} />
-        <Route path="/ecommerce" component={Ecommerce} />
+
         <Route path="/call-center" component={CallCenter} />
         <Route path="/real-estate" component={RealEstate} />
-        <Route path="/services" component={Services} />
+        <Route path="/technology" component={Technology} />
+        <Route path="/governance" component={Governance} />
+        <Route path="/ecommerce" component={Ecommerce} />
         <Route path="/restaurant" component={Restaurant} />
         <Route path="/legal" component={Legal} />
         <Route path="/car-dealership" component={CarDealership} />

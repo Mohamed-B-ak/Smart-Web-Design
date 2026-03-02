@@ -27,20 +27,20 @@ export default function WhatIs() {
     // ⭐ NOUVELLES CARTES
     {
       icon: Bot,
-      title: "وكلاء ذكيون",
-      desc: "روبوتات صوتية وكتابية قادرة على التعامل مع العملاء بشكل طبيعي.",
+      title: t("whatis.f4_title"),
+      desc: t("whatis.f4_desc"),
       color: "#7b2cbf",
     },
     {
       icon: Shield,
-      title: "أمان متقدم",
-      desc: "حماية بياناتك وفق أعلى معايير الأمان العالمية.",
+      title: t("whatis.f5_title"),
+      desc: t("whatis.f5_desc"),
       color: "#9d4edd",
     },
     {
       icon: Zap,
-      title: "سرعة فائقة",
-      desc: "استجابة فورية وتحليل لحظي لكل مكالمة وتفاعل.",
+      title: t("whatis.f6_title"),
+      desc: t("whatis.f6_desc"),
       color: "#5a189a",
     },
   ];

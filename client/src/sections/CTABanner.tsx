@@ -21,25 +21,18 @@ export default function CTABanner() {
             </p>
 
             <div className="flex items-center justify-center gap-4 flex-wrap">
+              {/* BOUTON PAGE FORMULAIRE */}
               <a
-                href="#demo"
-                className="inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-0.5 transition-all"
-                data-testid="button-cta-start"
+                href="/demo"
+                className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-[#1a0a2e] border border-[rgba(90,24,154,0.15)] rounded-full hover:bg-[rgba(90,24,154,0.05)] hover:border-[rgba(90,24,154,0.3)] transition-all duration-300 backdrop-blur-sm"
+                data-testid="button-hero-book"
               >
-                {t("cta.button")}
+                {t("hero.cta_book")}
                 {lang === "en" ? (
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 ) : (
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 )}
-              </a>
-
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-[#1a0a2e] border border-[rgba(90,24,154,0.12)] rounded-full hover:bg-[rgba(90,24,154,0.05)] transition-all"
-                data-testid="button-cta-demo"
-              >
-                {t("cta.demo")}
               </a>
             </div>
           </div>

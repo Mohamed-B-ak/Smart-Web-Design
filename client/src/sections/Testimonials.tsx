@@ -42,6 +42,7 @@ export default function Testimonials() {
             {t("testimonials.title")}
           </h2>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonialsData.map((item, i) => (
             <div
@@ -56,9 +57,12 @@ export default function Testimonials() {
                   />
                 ))}
               </div>
+
+              {/* ✅ Texte sans guillemets */}
               <p className="text-[15px] text-[#3a3a52] leading-relaxed mb-6">
-                "{lang === "ar" ? item.quoteAr : item.quote}"
+                {lang === "ar" ? item.quoteAr : item.quote}
               </p>
+
               <div>
                 <p className="text-[14px] font-semibold text-[#1a0a2e]">
                   {lang === "ar" ? item.nameAr : item.name}
