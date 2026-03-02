@@ -1,0 +1,46 @@
+==> Downloading cache...
+==> Cloning from https://github.com/Mohamed-B-ak/Smart-Web-Design
+==> Checking out commit 61c2f5a38a7a8aa96fd9e4e837d317fd689dc9b5 in branch main
+==> Downloaded 261MB in 3s. Extraction took 5s.
+Menu
+==> Using Node.js version 22.16.0 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'npm install; npm run build'...
+up to date, audited 478 packages in 1s
+76 packages are looking for funding
+  run `npm fund` for details
+4 vulnerabilities (1 low, 1 moderate, 2 high)
+To address all issues, run:
+  npm audit fix
+Run `npm audit` for details.
+> rest-express@1.0.0 build
+> tsx script/build.ts
+building client...
+vite v7.3.0 building client environment for production...
+transforming...
+✓ 1686 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/public/index.html                                                    2.01 kB │ gzip:   0.77 kB
+../dist/public/assets/téléchargement (8)-BiE6kZm9.png                      120.29 kB
+../dist/public/assets/LOGO-SONDoS_AI-Photoroom_1770977931329-XMobwkqf.png  170.47 kB
+../dist/public/assets/index-CFyFoPGc.css                                   116.40 kB │ gzip:  18.50 kB
+../dist/public/assets/index-5pEO_Qd-.js                                    631.33 kB │ gzip: 170.15 kB
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 4.37s
+building server...
+  dist/index.cjs  1.0mb ⚠️
+⚡ Done in 170ms
+==> Uploading build...
+==> Uploaded in 5.5s. Compression took 11.6s
+==> Build successful 🎉
+==> Deploying...
+==> Running 'npm run start'
+> rest-express@1.0.0 start
+> NODE_ENV=production node dist/index.cjs
+/opt/render/project/src/dist/index.cjs:74
+==> Exited with status 1
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
