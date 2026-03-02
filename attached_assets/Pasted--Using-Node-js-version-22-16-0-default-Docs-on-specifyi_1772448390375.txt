@@ -1,0 +1,48 @@
+==> Using Node.js version 22.16.0 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'npm install; npm run build'...
+added 16 packages, removed 255 packages, changed 101 packages, and audited 478 packages in 4s
+76 packages are looking for funding
+  run `npm fund` for details
+4 vulnerabilities (1 low, 1 moderate, 2 high)
+To address all issues, run:
+  npm audit fix
+Run `npm audit` for details.
+> rest-express@1.0.0 build
+> tsx script/build.ts
+building client...
+vite v7.3.0 building client environment for production...
+transforming...
+[plugin vite:esbuild] client/src/context/LanguageContext.tsx: Duplicate key "footer.rights" in object literal
+534 |      "footer.privacy": "سياسة الخصوصية",
+535 |      "footer.terms": "شروط الخدمة",
+536 |      "footer.rights": "جميع الحقوق محفوظة.",
+    |      ^
+537 |      "blog.title": "المدونة",
+538 |      "blog.subtitle": "رؤى وتحديثات وأفضل الممارسات من فريق سندس AI",
+✓ 1686 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/public/index.html                                                    2.01 kB │ gzip:   0.77 kB
+../dist/public/assets/téléchargement (8)-BiE6kZm9.png                      120.29 kB
+../dist/public/assets/LOGO-SONDoS_AI-Photoroom_1770977931329-XMobwkqf.png  170.47 kB
+../dist/public/assets/index-CFyFoPGc.css                                   116.40 kB │ gzip:  18.50 kB
+../dist/public/assets/index-TZTCk9og.js                                    631.38 kB │ gzip: 170.15 kB
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 4.46s
+building server...
+  dist/index.cjs  1.0mb ⚠️
+⚡ Done in 137ms
+==> Uploading build...
+==> Uploaded in 6.1s. Compression took 16.3s
+==> Build successful 🎉
+==> Deploying...
+==> Running 'npm run start'
+> rest-express@1.0.0 start
+> NODE_ENV=production node dist/index.cjs
+/opt/render/project/src/dist/index.cjs:74
+==> Exited with status 1
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

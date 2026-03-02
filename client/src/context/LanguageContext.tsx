@@ -533,7 +533,6 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.api": "مرجع API",
     "footer.privacy": "سياسة الخصوصية",
     "footer.terms": "شروط الخدمة",
-    "footer.rights": "جميع الحقوق محفوظة.",
     "blog.title": "المدونة",
     "blog.subtitle": "رؤى وتحديثات وأفضل الممارسات من فريق سندس AI",
     "blog.read_more": "اقرأ المزيد",
