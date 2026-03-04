@@ -1468,7 +1468,7 @@ const SondosTech = () => {
         </div>
       </section>
 
-      {/* ==================== PRICING ==================== */}
+      {/* ==================== PRICING ==================== 
       <section id="الأسعار" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
@@ -1678,7 +1678,7 @@ const SondosTech = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ==================== FAQ ==================== */}
       <section className="py-24" style={{ background: colors.bgLighter }}>

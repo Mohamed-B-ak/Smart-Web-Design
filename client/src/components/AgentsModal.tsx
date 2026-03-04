@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+
+const APPS_SCRIPT_URL =
+  "https://script.google.com/a/macros/sondos-ai.com/s/AKfycbzxoag5CdB_TwfsP8o6u23ds1p4eemNRF8bWyKABfd3355gNrxPyhA1To9nNf23Sr4e/exec";
 type Props = {
   open: boolean;
   onClose: () => void;
@@ -11,6 +14,7 @@ export default function AgentsModal({ open, onClose }: Props) {
   const { lang, t } = useLanguage();
   const [activeAgent, setActiveAgent] = useState<string | null>(null);
   const [callState, setCallState] = useState<CallState>("idle");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
@@ -29,7 +33,7 @@ export default function AgentsModal({ open, onClose }: Props) {
       bg: "bg-emerald-50",
       border: "border-emerald-200",
       iframe:
-        "https://app.sondos-ai.com/widget/index.html?assistant_id=4d8090a4-75c1-49e8-b912-70595ac5f6c9&theme=light",
+        "https://app.sondos-ai.com/widget/index.html?assistant_id=96a35afc-c49a-4ca6-bf71-964524b1f487&theme=light",
     },
     {
       id: "emirati",
@@ -54,23 +58,39 @@ export default function AgentsModal({ open, onClose }: Props) {
   ];
 
   const selectedAgent = agents.find((a) => a.id === activeAgent);
+
   const translateAgent = (key: string) => {
     if (!activeAgent) return t(`agents.${key}`);
-
     const dialectKey = `agents.${activeAgent}.${key}`;
     const fallbackKey = `agents.${key}`;
-
     const dialectTranslation = t(dialectKey);
-
-    // Si la traduction n'existe pas, ton t() retourne la clé elle-même
-    if (dialectTranslation === dialectKey) {
-      return t(fallbackKey);
-    }
-
+    if (dialectTranslation === dialectKey) return t(fallbackKey);
     return dialectTranslation;
   };
-  const handleStartClick = () => {
+
+  // ✅ CORRECTION PRINCIPALE : utilisation de fetch avec mode "no-cors"
+  const handleStartClick = async () => {
     if (callState === "idle") {
+      // Envoi des données vers Google Sheets + email
+      if (phoneNumber.trim()) {
+        try {
+          const params = new URLSearchParams({
+            phone: phoneNumber.trim(),
+            agent: selectedAgent?.name || activeAgent || "",
+          });
+
+          // no-cors est obligatoire pour éviter l'erreur CORS des Apps Script
+          fetch(`${APPS_SCRIPT_URL}?${params.toString()}`, {
+            method: "GET",
+            mode: "no-cors",
+          }).catch(() => {
+            // On ignore silencieusement l'erreur réseau
+          });
+        } catch {
+          // On n'interrompt pas l'UX si l'envoi échoue
+        }
+      }
+
       setCallState("connecting");
       setTimeout(() => setCallState("talking"), 2500);
     }
@@ -163,6 +183,24 @@ export default function AgentsModal({ open, onClose }: Props) {
         }
         .pulse-dot { animation: pulse-dot 1s ease-in-out infinite; }
         .btn-start:active { animation: btn-press 0.15s ease-in-out; }
+        .phone-input {
+          width: 100%;
+          padding: 10px 14px;
+          border-radius: 12px;
+          border: 1.5px solid rgba(139,92,246,0.25);
+          background: rgba(139,92,246,0.04);
+          color: #4c1d95;
+          font-size: 14px;
+          outline: none;
+          text-align: right;
+          direction: ltr;
+          transition: border-color 0.2s;
+        }
+        .phone-input::placeholder { color: #c4b5fd; text-align: right; }
+        .phone-input:focus {
+          border-color: #8b5cf6;
+          background: rgba(139,92,246,0.07);
+        }
       `}</style>
 
       <div
@@ -256,6 +294,7 @@ export default function AgentsModal({ open, onClose }: Props) {
           <div className="p-6" dir="rtl">
             {selectedAgent.iframe ? (
               <>
+                {/* iframe cachée pour activer les permissions micro */}
                 <iframe
                   ref={iframeRef}
                   src={selectedAgent.iframe}
@@ -270,7 +309,7 @@ export default function AgentsModal({ open, onClose }: Props) {
                   }}
                 />
 
-                {/* === IDLE === */}
+                {/* IDLE */}
                 {callState === "idle" && (
                   <div className="flex flex-col items-center gap-6 py-4">
                     <div className="relative flex items-center justify-center w-24 h-24">
@@ -297,10 +336,27 @@ export default function AgentsModal({ open, onClose }: Props) {
                       </p>
                     </div>
 
+                    {/* PHONE INPUT */}
+                    <div className="w-full">
+                      <label className="block text-xs text-violet-500 font-medium mb-1.5 text-right">
+                        رقم الهاتف
+                      </label>
+                      <input
+                        type="tel"
+                        className="phone-input"
+                        placeholder="+966 5X XXX XXXX"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                      />
+                    </div>
+
+                    {/* ✅ Conteneur relatif : iframe transparente par-dessus pour activer le micro,
+                        onClick sur le conteneur pour déclencher fetch + état */}
                     <div
                       className="relative w-full flex justify-center"
                       onClick={handleStartClick}
                     >
+                      {/* iframe transparente superposée — c'est elle qui démarre vraiment l'agent vocal */}
                       <iframe
                         src={selectedAgent.iframe}
                         allow="microphone; autoplay"
@@ -332,7 +388,7 @@ export default function AgentsModal({ open, onClose }: Props) {
                   </div>
                 )}
 
-                {/* === CONNECTING === */}
+                {/* CONNECTING */}
                 {callState === "connecting" && (
                   <div className="flex flex-col items-center gap-6 py-6">
                     <div className="relative flex items-center justify-center w-28 h-28">
@@ -369,7 +425,7 @@ export default function AgentsModal({ open, onClose }: Props) {
                   </div>
                 )}
 
-                {/* === TALKING === */}
+                {/* TALKING */}
                 {callState === "talking" && (
                   <div className="flex flex-col items-center gap-5 py-4">
                     <div className="relative flex items-center justify-center w-28 h-28">

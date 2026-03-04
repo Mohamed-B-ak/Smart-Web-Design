@@ -1329,8 +1329,8 @@ const SondosCallCenter = () => {
         </div>
       </section>
 
-      {/* ==================== PRICING ==================== */}
-      <section id="الأسعار" className="py-24 bg-white">
+      {/* ==================== PRICING ==================== 
+     /* <section id="الأسعار" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="text-[clamp(28px,4vw,40px)] font-bold leading-tight mb-4 text-[#1a0a2e]">
@@ -1508,7 +1508,7 @@ const SondosCallCenter = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ==================== FAQ ==================== */}
       <section className="py-24" style={{ background: colors.bgLighter }}>

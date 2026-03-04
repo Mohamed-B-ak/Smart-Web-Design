@@ -12,7 +12,7 @@ const industryLinks = [
   { en: "Call Center", ar: "مراكز الاتصال", href: "/call-center" },
   { en: "Real Estate", ar: "العقارات", href: "/real-estate" },
   { en: "Technology", ar: "التكنولوجيا", href: "/technology" },
-  { en: "Governance", ar: "الحوكمة", href: "/governance" },
+  { en: "Governance", ar: "الحكومة", href: "/governance" },
 
   { en: "Assurance", ar: "التأمين", href: "/restaurant" },
   { en: "E-commerce", ar: "التجارة الإلكترونية", href: "/ecommerce" },
@@ -139,7 +139,9 @@ export default function Navigation() {
             {lang === "en" ? "العربية" : "English"}
           </button>
           <a
-            href="#"
+            href="https://app.sondos-ai.com/login"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-[14px] font-medium text-[#4a3a62] hover:text-[#5a189a] transition-colors duration-300 px-4 py-2"
             data-testid="link-login"
           >

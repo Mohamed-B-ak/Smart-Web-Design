@@ -18,7 +18,7 @@ const SondosGovernance = () => {
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 6000);
-    return () => clearInterval(interval);
+    return () => clearInterval(interval);p
   }, []);
 
   useEffect(() => {

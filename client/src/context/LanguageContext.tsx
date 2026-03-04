@@ -539,7 +539,7 @@ const translations: Record<Language, Record<string, string>> = {
     "blog.back": "العودة للمدونة",
     "blog.min_read": "دقائق قراءة",
     "nav.industries": "القطاعات",
-    "nav.partner": "عملاؤنا",
+    "nav.partner": "من نحن",
     "hero.title_new": "منصة سندس AI",
     "hero.subtitle_new":
       "نظام حلول متكاملة لتشغيل خدمة العملاء بالذكاء الاصطناعي",

@@ -1278,7 +1278,7 @@ const SondosEcommerce = () => {
         </div>
       </section>
 
-      {/* ==================== PRICING ==================== */}
+      {/* ==================== PRICING ==================== 
       <section id="الأسعار" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
@@ -1302,7 +1302,7 @@ const SondosEcommerce = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* متجر ناشئ */}
+           
             <div
               className="p-8 rounded-3xl bg-white border-2 transition-all hover:shadow-xl"
               style={{ borderColor: colors.bgLight }}
@@ -1363,7 +1363,7 @@ const SondosEcommerce = () => {
               </a>
             </div>
 
-            {/* متجر نامي */}
+           
             <div
               className="p-8 rounded-3xl relative shadow-2xl scale-105"
               style={{
@@ -1437,7 +1437,7 @@ const SondosEcommerce = () => {
               </a>
             </div>
 
-            {/* متجر كبير */}
+           
             <div
               className="p-8 rounded-3xl bg-white border-2 transition-all hover:shadow-xl"
               style={{ borderColor: colors.bgLight }}
@@ -1496,7 +1496,7 @@ const SondosEcommerce = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section>  */}
 
       {/* ==================== FAQ ==================== */}
       <section className="py-24" style={{ background: colors.bgLighter }}>
