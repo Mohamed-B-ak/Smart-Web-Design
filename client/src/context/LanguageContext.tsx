@@ -161,7 +161,7 @@ const translations: Record<Language, Record<string, string>> = {
     "blog.back": "Back to Blog",
     "blog.min_read": "min read",
     "nav.industries": "Industries",
-    "nav.partner": "Partner",
+    "nav.partner": "About Us",
     "hero.title_new":
       "Smart Calls With Human Voice — Serving Your Customers 24/7",
     "hero.subtitle_new":

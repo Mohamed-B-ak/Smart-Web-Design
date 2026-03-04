@@ -2,7 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 const APPS_SCRIPT_URL =
-  "https://script.google.com/a/macros/sondos-ai.com/s/AKfycbzxoag5CdB_TwfsP8o6u23ds1p4eemNRF8bWyKABfd3355gNrxPyhA1To9nNf23Sr4e/exec";
+  "https://script.google.com/a/macros/sondos-ai.com/s/AKfycbyRrtYGyZwZMq__VkuzjL9RFhJOkhK-i8zyfeykSRIENY2vl4axs9oopMHv_2m02jB4/exec";
+const SONDOS_TOKEN = "1016|0c1ta4b7Jr6GpTfYTI6AgnZDkVPMgFxmRtC6NH3H18f46e28";
+const SONDOS_ASSISTANT_ID = 11647;
+
 type Props = {
   open: boolean;
   onClose: () => void;
@@ -68,31 +71,53 @@ export default function AgentsModal({ open, onClose }: Props) {
     return dialectTranslation;
   };
 
-  // ✅ CORRECTION PRINCIPALE : utilisation de fetch avec mode "no-cors"
   const handleStartClick = async () => {
     if (callState === "idle") {
-      // Envoi des données vers Google Sheets + email
-      if (phoneNumber.trim()) {
-        try {
-          const params = new URLSearchParams({
-            phone: phoneNumber.trim(),
-            agent: selectedAgent?.name || activeAgent || "",
-          });
-
-          // no-cors est obligatoire pour éviter l'erreur CORS des Apps Script
-          fetch(`${APPS_SCRIPT_URL}?${params.toString()}`, {
-            method: "GET",
-            mode: "no-cors",
-          }).catch(() => {
-            // On ignore silencieusement l'erreur réseau
-          });
-        } catch {
-          // On n'interrompt pas l'UX si l'envoi échoue
-        }
+      if (!phoneNumber.trim()) {
+        alert("❌ Numéro vide !");
+        return;
       }
 
       setCallState("connecting");
-      setTimeout(() => setCallState("talking"), 2500);
+
+      const phone = phoneNumber.trim();
+      const agent = selectedAgent?.name || activeAgent || "";
+
+      // ── 1. Enregistre dans Sheet via JSONP ─────────────────────────
+      const cbName = "sondos_cb_" + Date.now();
+      const params = new URLSearchParams({ phone, agent, callback: cbName });
+      (window as any)[cbName] = (data: any) => {
+        delete (window as any)[cbName];
+        if (script.parentNode) document.body.removeChild(script);
+      };
+      const script = document.createElement("script");
+      script.src = `${APPS_SCRIPT_URL}?${params.toString()}`;
+      document.body.appendChild(script);
+
+      // ── 2. Lance l'appel Sondos ──────────────────────────────────
+      try {
+        const res = await fetch(
+          "https://app.sondos-ai.com/api/user/make_call",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${SONDOS_TOKEN}`,
+            },
+            body: JSON.stringify({
+              phone_number: phone,
+              assistant_id: SONDOS_ASSISTANT_ID,
+              variables: { customer_name: "", email: "" },
+            }),
+          },
+        );
+        if (!res.ok) alert("❌ Sondos erreur : " + res.status);
+        else alert("✅ Appel Sondos lancé !");
+        setCallState("talking");
+      } catch (err) {
+        alert("❌ Sondos exception : " + err);
+        setCallState("talking");
+      }
     }
   };
 
@@ -294,21 +319,6 @@ export default function AgentsModal({ open, onClose }: Props) {
           <div className="p-6" dir="rtl">
             {selectedAgent.iframe ? (
               <>
-                {/* iframe cachée pour activer les permissions micro */}
-                <iframe
-                  ref={iframeRef}
-                  src={selectedAgent.iframe}
-                  allow="microphone; autoplay"
-                  style={{
-                    position: "fixed",
-                    top: "-9999px",
-                    left: "-9999px",
-                    width: "400px",
-                    height: "400px",
-                    opacity: 0,
-                  }}
-                />
-
                 {/* IDLE */}
                 {callState === "idle" && (
                   <div className="flex flex-col items-center gap-6 py-4">
@@ -350,41 +360,18 @@ export default function AgentsModal({ open, onClose }: Props) {
                       />
                     </div>
 
-                    {/* ✅ Conteneur relatif : iframe transparente par-dessus pour activer le micro,
-                        onClick sur le conteneur pour déclencher fetch + état */}
-                    <div
-                      className="relative w-full flex justify-center"
+                    <button
+                      className="btn-start w-full px-8 py-4 rounded-2xl text-white font-bold text-sm tracking-wide flex items-center justify-center gap-3 transition-all duration-150 hover:scale-[1.03] active:scale-95"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
+                        boxShadow: "0 8px 24px rgba(139,92,246,0.5)",
+                      }}
                       onClick={handleStartClick}
                     >
-                      {/* iframe transparente superposée — c'est elle qui démarre vraiment l'agent vocal */}
-                      <iframe
-                        src={selectedAgent.iframe}
-                        allow="microphone; autoplay"
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          width: "100%",
-                          height: "100%",
-                          opacity: 0.01,
-                          zIndex: 10,
-                          border: "none",
-                          borderRadius: "16px",
-                        }}
-                      />
-                      <button
-                        className="btn-start relative z-0 px-8 py-4 rounded-2xl text-white font-bold text-sm tracking-wide flex items-center gap-3 transition-all duration-150 hover:scale-[1.03] active:scale-95"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
-                          boxShadow: "0 8px 24px rgba(139,92,246,0.5)",
-                          pointerEvents: "none",
-                        }}
-                      >
-                        <span className="text-lg">🎙️</span>
-                        {translateAgent("start_conversation")}
-                      </button>
-                    </div>
+                      <span className="text-lg">🎙️</span>
+                      {translateAgent("start_conversation")}
+                    </button>
                   </div>
                 )}
 
