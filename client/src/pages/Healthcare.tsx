@@ -195,6 +195,9 @@ export default function Healthcare() {
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedFacility, setSelectedFacility] = useState<string | null>(null);
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">(
+    "monthly",
+  );
   const [roiInputs, setRoiInputs] = useState<RoiInputs>({
     dailyCalls: 60,
     missedPercent: 35,
@@ -266,20 +269,16 @@ export default function Healthcare() {
     };
   }, [roiInputs]);
 
-  // ── shared style tokens (kept for non-Hero sections) ──────────────────────
+  // ── shared style tokens ──────────────────────
   const pageBg = "bg-[var(--bg)] text-[var(--t1)]";
   const sectionSoft = "bg-[var(--bg2)]";
   const card = "bg-[var(--card)] border border-[var(--bg4)]";
-  const cardSoft =
-    "bg-[color:rgba(255,255,255,0.06)] border border-[var(--bg4)]";
   const muted = "text-[var(--t2)]";
-  const subtle = "text-[var(--t3)]";
 
   return (
     <div dir="rtl" className={`min-h-screen font-arabic ${pageBg}`}>
       {/* ==================== HERO ==================== */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden">
-        {/* gradient glow — same as Hero.jsx */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -287,8 +286,6 @@ export default function Healthcare() {
               "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(90,24,154,0.15) 0%, transparent 70%)",
           }}
         />
-
-        {/* GRID BACKGROUND — copied from Hero.jsx */}
         <div
           className="absolute inset-0 z-[1] pointer-events-none"
           style={{
@@ -299,8 +296,6 @@ export default function Healthcare() {
               "radial-gradient(ellipse at center, black 20%, transparent 65%)",
           }}
         />
-
-        {/* FLOATING BLOBS — copied from Hero.jsx */}
         <div
           className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20 float-gentle"
           style={{
@@ -323,33 +318,27 @@ export default function Healthcare() {
           }}
         />
 
-        {/* HERO CONTENT */}
         <div className="relative z-10 max-w-[820px] mx-auto">
-          {/* BADGE — same as Hero.jsx */}
           <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
             معتمد من عملاء موثوقين
           </div>
 
-          {/* H1 — same font + clamp as Hero.jsx */}
           <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto animate-fade-up animation-delay-100">
             حوّل المكالمات الفائتة إلى{" "}
             <span className="text-[#9d4edd]">مواعيد محجوزة</span>
           </h1>
 
-          {/* SUBTITLE — same as Hero.jsx subtitle_new */}
           <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[#1a0a2e] max-w-[580px] mx-auto leading-relaxed mb-4 animate-fade-up animation-delay-150">
             نظام استقبال صوتي بالذكاء الاصطناعي يرد على مرضاك 24/7 بلهجة سعودية
             طبيعية ويحجز المواعيد تلقائياً
           </p>
 
-          {/* SOCIAL PROOF — same style as Hero.jsx desc */}
           <p className="text-[clamp(14px,1.6vw,17px)] text-[#4a3a62] max-w-[680px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
             ✓ +150 منشأة صحية &nbsp;·&nbsp; ✓ +500,000 مكالمة شهرياً
             &nbsp;·&nbsp; ✓ 97% دقة التعرف
           </p>
 
-          {/* CTA BUTTON — same shimmer/glow style as Hero.jsx */}
           <div className="flex items-center justify-center gap-3.5 mb-12 flex-wrap animate-fade-up animation-delay-300">
             <Link
               to="/demo"
@@ -507,7 +496,7 @@ export default function Healthcare() {
         </div>
       </section>
 
-      {/* ==================== ROI CALCULATOR ==================== */}
+      {/* ==================== ROI CALCULATOR ==================== 
       <section className={`py-24 px-6 ${sectionSoft}`}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -520,7 +509,7 @@ export default function Healthcare() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* LEFT — inputs */}
+            {/* LEFT — inputs 
             <div className="p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.08)]">
               <h3 className="font-['Instrument_Sans',sans-serif] font-bold text-[17px] tracking-tight mb-6 text-[#1a0a2e]">
                 ⚙️ بيانات منشأتك
@@ -632,7 +621,7 @@ export default function Healthcare() {
               </button>
             </div>
 
-            {/* RIGHT — results */}
+            {/* RIGHT — results 
             <div className="p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.08)]">
               {!showROIResults ? (
                 <div className="h-full flex flex-col items-center justify-center text-center gap-4">
@@ -763,7 +752,7 @@ export default function Healthcare() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ==================== INTEGRATIONS ==================== */}
       <section className="py-24 px-6">
@@ -861,12 +850,9 @@ export default function Healthcare() {
             <p className="text-[#4a3a62]">راقب أداء منشأتك في الوقت الفعلي</p>
           </div>
 
-          {/* Dashboard card — same style as Hero dashboard card */}
           <div className="rounded-3xl overflow-hidden border border-[rgba(90,24,154,0.15)] bg-[rgba(255,255,255,0.85)] backdrop-blur-xl shadow-[0_0_100px_rgba(90,24,154,0.15),0_40px_80px_rgba(0,0,0,0.08)] ai-glow">
-            {/* top bar */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(90,24,154,0.1)]">
               <div className="flex items-center gap-3">
-                {/* macOS dots */}
                 <div className="w-3 h-3 rounded-full bg-[#ff6b6b]" />
                 <div className="w-3 h-3 rounded-full bg-[#ffa940]" />
                 <div className="w-3 h-3 rounded-full bg-[#00d68f]" />
@@ -879,7 +865,6 @@ export default function Healthcare() {
               </span>
             </div>
 
-            {/* stats grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[rgba(90,24,154,0.06)]">
               {[
                 { label: "المكالمات اليوم", value: "127", sub: "↑ 12% من أمس" },
@@ -900,7 +885,6 @@ export default function Healthcare() {
               ))}
             </div>
 
-            {/* activity feed */}
             <div className="p-6">
               <h4 className="text-sm font-semibold mb-4 text-[#4a3a62]">
                 آخر النشاطات
@@ -975,7 +959,32 @@ export default function Healthcare() {
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
               أسعار شفافة وواضحة
             </h2>
-            <p className="text-[#4a3a62]">ابدأ مجاناً، ترقّى حسب نموك</p>
+            <p className="text-[#4a3a62] mb-8">ابداً، ترقّى حسب نموك</p>
+
+            {/* Billing Toggle */}
+            <div className="inline-flex items-center gap-1 p-1 rounded-full bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.15)]">
+              <button
+                onClick={() => setBillingCycle("monthly")}
+                className={`px-5 py-2 rounded-full text-[13px] font-semibold transition-all duration-300 ${
+                  billingCycle === "monthly"
+                    ? "bg-[#5a189a] text-white shadow-md"
+                    : "text-[#4a3a62] hover:text-[#1a0a2e]"
+                }`}
+              >
+                شهري
+              </button>
+              <button
+                onClick={() => setBillingCycle("yearly")}
+                className={`px-5 py-2 rounded-full text-[13px] font-semibold transition-all duration-300 flex items-center gap-2 ${
+                  billingCycle === "yearly"
+                    ? "bg-[#5a189a] text-white shadow-md"
+                    : "text-[#4a3a62] hover:text-[#1a0a2e]"
+                }`}
+              >
+                سنوي
+                <span className="text-[11px] px-1.5 py-0.5 rounded-full bg-[#00d68f] text-white font-bold"></span>
+              </button>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -984,11 +993,13 @@ export default function Healthcare() {
               <h3 className="font-['Instrument_Sans',sans-serif] text-xl font-bold tracking-tight mb-2 text-[#1a0a2e]">
                 Starter
               </h3>
-              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-[#1a0a2e]">
-                6,900 ر.س
+              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-[#1a0a2e] transition-all duration-300">
+                {billingCycle === "monthly" ? "6,900" : "82,800"} ر.س
               </p>
               <p className="text-sm mb-6 text-[#4a3a62]">
-                /شهر · للعيادات والمراكز الصغيرة
+                {billingCycle === "monthly"
+                  ? "/شهر · للعيادات والمراكز الصغيرة"
+                  : "/سنوي · للعيادات والمراكز الصغيرة"}
               </p>
               <ul className="space-y-3 mb-8">
                 {[
@@ -1029,11 +1040,13 @@ export default function Healthcare() {
               <h3 className="font-['Instrument_Sans',sans-serif] text-xl font-bold tracking-tight mb-2 text-white">
                 Pro
               </h3>
-              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-white">
-                17,450 ر.س
+              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-white transition-all duration-300">
+                {billingCycle === "monthly" ? "17,450" : "209,400"} ر.س
               </p>
               <p className="text-sm mb-6 text-purple-200">
-                /شهر · للمجمعات الطبية المتوسطة
+                {billingCycle === "monthly"
+                  ? "/شهر · للمجمعات الطبية المتوسطة"
+                  : "/سنوي · للمجمعات الطبية المتوسطة"}
               </p>
               <ul className="space-y-3 mb-8">
                 {[
@@ -1067,11 +1080,13 @@ export default function Healthcare() {
               <h3 className="font-['Instrument_Sans',sans-serif] text-xl font-bold tracking-tight mb-2 text-[#1a0a2e]">
                 Business
               </h3>
-              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-[#1a0a2e]">
-                48,000 ر.س
+              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-[#1a0a2e] transition-all duration-300">
+                {billingCycle === "monthly" ? "48,000" : "576,000"} ر.س
               </p>
               <p className="text-sm mb-6 text-[#4a3a62]">
-                /شهر · للمستشفيات والمنشآت الكبيرة
+                {billingCycle === "monthly"
+                  ? "/شهر · للمستشفيات والمنشآت الكبيرة"
+                  : "/سنوي · للمستشفيات والمنشآت الكبيرة"}
               </p>
               <ul className="space-y-3 mb-8">
                 {[

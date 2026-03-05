@@ -974,7 +974,7 @@ const SondosEcommerce = () => {
         </div>
       </section>
 
-      {/* ==================== ROI CALCULATOR ==================== */}
+      {/* ==================== ROI CALCULATOR ==================== 
       <section className="py-24 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
@@ -1004,7 +1004,7 @@ const SondosEcommerce = () => {
             className="rounded-3xl p-8 sm:p-10 shadow-xl"
             style={{ background: colors.bgLighter }}
           >
-            {/* Inputs */}
+            {/* Inputs 
             <div className="grid md:grid-cols-3 gap-6 mb-10">
               <div>
                 <label
@@ -1101,7 +1101,7 @@ const SondosEcommerce = () => {
               </div>
             </div>
 
-            {/* Results */}
+            {/* Results 
             <div className="grid md:grid-cols-4 gap-4">
               <div
                 className="p-5 rounded-2xl text-center"
@@ -1164,7 +1164,7 @@ const SondosEcommerce = () => {
               </div>
             </div>
 
-            {/* ROI Badge */}
+            {/* ROI Badge 
             <div className="text-center mt-8">
               <div
                 className="inline-flex items-center gap-4 px-8 py-4 rounded-2xl"
@@ -1183,7 +1183,7 @@ const SondosEcommerce = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ==================== TESTIMONIALS ==================== */}
       <section className="py-24" style={{ background: colors.bgLighter }}>

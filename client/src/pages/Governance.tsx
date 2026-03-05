@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../index.css";
 
 const SondosGovernance = () => {
   const [activeSegment, setActiveSegment] = useState(0);
@@ -18,7 +19,7 @@ const SondosGovernance = () => {
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 6000);
-    return () => clearInterval(interval);p
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -32,21 +33,6 @@ const SondosGovernance = () => {
     if (statsSection) observer.observe(statsSection);
     return () => observer.disconnect();
   }, []);
-
-  const colors = {
-    primary: "#5B4E9F",
-    primaryLight: "#6B5BB3",
-    accent: "#7C6FBF",
-    bgLight: "#EDE9F9",
-    bgLighter: "#F7F5FC",
-    textDark: "#2D2654",
-    textMuted: "#6B6B8D",
-    white: "#FFFFFF",
-    success: "#10B981",
-    warning: "#F59E0B",
-    danger: "#EF4444",
-    gov: "#0369A1",
-  };
 
   const segments = [
     {
@@ -408,15 +394,13 @@ const SondosGovernance = () => {
     const trainingCost = employees * 300;
     const currentMonthlyCost =
       currentStaffCost + infrastructureCost + trainingCost;
-    const callsPerEmployee = 40;
     const automationRate = 0.85;
     const remainingCalls = dailyCalls * (1 - automationRate);
-    const newEmployeesNeeded = Math.ceil(remainingCalls / callsPerEmployee);
+    const newEmployeesNeeded = Math.ceil(remainingCalls / 40);
     const sondosCost =
       dailyCalls <= 500 ? 25000 : dailyCalls <= 2000 ? 60000 : 120000;
-    const newStaffCost = newEmployeesNeeded * avgSalary;
-    const newInfrastructure = newEmployeesNeeded * 800;
-    const newTotalCost = sondosCost + newStaffCost + newInfrastructure;
+    const newTotalCost =
+      sondosCost + newEmployeesNeeded * avgSalary + newEmployeesNeeded * 800;
     const monthlySavings = currentMonthlyCost - newTotalCost;
     const annualSavings = monthlySavings * 12;
     const newSatisfaction = Math.min(citizenSatisfaction + 25, 98);
@@ -433,66 +417,97 @@ const SondosGovernance = () => {
 
   const roiResults = calculateROI();
 
-  return (
-    <div className="min-h-screen bg-white font-sans" dir="rtl">
-      {/* ==================== HERO SECTION ==================== */}
-      <section
-        className="relative pt-24 pb-20 overflow-hidden"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="absolute inset-0 overflow-hidden">
-          <div
-            className="absolute top-20 right-10 w-72 h-72 rounded-full blur-3xl opacity-40"
-            style={{ background: colors.bgLight }}
-          ></div>
-          <div
-            className="absolute bottom-20 left-10 w-96 h-96 rounded-full blur-3xl opacity-30"
-            style={{ background: colors.accent }}
-          ></div>
-        </div>
+  const statKeyLabel = (key: string) =>
+    ({
+      automation: "الأتمتة",
+      availability: "التوفر",
+      accuracy: "الدقة",
+      reports: "البلاغات",
+      tracking: "التتبع",
+      resolution: "الحل",
+      booking: "الحجز",
+      inquiries: "الاستفسارات",
+      noShow: "عدم الحضور",
+      admissions: "القبول",
+      support: "الدعم",
+      satisfaction: "الرضا",
+      clarity: "الوضوح",
+      compliance: "الامتثال",
+      billing: "الفواتير",
+      requests: "الطلبات",
+      outages: "الأعطال",
+    })[key] ?? key;
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8"
-            style={{
-              background: colors.white,
-              color: colors.primary,
-              boxShadow: "0 2px 12px rgba(91, 78, 159, 0.15)",
-            }}
-          >
-            <span className="text-lg">🏛️</span>
-            <span>حلول ذكية للقطاع الحكومي</span>
+  return (
+    <div
+      dir="rtl"
+      className="min-h-screen font-arabic bg-[var(--bg)] text-[var(--t1)]"
+    >
+      {/* ==================== HERO ==================== */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(90,24,154,0.15) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(90,24,154,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(90,24,154,.04) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+            maskImage:
+              "radial-gradient(ellipse at center, black 20%, transparent 65%)",
+          }}
+        />
+        <div
+          className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20 float-gentle"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(90,24,154,0.3), transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute top-40 right-[15%] w-24 h-24 rounded-full opacity-15 float-slow"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(157,78,221,0.3), transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute bottom-32 left-[20%] w-20 h-20 rounded-full opacity-10 float-gentle"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(123,44,191,0.4), transparent 70%)",
+          }}
+        />
+
+        <div className="relative z-10 max-w-[820px] mx-auto">
+          <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
+            حلول ذكية للقطاع الحكومي
           </div>
 
-          <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
-            style={{ color: colors.textDark }}
-          >
-            خدمة المستفيد
-            <span
-              style={{
-                background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              {" "}
-              24/7{" "}
-            </span>
+          <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 animate-fade-up animation-delay-100">
+            خدمة المستفيد <span className="text-[#9d4edd]">24/7</span>
+            <br />
             بدون انتظار
           </h1>
 
-          <p
-            className="text-lg sm:text-xl mb-10 leading-relaxed max-w-2xl mx-auto"
-            style={{ color: colors.textMuted }}
-          >
+          <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[var(--t1)] max-w-[580px] mx-auto leading-relaxed mb-4 animate-fade-up animation-delay-150">
             سندس يتعامل مع 85% من استفسارات المواطنين تلقائياً: متابعة
             المعاملات، حجز المواعيد، استقبال البلاغات - بأمان حكومي وتكامل مع
             نفاذ
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-10">
+          <p className="text-[clamp(14px,1.6vw,17px)] text-[var(--t2)] max-w-[680px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
+            ✓ +20 جهة حكومية &nbsp;·&nbsp; ✓ 5 مليون معاملة شهرياً &nbsp;·&nbsp;
+            ✓ 85% أتمتة
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4 mb-10 animate-fade-up animation-delay-300">
             {[
               { value: "85%", label: "أتمتة", icon: "🤖" },
               { value: "24/7", label: "خدمة", icon: "⏰" },
@@ -500,51 +515,32 @@ const SondosGovernance = () => {
             ].map((stat, i) => (
               <div
                 key={i}
-                className="px-5 py-4 rounded-2xl text-center"
-                style={{
-                  background: "white",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-                }}
+                className="px-5 py-4 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all hover:shadow-xl hover:-translate-y-1"
               >
                 <div className="text-2xl mb-1">{stat.icon}</div>
-                <div
-                  className="text-xl font-bold"
-                  style={{ color: colors.primary }}
-                >
+                <div className="text-xl font-bold text-[#9d4edd]">
                   {stat.value}
                 </div>
-                <div className="text-xs" style={{ color: colors.textMuted }}>
-                  {stat.label}
-                </div>
+                <div className="text-xs text-[var(--t3)]">{stat.label}</div>
               </div>
             ))}
           </div>
 
-          {/* ===== SINGLE BUTTON (Hero) ===== */}
-          <div className="flex justify-center">
-            <a href="/demo">
-              <button
-                className="px-10 py-4 rounded-2xl font-semibold text-lg text-white shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  boxShadow: `0 10px 40px ${colors.primary}40`,
-                }}
-              >
-                احجز عرضك التجريبي
-              </button>
+          <div className="flex items-center justify-center gap-3.5 mb-10 flex-wrap animate-fade-up animation-delay-300">
+            <a
+              href="/demo"
+              className="inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
+            >
+              احجز عرضك التجريبي
             </a>
           </div>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3 animate-fade-up animation-delay-300">
             {["🔐 معتمد أمنياً", "🇸🇦 خوادم محلية", "📋 متوافق PDPL"].map(
               (badge, i) => (
                 <span
                   key={i}
-                  className="px-3 py-1 rounded-full text-xs font-medium"
-                  style={{
-                    background: colors.bgLight,
-                    color: colors.primary,
-                  }}
+                  className="px-3 py-1 rounded-full text-xs font-medium bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]"
                 >
                   {badge}
                 </span>
@@ -552,45 +548,21 @@ const SondosGovernance = () => {
             )}
           </div>
         </div>
-
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            viewBox="0 0 1440 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            className="w-full h-16"
-          >
-            <path
-              d="M0 100L60 90C120 80 240 60 360 55C480 50 600 60 720 65C840 70 960 70 1080 65C1200 60 1320 50 1380 45L1440 40V100H1380C1320 100 1200 100 1080 100C960 100 840 100 720 100C600 100 480 100 360 100C240 100 120 100 60 100H0Z"
-              fill="white"
-            />
-          </svg>
-        </div>
       </section>
 
-      {/* ==================== STATS SECTION ==================== */}
-      <section id="stats-section" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      {/* ==================== STATS ==================== */}
+      <section id="stats-section" className="py-16 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, idx) => (
               <div key={idx} className="text-center group">
-                <div
-                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl transition-transform group-hover:scale-110"
-                  style={{ background: colors.bgLight }}
-                >
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_4px_14px_rgba(0,0,0,0.05)] transition-transform group-hover:scale-110">
                   {stat.icon}
                 </div>
-                <div
-                  className="text-3xl sm:text-4xl font-bold mb-2"
-                  style={{ color: colors.primary }}
-                >
-                  {statsVisible ? stat.value : "0"}
+                <div className="text-3xl sm:text-4xl font-bold mb-2 text-[#9d4edd]">
+                  {statsVisible ? stat.value : "—"}
                 </div>
-                <div
-                  className="text-sm font-medium"
-                  style={{ color: colors.textMuted }}
-                >
+                <div className="text-sm font-medium text-[var(--t2)]">
                   {stat.label}
                 </div>
               </div>
@@ -600,76 +572,37 @@ const SondosGovernance = () => {
       </section>
 
       {/* ==================== CITIZEN JOURNEY ==================== */}
-      <section
-        id="رحلة المستفيد"
-        className="py-24"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              رحلة المستفيد
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                المُحسّنة
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              رحلة المستفيد <span className="text-[#9d4edd]">المُحسّنة</span>
             </h2>
-            <p style={{ color: colors.textMuted }}>
+            <p className="text-[var(--t2)]">
               كيف يحسّن سندس تجربة المواطن في كل خطوة
             </p>
           </div>
-
           <div className="grid md:grid-cols-5 gap-4">
             {citizenJourney.map((step, idx) => (
               <div
                 key={idx}
-                className="relative p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all"
+                className="relative p-6 rounded-2xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all hover:shadow-xl hover:-translate-y-1"
               >
-                <div
-                  className="absolute -top-3 right-4 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white"
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  }}
-                >
+                <div className="absolute -top-3 right-4 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white gradient-bg">
                   {step.step}
                 </div>
                 <div className="text-4xl mb-4 text-center">{step.icon}</div>
-                <h3
-                  className="font-bold text-center mb-2"
-                  style={{ color: colors.textDark }}
-                >
+                <h3 className="font-bold text-center mb-2 text-[var(--t1)]">
                   {step.title}
                 </h3>
-                <p
-                  className="text-xs text-center mb-4"
-                  style={{ color: colors.textMuted }}
-                >
+                <p className="text-xs text-center mb-4 text-[var(--t2)]">
                   {step.description}
                 </p>
                 <div className="space-y-2">
-                  <div
-                    className="p-2 rounded-lg text-xs"
-                    style={{ background: "#FEE2E2", color: "#991B1B" }}
-                  >
+                  <div className="p-2 rounded-lg text-xs bg-[rgba(239,68,68,0.08)] text-red-400">
                     ❌ {step.traditional}
                   </div>
-                  <div
-                    className="p-2 rounded-lg text-xs"
-                    style={{
-                      background: colors.bgLight,
-                      color: colors.success,
-                    }}
-                  >
+                  <div className="p-2 rounded-lg text-xs bg-[rgba(16,185,129,0.08)] text-emerald-600">
                     ✓ {step.withSondos}
                   </div>
                 </div>
@@ -679,121 +612,80 @@ const SondosGovernance = () => {
         </div>
       </section>
 
-      {/* ==================== SEGMENTS SECTION ==================== */}
-      <section id="الحلول" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      {/* ==================== SEGMENTS ==================== */}
+      <section id="الحلول" className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              حلول لكل
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                قطاع حكومي
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              حلول لكل <span className="text-[#9d4edd]">قطاع حكومي</span>
             </h2>
+            <p className="text-[var(--t2)] text-lg">
+              سندس يتكيف مع طبيعة كل جهة
+            </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {segments.map((segment, idx) => (
-              <button
-                key={segment.id}
-                onClick={() => setActiveSegment(idx)}
-                className="px-4 py-3 rounded-xl flex items-center gap-2 font-semibold transition-all duration-300 text-sm"
-                style={{
-                  background:
-                    activeSegment === idx
-                      ? `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`
-                      : "white",
-                  color: activeSegment === idx ? "white" : colors.textDark,
-                  boxShadow:
-                    activeSegment === idx
-                      ? `0 8px 24px ${colors.primary}40`
-                      : "0 2px 12px rgba(0,0,0,0.06)",
-                }}
-              >
-                <span className="text-xl">{segment.icon}</span>
-                <span className="hidden sm:inline">{segment.name}</span>
-              </button>
-            ))}
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {segments.map((segment, idx) => {
+              const isActive = activeSegment === idx;
+              return (
+                <button
+                  key={segment.id}
+                  onClick={() => setActiveSegment(idx)}
+                  className={`px-5 py-2.5 rounded-full flex items-center gap-2 text-[13px] font-medium transition-all duration-300 border backdrop-blur-sm ${
+                    isActive
+                      ? "gradient-bg glow text-white border-[rgba(90,24,154,0.4)]"
+                      : "bg-[rgba(90,24,154,0.04)] border-[rgba(90,24,154,0.12)] text-[var(--t2)] hover:border-[rgba(90,24,154,0.25)]"
+                  }`}
+                >
+                  <span className="text-xl">{segment.icon}</span>
+                  <span className="hidden sm:inline">{segment.name}</span>
+                </button>
+              );
+            })}
           </div>
 
-          <div
-            className="rounded-3xl overflow-hidden shadow-2xl"
-            style={{ boxShadow: `0 20px 60px ${colors.primary}15` }}
-          >
+          <div className="rounded-3xl overflow-hidden border border-[rgba(90,24,154,0.15)] shadow-[0_20px_60px_rgba(90,24,154,0.12)]">
             <div className="grid md:grid-cols-2">
-              <div className="p-8 sm:p-10" style={{ background: "#FEF2F2" }}>
+              <div className="p-8 sm:p-10 bg-[rgba(239,68,68,0.05)] border-b md:border-b-0 md:border-l border-[rgba(90,24,154,0.08)]">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">😫</span>
-                  <h3
-                    className="text-xl font-bold"
-                    style={{ color: "#991B1B" }}
-                  >
-                    التحديات
-                  </h3>
+                  <h3 className="text-xl font-bold text-red-400">التحديات</h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].painPoints.map((point, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="text-red-500 mt-1">✗</span>
-                      <span style={{ color: "#7F1D1D" }}>{point}</span>
+                      <span className="text-red-400 mt-1">✗</span>
+                      <span className="text-[var(--t2)]">{point}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div
-                className="p-8 sm:p-10"
-                style={{ background: colors.bgLight }}
-              >
+              <div className="p-8 sm:p-10 bg-[rgba(90,24,154,0.04)]">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">🎉</span>
-                  <h3
-                    className="text-xl font-bold"
-                    style={{ color: colors.primary }}
-                  >
-                    مع سندس
-                  </h3>
+                  <h3 className="text-xl font-bold text-[#9d4edd]">مع سندس</h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].solutions.map((solution, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span style={{ color: colors.success }}>✓</span>
-                      <span style={{ color: colors.textDark }}>{solution}</span>
+                      <span className="text-[#9d4edd]">✓</span>
+                      <span className="text-[var(--t1)]">{solution}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            <div
-              className="p-6 bg-white border-t"
-              style={{ borderColor: colors.bgLight }}
-            >
+            <div className="p-6 bg-[var(--bg)] border-t border-[rgba(90,24,154,0.08)]">
               <div className="flex flex-wrap items-center justify-between gap-6">
                 <div>
-                  <div
-                    className="text-sm font-medium mb-2"
-                    style={{ color: colors.textMuted }}
-                  >
+                  <div className="text-sm font-medium mb-2 text-[var(--t2)]">
                     حالات الاستخدام:
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {segments[activeSegment].useCases.map((useCase, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 rounded-full text-sm"
-                        style={{
-                          background: colors.bgLight,
-                          color: colors.primary,
-                        }}
+                        className="px-3 py-1 rounded-full text-sm bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]"
                       >
                         {useCase}
                       </span>
@@ -804,51 +696,11 @@ const SondosGovernance = () => {
                   {Object.entries(segments[activeSegment].stats).map(
                     ([key, value], i) => (
                       <div key={i} className="text-center">
-                        <div
-                          className="text-2xl font-bold"
-                          style={{ color: colors.primary }}
-                        >
+                        <div className="text-2xl font-bold text-[#9d4edd]">
                           {value}
                         </div>
-                        <div
-                          className="text-xs"
-                          style={{ color: colors.textMuted }}
-                        >
-                          {key === "automation"
-                            ? "الأتمتة"
-                            : key === "availability"
-                              ? "التوفر"
-                              : key === "accuracy"
-                                ? "الدقة"
-                                : key === "reports"
-                                  ? "البلاغات"
-                                  : key === "tracking"
-                                    ? "التتبع"
-                                    : key === "resolution"
-                                      ? "الحل"
-                                      : key === "booking"
-                                        ? "الحجز"
-                                        : key === "inquiries"
-                                          ? "الاستفسارات"
-                                          : key === "noShow"
-                                            ? "عدم الحضور"
-                                            : key === "admissions"
-                                              ? "القبول"
-                                              : key === "support"
-                                                ? "الدعم"
-                                                : key === "satisfaction"
-                                                  ? "الرضا"
-                                                  : key === "clarity"
-                                                    ? "الوضوح"
-                                                    : key === "compliance"
-                                                      ? "الامتثال"
-                                                      : key === "billing"
-                                                        ? "الفواتير"
-                                                        : key === "requests"
-                                                          ? "الطلبات"
-                                                          : key === "outages"
-                                                            ? "الأعطال"
-                                                            : key}
+                        <div className="text-sm text-[var(--t3)]">
+                          {statKeyLabel(key)}
                         </div>
                       </div>
                     ),
@@ -860,30 +712,13 @@ const SondosGovernance = () => {
         </div>
       </section>
 
-      {/* ==================== SECURITY SECTION ==================== */}
-      <section
-        id="الأمان"
-        className="py-24"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      {/* ==================== SECURITY ==================== */}
+      <section id="الأمان" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              أمان وحوكمة
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                على مستوى حكومي
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              أمان وحوكمة{" "}
+              <span className="text-[#9d4edd]">على مستوى حكومي</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -921,18 +756,13 @@ const SondosGovernance = () => {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all"
+                className="group p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-[rgba(90,24,154,0.3)] ai-glow"
               >
                 <div className="text-4xl mb-4">{item.icon}</div>
-                <h3
-                  className="font-bold mb-2"
-                  style={{ color: colors.textDark }}
-                >
+                <h3 className="font-bold mb-2 text-[var(--t1)]">
                   {item.title}
                 </h3>
-                <p className="text-sm" style={{ color: colors.textMuted }}>
-                  {item.desc}
-                </p>
+                <p className="text-sm text-[var(--t2)]">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -940,61 +770,31 @@ const SondosGovernance = () => {
       </section>
 
       {/* ==================== FEATURES ==================== */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="المميزات" className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              مميزات
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                للقطاع الحكومي
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              مميزات <span className="text-[#9d4edd]">للقطاع الحكومي</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, idx) => (
               <div
                 key={idx}
-                className="group p-8 rounded-3xl bg-white border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
-                style={{ borderColor: colors.bgLight }}
+                className="group p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-[rgba(90,24,154,0.3)] ai-glow"
               >
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: colors.bgLight }}
-                >
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 bg-[rgba(90,24,154,0.06)] transition-transform duration-300 group-hover:scale-110">
                   {feature.icon}
                 </div>
-                <h3
-                  className="text-xl font-bold mb-3"
-                  style={{ color: colors.textDark }}
-                >
+                <h3 className="text-xl font-bold mb-3 text-[var(--t1)]">
                   {feature.title}
                 </h3>
-                <p
-                  className="text-sm mb-5 leading-relaxed"
-                  style={{ color: colors.textMuted }}
-                >
+                <p className="text-sm mb-5 leading-relaxed text-[var(--t2)]">
                   {feature.description}
                 </p>
-                <div
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold"
-                  style={{
-                    background: `${colors.primary}15`,
-                    color: colors.primary,
-                  }}
-                >
+                <span className="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]">
                   {feature.highlight}
-                </div>
+                </span>
               </div>
             ))}
           </div>
@@ -1002,46 +802,22 @@ const SondosGovernance = () => {
       </section>
 
       {/* ==================== INTEGRATIONS ==================== */}
-      <section
-        id="التكاملات"
-        className="py-24"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="التكاملات" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              تكامل مع
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                الأنظمة الحكومية
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              تكامل مع <span className="text-[#9d4edd]">الأنظمة الحكومية</span>
             </h2>
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             {governmentIntegrations.map((int, idx) => (
               <div
                 key={idx}
-                className="px-8 py-6 rounded-2xl bg-white border-2 text-center transition-all hover:shadow-xl hover:-translate-y-1"
-                style={{ borderColor: colors.bgLight }}
+                className="px-8 py-6 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
                 <div className="text-4xl mb-3">{int.icon}</div>
-                <div className="font-bold" style={{ color: colors.textDark }}>
-                  {int.name}
-                </div>
-                <div
-                  className="text-xs mt-1"
-                  style={{ color: colors.textMuted }}
-                >
+                <div className="font-bold text-[var(--t1)]">{int.name}</div>
+                <div className="text-xs mt-1 px-2 py-0.5 rounded-full inline-block bg-[rgba(90,24,154,0.08)] text-[#9d4edd]">
                   {int.type}
                 </div>
               </div>
@@ -1051,51 +827,32 @@ const SondosGovernance = () => {
       </section>
 
       {/* ==================== USE CASES ==================== */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              شاهد سندس
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                أثناء العمل
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              شاهد سندس <span className="text-[#9d4edd]">أثناء العمل</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             {useCaseDemo.map((useCase, idx) => (
               <div
                 key={idx}
-                className="rounded-3xl overflow-hidden shadow-xl"
-                style={{ background: colors.bgLighter }}
+                className="rounded-3xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_0_40px_rgba(90,24,154,0.08)]"
               >
-                <div
-                  className="px-6 py-4 font-bold flex items-center gap-2"
-                  style={{ background: colors.bgLight, color: colors.textDark }}
-                >
+                <div className="px-6 py-4 font-bold bg-[rgba(90,24,154,0.06)] text-[var(--t1)] border-b border-[rgba(90,24,154,0.08)]">
                   {useCase.title}
                 </div>
                 <div className="p-6 space-y-4 max-h-[450px] overflow-y-auto">
                   {useCase.conversation.map((msg, i) => (
                     <div
                       key={i}
-                      className={`p-4 rounded-2xl text-sm ${msg.role === "ai" ? "rounded-tr-md max-w-[85%] mr-auto" : "rounded-tl-md max-w-[75%] ml-auto"}`}
-                      style={{
-                        background:
-                          msg.role === "ai" ? "white" : colors.primary,
-                        color: msg.role === "ai" ? colors.textDark : "white",
-                        whiteSpace: "pre-line",
-                      }}
+                      className={`p-4 rounded-2xl text-sm ${
+                        msg.role === "ai"
+                          ? "rounded-tr-md max-w-[85%] mr-auto bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.1)] text-[var(--t1)]"
+                          : "rounded-tl-md max-w-[75%] ml-auto gradient-bg text-white"
+                      }`}
+                      style={{ whiteSpace: "pre-line" }}
                     >
                       {msg.text}
                     </div>
@@ -1107,31 +864,20 @@ const SondosGovernance = () => {
         </div>
       </section>
 
-      {/* ==================== ROI CALCULATOR ==================== */}
-      <section className="py-24" style={{ background: colors.bgLighter }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      {/* ==================== ROI CALCULATOR ==================== 
+      <section id="roi" className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              احسب
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                الوفورات المتوقعة
-              </span>
+            <p className="text-[13px] font-medium mb-3 text-[#9d4edd]">
+              🧮 حاسبة مبنية على بيانات حقيقية
+            </p>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight">
+              احسب <span className="text-[#9d4edd]">الوفورات المتوقعة</span>
             </h2>
           </div>
 
-          <div className="rounded-3xl p-8 sm:p-10 shadow-xl bg-white">
-            <div className="grid md:grid-cols-2 gap-8 mb-10">
+          <div className="rounded-3xl p-8 sm:p-10 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.08)]">
+            <div className="grid md:grid-cols-2 gap-6 mb-10">
               {[
                 {
                   label: "المكالمات/الطلبات اليومية",
@@ -1139,8 +885,7 @@ const SondosGovernance = () => {
                   min: 100,
                   max: 5000,
                   step: 100,
-                  display: roiInputs.dailyCalls.toLocaleString(),
-                  bg: `${roiInputs.dailyCalls / 50}%`,
+                  suffix: "",
                 },
                 {
                   label: "عدد موظفي خدمة المستفيدين",
@@ -1148,8 +893,7 @@ const SondosGovernance = () => {
                   min: 10,
                   max: 200,
                   step: 1,
-                  display: `${roiInputs.employees} موظف`,
-                  bg: `${(roiInputs.employees - 10) / 1.9}%`,
+                  suffix: " موظف",
                 },
                 {
                   label: "متوسط الراتب الشهري (ر.س)",
@@ -1157,8 +901,7 @@ const SondosGovernance = () => {
                   min: 5000,
                   max: 15000,
                   step: 500,
-                  display: `${roiInputs.avgSalary.toLocaleString()} ر.س`,
-                  bg: `${(roiInputs.avgSalary - 5000) / 100}%`,
+                  suffix: " ر.س",
                 },
                 {
                   label: "رضا المستفيدين الحالي (%)",
@@ -1166,189 +909,126 @@ const SondosGovernance = () => {
                   min: 40,
                   max: 85,
                   step: 1,
-                  display: `${roiInputs.citizenSatisfaction}%`,
-                  bg: `${(roiInputs.citizenSatisfaction - 40) * 2.2}%`,
+                  suffix: "%",
                 },
-              ].map((slider) => (
-                <div key={slider.key}>
-                  <label
-                    className="block text-sm font-medium mb-3"
-                    style={{ color: colors.textDark }}
-                  >
-                    {slider.label}
-                  </label>
+              ].map(({ label, key, min, max, step, suffix }) => (
+                <div key={key}>
+                  <div className="flex justify-between mb-2">
+                    <label className="text-sm text-[var(--t2)]">{label}</label>
+                    <span className="font-bold text-[var(--t1)]">
+                      {(roiInputs as any)[key].toLocaleString()}
+                      {suffix}
+                    </span>
+                  </div>
                   <input
                     type="range"
-                    min={slider.min}
-                    max={slider.max}
-                    step={slider.step}
-                    value={roiInputs[slider.key]}
+                    min={min}
+                    max={max}
+                    step={step}
+                    value={(roiInputs as any)[key]}
                     onChange={(e) =>
                       setRoiInputs({
                         ...roiInputs,
-                        [slider.key]: parseInt(e.target.value),
+                        [key]: parseInt(e.target.value),
                       })
                     }
-                    className="w-full h-3 rounded-full appearance-none cursor-pointer"
-                    style={{
-                      background: `linear-gradient(90deg, ${colors.primary} ${slider.bg}, ${colors.bgLight} ${slider.bg})`,
-                    }}
+                    className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+                    style={{ background: "rgba(90,24,154,0.12)" }}
                   />
-                  <div
-                    className="text-center mt-2 text-2xl font-bold"
-                    style={{ color: colors.primary }}
-                  >
-                    {slider.display}
+                  <div className="text-center mt-2 font-bold text-[#9d4edd]">
+                    {(roiInputs as any)[key].toLocaleString()}
+                    {suffix}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div
-              className="p-6 rounded-2xl mb-6"
-              style={{ background: colors.bgLighter }}
-            >
-              <div className="grid md:grid-cols-4 gap-4 text-center">
-                {[
-                  {
-                    label: "التكلفة الحالية",
-                    value: `${roiResults.currentMonthlyCost.toLocaleString()} ر.س`,
-                    sub: "شهرياً",
-                    color: colors.danger,
-                  },
-                  {
-                    label: "مع سندس",
-                    value: `${roiResults.newTotalCost.toLocaleString()} ر.س`,
-                    sub: "شهرياً",
-                    color: colors.success,
-                  },
-                  {
-                    label: "رضا المستفيدين الجديد",
-                    value: `${roiResults.newSatisfaction}%`,
-                    sub: `+${roiResults.newSatisfaction - roiInputs.citizenSatisfaction}%`,
-                    color: colors.primary,
-                  },
-                  {
-                    label: "طلبات تُخدم آلياً",
-                    value: roiResults.automatedCalls.toLocaleString(),
-                    sub: "شهرياً",
-                    color: colors.accent,
-                  },
-                ].map((card, i) => (
-                  <div key={i} className="p-4 rounded-xl bg-white">
-                    <div
-                      className="text-xs mb-1"
-                      style={{ color: colors.textMuted }}
-                    >
-                      {card.label}
-                    </div>
-                    <div
-                      className="text-xl font-bold"
-                      style={{ color: card.color }}
-                    >
-                      {card.value}
-                    </div>
-                    <div
-                      className="text-xs"
-                      style={{ color: colors.textMuted }}
-                    >
-                      {card.sub}
-                    </div>
-                  </div>
-                ))}
+            <div className="grid md:grid-cols-4 gap-4 mb-6">
+              <div className="p-6 rounded-2xl text-center bg-[rgba(239,68,68,0.07)] border border-[rgba(239,68,68,0.2)]">
+                <div className="text-sm mb-2 text-red-400">التكلفة الحالية</div>
+                <div className="text-2xl font-bold text-red-500">
+                  {roiResults.currentMonthlyCost.toLocaleString()} ر.س
+                </div>
+                <div className="text-xs text-[var(--t3)]">شهرياً</div>
+              </div>
+              <div className="p-6 rounded-2xl text-center bg-[rgba(16,185,129,0.07)] border border-[rgba(16,185,129,0.2)]">
+                <div className="text-sm mb-2 text-emerald-600">مع سندس</div>
+                <div className="text-2xl font-bold text-emerald-600">
+                  {roiResults.newTotalCost.toLocaleString()} ر.س
+                </div>
+                <div className="text-xs text-[var(--t3)]">شهرياً</div>
+              </div>
+              <div className="p-6 rounded-2xl text-center bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.15)]">
+                <div className="text-sm mb-2 text-[#9d4edd]">
+                  رضا المستفيدين الجديد
+                </div>
+                <div className="text-2xl font-bold text-[#9d4edd]">
+                  {roiResults.newSatisfaction}%
+                </div>
+                <div className="text-xs text-[var(--t3)]">
+                  +{roiResults.newSatisfaction - roiInputs.citizenSatisfaction}%
+                </div>
+              </div>
+              <div className="p-6 rounded-2xl text-center bg-[rgba(16,185,129,0.07)] border border-[rgba(16,185,129,0.2)]">
+                <div className="text-sm mb-2 text-emerald-600">
+                  طلبات تُخدم آلياً
+                </div>
+                <div className="text-2xl font-bold text-emerald-600">
+                  {roiResults.automatedCalls.toLocaleString()}
+                </div>
+                <div className="text-xs text-[var(--t3)]">شهرياً</div>
               </div>
             </div>
 
-            <div
-              className="p-6 rounded-2xl text-center"
-              style={{
-                background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-              }}
-            >
-              <div className="text-white/80 mb-2">
-                الوفورات السنوية المتوقعة
-              </div>
-              <div className="text-white text-5xl font-bold mb-2">
-                {roiResults.annualSavings.toLocaleString()} ر.س
-              </div>
-              <div className="text-white/80 text-sm">
-                مع تحسين رضا المستفيدين من {roiInputs.citizenSatisfaction}% إلى{" "}
-                {roiResults.newSatisfaction}%
+            <div className="text-center">
+              <div className="inline-flex flex-wrap justify-center items-center gap-4 px-8 py-4 rounded-2xl gradient-bg">
+                <span className="text-white text-lg">
+                  الوفورات السنوية المتوقعة:
+                </span>
+                <span className="text-white text-4xl font-bold">
+                  {roiResults.annualSavings.toLocaleString()} ر.س
+                </span>
+                <span className="text-white/80 text-sm">
+                  مع تحسين رضا المستفيدين من {roiInputs.citizenSatisfaction}%
+                  إلى {roiResults.newSatisfaction}%
+                </span>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ==================== TESTIMONIALS ==================== */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              قصص نجاح
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                الجهات الحكومية
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              قصص نجاح <span className="text-[#9d4edd]">الجهات الحكومية</span>
             </h2>
           </div>
-
-          <div
-            className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl shadow-2xl relative"
-            style={{ background: colors.bgLighter }}
-          >
-            <div
-              className="absolute top-6 right-8 text-8xl font-serif opacity-10"
-              style={{ color: colors.primary }}
-            >
+          <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.1)] relative">
+            <div className="absolute top-6 right-8 text-8xl font-serif opacity-10 text-[#5a189a]">
               "
             </div>
-            <p
-              className="text-xl sm:text-2xl leading-relaxed mb-8"
-              style={{ color: colors.textDark }}
-            >
+            <p className="text-xl sm:text-2xl leading-relaxed mb-8 text-[var(--t1)]">
               {testimonials[currentTestimonial].quote}
             </p>
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-lg"
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  }}
-                >
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl gradient-bg shadow-lg">
                   {testimonials[currentTestimonial].image}
                 </div>
                 <div>
-                  <div
-                    className="font-bold text-lg"
-                    style={{ color: colors.textDark }}
-                  >
+                  <div className="font-bold text-lg text-[var(--t1)]">
                     {testimonials[currentTestimonial].name}
                   </div>
-                  <div className="text-sm" style={{ color: colors.textMuted }}>
-                    {testimonials[currentTestimonial].role} •{" "}
+                  <div className="text-sm text-[var(--t2)]">
+                    {testimonials[currentTestimonial].role} ·{" "}
                     {testimonials[currentTestimonial].company}
                   </div>
                 </div>
               </div>
-              <div
-                className="px-4 py-2 rounded-xl font-bold"
-                style={{
-                  background: colors.success + "20",
-                  color: colors.success,
-                }}
-              >
+              <div className="px-4 py-2 rounded-xl font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.2)]">
                 {testimonials[currentTestimonial].metric}
               </div>
             </div>
@@ -1361,11 +1041,11 @@ const SondosGovernance = () => {
                   style={{
                     background:
                       currentTestimonial === idx
-                        ? `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`
-                        : colors.primary + "30",
+                        ? "linear-gradient(135deg,#5a189a,#9d4edd)"
+                        : "rgba(90,24,154,0.2)",
                     width: currentTestimonial === idx ? "32px" : "12px",
                   }}
-                ></button>
+                />
               ))}
             </div>
           </div>
@@ -1373,80 +1053,47 @@ const SondosGovernance = () => {
       </section>
 
       {/* ==================== FAQ ==================== */}
-      <section className="py-24" style={{ background: colors.bgLighter }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6">
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              أسئلة
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                شائعة
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              أسئلة <span className="text-[#9d4edd]">شائعة</span>
             </h2>
           </div>
           <div className="space-y-4">
-            {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-lg bg-white"
-              >
-                <button
-                  onClick={() => setActiveFAQ(activeFAQ === idx ? null : idx)}
-                  className="w-full p-6 flex items-center justify-between text-right"
+            {faqs.map((faq, idx) => {
+              const open = activeFAQ === idx;
+              return (
+                <div
+                  key={idx}
+                  className="rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300"
                 >
-                  <span
-                    className="font-semibold text-lg"
-                    style={{ color: colors.textDark }}
+                  <button
+                    className="w-full flex items-center justify-between px-6 py-5 text-right font-semibold text-[var(--t1)]"
+                    onClick={() => setActiveFAQ(open ? null : idx)}
                   >
                     {faq.q}
-                  </span>
-                  <span
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 mr-4"
-                    style={{
-                      background:
-                        activeFAQ === idx ? colors.primary : colors.bgLight,
-                      color: activeFAQ === idx ? "white" : colors.primary,
-                      transform:
-                        activeFAQ === idx ? "rotate(180deg)" : "rotate(0deg)",
-                    }}
-                  >
-                    ▼
-                  </span>
-                </button>
-                {activeFAQ === idx && (
-                  <div
-                    className="px-6 pb-6 text-sm leading-relaxed"
-                    style={{ color: colors.textMuted }}
-                  >
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            ))}
+                    <span className="text-xl ml-4 flex-shrink-0 text-[#9d4edd]">
+                      {open ? "−" : "+"}
+                    </span>
+                  </button>
+                  {open && (
+                    <div className="px-6 pb-5 text-sm leading-relaxed text-[var(--t2)]">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* ==================== FINAL CTA ==================== */}
-      <section
-        className="py-24"
-        style={{
-          background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-        }}
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <section className="py-24 px-6 gradient-bg">
+        <div className="max-w-4xl mx-auto text-center">
           <div className="text-6xl mb-6">🏛️</div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
+          <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-white">
             جاهز لتحسين خدمة المستفيدين
             <br />
             ورفع رضاهم؟
@@ -1454,20 +1101,15 @@ const SondosGovernance = () => {
           <p className="text-white/80 text-xl mb-10 max-w-2xl mx-auto">
             انضم لأكثر من 20 جهة حكومية تستخدم سندس لخدمة المواطنين بشكل أفضل
           </p>
-
-          {/* ===== SINGLE BUTTON (Final CTA) ===== */}
-          <div className="flex justify-center">
-            <a href="/demo">
-              <button
-                className="px-12 py-5 bg-white rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1"
-                style={{ color: colors.primary }}
-              >
-                احجز عرضك التجريبي
-              </button>
+          <div className="flex justify-center mb-12">
+            <a
+              href="/demo"
+              className="inline-flex items-center gap-2 px-10 py-5 bg-[rgba(255,255,255,0.95)] rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:bg-white text-[#5a189a] shimmer"
+            >
+              احجز عرضك التجريبي
             </a>
           </div>
-
-          <div className="flex flex-wrap justify-center gap-6 mt-12 text-white/70 text-sm">
+          <div className="flex flex-wrap justify-center gap-6 text-white/70 text-sm">
             <span>🔐 معتمد NCA</span>
             <span>🇸🇦 خوادم محلية</span>
             <span>📋 متوافق PDPL</span>

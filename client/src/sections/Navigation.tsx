@@ -12,7 +12,7 @@ const industryLinks = [
   { en: "Call Center", ar: "مراكز الاتصال", href: "/call-center" },
   { en: "Real Estate", ar: "العقارات", href: "/real-estate" },
   { en: "Technology", ar: "التكنولوجيا", href: "/technology" },
-  { en: "Governance", ar: "الحكومة", href: "/governance" },
+  { en: "Governance", ar: "القطاع الحكومي", href: "/governance" },
 
   { en: "Assurance", ar: "التأمين", href: "/restaurant" },
   { en: "E-commerce", ar: "التجارة الإلكترونية", href: "/ecommerce" },

@@ -5,6 +5,19 @@ import { useState } from "react";
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbyNHoO38qOg94SmkCZ4GCxGbls8yHj4Q5HBUzESeyWeQnG8IyUCzaD19tSdgtOh92GT7g/exec";
 
+const INDUSTRIES = [
+  "القطاع الصحي",
+  "مراكز الاتصال",
+  "العقارات",
+  "التكنولوجيا",
+  "الحكومة",
+  "التأمين",
+  "التجارة الإلكترونية",
+  "قطاع التعليم",
+  "القطاع السياحي",
+  "قطاع النقل واللوجستيك",
+];
+
 export default function Demo() {
   const { t, lang } = useLanguage();
 
@@ -16,12 +29,15 @@ export default function Demo() {
     industry: "",
     questions: "",
   });
+
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -70,6 +86,7 @@ export default function Demo() {
           </div>
         ) : (
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+            {/* Name, Email, Company */}
             {[
               {
                 label: t("demo.full_name"),
@@ -84,22 +101,10 @@ export default function Demo() {
                 placeholder: "email@example.com",
               },
               {
-                label: t("demo.phone"),
-                name: "phone",
-                type: "tel",
-                placeholder: "+966 XX XXX XXX",
-              },
-              {
                 label: t("demo.company"),
                 name: "company",
                 type: "text",
                 placeholder: t("demo.company_placeholder"),
-              },
-              {
-                label: t("demo.industry"),
-                name: "industry",
-                type: "text",
-                placeholder: t("demo.industry_placeholder"),
               },
             ].map((field) => (
               <div key={field.name}>
@@ -116,6 +121,103 @@ export default function Demo() {
               </div>
             ))}
 
+            {/* Phone Field with Saudi validation */}
+            <div>
+              <label className="block text-sm mb-1">{t("demo.phone")}</label>
+              <div className="relative flex items-center border border-[#e5def5] rounded-xl overflow-hidden focus-within:border-[#5a189a]">
+                <span className="px-3 py-3 bg-[#f6f3fb] text-[#5a189a] font-semibold border-r border-[#e5def5] text-sm select-none">
+                  +966
+                </span>
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, "").slice(0, 9);
+                    setFormData({ ...formData, phone: val });
+                  }}
+                  placeholder="XX XXX XXXX"
+                  maxLength={9}
+                  pattern="\d{9}"
+                  title="أدخل رقم سعودي مكون من 9 أرقام"
+                  className="flex-1 px-4 py-3 outline-none bg-white text-sm"
+                  style={{ direction: "ltr" }}
+                />
+                {formData.phone.length > 0 && (
+                  <span className="px-3 text-sm font-medium">
+                    {formData.phone.length === 9 ? (
+                      <span className="text-green-500">✓</span>
+                    ) : (
+                      <span className="text-red-400">
+                        {formData.phone.length}/9
+                      </span>
+                    )}
+                  </span>
+                )}
+              </div>
+              {formData.phone.length > 0 && formData.phone.length < 9 && (
+                <p className="text-red-400 text-xs mt-1 text-right">
+                  {lang === "ar"
+                    ? `يتبقى ${9 - formData.phone.length} أرقام`
+                    : `${9 - formData.phone.length} digits remaining`}
+                </p>
+              )}
+            </div>
+
+            {/* Industry Dropdown */}
+            <div>
+              <label className="block text-sm mb-1">{t("demo.industry")}</label>
+              <div className="relative">
+                <select
+                  name="industry"
+                  required
+                  value={formData.industry}
+                  onChange={handleChange}
+                  style={{
+                    direction: lang === "ar" ? "rtl" : "ltr",
+                    fontWeight: formData.industry === "" ? 400 : undefined,
+                    color: formData.industry === "" ? "#a89bbf" : "#1a1a1a",
+                  }}
+                  className="w-full border border-[#e5def5] rounded-xl px-4 py-3 pr-10 outline-none focus:border-[#5a189a] bg-white appearance-none cursor-pointer"
+                >
+                  <option
+                    value=""
+                    disabled
+                    hidden
+                    style={{ color: "#a89bbf", fontWeight: 400 }}
+                  >
+                    — {lang === "ar" ? "اختر قطاعك" : "Select your sector"} —
+                  </option>
+                  {INDUSTRIES.map((sector) => (
+                    <option
+                      key={sector}
+                      value={sector}
+                      style={{ color: "#1a1a1a", fontWeight: 400 }}
+                    >
+                      {sector}
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
+                  <svg
+                    className="w-4 h-4 text-[#9d4edd]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Questions */}
             <div>
               <label className="block text-sm mb-1">
                 {t("demo.questions")}

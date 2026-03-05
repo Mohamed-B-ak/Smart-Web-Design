@@ -34,6 +34,7 @@ export default function Realstate() {
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
   const [statsVisible, setStatsVisible] = useState<boolean>(false);
   const [currentTestimonial, setCurrentTestimonial] = useState<number>(0);
+  const [isAnnual, setIsAnnual] = useState<boolean>(false);
 
   const [roiInputs, setRoiInputs] = useState({
     dailyCalls: 80,
@@ -42,23 +43,6 @@ export default function Realstate() {
     monthlyLeads: 100,
     conversionRate: 15,
   });
-
-  const colors = useMemo(
-    () => ({
-      primary: "#5B4E9F",
-      primaryLight: "#6B5BB3",
-      accent: "#7C6FBF",
-      bgLight: "#EDE9F9",
-      bgLighter: "#F7F5FC",
-      textDark: "#2D2654",
-      textMuted: "#6B6B8D",
-      white: "#FFFFFF",
-      success: "#10B981",
-      warning: "#F59E0B",
-      danger: "#EF4444",
-    }),
-    [],
-  );
 
   const segments: Segment[] = useMemo(
     () => [
@@ -343,231 +327,165 @@ export default function Realstate() {
     };
   }, [roiInputs]);
 
+  const statKeyLabel = (key: string) =>
+    ({
+      leads: "زيادة العملاء",
+      response: "وقت الرد",
+      deals: "زيادة الصفقات",
+      satisfaction: "رضا العملاء",
+      efficiency: "زيادة الكفاءة",
+      conversion: "معدل التحويل",
+    })[key] ?? key;
+
   return (
-    <div className="min-h-screen bg-white font-sans" dir="rtl">
+    <div
+      dir="rtl"
+      className="min-h-screen font-arabic bg-[var(--bg)] text-[var(--t1)]"
+    >
       {/* ==================== HERO SECTION ==================== */}
-      <section
-        className="relative overflow-hidden"
-        style={{
-          background: colors.bgLighter,
-          paddingTop: "5rem",
-          paddingBottom: "8rem",
-        }}
-      >
-        {/* Background Decorations */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute top-20 right-10 w-72 h-72 rounded-full blur-3xl opacity-40"
-            style={{ background: colors.bgLight }}
-          />
-          <div
-            className="absolute bottom-20 left-10 w-96 h-96 rounded-full blur-3xl opacity-30"
-            style={{ background: colors.accent }}
-          />
-          <div className="absolute bottom-0 left-0 right-0 h-32 opacity-5">
-            <div className="flex justify-around items-end h-full">
-              {Array.from({ length: 12 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="bg-current"
-                  style={{
-                    width: "60px",
-                    height: `${40 + ((i * 17) % 60)}%`,
-                    color: colors.primary,
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(90,24,154,0.15) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(90,24,154,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(90,24,154,.04) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+            maskImage:
+              "radial-gradient(ellipse at center, black 20%, transparent 65%)",
+          }}
+        />
+        <div
+          className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20 float-gentle"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(90,24,154,0.3), transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute top-40 right-[15%] w-24 h-24 rounded-full opacity-15 float-slow"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(157,78,221,0.3), transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute bottom-32 left-[20%] w-20 h-20 rounded-full opacity-10 float-gentle"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(123,44,191,0.4), transparent 70%)",
+          }}
+        />
 
-        {/* Content - fully centered */}
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          {/* Badge */}
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8"
-            style={{
-              background: colors.white,
-              color: colors.primary,
-              boxShadow: "0 2px 12px rgba(91, 78, 159, 0.15)",
-            }}
-          >
-            <span className="text-lg">🏢</span>
-            <span>الحل الأمثل للقطاع العقاري</span>
+        <div className="relative z-10 max-w-[820px] mx-auto">
+          <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
+            الحل الأمثل للقطاع العقاري
           </div>
 
-          {/* Headline */}
-          <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
-            style={{ color: colors.textDark }}
-          >
-            لا تفقد
-            <span
-              style={{
-                background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              {" "}
-              عميل عقاري{" "}
-            </span>
+          <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto animate-fade-up animation-delay-100">
+            لا تفقد <span className="text-[#9d4edd]">عميل عقاري</span>
             <br />
             واحد بعد اليوم
           </h1>
 
-          {/* Subheadline */}
-          <p
-            className="text-lg sm:text-xl mb-10 leading-relaxed max-w-2xl mx-auto"
-            style={{ color: colors.textMuted }}
-          >
+          <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[var(--t1)] max-w-[580px] mx-auto leading-relaxed mb-4 animate-fade-up animation-delay-150">
             سندس يرد على استفسارات العملاء 24/7، يأهّل المشترين الجادين، ويحجز
             مواعيد المعاينة تلقائياً
           </p>
 
-          {/* Stats row */}
-          <div
-            className="inline-flex flex-wrap justify-center gap-8 mb-10 px-8 py-6 rounded-2xl"
-            style={{
-              background: "white",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.07)",
-            }}
-          >
+          <p className="text-[clamp(14px,1.6vw,17px)] text-[var(--t2)] max-w-[680px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
+            ✓ +150 شركة عقارية &nbsp;·&nbsp; ✓ +200,000 مكالمة شهرياً
+            &nbsp;·&nbsp; ✓ رد في 3 ثوانٍ
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4 mb-10 animate-fade-up animation-delay-300">
             {[
-              { value: "+45%", label: "عملاء مؤهلين" },
-              { value: "100%", label: "معدل الرد" },
-              { value: "+30%", label: "صفقات مغلقة" },
+              { value: "+45%", label: "عملاء مؤهلين", icon: "📈" },
+              { value: "100%", label: "معدل الرد", icon: "📞" },
+              { value: "+30%", label: "صفقات مغلقة", icon: "🤝" },
             ].map((stat, i) => (
-              <div key={i} className="text-center px-4">
-                <div
-                  className="text-2xl font-bold"
-                  style={{ color: colors.primary }}
-                >
+              <div
+                key={i}
+                className="px-5 py-4 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all hover:shadow-xl hover:-translate-y-1"
+              >
+                <div className="text-2xl mb-1">{stat.icon}</div>
+                <div className="text-xl font-bold text-[#9d4edd]">
                   {stat.value}
                 </div>
-                <div className="text-sm" style={{ color: colors.textMuted }}>
-                  {stat.label}
-                </div>
+                <div className="text-xs text-[var(--t3)]">{stat.label}</div>
               </div>
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="flex justify-center">
+          <div className="flex items-center justify-center gap-3.5 mb-12 flex-wrap animate-fade-up animation-delay-300">
             <a
               href="/demo"
-              className="px-10 py-4 rounded-2xl font-semibold text-lg text-white shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 text-center"
-              style={{
-                background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                boxShadow: `0 10px 40px ${colors.primary}40`,
-              }}
+              className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
             >
               احجز عرضك التجريبي
             </a>
           </div>
         </div>
-
-        {/* Wave Divider */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            viewBox="0 0 1440 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            className="w-full h-16"
-          >
-            <path
-              d="M0 100L60 90C120 80 240 60 360 55C480 50 600 60 720 65C840 70 960 70 1080 65C1200 60 1320 50 1380 45L1440 40V100H1380C1320 100 1200 100 1080 100C960 100 840 100 720 100C600 100 480 100 360 100C240 100 120 100 60 100H0Z"
-              fill="white"
-            />
-          </svg>
-        </div>
       </section>
 
       {/* ==================== PROBLEMS SECTION ==================== */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              هل تواجه هذه
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                التحديات؟
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              هل تواجه هذه <span className="text-[#9d4edd]">التحديات؟</span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {[
               {
                 icon: "📵",
                 title: "مكالمات فائتة",
                 desc: "40% من الاستفسارات تضيع بسبب انشغال الفريق",
-                color: colors.danger,
               },
               {
                 icon: "⏰",
                 title: "ساعات محدودة",
                 desc: "العملاء يتصلون بعد ساعات العمل ولا أحد يرد",
-                color: colors.warning,
               },
               {
                 icon: "😤",
                 title: "عملاء غير مؤهلين",
                 desc: "وقت طويل في محادثات مع عملاء غير جادين",
-                color: "#8B5CF6",
               },
               {
                 icon: "📉",
                 title: "فرص ضائعة",
                 desc: "منافسيك يردون أسرع ويكسبون العميل",
-                color: "#EC4899",
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl border-2 border-dashed text-center transition-all hover:shadow-lg"
-                style={{ borderColor: `${item.color}40` }}
+                className="p-6 rounded-2xl text-center transition-all hover:shadow-lg bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(239,68,68,0.2)] hover:border-[rgba(239,68,68,0.35)]"
               >
-                <div
-                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl"
-                  style={{ background: `${item.color}15` }}
-                >
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl bg-[rgba(239,68,68,0.07)]">
                   {item.icon}
                 </div>
-                <h3
-                  className="font-bold mb-2"
-                  style={{ color: colors.textDark }}
-                >
+                <h3 className="font-bold mb-2 text-[var(--t1)]">
                   {item.title}
                 </h3>
-                <p className="text-sm" style={{ color: colors.textMuted }}>
-                  {item.desc}
-                </p>
+                <p className="text-sm text-[var(--t2)]">{item.desc}</p>
               </div>
             ))}
           </div>
 
           <div className="text-center my-12">
-            <div
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl"
-              style={{ background: colors.bgLight }}
-            >
+            <div className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.15)]">
               <span className="text-2xl">⬇️</span>
-              <span className="font-bold" style={{ color: colors.primary }}>
-                سندس يحل كل هذا
-              </span>
+              <span className="font-bold text-[#9d4edd]">سندس يحل كل هذا</span>
               <span className="text-2xl">⬇️</span>
             </div>
           </div>
@@ -578,50 +496,34 @@ export default function Realstate() {
                 icon: "✅",
                 title: "رد 100%",
                 desc: "كل مكالمة يتم الرد عليها في أقل من 3 ثوانٍ",
-                color: colors.success,
               },
               {
                 icon: "🌙",
                 title: "متاح 24/7",
                 desc: "سندس يعمل حتى في منتصف الليل والعطلات",
-                color: colors.primary,
               },
               {
                 icon: "🎯",
                 title: "تأهيل ذكي",
                 desc: "أسئلة ذكية تحدد العملاء الجادين فوراً",
-                color: colors.accent,
               },
               {
                 icon: "🚀",
                 title: "رد فوري",
                 desc: "العميل يحصل على معلومات قبل المنافسين",
-                color: colors.warning,
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl text-center transition-all hover:shadow-xl hover:-translate-y-1"
-                style={{
-                  background: `${item.color}10`,
-                  border: `2px solid ${item.color}30`,
-                }}
+                className="p-6 rounded-2xl text-center transition-all hover:shadow-xl hover:-translate-y-1 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.2)]"
               >
-                <div
-                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl text-white"
-                  style={{ background: item.color }}
-                >
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl text-white gradient-bg">
                   {item.icon}
                 </div>
-                <h3
-                  className="font-bold mb-2"
-                  style={{ color: colors.textDark }}
-                >
+                <h3 className="font-bold mb-2 text-[var(--t1)]">
                   {item.title}
                 </h3>
-                <p className="text-sm" style={{ color: colors.textMuted }}>
-                  {item.desc}
-                </p>
+                <p className="text-sm text-[var(--t2)]">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -629,34 +531,18 @@ export default function Realstate() {
       </section>
 
       {/* ==================== STATS SECTION ==================== */}
-      <section
-        id="stats-section"
-        className="py-16"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="stats-section" className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, idx) => (
               <div key={idx} className="text-center group">
-                <div
-                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl transition-transform group-hover:scale-110"
-                  style={{
-                    background: "white",
-                    boxShadow: "0 4px 14px rgba(0,0,0,0.05)",
-                  }}
-                >
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_4px_14px_rgba(0,0,0,0.05)] transition-transform group-hover:scale-110">
                   {stat.icon}
                 </div>
-                <div
-                  className="text-3xl sm:text-4xl font-bold mb-2"
-                  style={{ color: colors.primary }}
-                >
-                  {statsVisible ? stat.value : "0"}
+                <div className="text-3xl sm:text-4xl font-bold mb-2 text-[#9d4edd]">
+                  {statsVisible ? stat.value : "—"}
                 </div>
-                <div
-                  className="text-sm font-medium"
-                  style={{ color: colors.textMuted }}
-                >
+                <div className="text-sm font-medium text-[var(--t2)]">
                   {stat.label}
                 </div>
               </div>
@@ -666,133 +552,80 @@ export default function Realstate() {
       </section>
 
       {/* ==================== SEGMENTS SECTION ==================== */}
-      <section id="solutions" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="solutions" className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              حلول مخصصة لكل
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                نوع عمل
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              حلول مخصصة لكل <span className="text-[#9d4edd]">نوع عمل</span>
             </h2>
-            <p style={{ color: colors.textMuted }} className="text-lg">
+            <p className="text-[var(--t2)] text-lg">
               سندس يتكيف مع طبيعة عملك العقاري
             </p>
           </div>
 
           <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {segments.map((segment, idx) => (
-              <button
-                key={segment.id}
-                onClick={() => setActiveSegment(idx)}
-                className="px-6 py-3.5 rounded-2xl flex items-center gap-3 font-semibold transition-all duration-300"
-                style={{
-                  background:
-                    activeSegment === idx
-                      ? `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`
-                      : "white",
-                  color: activeSegment === idx ? "white" : colors.textDark,
-                  boxShadow:
-                    activeSegment === idx
-                      ? `0 8px 24px ${colors.primary}40`
-                      : "0 2px 12px rgba(0,0,0,0.06)",
-                }}
-              >
-                <span className="text-2xl">{segment.icon}</span>
-                <span>{segment.name}</span>
-              </button>
-            ))}
+            {segments.map((segment, idx) => {
+              const isActive = activeSegment === idx;
+              return (
+                <button
+                  key={segment.id}
+                  onClick={() => setActiveSegment(idx)}
+                  className={`px-5 py-2.5 rounded-full flex items-center gap-2 text-[13px] font-medium transition-all duration-300 border backdrop-blur-sm ${
+                    isActive
+                      ? "gradient-bg glow text-white border-[rgba(90,24,154,0.4)]"
+                      : "bg-[rgba(90,24,154,0.04)] border-[rgba(90,24,154,0.12)] text-[var(--t2)] hover:border-[rgba(90,24,154,0.25)]"
+                  }`}
+                >
+                  <span className="text-2xl">{segment.icon}</span>
+                  <span>{segment.name}</span>
+                </button>
+              );
+            })}
           </div>
 
-          <div
-            className="rounded-3xl overflow-hidden shadow-2xl"
-            style={{ boxShadow: `0 20px 60px ${colors.primary}15` }}
-          >
+          <div className="rounded-3xl overflow-hidden border border-[rgba(90,24,154,0.15)] shadow-[0_20px_60px_rgba(90,24,154,0.12)]">
             <div className="grid md:grid-cols-2">
-              <div className="p-8 sm:p-10" style={{ background: "#FEF2F2" }}>
+              <div className="p-8 sm:p-10 bg-[rgba(239,68,68,0.05)] border-b md:border-b-0 md:border-l border-[rgba(90,24,154,0.08)]">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">😫</span>
-                  <h3
-                    className="text-xl font-bold"
-                    style={{ color: "#991B1B" }}
-                  >
+                  <h3 className="text-xl font-bold text-red-400">
                     التحديات الحالية
                   </h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].painPoints.map((point, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="text-red-500 mt-1">✗</span>
-                      <span style={{ color: "#7F1D1D" }}>{point}</span>
+                      <span className="text-red-400 mt-1">✗</span>
+                      <span className="text-[var(--t2)]">{point}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div
-                className="p-8 sm:p-10"
-                style={{ background: colors.bgLight }}
-              >
+              <div className="p-8 sm:p-10 bg-[rgba(90,24,154,0.04)]">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">🎉</span>
-                  <h3
-                    className="text-xl font-bold"
-                    style={{ color: colors.primary }}
-                  >
-                    مع سندس
-                  </h3>
+                  <h3 className="text-xl font-bold text-[#9d4edd]">مع سندس</h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].solutions.map((solution, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span style={{ color: colors.success }}>✓</span>
-                      <span style={{ color: colors.textDark }}>{solution}</span>
+                      <span className="text-[#9d4edd]">✓</span>
+                      <span className="text-[var(--t1)]">{solution}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            <div
-              className="p-6 bg-white border-t"
-              style={{ borderColor: colors.bgLight }}
-            >
+            <div className="p-6 bg-[var(--bg)] border-t border-[rgba(90,24,154,0.08)]">
               <div className="flex flex-wrap justify-center gap-8">
                 {Object.entries(segments[activeSegment].stats).map(
                   ([key, value], i) => (
                     <div key={i} className="text-center">
-                      <div
-                        className="text-2xl font-bold"
-                        style={{ color: colors.primary }}
-                      >
+                      <div className="text-2xl font-bold text-[#9d4edd]">
                         {value}
                       </div>
-                      <div
-                        className="text-sm"
-                        style={{ color: colors.textMuted }}
-                      >
-                        {key === "leads"
-                          ? "زيادة العملاء"
-                          : key === "response"
-                            ? "وقت الرد"
-                            : key === "deals"
-                              ? "زيادة الصفقات"
-                              : key === "satisfaction"
-                                ? "رضا العملاء"
-                                : key === "efficiency"
-                                  ? "زيادة الكفاءة"
-                                  : key === "conversion"
-                                    ? "معدل التحويل"
-                                    : key}
+                      <div className="text-sm text-[var(--t3)]">
+                        {statKeyLabel(key)}
                       </div>
                     </div>
                   ),
@@ -804,246 +637,140 @@ export default function Realstate() {
       </section>
 
       {/* ==================== FEATURES SECTION ==================== */}
-      <section
-        id="features"
-        className="py-24"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="features" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              مميزات مصممة
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                للعقاريين
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              مميزات مصممة <span className="text-[#9d4edd]">للعقاريين</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, idx) => (
               <div
                 key={idx}
-                className="group p-8 rounded-3xl bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                className="group p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-[rgba(90,24,154,0.3)] ai-glow"
               >
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: colors.bgLight }}
-                >
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 bg-[rgba(90,24,154,0.06)] transition-transform duration-300 group-hover:scale-110">
                   {feature.icon}
                 </div>
-                <h3
-                  className="text-xl font-bold mb-3"
-                  style={{ color: colors.textDark }}
-                >
+                <h3 className="text-xl font-bold mb-3 text-[var(--t1)]">
                   {feature.title}
                 </h3>
-                <p
-                  className="text-sm mb-5 leading-relaxed"
-                  style={{ color: colors.textMuted }}
-                >
+                <p className="text-sm mb-5 leading-relaxed text-[var(--t2)]">
                   {feature.description}
                 </p>
-                <div
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold"
-                  style={{
-                    background: `${colors.primary}15`,
-                    color: colors.primary,
-                  }}
-                >
+                <span className="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]">
                   {feature.highlight}
-                </div>
+                </span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ==================== ROI CALCULATOR ==================== */}
-      <section id="roi" className="py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      {/* ==================== ROI CALCULATOR ==================== 
+      <section id="roi" className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              احسب
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                عائد استثمارك
-              </span>
+            <p className="text-[13px] font-medium mb-3 text-[#9d4edd]">
+              🧮 حاسبة مبنية على بيانات حقيقية
+            </p>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight">
+              احسب <span className="text-[#9d4edd]">عائد استثمارك</span>
             </h2>
-            <p style={{ color: colors.textMuted }}>
+            <p className="mt-3 text-[var(--t2)]">
               اكتشف كم يمكنك توفيره وكسبه مع سندس
             </p>
           </div>
 
-          <div
-            className="rounded-3xl p-8 sm:p-10 shadow-xl"
-            style={{ background: colors.bgLighter }}
-          >
+          <div className="rounded-3xl p-8 sm:p-10 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.08)]">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-              <div>
-                <label
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: colors.textDark }}
-                >
-                  المكالمات اليومية
-                </label>
-                <input
-                  type="range"
-                  min="20"
-                  max="200"
-                  value={roiInputs.dailyCalls}
-                  onChange={(e) =>
-                    setRoiInputs({
-                      ...roiInputs,
-                      dailyCalls: parseInt(e.target.value),
-                    })
-                  }
-                  className="w-full h-2 rounded-full appearance-none cursor-pointer"
-                  style={{
-                    background: `linear-gradient(90deg, ${colors.primary} ${roiInputs.dailyCalls / 2}%, ${colors.bgLight} ${roiInputs.dailyCalls / 2}%)`,
-                  }}
-                />
-                <div
-                  className="text-center mt-2 font-bold"
-                  style={{ color: colors.primary }}
-                >
-                  {roiInputs.dailyCalls} مكالمة
+              {[
+                {
+                  label: "المكالمات اليومية",
+                  key: "dailyCalls",
+                  min: 20,
+                  max: 200,
+                  step: 5,
+                  suffix: " مكالمة",
+                },
+                {
+                  label: "نسبة المكالمات الفائتة",
+                  key: "missedPercent",
+                  min: 10,
+                  max: 60,
+                  step: 5,
+                  suffix: "%",
+                },
+                {
+                  label: "متوسط قيمة الصفقة (ر.س)",
+                  key: "avgDealValue",
+                  min: 5000,
+                  max: 100000,
+                  step: 5000,
+                  suffix: " ر.س",
+                },
+              ].map(({ label, key, min, max, step, suffix }) => (
+                <div key={key}>
+                  <div className="flex justify-between mb-2">
+                    <label className="text-sm text-[var(--t2)]">{label}</label>
+                    <span className="font-bold text-[var(--t1)]">
+                      {(roiInputs as any)[key].toLocaleString()}
+                      {suffix}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min={min}
+                    max={max}
+                    step={step}
+                    value={(roiInputs as any)[key]}
+                    onChange={(e) =>
+                      setRoiInputs({
+                        ...roiInputs,
+                        [key]: parseInt(e.target.value),
+                      })
+                    }
+                    className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+                    style={{ background: "rgba(90,24,154,0.12)" }}
+                  />
+                  <div className="text-center mt-2 font-bold text-[#9d4edd]">
+                    {(roiInputs as any)[key].toLocaleString()}
+                    {suffix}
+                  </div>
                 </div>
-              </div>
-              <div>
-                <label
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: colors.textDark }}
-                >
-                  نسبة المكالمات الفائتة
-                </label>
-                <input
-                  type="range"
-                  min="10"
-                  max="60"
-                  value={roiInputs.missedPercent}
-                  onChange={(e) =>
-                    setRoiInputs({
-                      ...roiInputs,
-                      missedPercent: parseInt(e.target.value),
-                    })
-                  }
-                  className="w-full h-2 rounded-full appearance-none cursor-pointer"
-                  style={{
-                    background: `linear-gradient(90deg, ${colors.primary} ${roiInputs.missedPercent}%, ${colors.bgLight} ${roiInputs.missedPercent}%)`,
-                  }}
-                />
-                <div
-                  className="text-center mt-2 font-bold"
-                  style={{ color: colors.primary }}
-                >
-                  {roiInputs.missedPercent}%
-                </div>
-              </div>
-              <div>
-                <label
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: colors.textDark }}
-                >
-                  متوسط قيمة الصفقة (ر.س)
-                </label>
-                <input
-                  type="range"
-                  min="5000"
-                  max="100000"
-                  step="5000"
-                  value={roiInputs.avgDealValue}
-                  onChange={(e) =>
-                    setRoiInputs({
-                      ...roiInputs,
-                      avgDealValue: parseInt(e.target.value),
-                    })
-                  }
-                  className="w-full h-2 rounded-full appearance-none cursor-pointer"
-                  style={{
-                    background: `linear-gradient(90deg, ${colors.primary} ${roiInputs.avgDealValue / 1000}%, ${colors.bgLight} ${roiInputs.avgDealValue / 1000}%)`,
-                  }}
-                />
-                <div
-                  className="text-center mt-2 font-bold"
-                  style={{ color: colors.primary }}
-                >
-                  {roiInputs.avgDealValue.toLocaleString()} ر.س
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
-              <div
-                className="p-6 rounded-2xl text-center"
-                style={{ background: "#FEE2E2" }}
-              >
-                <div className="text-sm mb-2" style={{ color: "#991B1B" }}>
+              <div className="p-6 rounded-2xl text-center bg-[rgba(239,68,68,0.07)] border border-[rgba(239,68,68,0.2)]">
+                <div className="text-sm mb-2 text-red-400">
                   الخسارة الحالية (شهرياً)
                 </div>
-                <div
-                  className="text-3xl font-bold"
-                  style={{ color: "#DC2626" }}
-                >
+                <div className="text-3xl font-bold text-red-500">
                   {roiResults.currentLoss.toLocaleString()} ر.س
                 </div>
               </div>
-              <div
-                className="p-6 rounded-2xl text-center"
-                style={{ background: colors.bgLight }}
-              >
-                <div className="text-sm mb-2" style={{ color: colors.primary }}>
+              <div className="p-6 rounded-2xl text-center bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.15)]">
+                <div className="text-sm mb-2 text-[#9d4edd]">
                   تكلفة سندس (شهرياً)
                 </div>
-                <div
-                  className="text-3xl font-bold"
-                  style={{ color: colors.primary }}
-                >
+                <div className="text-3xl font-bold text-[#9d4edd]">
                   {roiResults.sondosCost.toLocaleString()} ر.س
                 </div>
               </div>
-              <div
-                className="p-6 rounded-2xl text-center"
-                style={{ background: "#D1FAE5" }}
-              >
-                <div className="text-sm mb-2" style={{ color: "#065F46" }}>
+              <div className="p-6 rounded-2xl text-center bg-[rgba(16,185,129,0.07)] border border-[rgba(16,185,129,0.2)]">
+                <div className="text-sm mb-2 text-emerald-600">
                   صافي الربح (شهرياً)
                 </div>
-                <div
-                  className="text-3xl font-bold"
-                  style={{ color: "#059669" }}
-                >
+                <div className="text-3xl font-bold text-emerald-600">
                   +{roiResults.netGain.toLocaleString()} ر.س
                 </div>
               </div>
             </div>
 
             <div className="text-center mt-8">
-              <div
-                className="inline-flex flex-wrap justify-center items-center gap-4 px-8 py-4 rounded-2xl"
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                }}
-              >
+              <div className="inline-flex flex-wrap justify-center items-center gap-4 px-8 py-4 rounded-2xl gradient-bg">
                 <span className="text-white text-lg">عائد الاستثمار:</span>
                 <span className="text-white text-4xl font-bold">
                   {roiResults.roi}%
@@ -1055,57 +782,30 @@ export default function Realstate() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ==================== USE CASES ==================== */}
-      <section
-        id="usecases"
-        className="py-24"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="usecases" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              شاهد سندس
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                أثناء العمل
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              شاهد سندس <span className="text-[#9d4edd]">أثناء العمل</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             {useCases.map((useCase, idx) => (
               <div
                 key={idx}
-                className="rounded-3xl overflow-hidden shadow-xl"
-                style={{ background: "white" }}
+                className="rounded-3xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_0_40px_rgba(90,24,154,0.08)]"
               >
-                <div
-                  className="px-6 py-4 font-bold"
-                  style={{ background: colors.bgLight, color: colors.textDark }}
-                >
+                <div className="px-6 py-4 font-bold bg-[rgba(90,24,154,0.06)] text-[var(--t1)] border-b border-[rgba(90,24,154,0.08)]">
                   {useCase.title}
                 </div>
                 <div className="p-6 space-y-4">
                   {useCase.conversation.map((msg, i) => (
                     <div
                       key={i}
-                      className={`p-4 rounded-2xl text-sm ${msg.role === "ai" ? "rounded-tr-md max-w-[85%] mr-auto" : "rounded-tl-md max-w-[75%] ml-auto"}`}
-                      style={{
-                        background:
-                          msg.role === "ai" ? colors.bgLight : colors.primary,
-                        color: msg.role === "ai" ? colors.textDark : "white",
-                      }}
+                      className={`p-4 rounded-2xl text-sm ${msg.role === "ai" ? "rounded-tr-md max-w-[85%] mr-auto bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.1)] text-[var(--t1)]" : "rounded-tl-md max-w-[75%] ml-auto gradient-bg text-white"}`}
                     >
                       {msg.text}
                     </div>
@@ -1118,73 +818,36 @@ export default function Realstate() {
       </section>
 
       {/* ==================== TESTIMONIALS ==================== */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              قصص نجاح
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                عقارية
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              قصص نجاح <span className="text-[#9d4edd]">عقارية</span>
             </h2>
           </div>
-          <div
-            className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl shadow-2xl relative"
-            style={{ background: colors.bgLight }}
-          >
-            <div
-              className="absolute top-6 right-8 text-8xl font-serif opacity-20"
-              style={{ color: colors.primary }}
-            >
+          <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.1)] relative">
+            <div className="absolute top-6 right-8 text-8xl font-serif opacity-10 text-[#5a189a]">
               "
             </div>
-            <p
-              className="text-xl sm:text-2xl leading-relaxed mb-8"
-              style={{ color: colors.textDark }}
-            >
+            <p className="text-xl sm:text-2xl leading-relaxed mb-8 text-[var(--t1)]">
               {testimonials[currentTestimonial].quote}
             </p>
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-lg"
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  }}
-                >
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl gradient-bg shadow-lg">
                   {testimonials[currentTestimonial].image}
                 </div>
                 <div>
-                  <div
-                    className="font-bold text-lg"
-                    style={{ color: colors.textDark }}
-                  >
+                  <div className="font-bold text-lg text-[var(--t1)]">
                     {testimonials[currentTestimonial].name}
                   </div>
-                  <div className="text-sm" style={{ color: colors.textMuted }}>
-                    {testimonials[currentTestimonial].role} •{" "}
+                  <div className="text-sm text-[var(--t2)]">
+                    {testimonials[currentTestimonial].role} ·{" "}
                     {testimonials[currentTestimonial].company}
                   </div>
                 </div>
               </div>
-              <div
-                className="px-4 py-2 rounded-xl font-bold"
-                style={{
-                  background: `${colors.success}20`,
-                  color: colors.success,
-                }}
-              >
+              <div className="px-4 py-2 rounded-xl font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.2)]">
                 {testimonials[currentTestimonial].metric}
               </div>
             </div>
@@ -1197,8 +860,8 @@ export default function Realstate() {
                   style={{
                     background:
                       currentTestimonial === idx
-                        ? `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`
-                        : `${colors.primary}30`,
+                        ? "linear-gradient(135deg,#5a189a,#9d4edd)"
+                        : "rgba(90,24,154,0.2)",
                     width: currentTestimonial === idx ? "32px" : "12px",
                   }}
                 />
@@ -1209,61 +872,58 @@ export default function Realstate() {
       </section>
 
       {/* ==================== PRICING ==================== */}
-      <section
-        id="pricing"
-        className="py-24"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              باقات
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                العقاريين
-              </span>
+      <section id="pricing" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-6">
+              باقات <span className="text-[#9d4edd]">العقاريين</span>
             </h2>
+
+            {/* ── Toggle شهري / سنوي ── */}
+            <div className="inline-flex items-center gap-1 p-1 rounded-full bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.15)]">
+              <button
+                onClick={() => setIsAnnual(false)}
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  !isAnnual
+                    ? "gradient-bg text-white shadow-md"
+                    : "text-[var(--t2)] hover:text-[var(--t1)]"
+                }`}
+              >
+                شهري
+              </button>
+              <button
+                onClick={() => setIsAnnual(true)}
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  isAnnual
+                    ? "gradient-bg text-white shadow-md"
+                    : "text-[var(--t2)] hover:text-[var(--t1)]"
+                }`}
+              >
+                سنوي
+              </button>
+            </div>
+
+            {isAnnual && (
+              <p className="mt-3 text-sm text-emerald-500 font-medium">
+                🎉 وفّر حتى 10% مع الاشتراك السنوي
+              </p>
+            )}
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* ===== Starter ===== */}
-            <div
-              className="p-8 rounded-3xl bg-white transition-all hover:shadow-xl border-2"
-              style={{ borderColor: "#10B981" }}
-            >
+            {/* ── Starter ── */}
+            <div className="p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.12)]">
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-xl">🟢</span>
-                <span
-                  className="text-sm font-bold"
-                  style={{ color: "#10B981" }}
-                >
+                <span className="text-sm font-bold text-emerald-500">
                   Starter
                 </span>
               </div>
-              <div className="mb-2">
-                <span
-                  className="text-4xl font-bold"
-                  style={{ color: colors.textDark }}
-                >
-                  2,499
-                </span>
-                <span style={{ color: colors.textMuted }} className="mr-1">
-                  {" "}
-                  ر.س/شهر
-                </span>
-              </div>
-              <p className="text-sm mb-6" style={{ color: colors.textMuted }}>
-                للمكاتب العقارية الصغيرة
+              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-[var(--t1)] transition-all duration-300">
+                {isAnnual ? "26,989" : "2,499"} ر.س
+              </p>
+              <p className="text-sm mb-6 text-[var(--t2)]">
+                {isAnnual ? "/سنة" : "/شهر"} · للمكاتب العقارية الصغيرة
               </p>
               <ul className="space-y-3 mb-8">
                 {[
@@ -1279,70 +939,36 @@ export default function Realstate() {
                   "1,000 دقيقة AI شهريًا",
                   "500 رسالة AI",
                 ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm"
-                    style={{ color: colors.textMuted }}
-                  >
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0"
-                      style={{ background: "#D1FAE5", color: "#10B981" }}
-                    >
-                      ✓
-                    </span>
+                  <li key={i} className="text-sm flex gap-2 text-[var(--t2)]">
+                    <span>✓</span>
                     {item}
                   </li>
                 ))}
               </ul>
               <a
                 href="/demo"
-                className="block w-full text-center py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
-                style={{ borderColor: "#10B981", color: "#10B981" }}
+                className="block w-full py-3 rounded-full text-center font-semibold border border-[rgba(90,24,154,0.2)] text-[var(--t1)] hover:bg-[rgba(90,24,154,0.05)] hover:border-[rgba(90,24,154,0.35)] transition-all duration-300"
               >
                 ابدأ الآن
               </a>
             </div>
 
-            {/* ===== Professional ===== */}
-            <div
-              className="p-8 rounded-3xl relative shadow-2xl scale-105"
-              style={{
-                background: `linear-gradient(180deg, ${colors.bgLight}, white)`,
-                border: `2px solid ${colors.primary}`,
-                boxShadow: `0 20px 60px ${colors.primary}30`,
-              }}
-            >
-              <div
-                className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-2 rounded-full text-xs font-bold text-white"
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                }}
-              >
+            {/* ── Professional ── */}
+            <div className="p-8 rounded-3xl relative gradient-bg glow border-2 border-[rgba(157,78,221,0.6)]">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs px-3 py-1 rounded-full bg-white text-[#5a189a] font-bold shadow">
                 الأكثر شعبية ⭐
-              </div>
+              </span>
               <div className="flex items-center gap-2 mb-3 mt-2">
                 <span className="text-xl">🟣</span>
-                <span
-                  className="text-sm font-bold"
-                  style={{ color: colors.primary }}
-                >
+                <span className="text-sm font-bold text-white">
                   Professional
                 </span>
               </div>
-              <div className="mb-2">
-                <span
-                  className="text-4xl font-bold"
-                  style={{ color: colors.textDark }}
-                >
-                  7,999
-                </span>
-                <span style={{ color: colors.textMuted }} className="mr-1">
-                  {" "}
-                  ر.س/شهر
-                </span>
-              </div>
-              <p className="text-sm mb-6" style={{ color: colors.textMuted }}>
-                لشركات الوساطة المتوسطة
+              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-white transition-all duration-300">
+                {isAnnual ? "86,389" : "7,999"} ر.س
+              </p>
+              <p className="text-sm mb-6 text-purple-200">
+                {isAnnual ? "/سنة" : "/شهر"} · لشركات الوساطة المتوسطة
               </p>
               <ul className="space-y-3 mb-8">
                 {[
@@ -1357,61 +983,34 @@ export default function Realstate() {
                   "2,000 رسالة AI",
                   "3 مكالمات متزامنة",
                 ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm"
-                    style={{ color: colors.textMuted }}
-                  >
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white flex-shrink-0"
-                      style={{ background: colors.primary }}
-                    >
-                      ✓
-                    </span>
+                  <li key={i} className="text-sm flex gap-2 text-white">
+                    <span>✓</span>
                     {item}
                   </li>
                 ))}
               </ul>
               <a
                 href="/demo"
-                className="block w-full text-center py-4 rounded-2xl font-semibold text-white transition-all hover:shadow-xl"
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  boxShadow: `0 8px 24px ${colors.primary}40`,
-                }}
+                className="block w-full py-3 rounded-full text-center font-semibold bg-white text-[#5a189a] hover:opacity-90 transition-opacity shimmer"
               >
                 ابدأ الآن
               </a>
             </div>
 
-            {/* ===== Enterprise ===== */}
-            <div
-              className="p-8 rounded-3xl bg-white transition-all hover:shadow-xl border-2"
-              style={{ borderColor: "#374151" }}
-            >
+            {/* ── Enterprise ── */}
+            <div className="p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.12)]">
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-xl">⚫</span>
-                <span
-                  className="text-sm font-bold"
-                  style={{ color: "#374151" }}
-                >
+                <span className="text-sm font-bold text-[var(--t1)]">
                   Enterprise
                 </span>
               </div>
-              <div className="mb-2">
-                <span
-                  className="text-4xl font-bold"
-                  style={{ color: colors.textDark }}
-                >
-                  24,999
-                </span>
-                <span style={{ color: colors.textMuted }} className="mr-1">
-                  {" "}
-                  ر.س/شهر
-                </span>
-              </div>
-              <p className="text-sm mb-6" style={{ color: colors.textMuted }}>
-                للمطورين العقاريين والشركات الكبرى
+              <p className="text-[clamp(24px,2.5vw,32px)] font-['Instrument_Sans',sans-serif] font-bold tracking-tight mb-1 text-[var(--t1)] transition-all duration-300">
+                {isAnnual ? "269,989" : "24,999"} ر.س
+              </p>
+              <p className="text-sm mb-6 text-[var(--t2)]">
+                {isAnnual ? "/سنة" : "/شهر"} · للمطورين العقاريين والشركات
+                الكبرى
               </p>
               <ul className="space-y-3 mb-8">
                 {[
@@ -1426,25 +1025,15 @@ export default function Realstate() {
                   "7,000 رسالة AI",
                   "10 مكالمات متزامنة",
                 ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm"
-                    style={{ color: colors.textMuted }}
-                  >
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0"
-                      style={{ background: "#F3F4F6", color: "#374151" }}
-                    >
-                      ✓
-                    </span>
+                  <li key={i} className="text-sm flex gap-2 text-[var(--t2)]">
+                    <span>✓</span>
                     {item}
                   </li>
                 ))}
               </ul>
               <a
                 href="/demo"
-                className="block w-full text-center py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
-                style={{ borderColor: "#374151", color: "#374151" }}
+                className="block w-full py-3 rounded-full text-center font-semibold border border-[rgba(90,24,154,0.2)] text-[var(--t1)] hover:bg-[rgba(90,24,154,0.05)] hover:border-[rgba(90,24,154,0.35)] transition-all duration-300"
               >
                 تواصل معنا
               </a>
@@ -1454,80 +1043,47 @@ export default function Realstate() {
       </section>
 
       {/* ==================== FAQ ==================== */}
-      <section className="py-24 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              أسئلة
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                شائعة
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              أسئلة <span className="text-[#9d4edd]">شائعة</span>
             </h2>
           </div>
           <div className="space-y-4">
-            {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-lg"
-                style={{ background: colors.bgLighter }}
-              >
-                <button
-                  onClick={() => setActiveFAQ(activeFAQ === idx ? null : idx)}
-                  className="w-full p-6 flex items-center justify-between text-right"
+            {faqs.map((faq, idx) => {
+              const open = activeFAQ === idx;
+              return (
+                <div
+                  key={idx}
+                  className="rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300"
                 >
-                  <span
-                    className="font-semibold text-lg"
-                    style={{ color: colors.textDark }}
+                  <button
+                    className="w-full flex items-center justify-between px-6 py-5 text-right font-semibold text-[var(--t1)]"
+                    onClick={() => setActiveFAQ(open ? null : idx)}
                   >
                     {faq.q}
-                  </span>
-                  <span
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 mr-4"
-                    style={{
-                      background: activeFAQ === idx ? colors.primary : "white",
-                      color: activeFAQ === idx ? "white" : colors.primary,
-                      transform:
-                        activeFAQ === idx ? "rotate(180deg)" : "rotate(0deg)",
-                    }}
-                  >
-                    ▼
-                  </span>
-                </button>
-                {activeFAQ === idx && (
-                  <div
-                    className="px-6 pb-6 text-sm leading-relaxed"
-                    style={{ color: colors.textMuted }}
-                  >
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            ))}
+                    <span className="text-xl ml-4 flex-shrink-0 text-[#9d4edd]">
+                      {open ? "−" : "+"}
+                    </span>
+                  </button>
+                  {open && (
+                    <div className="px-6 pb-5 text-sm leading-relaxed text-[var(--t2)]">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* ==================== FINAL CTA ==================== */}
-      <section
-        className="py-24"
-        style={{
-          background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-        }}
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <section className="py-24 px-6 gradient-bg">
+        <div className="max-w-4xl mx-auto text-center">
           <div className="text-6xl mb-6">🏢</div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
+          <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-white">
             جاهز تكسب كل عميل
             <br />
             عقاري محتمل؟
@@ -1535,12 +1091,10 @@ export default function Realstate() {
           <p className="text-white/80 text-xl mb-10 max-w-2xl mx-auto">
             انضم لأكثر من 150 شركة عقارية سعودية تستخدم سندس لزيادة مبيعاتها
           </p>
-
-          <div className="flex justify-center">
+          <div className="flex justify-center mb-12">
             <a
               href="/demo"
-              className="px-10 py-5 bg-white rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl"
-              style={{ color: colors.primary }}
+              className="inline-flex items-center gap-2 px-10 py-5 bg-[rgba(255,255,255,0.95)] rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:bg-white text-[#5a189a] shimmer"
             >
               احجز عرضك التجريبي
             </a>

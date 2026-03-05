@@ -489,7 +489,7 @@ const translations: Record<Language, Record<string, string>> = {
     "telephony.label": "الاتصالات",
     "telephony.title": "اتصالات سحابية",
     "telephony.desc":
-      "بنية تحتية للاتصالات على مستوى الم �سسات مبنية لعصر السحابة الحديث.",
+      "بنية تحتية للاتصالات على مستوى الم مؤسَّسات مبنية لعصر السحابة الحديث.",
     "security.label": "الأمان",
     "security.title": "أمان بمستوى البنوك",
     "security.desc": "بياناتك محمية بأعلى معايير الأمان وشهادات الامتثال.",

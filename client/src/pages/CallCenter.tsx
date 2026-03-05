@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
+import "../index.css";
 
 const SondosCallCenter = () => {
   const [activeSegment, setActiveSegment] = useState(0);
@@ -34,20 +35,6 @@ const SondosCallCenter = () => {
     if (statsSection) observer.observe(statsSection);
     return () => observer.disconnect();
   }, []);
-
-  const colors = {
-    primary: "#5a189a",
-    primaryLight: "#7209b7",
-    accent: "#9d4edd",
-    bgLight: "#f3e8ff",
-    bgLighter: "#faf5ff",
-    textDark: "#1a0a2e",
-    textMuted: "#6b5b95",
-    white: "#FFFFFF",
-    success: "#10B981",
-    warning: "#F59E0B",
-    danger: "#EF4444",
-  };
 
   const segments = [
     {
@@ -323,8 +310,7 @@ const SondosCallCenter = () => {
   ];
 
   const calculateROI = () => {
-    const { agents, avgSalary, dailyCalls, avgHandleTime, waitTime } =
-      roiInputs;
+    const { agents, avgSalary, dailyCalls } = roiInputs;
     const totalSalaries = agents * avgSalary;
     const benefits = totalSalaries * 0.2;
     const training = agents * 400;
@@ -362,78 +348,38 @@ const SondosCallCenter = () => {
 
   const roiResults = calculateROI();
 
+  const statKeyLabel = (key: string) =>
+    ({
+      waitTime: "الانتظار",
+      cost: "التكلفة",
+      quality: "الجودة",
+      capacity: "السعة",
+      reach: "الوصول",
+      efficiency: "الكفاءة",
+      automation: "الأتمتة",
+      availability: "التوفر",
+      training: "التدريب",
+      qualification: "التأهيل",
+      followUp: "المتابعة",
+      CAC: "تكلفة الاكتساب",
+    })[key] ?? key;
+
   return (
-    <div className="min-h-screen bg-white font-sans" dir="rtl">
-      <style>{`
-        @keyframes fade-up {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes float-gentle {
-          0%, 100% {
-            transform: translateY(0) translateX(0);
-          }
-          50% {
-            transform: translateY(-20px) translateX(10px);
-          }
-        }
-
-        @keyframes float-slow {
-          0%, 100% {
-            transform: translateY(0) translateX(0);
-          }
-          50% {
-            transform: translateY(-15px) translateX(-10px);
-          }
-        }
-
-        .animate-fade-up {
-          animation: fade-up 0.6s ease-out forwards;
-          opacity: 0;
-        }
-
-        .animation-delay-100 {
-          animation-delay: 0.1s;
-        }
-
-        .animation-delay-150 {
-          animation-delay: 0.15s;
-        }
-
-        .animation-delay-200 {
-          animation-delay: 0.2s;
-        }
-
-        .animation-delay-300 {
-          animation-delay: 0.3s;
-        }
-
-        .animation-delay-400 {
-          animation-delay: 0.4s;
-        }
-
-        .float-gentle {
-          animation: float-gentle 6s ease-in-out infinite;
-        }
-
-        .float-slow {
-          animation: float-slow 8s ease-in-out infinite;
-        }
-      `}</style>
-
+    <div
+      dir="rtl"
+      className="min-h-screen font-arabic bg-[var(--bg)] text-[var(--t1)]"
+    >
       {/* ==================== HERO SECTION ==================== */}
-      <section
-        className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden"
-        style={{ background: colors.bgLighter }}
-      >
-        {/* GRID BACKGROUND */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden">
+        {/* gradient glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(90,24,154,0.15) 0%, transparent 70%)",
+          }}
+        />
+        {/* grid */}
         <div
           className="absolute inset-0 z-[1] pointer-events-none"
           style={{
@@ -444,8 +390,7 @@ const SondosCallCenter = () => {
               "radial-gradient(ellipse at center, black 20%, transparent 65%)",
           }}
         />
-
-        {/* FLOATING BLOBS */}
+        {/* blobs */}
         <div
           className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20 float-gentle"
           style={{
@@ -468,41 +413,32 @@ const SondosCallCenter = () => {
           }}
         />
 
-        {/* HERO CONTENT */}
         <div className="relative z-10 max-w-[820px] mx-auto">
+          {/* Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
-            <span className="text-lg">📞</span>
             <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
-            <span>مستقبل مراكز الاتصال</span>
+            مستقبل مراكز الاتصال
           </div>
 
-          <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-3 animate-fade-up animation-delay-100">
-            وفّر
-            <span
-              className="inline-block mx-2"
-              style={{
-                background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              70%
-            </span>
-            من تكلفة
+          {/* Headline */}
+          <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto animate-fade-up animation-delay-100">
+            وفّر <span className="text-[#9d4edd]">70%</span> من تكلفة
             <br />
             مركز الاتصال
           </h1>
 
-          <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[#1a0a2e] max-w-[580px] mx-auto leading-relaxed mb-4 animate-fade-up animation-delay-150">
+          {/* Subheadline */}
+          <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[var(--t1)] max-w-[580px] mx-auto leading-relaxed mb-4 animate-fade-up animation-delay-150">
             سندس يتعامل مع 75% من مكالماتك تلقائياً بجودة أعلى
           </p>
 
-          <p className="text-[clamp(14px,1.6vw,17px)] text-[#4a3a62] max-w-[680px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
-            وقت انتظار صفر، و24/7 - بينما فريقك يركز على الحالات المهمة
+          {/* Social proof */}
+          <p className="text-[clamp(14px,1.6vw,17px)] text-[var(--t2)] max-w-[680px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
+            ✓ وقت انتظار صفر &nbsp;·&nbsp; ✓ 24/7 بدون انقطاع &nbsp;·&nbsp; ✓
+            فريقك يركز على الحالات المهمة
           </p>
 
-          {/* STATS CARDS */}
+          {/* Stats row */}
           <div className="flex flex-wrap justify-center gap-4 mb-10 animate-fade-up animation-delay-300">
             {[
               { value: "0 ثانية", label: "وقت انتظار", icon: "⚡" },
@@ -514,167 +450,118 @@ const SondosCallCenter = () => {
                 className="px-5 py-4 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all hover:shadow-xl hover:-translate-y-1"
               >
                 <div className="text-2xl mb-1">{stat.icon}</div>
-                <div className="text-xl font-bold text-[#5a189a]">
+                <div className="text-xl font-bold text-[#9d4edd]">
                   {stat.value}
                 </div>
-                <div className="text-xs text-[#8878a0]">{stat.label}</div>
+                <div className="text-xs text-[var(--t3)]">{stat.label}</div>
               </div>
             ))}
           </div>
 
-          {/* CTA BUTTON */}
-          <div className="flex justify-center animate-fade-up animation-delay-400">
+          {/* CTA */}
+          <div className="flex items-center justify-center gap-3.5 mb-12 flex-wrap animate-fade-up animation-delay-300">
             <Link
               to="/demo"
-              className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300"
-              style={{
-                background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                boxShadow: "0 10px 40px rgba(90,24,154,0.25)",
-              }}
+              className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
             >
               احجز عرض توضيحي
-              <span className="text-xl group-hover:-translate-x-1 transition-transform">
-                ←
-              </span>
             </Link>
           </div>
-        </div>
-
-        {/* WAVE SVG */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            viewBox="0 0 1440 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            className="w-full h-16"
-          >
-            <path
-              d="M0 100L60 90C120 80 240 60 360 55C480 50 600 60 720 65C840 70 960 70 1080 65C1200 60 1320 50 1380 45L1440 40V100H1380C1320 100 1200 100 1080 100C960 100 840 100 720 100C600 100 480 100 360 100C240 100 120 100 60 100H0Z"
-              fill="white"
-            />
-          </svg>
         </div>
       </section>
 
       {/* ==================== PROBLEMS SECTION ==================== */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-[clamp(28px,4vw,40px)] font-bold leading-tight mb-4 text-[#1a0a2e]">
-              تحديات مراكز الاتصال
-              <span
-                className="inline-block mr-2"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                التقليدية
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              تحديات مراكز الاتصال{" "}
+              <span className="text-[#9d4edd]">التقليدية</span>
             </h2>
           </div>
 
+          {/* Problems */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {[
               {
                 icon: "💸",
                 title: "تكلفة باهظة",
                 desc: "رواتب، تدريب، معدات، إدارة = آلاف الريالات شهرياً",
-                color: colors.danger,
               },
               {
                 icon: "⏰",
                 title: "انتظار طويل",
                 desc: "العملاء ينتظرون دقائق ويغادرون محبطين",
-                color: colors.warning,
               },
               {
                 icon: "🔄",
                 title: "دوران الموظفين",
                 desc: "30-50% يغادرون سنوياً = تدريب مستمر",
-                color: colors.accent,
               },
               {
                 icon: "📉",
                 title: "جودة متفاوتة",
                 desc: "كل موظف يرد بطريقته = تجربة غير موحدة",
-                color: colors.primary,
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl border-2 border-dashed text-center transition-all hover:shadow-lg"
-                style={{ borderColor: item.color + "40" }}
+                className="p-6 rounded-2xl text-center transition-all hover:shadow-lg bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(239,68,68,0.2)] hover:border-[rgba(239,68,68,0.35)]"
               >
-                <div
-                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl"
-                  style={{ background: item.color + "15" }}
-                >
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl bg-[rgba(239,68,68,0.07)]">
                   {item.icon}
                 </div>
-                <h3 className="font-bold mb-2 text-[#1a0a2e]">{item.title}</h3>
-                <p className="text-sm text-[#6b5b95]">{item.desc}</p>
+                <h3 className="font-bold mb-2 text-[var(--t1)]">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[var(--t2)]">{item.desc}</p>
               </div>
             ))}
           </div>
 
           <div className="text-center my-12">
-            <div
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl"
-              style={{ background: colors.bgLight }}
-            >
+            <div className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.15)]">
               <span className="text-2xl">⬇️</span>
-              <span className="font-bold text-[#5a189a]">سندس يحل كل هذا</span>
+              <span className="font-bold text-[#9d4edd]">سندس يحل كل هذا</span>
               <span className="text-2xl">⬇️</span>
             </div>
           </div>
 
+          {/* Solutions */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 icon: "💰",
                 title: "توفير 70%",
                 desc: "تكلفة ثابتة ومتوقعة بدون مفاجآت",
-                color: colors.success,
               },
               {
                 icon: "⚡",
                 title: "0 انتظار",
                 desc: "رد فوري على كل مكالمة في أي وقت",
-                color: colors.primary,
               },
               {
                 icon: "🔒",
                 title: "استقرار 100%",
                 desc: "لا إجازات، لا استقالات، لا مرض",
-                color: colors.accent,
               },
               {
                 icon: "⭐",
                 title: "جودة موحدة",
                 desc: "نفس المستوى الممتاز في كل مكالمة",
-                color: colors.warning,
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl text-center transition-all hover:shadow-xl hover:-translate-y-1"
-                style={{
-                  background: item.color + "10",
-                  border: `2px solid ${item.color}30`,
-                }}
+                className="p-6 rounded-2xl text-center transition-all hover:shadow-xl hover:-translate-y-1 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.2)]"
               >
-                <div
-                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl text-white"
-                  style={{ background: item.color }}
-                >
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl text-white gradient-bg">
                   {item.icon}
                 </div>
-                <h3 className="font-bold mb-2 text-[#1a0a2e]">{item.title}</h3>
-                <p className="text-sm text-[#6b5b95]">{item.desc}</p>
+                <h3 className="font-bold mb-2 text-[var(--t1)]">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[var(--t2)]">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -682,28 +569,18 @@ const SondosCallCenter = () => {
       </section>
 
       {/* ==================== STATS SECTION ==================== */}
-      <section
-        id="stats-section"
-        className="py-16"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="stats-section" className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, idx) => (
               <div key={idx} className="text-center group">
-                <div
-                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl transition-transform group-hover:scale-110"
-                  style={{
-                    background: "white",
-                    boxShadow: "0 4px 14px rgba(0,0,0,0.05)",
-                  }}
-                >
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_4px_14px_rgba(0,0,0,0.05)] transition-transform group-hover:scale-110">
                   {stat.icon}
                 </div>
-                <div className="text-3xl sm:text-4xl font-bold mb-2 text-[#5a189a]">
-                  {statsVisible ? stat.value : "0"}
+                <div className="text-3xl sm:text-4xl font-bold mb-2 text-[#9d4edd]">
+                  {statsVisible ? stat.value : "—"}
                 </div>
-                <div className="text-sm font-medium text-[#6b5b95]">
+                <div className="text-sm font-medium text-[var(--t2)]">
                   {stat.label}
                 </div>
               </div>
@@ -713,148 +590,86 @@ const SondosCallCenter = () => {
       </section>
 
       {/* ==================== SEGMENTS SECTION ==================== */}
-      <section id="الحلول" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="solutions" className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-[clamp(28px,4vw,40px)] font-bold leading-tight mb-4 text-[#1a0a2e]">
-              حلول لكل نوع
-              <span
-                className="inline-block mr-2"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                مكالمات
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              حلول لكل نوع <span className="text-[#9d4edd]">مكالمات</span>
             </h2>
+            <p className="text-[var(--t2)] text-lg">
+              سندس يتكيف مع طبيعة مركز اتصالك
+            </p>
           </div>
 
           <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {segments.map((segment, idx) => (
-              <button
-                key={segment.id}
-                onClick={() => setActiveSegment(idx)}
-                className="px-6 py-3.5 rounded-2xl flex items-center gap-3 font-semibold transition-all duration-300"
-                style={{
-                  background:
-                    activeSegment === idx
-                      ? "linear-gradient(135deg, #5a189a, #9d4edd)"
-                      : "white",
-                  color: activeSegment === idx ? "white" : colors.textDark,
-                  boxShadow:
-                    activeSegment === idx
-                      ? "0 8px 24px rgba(90,24,154,0.4)"
-                      : "0 2px 12px rgba(0,0,0,0.06)",
-                }}
-              >
-                <span className="text-2xl">{segment.icon}</span>
-                <span>{segment.name}</span>
-              </button>
-            ))}
+            {segments.map((segment, idx) => {
+              const isActive = activeSegment === idx;
+              return (
+                <button
+                  key={segment.id}
+                  onClick={() => setActiveSegment(idx)}
+                  className={`px-5 py-2.5 rounded-full flex items-center gap-2 text-[13px] font-medium transition-all duration-300 border backdrop-blur-sm ${
+                    isActive
+                      ? "gradient-bg glow text-white border-[rgba(90,24,154,0.4)]"
+                      : "bg-[rgba(90,24,154,0.04)] border-[rgba(90,24,154,0.12)] text-[var(--t2)] hover:border-[rgba(90,24,154,0.25)]"
+                  }`}
+                >
+                  <span className="text-2xl">{segment.icon}</span>
+                  <span>{segment.name}</span>
+                </button>
+              );
+            })}
           </div>
 
-          <div
-            className="rounded-3xl overflow-hidden shadow-2xl"
-            style={{ boxShadow: "0 20px 60px rgba(90,24,154,0.15)" }}
-          >
+          <div className="rounded-3xl overflow-hidden border border-[rgba(90,24,154,0.15)] shadow-[0_20px_60px_rgba(90,24,154,0.12)]">
             <div className="grid md:grid-cols-2">
-              <div className="p-8 sm:p-10" style={{ background: "#FEF2F2" }}>
+              {/* pain */}
+              <div className="p-8 sm:p-10 bg-[rgba(239,68,68,0.05)] border-b md:border-b-0 md:border-l border-[rgba(90,24,154,0.08)]">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">😫</span>
-                  <h3 className="text-xl font-bold text-[#991B1B]">التحديات</h3>
+                  <h3 className="text-xl font-bold text-red-400">
+                    التحديات الحالية
+                  </h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].painPoints.map((point, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="text-red-500 mt-1">✗</span>
-                      <span className="text-[#7F1D1D]">{point}</span>
+                      <span className="text-red-400 mt-1">✗</span>
+                      <span className="text-[var(--t2)]">{point}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div
-                className="p-8 sm:p-10"
-                style={{ background: colors.bgLight }}
-              >
+              {/* solution */}
+              <div className="p-8 sm:p-10 bg-[rgba(90,24,154,0.04)]">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">🎉</span>
-                  <h3 className="text-xl font-bold text-[#5a189a]">مع سندس</h3>
+                  <h3 className="text-xl font-bold text-[#9d4edd]">مع سندس</h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].solutions.map((solution, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="text-[#10B981]">✓</span>
-                      <span className="text-[#1a0a2e]">{solution}</span>
+                      <span className="text-[#9d4edd]">✓</span>
+                      <span className="text-[var(--t1)]">{solution}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            <div
-              className="p-6 bg-white border-t"
-              style={{ borderColor: colors.bgLight }}
-            >
-              <div className="flex flex-wrap items-center justify-between gap-6">
-                <div>
-                  <div className="text-sm font-medium mb-2 text-[#6b5b95]">
-                    حالات الاستخدام:
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {segments[activeSegment].useCases.map((useCase, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 rounded-full text-sm"
-                        style={{
-                          background: colors.bgLight,
-                          color: colors.primary,
-                        }}
-                      >
-                        {useCase}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="flex gap-6">
-                  {Object.entries(segments[activeSegment].stats).map(
-                    ([key, value], i) => (
-                      <div key={i} className="text-center">
-                        <div className="text-2xl font-bold text-[#5a189a]">
-                          {value}
-                        </div>
-                        <div className="text-xs text-[#6b5b95]">
-                          {key === "waitTime"
-                            ? "الانتظار"
-                            : key === "cost"
-                              ? "التكلفة"
-                              : key === "quality"
-                                ? "الجودة"
-                                : key === "capacity"
-                                  ? "السعة"
-                                  : key === "reach"
-                                    ? "الوصول"
-                                    : key === "efficiency"
-                                      ? "الكفاءة"
-                                      : key === "automation"
-                                        ? "الأتمتة"
-                                        : key === "availability"
-                                          ? "التوفر"
-                                          : key === "training"
-                                            ? "التدريب"
-                                            : key === "qualification"
-                                              ? "التأهيل"
-                                              : key === "followUp"
-                                                ? "المتابعة"
-                                                : key === "CAC"
-                                                  ? "تكلفة الاكتساب"
-                                                  : key}
-                        </div>
+            <div className="p-6 bg-[var(--bg)] border-t border-[rgba(90,24,154,0.08)]">
+              <div className="flex flex-wrap justify-center gap-8">
+                {Object.entries(segments[activeSegment].stats).map(
+                  ([key, value], i) => (
+                    <div key={i} className="text-center">
+                      <div className="text-2xl font-bold text-[#9d4edd]">
+                        {value}
                       </div>
-                    ),
-                  )}
-                </div>
+                      <div className="text-sm text-[var(--t3)]">
+                        {statKeyLabel(key)}
+                      </div>
+                    </div>
+                  ),
+                )}
               </div>
             </div>
           </div>
@@ -862,26 +677,12 @@ const SondosCallCenter = () => {
       </section>
 
       {/* ==================== COMPARISON SECTION ==================== */}
-      <section
-        id="المقارنة"
-        className="py-24"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <section id="comparison" className="py-24 px-6">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-[clamp(28px,4vw,40px)] font-bold leading-tight mb-4 text-[#1a0a2e]">
-              مقارنة شاملة:
-              <span
-                className="inline-block mr-2"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                تقليدي vs سندس
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              مقارنة شاملة:{" "}
+              <span className="text-[#9d4edd]">تقليدي vs سندس</span>
             </h2>
           </div>
 
@@ -894,13 +695,11 @@ const SondosCallCenter = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveComparison(tab.id)}
-                className="px-6 py-3 rounded-xl font-semibold transition-all"
-                style={{
-                  background:
-                    activeComparison === tab.id ? colors.primary : "white",
-                  color:
-                    activeComparison === tab.id ? "white" : colors.textDark,
-                }}
+                className={`px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-300 border backdrop-blur-sm ${
+                  activeComparison === tab.id
+                    ? "gradient-bg glow text-white border-[rgba(90,24,154,0.4)]"
+                    : "bg-[rgba(90,24,154,0.04)] border-[rgba(90,24,154,0.12)] text-[var(--t2)] hover:border-[rgba(90,24,154,0.25)]"
+                }`}
               >
                 {tab.label}
               </button>
@@ -908,16 +707,11 @@ const SondosCallCenter = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <div
-              className="rounded-2xl overflow-hidden"
-              style={{ background: "white", border: "2px solid #FEE2E2" }}
-            >
-              <div
-                className="p-4 text-center"
-                style={{ background: "#FEE2E2" }}
-              >
+            {/* Traditional */}
+            <div className="rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(239,68,68,0.2)]">
+              <div className="p-4 text-center bg-[rgba(239,68,68,0.07)] border-b border-[rgba(239,68,68,0.15)]">
                 <span className="text-2xl mr-2">🏢</span>
-                <span className="font-bold text-[#991B1B]">
+                <span className="font-bold text-red-400">
                   مركز اتصال تقليدي
                 </span>
               </div>
@@ -925,11 +719,11 @@ const SondosCallCenter = () => {
                 {comparisonData[activeComparison].traditional.map((item, i) => (
                   <div
                     key={i}
-                    className={`flex justify-between items-center p-3 rounded-lg ${item.highlight ? "font-bold" : ""}`}
-                    style={{
-                      background: item.highlight ? "#FEE2E2" : colors.bgLighter,
-                      color: item.highlight ? "#DC2626" : colors.textDark,
-                    }}
+                    className={`flex justify-between items-center p-3 rounded-lg text-sm ${
+                      item.highlight
+                        ? "font-bold bg-[rgba(239,68,68,0.08)] text-red-500"
+                        : "bg-[rgba(90,24,154,0.03)] text-[var(--t1)]"
+                    }`}
                   >
                     <span>{item.item}</span>
                     <span>{item.value}</span>
@@ -937,19 +731,10 @@ const SondosCallCenter = () => {
                 ))}
               </div>
             </div>
-            <div
-              className="rounded-2xl overflow-hidden shadow-xl"
-              style={{
-                background: "white",
-                border: `2px solid ${colors.primary}`,
-              }}
-            >
-              <div
-                className="p-4 text-center"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                }}
-              >
+
+            {/* Sondos */}
+            <div className="rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.3)] shadow-[0_0_40px_rgba(90,24,154,0.1)]">
+              <div className="p-4 text-center gradient-bg border-b border-[rgba(90,24,154,0.15)]">
                 <span className="text-2xl mr-2">🚀</span>
                 <span className="font-bold text-white">مع سندس AI</span>
               </div>
@@ -957,13 +742,11 @@ const SondosCallCenter = () => {
                 {comparisonData[activeComparison].sondos.map((item, i) => (
                   <div
                     key={i}
-                    className={`flex justify-between items-center p-3 rounded-lg ${item.highlight ? "font-bold" : ""}`}
-                    style={{
-                      background: item.highlight
-                        ? colors.bgLight
-                        : colors.bgLighter,
-                      color: item.highlight ? colors.success : colors.textDark,
-                    }}
+                    className={`flex justify-between items-center p-3 rounded-lg text-sm ${
+                      item.highlight
+                        ? "font-bold bg-[rgba(16,185,129,0.08)] text-emerald-600"
+                        : "bg-[rgba(90,24,154,0.03)] text-[var(--t1)]"
+                    }`}
                   >
                     <span>{item.item}</span>
                     <span>{item.value}</span>
@@ -974,12 +757,7 @@ const SondosCallCenter = () => {
           </div>
 
           {activeComparison === "cost" && (
-            <div
-              className="mt-8 p-6 rounded-2xl text-center"
-              style={{
-                background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-              }}
-            >
+            <div className="mt-8 p-6 rounded-2xl text-center gradient-bg glow">
               <div className="text-white/80 text-sm mb-1">التوفير الشهري</div>
               <div className="text-white text-4xl font-bold">
                 {comparisonData.cost.savings}
@@ -993,87 +771,55 @@ const SondosCallCenter = () => {
       </section>
 
       {/* ==================== FEATURES SECTION ==================== */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="features" className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-[clamp(28px,4vw,40px)] font-bold leading-tight mb-4 text-[#1a0a2e]">
-              مميزات
-              <span
-                className="inline-block mr-2"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                متقدمة
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              مميزات مصممة{" "}
+              <span className="text-[#9d4edd]">لمراكز الاتصال</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, idx) => (
               <div
                 key={idx}
-                className="group p-8 rounded-3xl bg-white border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
-                style={{ borderColor: colors.bgLight }}
+                className="group p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-[rgba(90,24,154,0.3)] ai-glow"
               >
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: colors.bgLight }}
-                >
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 bg-[rgba(90,24,154,0.06)] transition-transform duration-300 group-hover:scale-110">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-[#1a0a2e]">
+                <h3 className="text-xl font-bold mb-3 text-[var(--t1)]">
                   {feature.title}
                 </h3>
-                <p className="text-sm mb-5 leading-relaxed text-[#6b5b95]">
+                <p className="text-sm mb-5 leading-relaxed text-[var(--t2)]">
                   {feature.description}
                 </p>
-                <div
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold"
-                  style={{
-                    background: `${colors.primary}15`,
-                    color: colors.primary,
-                  }}
-                >
+                <span className="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]">
                   {feature.highlight}
-                </div>
+                </span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ==================== ROI CALCULATOR ==================== */}
-      <section
-        id="حاسبة التوفير"
-        className="py-24"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      {/* ==================== ROI CALCULATOR ==================== 
+      <section id="roi" className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-[clamp(28px,4vw,40px)] font-bold leading-tight mb-4 text-[#1a0a2e]">
-              احسب
-              <span
-                className="inline-block mr-2"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                توفيرك السنوي
-              </span>
+            <p className="text-[13px] font-medium mb-3 text-[#9d4edd]">
+              🧮 حاسبة مبنية على بيانات حقيقية
+            </p>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight">
+              احسب <span className="text-[#9d4edd]">توفيرك السنوي</span>
             </h2>
-            <p className="text-[#6b5b95]">
+            <p className="mt-3 text-[var(--t2)]">
               أدخل بيانات مركز الاتصال الحالي واكتشف كم يمكنك توفيره
             </p>
           </div>
 
-          <div className="rounded-3xl p-8 sm:p-10 shadow-xl bg-white">
-            <div className="grid md:grid-cols-2 gap-8 mb-10">
+          <div className="rounded-3xl p-8 sm:p-10 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.08)]">
+            <div className="grid md:grid-cols-2 gap-6 mb-10">
               {[
                 {
                   label: "عدد موظفي مركز الاتصال",
@@ -1081,8 +827,7 @@ const SondosCallCenter = () => {
                   min: 5,
                   max: 100,
                   step: 1,
-                  display: `${roiInputs.agents} موظف`,
-                  pct: roiInputs.agents,
+                  suffix: " موظف",
                 },
                 {
                   label: "متوسط الراتب الشهري (ر.س)",
@@ -1090,8 +835,7 @@ const SondosCallCenter = () => {
                   min: 4000,
                   max: 12000,
                   step: 500,
-                  display: `${roiInputs.avgSalary.toLocaleString()} ر.س`,
-                  pct: (roiInputs.avgSalary - 4000) / 80,
+                  suffix: " ر.س",
                 },
                 {
                   label: "المكالمات اليومية",
@@ -1099,8 +843,7 @@ const SondosCallCenter = () => {
                   min: 100,
                   max: 2000,
                   step: 50,
-                  display: `${roiInputs.dailyCalls} مكالمة`,
-                  pct: roiInputs.dailyCalls / 20,
+                  suffix: " مكالمة",
                 },
                 {
                   label: "متوسط وقت الانتظار الحالي (دقائق)",
@@ -1108,141 +851,104 @@ const SondosCallCenter = () => {
                   min: 1,
                   max: 10,
                   step: 1,
-                  display: `${roiInputs.waitTime} دقائق`,
-                  pct: roiInputs.waitTime * 10,
+                  suffix: " دقائق",
                 },
-              ].map(({ label, key, min, max, step, display, pct }) => (
+              ].map(({ label, key, min, max, step, suffix }) => (
                 <div key={key}>
-                  <label className="block text-sm font-medium mb-3 text-[#1a0a2e]">
-                    {label}
-                  </label>
+                  <div className="flex justify-between mb-2">
+                    <label className="text-sm text-[var(--t2)]">{label}</label>
+                    <span className="font-bold text-[var(--t1)]">
+                      {(roiInputs as any)[key].toLocaleString()}
+                      {suffix}
+                    </span>
+                  </div>
                   <input
                     type="range"
                     min={min}
                     max={max}
                     step={step}
-                    value={roiInputs[key]}
+                    value={(roiInputs as any)[key]}
                     onChange={(e) =>
                       setRoiInputs({
                         ...roiInputs,
                         [key]: parseInt(e.target.value),
                       })
                     }
-                    className="w-full h-3 rounded-full appearance-none cursor-pointer"
-                    style={{
-                      background: `linear-gradient(90deg, ${colors.primary} ${pct}%, ${colors.bgLight} ${pct}%)`,
-                    }}
+                    className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+                    style={{ background: "rgba(90,24,154,0.12)" }}
                   />
-                  <div className="text-center mt-2 text-2xl font-bold text-[#5a189a]">
-                    {display}
+                  <div className="text-center mt-2 font-bold text-[#9d4edd]">
+                    {(roiInputs as any)[key].toLocaleString()}
+                    {suffix}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div
-              className="p-6 rounded-2xl mb-6"
-              style={{ background: colors.bgLighter }}
-            >
-              <div className="grid md:grid-cols-4 gap-4 text-center">
-                {[
-                  {
-                    label: "التكلفة الحالية",
-                    value: `${roiResults.currentMonthlyCost.toLocaleString()} ر.س`,
-                    color: colors.danger,
-                    sub: "شهرياً",
-                  },
-                  {
-                    label: "مع سندس",
-                    value: `${roiResults.sondosMonthlyCost.toLocaleString()} ر.س`,
-                    color: colors.success,
-                    sub: "شهرياً",
-                  },
-                  {
-                    label: "التوفير الشهري",
-                    value: `${roiResults.monthlySavings.toLocaleString()} ر.س`,
-                    color: colors.primary,
-                    sub: `${roiResults.savingsPercent}% توفير`,
-                  },
-                  {
-                    label: "الموظفين المتبقين",
-                    value: `${roiResults.remainingAgents} موظف`,
-                    color: colors.accent,
-                    sub: "للحالات المعقدة",
-                  },
-                ].map((item, i) => (
-                  <div key={i} className="p-4 rounded-xl bg-white">
-                    <div className="text-xs mb-1 text-[#6b5b95]">
-                      {item.label}
-                    </div>
-                    <div
-                      className="text-xl font-bold"
-                      style={{ color: item.color }}
-                    >
-                      {item.value}
-                    </div>
-                    <div className="text-xs text-[#6b5b95]">{item.sub}</div>
-                  </div>
-                ))}
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-2xl text-center bg-[rgba(239,68,68,0.07)] border border-[rgba(239,68,68,0.2)]">
+                <div className="text-sm mb-2 text-red-400">
+                  التكلفة الحالية (شهرياً)
+                </div>
+                <div className="text-3xl font-bold text-red-500">
+                  {roiResults.currentMonthlyCost.toLocaleString()} ر.س
+                </div>
+              </div>
+              <div className="p-6 rounded-2xl text-center bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.15)]">
+                <div className="text-sm mb-2 text-[#9d4edd]">
+                  مع سندس (شهرياً)
+                </div>
+                <div className="text-3xl font-bold text-[#9d4edd]">
+                  {roiResults.sondosMonthlyCost.toLocaleString()} ر.س
+                </div>
+              </div>
+              <div className="p-6 rounded-2xl text-center bg-[rgba(16,185,129,0.07)] border border-[rgba(16,185,129,0.2)]">
+                <div className="text-sm mb-2 text-emerald-600">
+                  التوفير الشهري
+                </div>
+                <div className="text-3xl font-bold text-emerald-600">
+                  +{roiResults.monthlySavings.toLocaleString()} ر.س
+                </div>
               </div>
             </div>
 
-            <div
-              className="p-6 rounded-2xl text-center"
-              style={{
-                background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-              }}
-            >
-              <div className="text-white/80 mb-2">التوفير السنوي المتوقع</div>
-              <div className="text-white text-5xl font-bold mb-2">
-                {roiResults.annualSavings.toLocaleString()} ر.س
-              </div>
-              <div className="text-white/80 text-sm">
-                + {roiResults.missedCallsRecovered.toLocaleString()} مكالمة
-                إضافية مردودة شهرياً
+            <div className="text-center mt-8">
+              <div className="inline-flex flex-wrap justify-center items-center gap-4 px-8 py-4 rounded-2xl gradient-bg">
+                <span className="text-white text-lg">التوفير السنوي:</span>
+                <span className="text-white text-4xl font-bold">
+                  {roiResults.annualSavings.toLocaleString()} ر.س
+                </span>
+                <span className="text-white/80 text-sm">
+                  + {roiResults.missedCallsRecovered.toLocaleString()} مكالمة
+                  إضافية/شهر
+                </span>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ==================== INTEGRATIONS ==================== */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-[clamp(28px,4vw,40px)] font-bold leading-tight mb-4 text-[#1a0a2e]">
-              يتكامل مع
-              <span
-                className="inline-block mr-2"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                أنظمتك الحالية
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              يتكامل مع <span className="text-[#9d4edd]">أنظمتك الحالية</span>
             </h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {integrations.map((int, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-white border-2 text-center transition-all hover:shadow-xl hover:-translate-y-1"
-                style={{ borderColor: colors.bgLight }}
+                className="p-6 rounded-2xl flex flex-col items-center gap-3 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="text-4xl mb-3">{int.icon}</div>
-                <div className="font-semibold text-[#1a0a2e]">{int.name}</div>
-                <div
-                  className="text-xs mt-1 px-2 py-0.5 rounded-full inline-block"
-                  style={{
-                    background: colors.bgLight,
-                    color: colors.textMuted,
-                  }}
-                >
+                <span className="text-3xl">{int.icon}</span>
+                <span className="font-semibold text-[var(--t1)]">
+                  {int.name}
+                </span>
+                <span className="text-xs px-2 py-1 rounded-full bg-[rgba(90,24,154,0.08)] text-[#9d4edd]">
                   {int.type}
-                </div>
+                </span>
               </div>
             ))}
           </div>
@@ -1250,62 +956,36 @@ const SondosCallCenter = () => {
       </section>
 
       {/* ==================== TESTIMONIALS ==================== */}
-      <section className="py-24" style={{ background: colors.bgLighter }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-[clamp(28px,4vw,40px)] font-bold leading-tight mb-4 text-[#1a0a2e]">
-              قصص نجاح
-              <span
-                className="inline-block mr-2"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                مراكز الاتصال
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              قصص نجاح <span className="text-[#9d4edd]">مراكز الاتصال</span>
             </h2>
           </div>
-
-          <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl shadow-2xl relative bg-white">
-            <div
-              className="absolute top-6 right-8 text-8xl font-serif opacity-10"
-              style={{ color: colors.primary }}
-            >
+          <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.1)] relative">
+            <div className="absolute top-6 right-8 text-8xl font-serif opacity-10 text-[#5a189a]">
               "
             </div>
-            <p className="text-xl sm:text-2xl leading-relaxed mb-8 text-[#1a0a2e]">
+            <p className="text-xl sm:text-2xl leading-relaxed mb-8 text-[var(--t1)]">
               {testimonials[currentTestimonial].quote}
             </p>
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-lg"
-                  style={{
-                    background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                  }}
-                >
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl gradient-bg shadow-lg">
                   {testimonials[currentTestimonial].image}
                 </div>
                 <div>
-                  <div className="font-bold text-lg text-[#1a0a2e]">
+                  <div className="font-bold text-lg text-[var(--t1)]">
                     {testimonials[currentTestimonial].name}
                   </div>
-                  <div className="text-sm text-[#6b5b95]">
-                    {testimonials[currentTestimonial].role} •{" "}
+                  <div className="text-sm text-[var(--t2)]">
+                    {testimonials[currentTestimonial].role} ·{" "}
                     {testimonials[currentTestimonial].company}
                   </div>
                 </div>
               </div>
-              <div
-                className="px-4 py-2 rounded-xl font-bold"
-                style={{
-                  background: colors.success + "20",
-                  color: colors.success,
-                }}
-              >
+              <div className="px-4 py-2 rounded-xl font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.2)]">
                 {testimonials[currentTestimonial].metric}
               </div>
             </div>
@@ -1318,264 +998,59 @@ const SondosCallCenter = () => {
                   style={{
                     background:
                       currentTestimonial === idx
-                        ? "linear-gradient(135deg, #5a189a, #9d4edd)"
-                        : colors.primary + "30",
+                        ? "linear-gradient(135deg,#5a189a,#9d4edd)"
+                        : "rgba(90,24,154,0.2)",
                     width: currentTestimonial === idx ? "32px" : "12px",
                   }}
-                ></button>
+                />
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ==================== PRICING ==================== 
-     /* <section id="الأسعار" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-[clamp(28px,4vw,40px)] font-bold leading-tight mb-4 text-[#1a0a2e]">
-              باقات
-              <span
-                className="inline-block mr-2"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                مراكز الاتصال
-              </span>
-            </h2>
-            <p className="text-[#6b5b95]">أسعار تنافسية تناسب حجم عملك</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div
-              className="p-8 rounded-3xl bg-white border-2 transition-all hover:shadow-xl"
-              style={{ borderColor: colors.bgLight }}
-            >
-              <div className="text-sm font-bold mb-3 text-[#5a189a]">
-                فريق صغير
-              </div>
-              <div className="mb-2">
-                <span className="text-5xl font-bold text-[#1a0a2e]">
-                  15,000
-                </span>
-                <span className="text-[#6b5b95] mr-1"> ر.س/شهر</span>
-              </div>
-              <p className="text-sm mb-8 text-[#6b5b95]">
-                حتى 200 مكالمة يومياً
-              </p>
-              <ul className="space-y-4 mb-8">
-                {[
-                  "مكالمات واردة وصادرة",
-                  "تحويل ذكي للموظفين",
-                  "لوحة تحكم أساسية",
-                  "تقارير يومية",
-                  "دعم فني",
-                ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm text-[#6b5b95]"
-                  >
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs"
-                      style={{
-                        background: colors.bgLight,
-                        color: colors.primary,
-                      }}
-                    >
-                      ✓
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <button
-                className="w-full py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
-                style={{ borderColor: colors.primary, color: colors.primary }}
-              >
-                ابدأ الآن
-              </button>
-            </div>
-
-            <div
-              className="p-8 rounded-3xl relative shadow-2xl scale-105"
-              style={{
-                background: `linear-gradient(180deg, ${colors.bgLight}, white)`,
-                border: `2px solid ${colors.primary}`,
-                boxShadow: `0 20px 60px ${colors.primary}30`,
-              }}
-            >
-              <div
-                className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-2 rounded-full text-xs font-bold text-white"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                }}
-              >
-                الأكثر شعبية ⭐
-              </div>
-              <div className="text-sm font-bold mb-3 mt-2 text-[#5a189a]">
-                فريق متوسط
-              </div>
-              <div className="mb-2">
-                <span className="text-5xl font-bold text-[#1a0a2e]">
-                  25,000
-                </span>
-                <span className="text-[#6b5b95] mr-1"> ر.س/شهر</span>
-              </div>
-              <p className="text-sm mb-8 text-[#6b5b95]">
-                حتى 500 مكالمة يومياً
-              </p>
-              <ul className="space-y-4 mb-8">
-                {[
-                  "كل مميزات الفريق الصغير",
-                  "تكامل CRM كامل",
-                  "تحليلات متقدمة",
-                  "تسجيل المكالمات",
-                  "أولوية في الدعم",
-                  "تقارير مخصصة",
-                ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm text-[#6b5b95]"
-                  >
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white"
-                      style={{ background: colors.primary }}
-                    >
-                      ✓
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <button
-                className="w-full py-4 rounded-2xl font-semibold text-white transition-all hover:shadow-xl"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                  boxShadow: "0 8px 24px rgba(90,24,154,0.4)",
-                }}
-              >
-                ابدأ الآن
-              </button>
-            </div>
-
-            <div
-              className="p-8 rounded-3xl bg-white border-2 transition-all hover:shadow-xl"
-              style={{ borderColor: colors.bgLight }}
-            >
-              <div className="text-sm font-bold mb-3 text-[#9d4edd]">
-                مؤسسة كبيرة
-              </div>
-              <div className="mb-2">
-                <span className="text-5xl font-bold text-[#1a0a2e]">مخصص</span>
-              </div>
-              <p className="text-sm mb-8 text-[#6b5b95]">مكالمات غير محدودة</p>
-              <ul className="space-y-4 mb-8">
-                {[
-                  "كل مميزات الفريق المتوسط",
-                  "مدير حساب مخصص",
-                  "SLA مضمون 99.9%",
-                  "تكامل مخصص",
-                  "تدريب الفريق",
-                  "دعم 24/7",
-                ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm text-[#6b5b95]"
-                  >
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs"
-                      style={{
-                        background: colors.bgLight,
-                        color: colors.accent,
-                      }}
-                    >
-                      ✓
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <button
-                className="w-full py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
-                style={{ borderColor: colors.accent, color: colors.accent }}
-              >
-                تواصل معنا
-              </button>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* ==================== FAQ ==================== */}
-      <section className="py-24" style={{ background: colors.bgLighter }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-[clamp(28px,4vw,40px)] font-bold leading-tight mb-4 text-[#1a0a2e]">
-              أسئلة
-              <span
-                className="inline-block mr-2"
-                style={{
-                  background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                شائعة
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              أسئلة <span className="text-[#9d4edd]">شائعة</span>
             </h2>
           </div>
           <div className="space-y-4">
-            {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-lg bg-white"
-              >
-                <button
-                  onClick={() => setActiveFAQ(activeFAQ === idx ? null : idx)}
-                  className="w-full p-6 flex items-center justify-between text-right"
+            {faqs.map((faq, idx) => {
+              const open = activeFAQ === idx;
+              return (
+                <div
+                  key={idx}
+                  className="rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300"
                 >
-                  <span className="font-semibold text-lg text-[#1a0a2e]">
-                    {faq.q}
-                  </span>
-                  <span
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 mr-4"
-                    style={{
-                      background:
-                        activeFAQ === idx ? colors.primary : colors.bgLight,
-                      color: activeFAQ === idx ? "white" : colors.primary,
-                      transform:
-                        activeFAQ === idx ? "rotate(180deg)" : "rotate(0deg)",
-                    }}
+                  <button
+                    className="w-full flex items-center justify-between px-6 py-5 text-right font-semibold text-[var(--t1)]"
+                    onClick={() => setActiveFAQ(open ? null : idx)}
                   >
-                    ▼
-                  </span>
-                </button>
-                {activeFAQ === idx && (
-                  <div className="px-6 pb-6 text-sm leading-relaxed text-[#6b5b95]">
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            ))}
+                    {faq.q}
+                    <span className="text-xl ml-4 flex-shrink-0 text-[#9d4edd]">
+                      {open ? "−" : "+"}
+                    </span>
+                  </button>
+                  {open && (
+                    <div className="px-6 pb-5 text-sm leading-relaxed text-[var(--t2)]">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* ==================== FINAL CTA ==================== */}
-      <section
-        className="py-24"
-        style={{
-          background: "linear-gradient(135deg, #5a189a, #9d4edd)",
-        }}
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <section className="py-24 px-6 gradient-bg">
+        <div className="max-w-4xl mx-auto text-center">
           <div className="text-6xl mb-6">📞</div>
-          <h2 className="text-[clamp(28px,4vw,48px)] font-bold leading-tight mb-6 text-white">
+          <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-white">
             جاهز توفّر 70%
             <br />
             من تكلفة مركز الاتصال؟
@@ -1584,18 +1059,14 @@ const SondosCallCenter = () => {
             انضم لأكثر من 50 مركز اتصال يستخدمون سندس لتقديم خدمة أفضل بتكلفة
             أقل
           </p>
-
-          {/* CTA BUTTON */}
           <div className="flex justify-center mb-12">
             <Link
               to="/demo"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-white rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1"
-              style={{ color: colors.primary }}
+              className="inline-flex items-center gap-2 px-10 py-5 bg-[rgba(255,255,255,0.95)] rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:bg-white text-[#5a189a] shimmer"
             >
               احجز عرض توضيحي
             </Link>
           </div>
-
           <div className="flex flex-wrap justify-center gap-6 text-white/70 text-sm">
             <span>🔗 تكامل مع Genesys & Avaya</span>
             <span>🎧 دعم فني 24/7</span>
