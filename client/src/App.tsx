@@ -10,7 +10,6 @@ import Hero from "@/sections/Hero";
 import LogoCarousel from "@/sections/LogoCarousel";
 import ScaleBanner from "@/sections/ScaleBanner";
 import WhatIs from "@/sections/WhatIs";
-
 import Testimonials from "@/sections/Testimonials";
 import TalksLikePeople from "@/sections/TalksLikePeople";
 import Highlights from "@/sections/Highlights";
@@ -18,11 +17,9 @@ import Features from "@/sections/Features";
 import QA from "@/sections/QA";
 import Omnichannel from "@/sections/Omnichannel";
 import Telephony from "@/sections/Telephony";
-
 import Integrations from "@/sections/Integrations";
 import FAQ from "@/sections/FAQ";
 import CTABanner from "@/sections/CTABanner";
-
 import Footer from "@/sections/Footer";
 import BlogList from "@/sections/BlogList";
 import BlogPost from "@/sections/BlogPost";
@@ -30,12 +27,10 @@ import Healthcare from "@/pages/Healthcare";
 import Ecommerce from "@/pages/Ecommerce";
 import CallCenter from "@/pages/CallCenter";
 import RealEstate from "@/pages/RealEstate";
-
 import Restaurant from "@/pages/Restaurant";
 import Legal from "@/pages/Legal";
 import CarDealership from "@/pages/CarDealership";
 import DebtCollection from "@/pages/DebtCollection";
-
 import Partner from "@/pages/Partner";
 import SavingsCalculator from "@/sections/SavingsCalculator";
 import IntegrationsPage from "@/pages/IntegrationsPage";
@@ -53,13 +48,11 @@ function HomePage() {
       <SavingsCalculator />
       <Testimonials />
       <TalksLikePeople />
-
       <Highlights />
       <Features />
       <QA />
       <Omnichannel />
       <Telephony />
-
       <Integrations />
       <FAQ />
       <CTABanner />
@@ -85,10 +78,18 @@ function BlogListPage() {
   );
 }
 
-// ❌ Remplacez TOUTE cette fonction :
 function BlogPostPage({ slug }: { slug: string }) {
   const [, navigate] = useLocation();
-  const post = getBlogPostBySlug(slug);
+  const { posts, loading } = useBlogPosts();
+
+  if (loading)
+    return (
+      <div className="pt-32 text-center text-[#7b2cbf] text-xl">
+        Chargement...
+      </div>
+    );
+
+  const post = posts.find((p) => p.slug === slug);
 
   if (!post) {
     return <PlaceholderPage title="404 - Post Not Found" />;
@@ -135,10 +136,8 @@ function AppContent() {
       <Navigation />
       <Switch>
         <Route path="/" component={HomePage} />
-
         <Route path="/partner" component={Partner} />
         <Route path="/healthcare" component={Healthcare} />
-
         <Route path="/call-center" component={CallCenter} />
         <Route path="/real-estate" component={RealEstate} />
         <Route path="/technology" component={Technology} />
@@ -153,9 +152,7 @@ function AppContent() {
           {(params) => <BlogPostPage slug={params.slug} />}
         </Route>
         <Route path="/integrations" component={IntegrationsPage} />
-        {/* ✅ AJOUTE CETTE LIGNE */}
         <Route path="/Demo" component={Demo} />
-
         <Route>{() => <PlaceholderPage title="404 - Page Not Found" />}</Route>
       </Switch>
       <Footer />

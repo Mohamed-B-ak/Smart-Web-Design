@@ -23,7 +23,7 @@ export default function BlogList({ onPostClick }: BlogListProps) {
   if (posts.length === 0)
     return (
       <div className="pt-32 text-center text-[#4a3a62] text-xl">
-        Aucun article trouvé.
+        No articles found.
       </div>
     );
 

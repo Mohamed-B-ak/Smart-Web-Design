@@ -4,7 +4,7 @@ import { useLanguage } from "@/context/LanguageContext";
 const APPS_SCRIPT_URL =
   "https://script.google.com/a/macros/sondos-ai.com/s/AKfycbxg3V1VB-S50WJrFwm6D-VskJzXLIP4FuquNt5X9HOYjrxP7UIImFX4zc3zqxxfwHhN/exec";
 const SONDOS_TOKEN = "1016|0c1ta4b7Jr6GpTfYTI6AgnZDkVPMgFxmRtC6NH3H18f46e28";
-const SONDOS_ASSISTANT_ID = 6299;
+const SONDOS_ASSISTANT_ID = 11647;
 
 type Props = {
   open: boolean;
