@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 const APPS_SCRIPT_URL =
-  "https://script.google.com/a/macros/sondos-ai.com/s/AKfycbyRrtYGyZwZMq__VkuzjL9RFhJOkhK-i8zyfeykSRIENY2vl4axs9oopMHv_2m02jB4/exec";
+  "https://script.google.com/a/macros/sondos-ai.com/s/AKfycbxg3V1VB-S50WJrFwm6D-VskJzXLIP4FuquNt5X9HOYjrxP7UIImFX4zc3zqxxfwHhN/exec";
 const SONDOS_TOKEN = "1016|0c1ta4b7Jr6GpTfYTI6AgnZDkVPMgFxmRtC6NH3H18f46e28";
 const SONDOS_ASSISTANT_ID = 6299;
 
@@ -13,22 +13,49 @@ type Props = {
 
 type CallState = "idle" | "connecting" | "talking";
 
-// ✅ Validation numéro saoudien — mobile + fixe, tous formats
-// Formats : 0XXXXXXXXX / XXXXXXXXX / +966XXXXXXXXX / 00966XXXXXXXXX
-// 9 chiffres minimum après l'indicatif
-function isValidSaudiPhone(phone: string): boolean {
+// ✅ Accepte saoudien + tunisien + format international
+function isValidPhone(phone: string): boolean {
   const cleaned = phone.replace(/[\s\-().]/g, "");
-  // Avec indicatif international
-  if (/^(\+966|00966|966)\d{8,9}$/.test(cleaned)) return true;
-  // Avec 0 devant (format local)
-  if (/^0\d{8,9}$/.test(cleaned)) return true;
-  // Direct sans préfixe (8 ou 9 chiffres)
-  if (/^\d{8,9}$/.test(cleaned)) return true;
-  return false;
+  if (cleaned.startsWith("+")) return cleaned.length >= 10;
+  if (cleaned.startsWith("00")) return cleaned.length >= 11;
+  if (cleaned.startsWith("966")) return cleaned.length >= 11;
+  if (cleaned.startsWith("216")) return cleaned.length >= 11;
+  if (cleaned.startsWith("0")) return cleaned.length >= 9;
+  return cleaned.length >= 8;
+}
+
+// ✅ Formate vers +XXXXXXXXXXX selon le pays détecté
+function formatPhone(phone: string): string {
+  const cleaned = phone.replace(/[\s\-().]/g, "");
+
+  // Déjà en format international
+  if (cleaned.startsWith("+")) return cleaned;
+
+  // Format 00XXX
+  if (cleaned.startsWith("00")) return "+" + cleaned.slice(2);
+
+  // Indicatif saoudien sans +
+  if (cleaned.startsWith("966")) return "+" + cleaned;
+
+  // Indicatif tunisien sans +
+  if (cleaned.startsWith("216")) return "+" + cleaned;
+
+  // Mobile saoudien local : 05X ou 04X
+  if (/^0[45]/.test(cleaned)) return "+966" + cleaned.slice(1);
+
+  // Mobile tunisien local : 02X, 07X, 09X, 05X (hors 05 saoudien géré avant)
+  if (/^0[2379]/.test(cleaned)) return "+216" + cleaned.slice(1);
+
+  // Numéro sans préfixe : 9 chiffres → saoudien, 8 chiffres → tunisien
+  if (cleaned.length === 9) return "+966" + cleaned;
+  if (cleaned.length === 8) return "+216" + cleaned;
+
+  // Fallback
+  return "+" + cleaned;
 }
 
 export default function AgentsModal({ open, onClose }: Props) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [activeAgent, setActiveAgent] = useState<string | null>(null);
   const [callState, setCallState] = useState<CallState>("idle");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
@@ -93,20 +120,20 @@ export default function AgentsModal({ open, onClose }: Props) {
 
   const handleStartClick = async () => {
     if (callState === "idle") {
-      // ── Validation numéro saoudien ───────────────────────────────
       if (!phoneNumber.trim()) {
-        setPhoneError("الرجاء إدخال رقم الهاتف");
+        setPhoneError(t("agents.phone_required"));
         return;
       }
-      if (!isValidSaudiPhone(phoneNumber)) {
-        setPhoneError("رقم غير صحيح — مثال: +966 5X XXX XXXX");
+      if (!isValidPhone(phoneNumber)) {
+        setPhoneError(t("agents.phone_invalid"));
         return;
       }
 
       setPhoneError("");
       setCallState("connecting");
 
-      const phone = phoneNumber.trim();
+      // ✅ Numéro formaté en international
+      const phone = formatPhone(phoneNumber.trim());
       const agent = selectedAgent?.name || activeAgent || "";
 
       // ── 1. Enregistre dans Sheet via JSONP ───────────────────────
@@ -137,11 +164,20 @@ export default function AgentsModal({ open, onClose }: Props) {
             }),
           },
         );
-        if (!res.ok) throw new Error("Sondos " + res.status);
+
+        if (!res.ok) {
+          const errBody = await res.text();
+          console.error("Sondos error:", res.status, errBody);
+          setCallState("idle");
+          setPhoneError(`Erreur appel: ${res.status}`);
+          return;
+        }
+
         setCallState("talking");
       } catch (err) {
         console.error("Sondos error:", err);
-        setCallState("talking");
+        setCallState("idle");
+        setPhoneError(t("agents.call_failed") || "Échec de l'appel");
       }
     }
   };
@@ -250,11 +286,14 @@ export default function AgentsModal({ open, onClose }: Props) {
           color: #4c1d95;
           font-size: 14px;
           outline: none;
-          text-align: right;
-          direction: ltr;
+          text-align: ${lang === "ar" ? "right" : "left"};
+          direction: ${lang === "ar" ? "rtl" : "ltr"};
           transition: border-color 0.2s;
         }
-        .phone-input::placeholder { color: #c4b5fd; text-align: right; }
+        .phone-input::placeholder { 
+          color: #c4b5fd; 
+          text-align: ${lang === "ar" ? "right" : "left"}; 
+        }
         .phone-input:focus {
           border-color: #8b5cf6;
           background: rgba(139,92,246,0.07);
@@ -275,7 +314,7 @@ export default function AgentsModal({ open, onClose }: Props) {
         {/* HEADER */}
         <div
           className="px-6 py-4 flex justify-between items-center"
-          dir="rtl"
+          dir={lang === "ar" ? "rtl" : "ltr"}
           style={{
             borderBottom: "1px solid rgba(139,92,246,0.1)",
             background: "rgba(255,255,255,0.85)",
@@ -292,7 +331,7 @@ export default function AgentsModal({ open, onClose }: Props) {
                 }}
                 className="ml-1 w-7 h-7 rounded-full flex items-center justify-center text-violet-400 hover:bg-violet-100 transition text-sm"
               >
-                →
+                {lang === "ar" ? "←" : "→"}
               </button>
             )}
             <div
@@ -320,7 +359,7 @@ export default function AgentsModal({ open, onClose }: Props) {
 
         {/* AGENT LIST */}
         {!activeAgent && (
-          <div className="p-5 space-y-3" dir="rtl">
+          <div className="p-5 space-y-3" dir={lang === "ar" ? "rtl" : "ltr"}>
             <p className="text-xs text-gray-400 text-center mb-4 tracking-wider">
               {t("agents.choose_dialect")}
             </p>
@@ -345,7 +384,7 @@ export default function AgentsModal({ open, onClose }: Props) {
                     background: `linear-gradient(135deg, ${a.color}, ${a.colorEnd})`,
                   }}
                 >
-                  ←
+                  {lang === "ar" ? "←" : "→"}
                 </div>
               </button>
             ))}
@@ -354,7 +393,7 @@ export default function AgentsModal({ open, onClose }: Props) {
 
         {/* CHAT VIEW */}
         {activeAgent && selectedAgent && (
-          <div className="p-6" dir="rtl">
+          <div className="p-6" dir={lang === "ar" ? "rtl" : "ltr"}>
             {selectedAgent.iframe ? (
               <>
                 {/* IDLE */}
@@ -387,12 +426,12 @@ export default function AgentsModal({ open, onClose }: Props) {
                     {/* PHONE INPUT */}
                     <div className="w-full">
                       <label className="block text-xs text-violet-500 font-medium mb-1.5 text-right">
-                        رقم الهاتف
+                        {t("agents.phone_label")}
                       </label>
                       <input
                         type="tel"
                         className={`phone-input ${phoneError ? "error shake" : ""}`}
-                        placeholder="+966 5X XXX XXXX"
+                        placeholder={t("agents.phone_placeholder")}
                         value={phoneNumber}
                         onChange={(e) => handlePhoneChange(e.target.value)}
                       />

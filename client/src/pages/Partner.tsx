@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
-/* ─── INLINE STYLES using indes.css color tokens ─── */
+/* ─── INLINE STYLES using index.css color tokens ─── */
 const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Manrope:wght@200..800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Manrope:wght@200..800&family=Instrument+Sans:wght@400;500;600;700;800&display=swap');
 
   :root {
     --bg: #f4f0fa;
@@ -31,7 +32,6 @@ const CSS = `
     font-family: 'IBM Plex Sans Arabic', 'Manrope', sans-serif;
     background: var(--bg);
     color: var(--t1);
-    direction: rtl;
     overflow-x: hidden;
     position: relative;
   }
@@ -136,12 +136,13 @@ const CSS = `
   }
 
   .hero h1 {
-    font-size: clamp(3rem, 8vw, 7rem);
+    font-family: 'Instrument Sans', 'IBM Plex Sans Arabic', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
     font-weight: 800;
-    line-height: 1;
-    letter-spacing: -2px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     color: var(--t1);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     animation: fadeUp 0.7s 0.08s ease both;
   }
 
@@ -340,10 +341,11 @@ const CSS = `
   }
 
   .s-h {
-    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-family: 'Instrument Sans', 'IBM Plex Sans Arabic', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
     font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -1.5px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
     color: var(--t1);
     margin-bottom: 14px;
   }
@@ -558,7 +560,14 @@ const CSS = `
     font-family: 'Manrope', sans-serif;
   }
 
-  .story-title { font-size: 0.9rem; font-weight: 700; color: var(--t1); margin-bottom: 10px; }
+  .story-title { 
+    font-family: 'Instrument Sans', 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 0.9rem; 
+    font-weight: 700; 
+    color: var(--t1); 
+    margin-bottom: 10px; 
+    letter-spacing: -0.01em;
+  }
   .story-desc { font-size: 0.78rem; color: var(--t2); line-height: 1.7; margin-bottom: 18px; }
 
   .story-q {
@@ -819,7 +828,14 @@ const CSS = `
     font-family: 'Manrope', sans-serif;
   }
 
-  .stack-title { font-size: 1.05rem; font-weight: 800; color: var(--t1); margin-bottom: 10px; }
+  .stack-title { 
+    font-family: 'Instrument Sans', 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 1rem; 
+    font-weight: 800; 
+    color: var(--t1); 
+    margin-bottom: 10px; 
+    letter-spacing: -0.01em;
+  }
   .stack-desc { font-size: 0.82rem; color: var(--t2); line-height: 1.7; margin-bottom: 18px; }
 
   .stack-tools { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -903,7 +919,14 @@ const CSS = `
     flex-shrink: 0;
   }
 
-  .tc-name { font-size: 0.8rem; font-weight: 700; color: var(--t1); margin-bottom: 2px; }
+  .tc-name { 
+    font-family: 'Instrument Sans', 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 0.8rem; 
+    font-weight: 700; 
+    color: var(--t1); 
+    margin-bottom: 2px; 
+    letter-spacing: -0.01em;
+  }
   .tc-role { font-size: 0.68rem; color: var(--t3); font-family: 'Manrope', sans-serif; }
 
   .tc-badge {
@@ -980,10 +1003,11 @@ const CSS = `
   }
 
   .cta-h {
-    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-family: 'Instrument Sans', 'IBM Plex Sans Arabic', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -2.5px;
+    line-height: 1;
+    letter-spacing: -0.02em;
     color: var(--t1);
     margin-bottom: 20px;
   }
@@ -1058,6 +1082,7 @@ const CSS = `
 `;
 
 export default function SondosHero() {
+  const { t, lang } = useLanguage();
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -1078,7 +1103,11 @@ export default function SondosHero() {
     <>
       <style>{CSS}</style>
 
-      <div className="sondos-root" ref={rootRef} dir="rtl">
+      <div
+        className="sondos-root"
+        ref={rootRef}
+        dir={lang === "ar" ? "rtl" : "ltr"}
+      >
         {/* ── BG ── */}
         <div className="sondos-bg">
           <div className="blob blob-1" />
@@ -1092,49 +1121,45 @@ export default function SondosHero() {
           <section className="hero">
             <div className="hero-chip">
               <div className="chip-dot" />
-              <span className="chip-tag">NEW</span>
-              نظام V3 · 33+ خطوة أتمتة · يعمل الآن في الإنتاج
+              <span className="chip-tag">{t("hero.chip.tag")}</span>
+              {t("hero.chip.text")}
             </div>
 
             <h1>
-              بنية تحتية
+              {t("hero.title.line1")}
               <br />
-              <span className="gradient-text">للذكاء الاصطناعي</span>
+              <span className="gradient-text">{t("hero.title.line2")}</span>
               <br />
-              بدون توقف
+              {t("hero.title.line3")}
             </h1>
 
-            <p className="hero-sub">
-              لا نبيع برمجيات جاهزة. نهندس أنظمة ذكاء اصطناعي مخصصة تُنجز عمليات
-              كاملة — مكالمات، بيانات، قرارات، متابعة — آلياً ودقيقاً على مدار
-              الساعة.
-            </p>
+            <p className="hero-sub">{t("hero.subtitle")}</p>
 
             <div className="hero-ctas">
               <a href="/demo" className="btn-primary">
-                ابدأ مشروعك ←
+                {t("hero.cta.primary")} ←
               </a>
               <a href="#workflow" className="btn-secondary">
-                تصفح البنية التقنية →
+                {t("hero.cta.secondary")} →
               </a>
             </div>
 
             <div className="stats-bar">
               <div className="stat-cell">
-                <span className="stat-n">+50</span>
-                <span className="stat-l">projects_shipped</span>
+                <span className="stat-n">{t("hero.stat1.value")}</span>
+                <span className="stat-l">{t("hero.stat1.label")}</span>
               </div>
               <div className="stat-cell">
-                <span className="stat-n">90%</span>
-                <span className="stat-l">automation_rate</span>
+                <span className="stat-n">{t("hero.stat2.value")}</span>
+                <span className="stat-l">{t("hero.stat2.label")}</span>
               </div>
               <div className="stat-cell">
-                <span className="stat-n">24/7</span>
-                <span className="stat-l">uptime</span>
+                <span className="stat-n">{t("hero.stat3.value")}</span>
+                <span className="stat-l">{t("hero.stat3.label")}</span>
               </div>
               <div className="stat-cell">
-                <span className="stat-n">-70%</span>
-                <span className="stat-l">cost_reduction</span>
+                <span className="stat-n">{t("hero.stat4.value")}</span>
+                <span className="stat-l">{t("hero.stat4.label")}</span>
               </div>
             </div>
           </section>
@@ -1176,17 +1201,16 @@ export default function SondosHero() {
             <div className="wrap">
               <div className="svc-wrap">
                 <div className="svc-left rv">
-                  <div className="s-tag">ما نبنيه</div>
+                  <div className="s-tag">{t("services.tag")}</div>
                   <h2 className="s-h">
-                    حلول
+                    {t("services.title.line1")}
                     <br />
-                    مُهندَسة
+                    {t("services.title.line2")}
                     <br />
-                    <span className="hi">من الصفر</span>
+                    <span className="hi">{t("services.title.line3")}</span>
                   </h2>
                   <p className="s-p" style={{ marginBottom: 24 }}>
-                    لا قوالب. لا تسويات. كل نظام نبنيه يُصمَّم لعملياتك تحديداً
-                    — بعد فهم عميق للسياق التجاري والتقني.
+                    {t("services.desc")}
                   </p>
                   <div className="tech-row">
                     {[
@@ -1214,28 +1238,28 @@ export default function SondosHero() {
                   {[
                     {
                       n: "01",
-                      t: "وكلاء مكالمات صوتية بالعربية السعودية",
-                      p: "ذكاء اصطناعي يرد، يحجز، يتابع — باللهجة السعودية الطبيعية. لا ينتظر، لا ينام، لا يخطئ.",
+                      t: t("services.item1.title"),
+                      p: t("services.item1.desc"),
                     },
                     {
                       n: "02",
-                      t: "أتمتة العمليات من البداية للنهاية",
-                      p: "نربط جميع أدواتك في pipeline واحد متكامل — يعمل 24/7 بدون إشراف أو تدخل.",
+                      t: t("services.item2.title"),
+                      p: t("services.item2.desc"),
                     },
                     {
                       n: "03",
-                      t: "روبوتات واتساب وقنوات التواصل",
-                      p: "تجربة عميل موحَّدة عبر واتساب وإنستغرام وماسنجر — ردود فورية وسياقية.",
+                      t: t("services.item3.title"),
+                      p: t("services.item3.desc"),
                     },
                     {
                       n: "04",
-                      t: "لوحات بيانات حية وتقارير آلية",
-                      p: "قرارات مبنية على أرقام حقيقية في الوقت الفعلي — لا تقارير متأخرة، لا بيانات مفقودة.",
+                      t: t("services.item4.title"),
+                      p: t("services.item4.desc"),
                     },
                     {
                       n: "05",
-                      t: "تكامل API مع أنظمتك الحالية",
-                      p: "نوصّل الذكاء الاصطناعي بـ CRM وERP وأي نظام مخصص — بدون هجرة، بدون توقف.",
+                      t: t("services.item5.title"),
+                      p: t("services.item5.desc"),
                     },
                   ].map((s) => (
                     <div key={s.n} className="svc-row">
@@ -1256,43 +1280,41 @@ export default function SondosHero() {
           <section id="proof" className="section">
             <div className="wrap">
               <div className="proof-top rv">
-                <div className="s-tag">النتائج الفعلية</div>
+                <div className="s-tag">{t("proof.tag")}</div>
                 <h2 className="s-h">
-                  أرقام
+                  {t("proof.title.line1")}
                   <br />
-                  لا <span className="hi">تحتاج تعليقاً</span>
+                  {t("proof.title.line2")}{" "}
+                  <span className="hi">{t("proof.title.line3")}</span>
                 </h2>
                 <p className="s-p" style={{ margin: "0 auto" }}>
-                  هذه نتائج حقيقية من مشاريع أنجزناها. لا توقعات. لا تقديرات.
-                  أرقام قابلة للتحقق.
+                  {t("proof.desc")}
                 </p>
               </div>
 
               <div className="proof-nums rv d2">
                 <div className="pn-cell">
-                  <span className="pn-label">cost_savings_avg</span>
-                  <span className="pn-num">70%</span>
+                  <span className="pn-label">{t("proof.stat1.label")}</span>
+                  <span className="pn-num">{t("proof.stat1.value")}</span>
                   <p className="pn-desc">
-                    متوسط انخفاض تكاليف التشغيل خلال 90 يوماً.{" "}
-                    <strong>تكلفة موظف واحد → نظام يخدم مئات العملاء.</strong>
+                    {t("proof.stat1.desc")}{" "}
+                    <strong>{t("proof.stat1.strong")}</strong>
                   </p>
                 </div>
                 <div className="pn-cell">
-                  <span className="pn-label">tasks_automated</span>
-                  <span className="pn-num">90%</span>
+                  <span className="pn-label">{t("proof.stat2.label")}</span>
+                  <span className="pn-num">{t("proof.stat2.value")}</span>
                   <p className="pn-desc">
-                    من المهام التشغيلية المتكررة تُنجز آلياً.{" "}
-                    <strong>
-                      ردود، جدولة، تقارير، متابعة — كلها تعمل وحدها.
-                    </strong>
+                    {t("proof.stat2.desc")}{" "}
+                    <strong>{t("proof.stat2.strong")}</strong>
                   </p>
                 </div>
                 <div className="pn-cell">
-                  <span className="pn-label">response_improvement</span>
-                  <span className="pn-num">3×</span>
+                  <span className="pn-label">{t("proof.stat3.label")}</span>
+                  <span className="pn-num">{t("proof.stat3.value")}</span>
                   <p className="pn-desc">
-                    أسرع في الاستجابة مقارنة بالفرق البشرية.{" "}
-                    <strong>كل استفسار يُعالَج في ثوانٍ.</strong>
+                    {t("proof.stat3.desc")}{" "}
+                    <strong>{t("proof.stat3.strong")}</strong>
                   </p>
                 </div>
               </div>
@@ -1300,28 +1322,28 @@ export default function SondosHero() {
               <div className="stories-grid rv d3">
                 {[
                   {
-                    tag: "healthcare · الرياض",
-                    big: "-73%",
-                    title: "تكاليف الاستقبال والحجز",
-                    desc: "وكيل مكالمات يرد على المرضى ويحجز المواعيد ويرسل التذكيرات.",
-                    q: '"النظام يرد أسرع مني ولا يتعب. المرضى ما يعرفوا الفرق."',
-                    who: "مدير العيادة",
+                    tag: t("proof.story1.tag"),
+                    big: t("proof.story1.value"),
+                    title: t("proof.story1.title"),
+                    desc: t("proof.story1.desc"),
+                    q: t("proof.story1.quote"),
+                    who: t("proof.story1.who"),
                   },
                   {
-                    tag: "real_estate · جدة",
-                    big: "×4",
-                    title: "العملاء المتابَعون أسبوعياً",
-                    desc: "أتمتة كاملة لعملية المتابعة — من أول اتصال حتى إغلاق الصفقة.",
-                    q: '"قبل كنا نضيع 60% من وقتنا في التنسيق. الحين: صفر."',
-                    who: "مدير المبيعات",
+                    tag: t("proof.story2.tag"),
+                    big: t("proof.story2.value"),
+                    title: t("proof.story2.title"),
+                    desc: t("proof.story2.desc"),
+                    q: t("proof.story2.quote"),
+                    who: t("proof.story2.who"),
                   },
                   {
-                    tag: "operations · الدمام",
-                    big: "33+",
-                    title: "خطوة أتمتة في نظام واحد",
-                    desc: "من استقبال المكالمة حتى المتابعة — كل شيء آلي بدون لمسة بشرية.",
-                    q: '"أول مرة أشعر إن شركتي تشتغل وأنا نايم حرفياً."',
-                    who: "المؤسس",
+                    tag: t("proof.story3.tag"),
+                    big: t("proof.story3.value"),
+                    title: t("proof.story3.title"),
+                    desc: t("proof.story3.desc"),
+                    q: t("proof.story3.quote"),
+                    who: t("proof.story3.who"),
                   },
                 ].map((s, i) => (
                   <div key={i} className="story">
@@ -1343,15 +1365,15 @@ export default function SondosHero() {
           <section id="workflow" className="section">
             <div className="wrap">
               <div className="wf-top rv">
-                <div className="s-tag">نظام حقيقي · إنتاج فعلي</div>
+                <div className="s-tag">{t("workflow.tag")}</div>
                 <h2 className="s-h">
-                  البنية الداخلية
+                  {t("workflow.title.line1")}
                   <br />
-                  لنظام <span className="hi">يعمل الآن</span>
+                  {t("workflow.title.line2")}{" "}
+                  <span className="hi">{t("workflow.title.line3")}</span>
                 </h2>
                 <p className="s-p" style={{ margin: "0 auto 44px" }}>
-                  هذا ليس demo. هذا workflow فعلي من أحد عملائنا — 33+ خطوة، صفر
-                  تدخل بشري.
+                  {t("workflow.desc")}
                 </p>
               </div>
 
@@ -1361,11 +1383,11 @@ export default function SondosHero() {
                   <div className="td td-y" />
                   <div className="td td-g" />
                   <span className="term-title">
-                    sondos.ai / workflow-v3 / production
+                    {t("workflow.terminal.title")}
                   </span>
                   <div className="term-live">
                     <div className="tlive-dot" />
-                    LIVE · RUNNING
+                    {t("workflow.terminal.live")}
                   </div>
                 </div>
                 <div className="term-body">
@@ -1374,37 +1396,37 @@ export default function SondosHero() {
                       n: "01",
                       ic: "ic-g",
                       icon: "📞",
-                      name: "Phone Call Ended",
-                      type: "trigger · Vapi Voice Platform",
+                      name: t("workflow.step1.name"),
+                      type: t("workflow.step1.type"),
                       st: "st-ok",
-                      stl: "✓ active",
+                      stl: t("workflow.step1.status"),
                     },
                     {
                       n: "02",
                       ic: "ic-b",
                       icon: "🗂",
-                      name: "Insert Row → Sheets",
-                      type: "action · تسجيل بيانات المكالمة",
+                      name: t("workflow.step2.name"),
+                      type: t("workflow.step2.type"),
                       st: "st-ok",
-                      stl: "✓ active",
+                      stl: t("workflow.step2.status"),
                     },
                     {
                       n: "03",
                       ic: "ic-b",
                       icon: "🔍",
-                      name: "Find Rows → Sheets",
-                      type: "action · البحث عن سجل العميل",
+                      name: t("workflow.step3.name"),
+                      type: t("workflow.step3.type"),
                       st: "st-ok",
-                      stl: "✓ active",
+                      stl: t("workflow.step3.status"),
                     },
                     {
                       n: "04",
                       ic: "ic-a",
                       icon: "🔀",
-                      name: "Branch · Conditional Logic",
-                      type: "router · تحليل الحالة وتوجيه المسار",
+                      name: t("workflow.step4.name"),
+                      type: t("workflow.step4.type"),
                       st: "st-run",
-                      stl: "⟳ routing",
+                      stl: t("workflow.step4.status"),
                     },
                   ].map((r) => (
                     <div key={r.n} className="trow">
@@ -1418,20 +1440,20 @@ export default function SondosHero() {
 
                   <div className="branch-sep">
                     <div className="bline" />
-                    <span className="blabel">BRANCH SPLIT</span>
+                    <span className="blabel">{t("workflow.branch")}</span>
                     <div className="bline" />
                   </div>
 
                   <div className="split">
                     <div className="sp-col">
                       <div className="sp-head sp-head-a">
-                        // PATH_A · new_customer
+                        {t("workflow.pathA")}
                       </div>
                       {[
-                        ["💬", "Send Message → Slack", "team_alert"],
-                        ["🌐", "HTTP Request → API", "external_sync"],
-                        ["⏳", "Delay Until", "optimal_timing"],
-                        ["📲", "Make Phone Call → Vapi", "auto_followup"],
+                        ["💬", t("workflow.pathA.action1"), "team_alert"],
+                        ["🌐", t("workflow.pathA.action2"), "external_sync"],
+                        ["⏳", t("workflow.pathA.action3"), "optimal_timing"],
+                        ["📲", t("workflow.pathA.action4"), "auto_followup"],
                       ].map(([ic, nm, tg], i) => (
                         <div key={i} className="sp-row">
                           <span className="sp-icon">{ic}</span>
@@ -1442,13 +1464,13 @@ export default function SondosHero() {
                     </div>
                     <div className="sp-col">
                       <div className="sp-head sp-head-b">
-                        // PATH_B · returning_customer
+                        {t("workflow.pathB")}
                       </div>
                       {[
-                        ["🔀", "Branch → Sub-check", "status_check"],
-                        ["💬", "Send Message → Slack", "context_aware"],
-                        ["🌐", "HTTP Request", "update_record"],
-                        ["⏰", "Delay Until → Smart", "smart_schedule"],
+                        ["🔀", t("workflow.pathB.action1"), "status_check"],
+                        ["💬", t("workflow.pathB.action2"), "context_aware"],
+                        ["🌐", t("workflow.pathB.action3"), "update_record"],
+                        ["⏰", t("workflow.pathB.action4"), "smart_schedule"],
                       ].map(([ic, nm, tg], i) => (
                         <div key={i} className="sp-row">
                           <span className="sp-icon">{ic}</span>
@@ -1463,10 +1485,10 @@ export default function SondosHero() {
 
               <div className="wf-nums rv d3">
                 {[
-                  ["33+", "automation_steps"],
-                  ["0", "human_touches"],
-                  ["<2s", "response_time"],
-                  ["99.9%", "uptime"],
+                  [t("workflow.stat1.value"), t("workflow.stat1.label")],
+                  [t("workflow.stat2.value"), t("workflow.stat2.label")],
+                  [t("workflow.stat3.value"), t("workflow.stat3.label")],
+                  [t("workflow.stat4.value"), t("workflow.stat4.label")],
                 ].map(([b, l], i) => (
                   <div key={i} className="wf-n">
                     <span className="wf-big">{b}</span>
@@ -1481,24 +1503,23 @@ export default function SondosHero() {
           <section id="stack" className="section">
             <div className="wrap">
               <div className="stack-top rv">
-                <div className="s-tag">البنية التقنية</div>
+                <div className="s-tag">{t("stack.tag")}</div>
                 <h2 className="s-h">
-                  نختار الأفضل
+                  {t("stack.title.line1")}
                   <br />
-                  <span className="hi">لكل مهمة</span>
+                  <span className="hi">{t("stack.title.line2")}</span>
                 </h2>
                 <p className="s-p" style={{ margin: "0 auto 48px" }}>
-                  لا نلتزم بأداة واحدة. نختار النموذج والمنصة الأنسب لكل حالة
-                  استخدام.
+                  {t("stack.desc")}
                 </p>
               </div>
               <div className="stack-grid rv d2">
                 {[
                   {
                     n: "01 /",
-                    cat: "AI_MODELS",
-                    title: "أذكى نماذج العالم",
-                    desc: "نختار بين النماذج بحسب السرعة والدقة والتكلفة.",
+                    cat: t("stack.card1.cat"),
+                    title: t("stack.card1.title"),
+                    desc: t("stack.card1.desc"),
                     tools: [
                       "gpt-4o",
                       "claude-3.5",
@@ -1509,9 +1530,9 @@ export default function SondosHero() {
                   },
                   {
                     n: "02 /",
-                    cat: "AUTOMATION",
-                    title: "أتمتة بلا سقف",
-                    desc: "نبني workflows تربط عشرات الأدوات — قابلة للتوسع، مستقرة تحت الضغط.",
+                    cat: t("stack.card2.cat"),
+                    title: t("stack.card2.title"),
+                    desc: t("stack.card2.desc"),
                     tools: [
                       "make.com",
                       "n8n",
@@ -1522,9 +1543,9 @@ export default function SondosHero() {
                   },
                   {
                     n: "03 /",
-                    cat: "VOICE_AI",
-                    title: "صوت لا يُعرَف من البشر",
-                    desc: "مكالمات عربية بجودة بشرية حقيقية — تفهم اللهجة السعودية.",
+                    cat: t("stack.card3.cat"),
+                    title: t("stack.card3.title"),
+                    desc: t("stack.card3.desc"),
                     tools: ["vapi", "elevenlabs", "whisper", "deepgram"],
                   },
                 ].map((c) => (
@@ -1550,42 +1571,42 @@ export default function SondosHero() {
           <section id="testimonials" className="section">
             <div className="wrap">
               <div className="testi-top rv">
-                <div className="s-tag">آراء العملاء</div>
+                <div className="s-tag">{t("testimonials.tag")}</div>
                 <h2 className="s-h">
-                  ما يقوله
+                  {t("testimonials.title.line1")}
                   <br />
-                  <span className="hi">من جرّبنا</span>
+                  <span className="hi">{t("testimonials.title.line2")}</span>
                 </h2>
               </div>
               <div className="testi-grid rv d2">
                 {[
                   {
                     av: "ر",
-                    q: "أول شركة ذكاء اصطناعي تقدر تثبت لي الأرقام قبل ما أوقّع. وبعد الإطلاق جاءت الأرقام أحسن من المتوقع.",
-                    name: "رنا الدوسري",
-                    role: "ceo · retail_co",
-                    badge: "retail",
+                    q: t("testimonial1.quote"),
+                    name: t("testimonial1.name"),
+                    role: t("testimonial1.role"),
+                    badge: t("testimonial1.badge"),
                   },
                   {
                     av: "ف",
-                    q: "الفريق يفهم الأعمال مو بس التقنية. جلسة واحدة كافية يفهموا كيف نشتغل ويبنوا النظام الصح.",
-                    name: "فيصل الشمري",
-                    role: "founder · realestate_co",
-                    badge: "real_estate",
+                    q: t("testimonial2.quote"),
+                    name: t("testimonial2.name"),
+                    role: t("testimonial2.role"),
+                    badge: t("testimonial2.badge"),
                   },
                   {
                     av: "ع",
-                    q: "وفّرنا أكثر من 40 ساعة أسبوعياً من العمل اليدوي. الفريق صار يركّز على ما يهم فعلاً.",
-                    name: "عمر الحربي",
-                    role: "ops_director · logistics_co",
-                    badge: "logistics",
+                    q: t("testimonial3.quote"),
+                    name: t("testimonial3.name"),
+                    role: t("testimonial3.role"),
+                    badge: t("testimonial3.badge"),
                   },
                   {
                     av: "خ",
-                    q: "النظام يرد على المرضى بلهجة سعودية طبيعية. 73% انخفاض في تكاليف الاستقبال.",
-                    name: "خالد المطيري",
-                    role: "ops_manager · healthcare_co",
-                    badge: "healthcare",
+                    q: t("testimonial4.quote"),
+                    name: t("testimonial4.name"),
+                    role: t("testimonial4.role"),
+                    badge: t("testimonial4.badge"),
                   },
                 ].map((t, i) => (
                   <div key={i} className="tcard">
@@ -1608,18 +1629,18 @@ export default function SondosHero() {
                   className="s-tag"
                   style={{ justifyContent: "center", marginBottom: 20 }}
                 >
-                  قطاعات_نخدمها
+                  {t("testimonials.sectors")}
                 </div>
                 <div className="sectors-wrap">
                   {[
-                    "healthcare",
-                    "real_estate",
-                    "retail",
-                    "logistics",
-                    "education",
-                    "banking",
-                    "hospitality",
-                    "government",
+                    t("sector.healthcare"),
+                    t("sector.realestate"),
+                    t("sector.retail"),
+                    t("sector.logistics"),
+                    t("sector.education"),
+                    t("sector.banking"),
+                    t("sector.hospitality"),
+                    t("sector.government"),
                   ].map((s) => (
                     <span key={s} className="sector">
                       {s}
@@ -1635,18 +1656,16 @@ export default function SondosHero() {
             <div className="cta-glow" />
             <div className="wrap">
               <div className="rv">
-                <div className="cta-label">ابدأ اليوم</div>
+                <div className="cta-label">{t("cta.label")}</div>
                 <h2 className="cta-h">
-                  عملك يستحق
+                  {t("cta.title.line1")}
                   <br />
-                  <span className="dim">أكثر من ذلك</span>
+                  <span className="dim">{t("cta.title.line2")}</span>
                 </h2>
-                <p className="cta-sub">
-                  نحلل عملياتك و نبني roadmap بالتفصيل الهندسي
-                </p>
+                <p className="cta-sub">{t("cta.subtitle")}</p>
                 <div className="hero-ctas">
                   <a href="/demo" className="btn-primary">
-                    ابدأ مشروعك ←
+                    {t("cta.button1")} ←
                   </a>
                 </div>
               </div>

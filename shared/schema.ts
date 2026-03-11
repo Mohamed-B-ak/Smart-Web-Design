@@ -11,10 +11,28 @@ export const contactRequests = pgTable("contact_requests", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const insertContactRequestSchema = createInsertSchema(contactRequests).omit({
+export const insertContactRequestSchema = createInsertSchema(
+  contactRequests,
+).omit({
   id: true,
   createdAt: true,
 });
 
 export type ContactRequest = typeof contactRequests.$inferSelect;
 export type InsertContactRequest = z.infer<typeof insertContactRequestSchema>;
+
+export const articles = pgTable("articles", {
+  id: serial("id").primaryKey(),
+  blogText: text("blog_text").notNull(),
+  primaryKeyword: text("primary_keyword"),
+  secondaryKeywords: text("secondary_keywords"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertArticleSchema = createInsertSchema(articles).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type Article = typeof articles.$inferSelect;
+export type InsertArticle = z.infer<typeof insertArticleSchema>;

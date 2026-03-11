@@ -4,7 +4,7 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
-import { getBlogPostBySlug } from "@/data/blog";
+import { useBlogPosts } from "@/hooks/useBlogPosts";
 import Navigation from "@/sections/Navigation";
 import Hero from "@/sections/Hero";
 import LogoCarousel from "@/sections/LogoCarousel";
@@ -85,6 +85,7 @@ function BlogListPage() {
   );
 }
 
+// ❌ Remplacez TOUTE cette fonction :
 function BlogPostPage({ slug }: { slug: string }) {
   const [, navigate] = useLocation();
   const post = getBlogPostBySlug(slug);

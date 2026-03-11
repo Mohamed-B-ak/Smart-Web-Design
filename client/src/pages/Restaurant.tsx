@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
+import "../index.css";
 
 const SondosInsurance = () => {
+  const { t, lang } = useLanguage();
   const [activeSegment, setActiveSegment] = useState(0);
   const [activeFAQ, setActiveFAQ] = useState(null);
   const [statsVisible, setStatsVisible] = useState(false);
@@ -16,31 +19,28 @@ const SondosInsurance = () => {
 
   const testimonials = [
     {
-      quote:
-        "نسبة تجديد الوثائق كانت 68%. بعد تذكيرات سندس التلقائية ارتفعت إلى 89%. هذا يعني ملايين إضافية سنوياً.",
-      name: "أ. خالد الغامدي",
-      role: "مدير العمليات",
-      company: "شركة الدرع للتأمين",
+      quote: t("ins.testimonial1.quote"),
+      name: t("ins.testimonial1.name"),
+      role: t("ins.testimonial1.role"),
+      company: t("ins.testimonial1.company"),
       image: "👨‍💼",
-      metric: "+21% نسبة التجديد",
+      metric: t("ins.testimonial1.metric"),
     },
     {
-      quote:
-        "كنا نحتاج 8 موظفين للرد على استفسارات التغطية والشبكة الطبية. الآن سندس يتعامل مع 85% منها بدقة عالية.",
-      name: "د. سارة المطيري",
-      role: "مديرة خدمة العملاء",
-      company: "التعاونية للتأمين الصحي",
+      quote: t("ins.testimonial2.quote"),
+      name: t("ins.testimonial2.name"),
+      role: t("ins.testimonial2.role"),
+      company: t("ins.testimonial2.company"),
       image: "👩‍💼",
-      metric: "توفير 85% من الاستفسارات",
+      metric: t("ins.testimonial2.metric"),
     },
     {
-      quote:
-        "بلاغات الحوادث كانت كابوس خارج ساعات العمل. الآن سندس يستقبلها 24/7 ويجهز الملف كامل لفريقنا صباحاً.",
-      name: "أ. فهد العتيبي",
-      role: "مدير المطالبات",
-      company: "وقاية للتأمين",
+      quote: t("ins.testimonial3.quote"),
+      name: t("ins.testimonial3.name"),
+      role: t("ins.testimonial3.role"),
+      company: t("ins.testimonial3.company"),
       image: "🧔",
-      metric: "24/7 استقبال بلاغات",
+      metric: t("ins.testimonial3.metric"),
     },
   ];
 
@@ -66,312 +66,308 @@ const SondosInsurance = () => {
   const segments = [
     {
       id: "auto",
-      name: "تأمين السيارات",
+      name: t("ins.segment.auto.name"),
       icon: "🚗",
-      description: "تأمين شامل وضد الغير",
+      description: t("ins.segment.auto.desc"),
       painPoints: [
-        "استفسارات متكررة عن التغطية والأسعار",
-        "بلاغات الحوادث تحتاج استجابة فورية",
-        "تذكير العملاء بالتجديد يستهلك الفريق",
+        t("ins.segment.auto.pain1"),
+        t("ins.segment.auto.pain2"),
+        t("ins.segment.auto.pain3"),
       ],
       solutions: [
-        "عروض أسعار فورية حسب بيانات السيارة",
-        "استقبال بلاغات الحوادث 24/7 مع جمع التفاصيل",
-        "تذكيرات تلقائية قبل انتهاء الوثيقة",
+        t("ins.segment.auto.sol1"),
+        t("ins.segment.auto.sol2"),
+        t("ins.segment.auto.sol3"),
       ],
       stats: { quotes: "+200%", claims: "24/7", renewal: "+35%" },
       useCases: [
-        "عروض الأسعار",
-        "بلاغات الحوادث",
-        "تجديد الوثائق",
-        "استفسارات التغطية",
+        t("ins.segment.auto.use1"),
+        t("ins.segment.auto.use2"),
+        t("ins.segment.auto.use3"),
+        t("ins.segment.auto.use4"),
       ],
     },
     {
       id: "health",
-      name: "التأمين الصحي",
+      name: t("ins.segment.health.name"),
       icon: "🏥",
-      description: "تأمين طبي للأفراد والشركات",
+      description: t("ins.segment.health.desc"),
       painPoints: [
-        "أسئلة كثيرة عن الشبكة الطبية والتغطية",
-        "موافقات مسبقة تحتاج متابعة",
-        "شكاوى تأخر الموافقات",
+        t("ins.segment.health.pain1"),
+        t("ins.segment.health.pain2"),
+        t("ins.segment.health.pain3"),
       ],
       solutions: [
-        "معلومات فورية عن المستشفيات والتغطية",
-        "متابعة حالة الموافقات تلقائياً",
-        "تصعيد الشكاوى العاجلة للمختصين",
+        t("ins.segment.health.sol1"),
+        t("ins.segment.health.sol2"),
+        t("ins.segment.health.sol3"),
       ],
-      stats: { satisfaction: "94%", response: "< 10 ثوانٍ", resolution: "85%" },
+      stats: { satisfaction: "94%", response: "< 10s", resolution: "85%" },
       useCases: [
-        "الشبكة الطبية",
-        "الموافقات المسبقة",
-        "حدود التغطية",
-        "إضافة تابعين",
+        t("ins.segment.health.use1"),
+        t("ins.segment.health.use2"),
+        t("ins.segment.health.use3"),
+        t("ins.segment.health.use4"),
       ],
     },
     {
       id: "property",
-      name: "تأمين الممتلكات",
+      name: t("ins.segment.property.name"),
       icon: "🏠",
-      description: "منازل، مباني، تجاري",
+      description: t("ins.segment.property.desc"),
       painPoints: [
-        "تقييم المخاطر يحتاج معلومات كثيرة",
-        "بلاغات الأضرار تحتاج توثيق سريع",
-        "تجديدات سنوية كثيرة",
+        t("ins.segment.property.pain1"),
+        t("ins.segment.property.pain2"),
+        t("ins.segment.property.pain3"),
       ],
       solutions: [
-        "جمع معلومات التقييم بمحادثة ذكية",
-        "استقبال البلاغات مع الصور والتفاصيل",
-        "حملات تجديد آلية ومتابعة",
+        t("ins.segment.property.sol1"),
+        t("ins.segment.property.sol2"),
+        t("ins.segment.property.sol3"),
       ],
-      stats: { assessment: "-70% وقت", claims: "فوري", retention: "+40%" },
+      stats: {
+        assessment: "-70%",
+        claims: t("ins.stat.instant"),
+        retention: "+40%",
+      },
       useCases: [
-        "تقييم الممتلكات",
-        "بلاغات الأضرار",
-        "التجديد السنوي",
-        "تعديل التغطية",
+        t("ins.segment.property.use1"),
+        t("ins.segment.property.use2"),
+        t("ins.segment.property.use3"),
+        t("ins.segment.property.use4"),
       ],
     },
     {
       id: "life",
-      name: "تأمين الحياة",
+      name: t("ins.segment.life.name"),
       icon: "💚",
-      description: "حماية وادخار",
+      description: t("ins.segment.life.desc"),
       painPoints: [
-        "منتجات معقدة تحتاج شرح مفصل",
-        "عملاء محتملين يحتاجون متابعة طويلة",
-        "استفسارات عن المستفيدين والقيمة",
+        t("ins.segment.life.pain1"),
+        t("ins.segment.life.pain2"),
+        t("ins.segment.life.pain3"),
       ],
       solutions: [
-        "شرح مبسط للمنتجات حسب احتياج العميل",
-        "تأهيل ومتابعة العملاء المحتملين",
-        "خدمة المستفيدين والورثة بحساسية",
+        t("ins.segment.life.sol1"),
+        t("ins.segment.life.sol2"),
+        t("ins.segment.life.sol3"),
       ],
       stats: { leads: "+60%", conversion: "+25%", NPS: "4.8⭐" },
       useCases: [
-        "شرح المنتجات",
-        "تأهيل العملاء",
-        "خدمة المستفيدين",
-        "تعديل الوثائق",
+        t("ins.segment.life.use1"),
+        t("ins.segment.life.use2"),
+        t("ins.segment.life.use3"),
+        t("ins.segment.life.use4"),
       ],
     },
     {
       id: "travel",
-      name: "تأمين السفر",
+      name: t("ins.segment.travel.name"),
       icon: "✈️",
-      description: "سفر وطوارئ",
+      description: t("ins.segment.travel.desc"),
       painPoints: [
-        "طلبات عاجلة قبل السفر مباشرة",
-        "حالات طوارئ في الخارج",
-        "استفسارات التغطية الدولية",
+        t("ins.segment.travel.pain1"),
+        t("ins.segment.travel.pain2"),
+        t("ins.segment.travel.pain3"),
       ],
       solutions: [
-        "إصدار فوري للوثائق 24/7",
-        "خط طوارئ يعمل بكل اللغات",
-        "معلومات واضحة عن التغطية في كل بلد",
+        t("ins.segment.travel.sol1"),
+        t("ins.segment.travel.sol2"),
+        t("ins.segment.travel.sol3"),
       ],
-      stats: { issuance: "فوري", emergency: "24/7", languages: "3+" },
+      stats: {
+        issuance: t("ins.stat.instant"),
+        emergency: "24/7",
+        languages: "3+",
+      },
       useCases: [
-        "إصدار الوثائق",
-        "حالات الطوارئ",
-        "تمديد التغطية",
-        "المطالبات",
+        t("ins.segment.travel.use1"),
+        t("ins.segment.travel.use2"),
+        t("ins.segment.travel.use3"),
+        t("ins.segment.travel.use4"),
       ],
     },
     {
       id: "broker",
-      name: "وسطاء التأمين",
+      name: t("ins.segment.broker.name"),
       icon: "🤝",
-      description: "وساطة وتسويق",
+      description: t("ins.segment.broker.desc"),
       painPoints: [
-        "مقارنة عروض شركات متعددة",
-        "متابعة عملاء كثيرين",
-        "تجديدات من شركات مختلفة",
+        t("ins.segment.broker.pain1"),
+        t("ins.segment.broker.pain2"),
+        t("ins.segment.broker.pain3"),
       ],
       solutions: [
-        "عروض مقارنة من كل الشركات فوراً",
-        "إدارة محفظة العملاء بالكامل",
-        "تذكيرات موحدة لكل التجديدات",
+        t("ins.segment.broker.sol1"),
+        t("ins.segment.broker.sol2"),
+        t("ins.segment.broker.sol3"),
       ],
-      stats: { comparison: "فوري", portfolio: "مركزي", efficiency: "+80%" },
-      useCases: ["مقارنة العروض", "إدارة المحفظة", "التجديدات", "خدمة العملاء"],
+      stats: {
+        comparison: t("ins.stat.instant"),
+        portfolio: t("ins.stat.centralized"),
+        efficiency: "+80%",
+      },
+      useCases: [
+        t("ins.segment.broker.use1"),
+        t("ins.segment.broker.use2"),
+        t("ins.segment.broker.use3"),
+        t("ins.segment.broker.use4"),
+      ],
     },
   ];
 
   const features = [
     {
       icon: "💬",
-      title: "عروض أسعار فورية",
-      description:
-        "العميل يذكر بيانات سيارته أو عمره ويحصل على عرض سعر تقريبي في ثوانٍ",
-      highlight: "< 30 ثانية",
+      title: t("ins.feature.quotes.title"),
+      description: t("ins.feature.quotes.desc"),
+      highlight: t("ins.feature.quotes.highlight"),
     },
     {
       icon: "🚨",
-      title: "استقبال البلاغات 24/7",
-      description:
-        "حادث في منتصف الليل؟ سندس يستقبل البلاغ، يجمع التفاصيل، ويفتح المطالبة",
-      highlight: "لا انتظار",
+      title: t("ins.feature.claims.title"),
+      description: t("ins.feature.claims.desc"),
+      highlight: t("ins.feature.claims.highlight"),
     },
     {
       icon: "🔔",
-      title: "تذكير التجديد الذكي",
-      description:
-        "اتصالات تلقائية قبل انتهاء الوثيقة بشهر، أسبوعين، وأيام - مع عرض خاص",
-      highlight: "+35% تجديد",
+      title: t("ins.feature.renewal.title"),
+      description: t("ins.feature.renewal.desc"),
+      highlight: t("ins.feature.renewal.highlight"),
     },
     {
       icon: "📋",
-      title: "متابعة المطالبات",
-      description:
-        "العميل يسأل عن مطالبته ويحصل على آخر التحديثات فوراً من النظام",
-      highlight: "شفافية كاملة",
+      title: t("ins.feature.tracking.title"),
+      description: t("ins.feature.tracking.desc"),
+      highlight: t("ins.feature.tracking.highlight"),
     },
     {
       icon: "🎯",
-      title: "تأهيل العملاء المحتملين",
-      description:
-        "أسئلة ذكية تحدد احتياج العميل، ميزانيته، وجديته قبل التحويل للمبيعات",
-      highlight: "Lead Scoring",
+      title: t("ins.feature.leads.title"),
+      description: t("ins.feature.leads.desc"),
+      highlight: t("ins.feature.leads.highlight"),
     },
     {
       icon: "🌐",
-      title: "متعدد اللغات",
-      description:
-        "عربي، إنجليزي، أوردو، فلبيني - سندس يتحدث لغة عميلك في السعودية",
-      highlight: "4+ لغات",
+      title: t("ins.feature.languages.title"),
+      description: t("ins.feature.languages.desc"),
+      highlight: t("ins.feature.languages.highlight"),
     },
   ];
 
   const faqs = [
-    {
-      q: "كيف يعطي سندس عروض أسعار؟",
-      a: "سندس يسأل العميل عن البيانات المطلوبة (نوع السيارة، سنة الصنع، العمر، تاريخ المطالبات) ثم يستخدم API للاتصال بنظام التسعير الخاص بك ويعطي عرض سعر فوري. يمكن تخصيصه ليعطي نطاق سعري أو سعر دقيق حسب تفضيلكم.",
-    },
-    {
-      q: "هل يستطيع استقبال بلاغات الحوادث؟",
-      a: "نعم! سندس يجمع كل التفاصيل: مكان الحادث، الأطراف المتورطة، الإصابات، الأضرار، ومعلومات الاتصال. يمكنه طلب صور عبر واتساب ويفتح المطالبة في نظامكم تلقائياً. الحالات العاجلة (إصابات خطيرة) يحولها فوراً لفريق الطوارئ.",
-    },
-    {
-      q: "كيف يتعامل مع استفسارات التغطية المعقدة؟",
-      a: "سندس مدرّب على وثائقكم وشروط التغطية. يجيب على الأسئلة الشائعة بدقة. للحالات المعقدة أو الاستثناءات، يجمع تفاصيل الحالة ويحولها لمختص مع ملخص كامل. هدفنا حل 80% من الاستفسارات تلقائياً.",
-    },
-    {
-      q: "هل يتكامل مع أنظمة التأمين الموجودة؟",
-      a: "نعم، سندس يتكامل مع أشهر أنظمة إدارة التأمين (Policy Administration Systems) وأنظمة المطالبات. كذلك يتكامل مع نجم، ونظام ساما، وأنظمة CRM. نوفر API مرن للتكامل مع أي نظام.",
-    },
-    {
-      q: "ماذا عن خصوصية بيانات العملاء؟",
-      a: "أمان البيانات أولويتنا. نلتزم بمتطلبات البنك المركزي (ساما) ونظام حماية البيانات الشخصية (PDPL). كل البيانات مشفرة، والخوادم في السعودية، مع صلاحيات وصول محددة وسجلات مراجعة كاملة.",
-    },
-    {
-      q: "كم يستغرق التفعيل؟",
-      a: "التفعيل الأساسي (استفسارات عامة) خلال أسبوع. التكاملات مع أنظمة التسعير والمطالبات تحتاج 2-4 أسابيع. نوفر فريق تنفيذ مخصص لضمان نجاح المشروع.",
-    },
+    { q: t("ins.faq1.q"), a: t("ins.faq1.a") },
+    { q: t("ins.faq2.q"), a: t("ins.faq2.a") },
+    { q: t("ins.faq3.q"), a: t("ins.faq3.a") },
+    { q: t("ins.faq4.q"), a: t("ins.faq4.a") },
+    { q: t("ins.faq5.q"), a: t("ins.faq5.a") },
+    { q: t("ins.faq6.q"), a: t("ins.faq6.a") },
   ];
 
   const stats = [
-    { value: "1M+", label: "مكالمة تأمينية شهرياً", icon: "📞" },
-    { value: "30+", label: "شركة تأمين", icon: "🏢" },
-    { value: "+35%", label: "زيادة في التجديد", icon: "🔄" },
-    { value: "24/7", label: "استقبال البلاغات", icon: "🚨" },
+    { value: "1M+", label: t("ins.stat.calls"), icon: "📞" },
+    { value: "30+", label: t("ins.stat.companies"), icon: "🏢" },
+    { value: "+35%", label: t("ins.stat.renewal"), icon: "🔄" },
+    { value: "24/7", label: t("ins.stat.claims"), icon: "🚨" },
   ];
 
   const insuranceJourney = [
     {
-      stage: "الاستفسار",
+      stage: t("ins.journey.stage1"),
       icon: "❓",
-      traditional: "انتظار 5+ دقائق للرد",
-      sondos: "رد فوري في 3 ثوانٍ",
-      improvement: "-99% وقت",
+      traditional: t("ins.journey.stage1.traditional"),
+      sondos: t("ins.journey.stage1.sondos"),
+      improvement: t("ins.journey.stage1.improvement"),
     },
     {
-      stage: "عرض السعر",
+      stage: t("ins.journey.stage2"),
       icon: "💰",
-      traditional: "طلب معاودة الاتصال",
-      sondos: "عرض سعر فوري",
-      improvement: "فوري",
+      traditional: t("ins.journey.stage2.traditional"),
+      sondos: t("ins.journey.stage2.sondos"),
+      improvement: t("ins.journey.stage2.improvement"),
     },
     {
-      stage: "الإصدار",
+      stage: t("ins.journey.stage3"),
       icon: "📄",
-      traditional: "إجراءات ورقية طويلة",
-      sondos: "توجيه رقمي سلس",
-      improvement: "-80% وقت",
+      traditional: t("ins.journey.stage3.traditional"),
+      sondos: t("ins.journey.stage3.sondos"),
+      improvement: t("ins.journey.stage3.improvement"),
     },
     {
-      stage: "البلاغ",
+      stage: t("ins.journey.stage4"),
       icon: "🚨",
-      traditional: "خارج ساعات العمل = انتظار",
-      sondos: "24/7 استقبال فوري",
-      improvement: "0 انتظار",
+      traditional: t("ins.journey.stage4.traditional"),
+      sondos: t("ins.journey.stage4.sondos"),
+      improvement: t("ins.journey.stage4.improvement"),
     },
     {
-      stage: "المتابعة",
+      stage: t("ins.journey.stage5"),
       icon: "📋",
-      traditional: "اتصل واستفسر كل مرة",
-      sondos: "تحديثات استباقية",
-      improvement: "شفافية",
+      traditional: t("ins.journey.stage5.traditional"),
+      sondos: t("ins.journey.stage5.sondos"),
+      improvement: t("ins.journey.stage5.improvement"),
     },
     {
-      stage: "التجديد",
+      stage: t("ins.journey.stage6"),
       icon: "🔔",
-      traditional: "قد ينسى العميل",
-      sondos: "تذكير ذكي + عرض",
-      improvement: "+35%",
+      traditional: t("ins.journey.stage6.traditional"),
+      sondos: t("ins.journey.stage6.sondos"),
+      improvement: t("ins.journey.stage6.improvement"),
     },
   ];
 
   const integrations = [
-    { name: "نجم", icon: "🚗", type: "حوادث" },
-    { name: "ساما", icon: "🏛️", type: "تنظيمي" },
-    { name: "Salesforce", icon: "☁️", type: "CRM" },
-    { name: "Duck Creek", icon: "🦆", type: "إدارة وثائق" },
-    { name: "Guidewire", icon: "🔧", type: "مطالبات" },
-    { name: "WhatsApp", icon: "💬", type: "تواصل" },
-    { name: "Elm", icon: "🌳", type: "تكامل حكومي" },
-    { name: "Absher", icon: "🆔", type: "تحقق" },
+    {
+      name: t("ins.integration.najm"),
+      icon: "🚗",
+      type: t("ins.integration.type.accidents"),
+    },
+    {
+      name: t("ins.integration.sama"),
+      icon: "🏛️",
+      type: t("ins.integration.type.regulatory"),
+    },
+    { name: "Salesforce", icon: "☁️", type: t("ins.integration.type.crm") },
+    { name: "Duck Creek", icon: "🦆", type: t("ins.integration.type.policy") },
+    { name: "Guidewire", icon: "🔧", type: t("ins.integration.type.claims") },
+    {
+      name: "WhatsApp",
+      icon: "💬",
+      type: t("ins.integration.type.communication"),
+    },
+    {
+      name: t("ins.integration.elm"),
+      icon: "🌳",
+      type: t("ins.integration.type.gov"),
+    },
+    {
+      name: t("ins.integration.absher"),
+      icon: "🆔",
+      type: t("ins.integration.type.verification"),
+    },
   ];
 
   const useCases = [
     {
-      title: "🚗 بلاغ حادث سيارة",
+      title: t("ins.usecase.claim.title"),
       conversation: [
-        { role: "ai", text: "أهلاً! شركة الدرع للتأمين، كيف أقدر أساعدك؟" },
-        { role: "user", text: "صار لي حادث وأبغى أبلّغ" },
-        {
-          role: "ai",
-          text: "أتمنى سلامتك! 🙏 خلني أساعدك في البلاغ.\n\nأولاً: هل فيه إصابات لك أو للطرف الثاني؟",
-        },
-        { role: "user", text: "لا الحمدلله ما فيه إصابات" },
-        { role: "ai", text: "الحمدلله على السلامة.\n\nرقم وثيقتك التأمينية؟" },
-        { role: "user", text: "123456789" },
-        { role: "ai", text: "تمام، أشوف وثيقتك سارية. 👍\n\nوين مكان الحادث؟" },
-        { role: "user", text: "طريق الملك فهد تقاطع العليا" },
-        {
-          role: "ai",
-          text: "ممتاز. تقدر ترسل لي صور الأضرار على واتساب؟ رقم: 05XXXXXXXX\n\nوسأرسل لك رابط تقرير نجم لتعبئته. رقم المطالمة: CLM-2024-78543",
-        },
+        { role: "ai", text: t("ins.usecase.claim.msg1") },
+        { role: "user", text: t("ins.usecase.claim.msg2") },
+        { role: "ai", text: t("ins.usecase.claim.msg3") },
+        { role: "user", text: t("ins.usecase.claim.msg4") },
+        { role: "ai", text: t("ins.usecase.claim.msg5") },
+        { role: "user", text: t("ins.usecase.claim.msg6") },
+        { role: "ai", text: t("ins.usecase.claim.msg7") },
       ],
     },
     {
-      title: "🔔 تذكير تجديد",
+      title: t("ins.usecase.renewal.title"),
       conversation: [
-        {
-          role: "ai",
-          text: "السلام عليكم أخ محمد! معاك سندس من شركة الأمان للتأمين.\n\nأذكرك إن تأمين سيارتك ينتهي بعد أسبوعين (15 مارس). 📅",
-        },
-        { role: "user", text: "إيه صحيح، كم التجديد؟" },
-        {
-          role: "ai",
-          text: "لأنك عميل بدون مطالبات هالسنة، عندك خصم VIP! 🌟\n\nتجديد شامل: 2,400 ر.س (بدل 3,200)\nضد الغير: 950 ر.س\n\nتبي أجدد لك الشامل؟",
-        },
-        { role: "user", text: "إيه جدد الشامل" },
-        {
-          role: "ai",
-          text: "تم! ✅ أرسلت لك رابط الدفع على واتساب.\n\nبعد الدفع، وثيقتك الجديدة توصلك خلال دقائق. شكراً لثقتك فينا! 💜",
-        },
+        { role: "ai", text: t("ins.usecase.renewal.msg1") },
+        { role: "user", text: t("ins.usecase.renewal.msg2") },
+        { role: "ai", text: t("ins.usecase.renewal.msg3") },
+        { role: "user", text: t("ins.usecase.renewal.msg4") },
+        { role: "ai", text: t("ins.usecase.renewal.msg5") },
       ],
     },
   ];
@@ -417,7 +413,6 @@ const SondosInsurance = () => {
 
   const roiResults = calculateROI();
 
-  // ── shared style tokens from healthcare ──
   const pageBg = "bg-[var(--bg,#f7f5fc)] text-[var(--t1,#1a0a2e)]";
   const sectionSoft = "bg-[var(--bg2,rgba(90,24,154,0.03))]";
   const card =
@@ -425,31 +420,34 @@ const SondosInsurance = () => {
   const muted = "text-[#4a3a62]";
   const headingFont = "font-['Instrument_Sans',sans-serif]";
 
-  const statKeyLabel = (key) => {
-    const map = {
-      quotes: "عروض الأسعار",
-      claims: "البلاغات",
-      renewal: "التجديد",
-      satisfaction: "الرضا",
-      response: "وقت الرد",
-      resolution: "الحل الفوري",
-      assessment: "التقييم",
-      retention: "الاحتفاظ",
-      leads: "العملاء",
-      conversion: "التحويل",
-      NPS: "التقييم",
-      issuance: "الإصدار",
-      emergency: "الطوارئ",
-      languages: "اللغات",
-      comparison: "المقارنة",
-      portfolio: "المحفظة",
-      efficiency: "الكفاءة",
+  const statKeyLabel = (key: string) => {
+    const map: Record<string, string> = {
+      quotes: t("ins.stat.quotes"),
+      claims: t("ins.stat.claims"),
+      renewal: t("ins.stat.renewal"),
+      satisfaction: t("ins.stat.satisfaction"),
+      response: t("ins.stat.response"),
+      resolution: t("ins.stat.resolution"),
+      assessment: t("ins.stat.assessment"),
+      retention: t("ins.stat.retention"),
+      leads: t("ins.stat.leads"),
+      conversion: t("ins.stat.conversion"),
+      NPS: t("ins.stat.nps"),
+      issuance: t("ins.stat.issuance"),
+      emergency: t("ins.stat.emergency"),
+      languages: t("ins.stat.languages"),
+      comparison: t("ins.stat.comparison"),
+      portfolio: t("ins.stat.portfolio"),
+      efficiency: t("ins.stat.efficiency"),
     };
     return map[key] || key;
   };
 
   return (
-    <div className={`min-h-screen font-sans ${pageBg}`} dir="rtl">
+    <div
+      dir={lang === "ar" ? "rtl" : "ltr"}
+      className={`min-h-screen font-sans ${pageBg}`}
+    >
       {/* ==================== HERO SECTION ==================== */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden">
         {/* Background effects from healthcare */}
@@ -493,36 +491,47 @@ const SondosInsurance = () => {
         />
 
         <div className="relative z-10 max-w-[820px] mx-auto">
-          {/* Badge — from healthcare inline-flex pill */}
+          {/* Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
-            حلول ذكية لقطاع التأمين 🛡️
+            {t("ins.hero.badge")}
           </div>
 
           <h1
             className={`${headingFont} text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto`}
           >
-            ارفع نسبة <span className="text-[#9d4edd]">التجديد 35%</span>
+            {t("ins.hero.title1")}{" "}
+            <span className="text-[#9d4edd]">{t("ins.hero.title2")}</span>
             <br />
-            وقلّل تكلفة الدعم 70%
+            {t("ins.hero.title3")}
           </h1>
 
           <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[#1a0a2e] max-w-[580px] mx-auto leading-relaxed mb-4">
-            سندس يتعامل مع استفسارات العملاء، يستقبل البلاغات 24/7، ويذكّر
-            بالتجديد تلقائياً - بينما فريقك يركز على الحالات المهمة
+            {t("ins.hero.subtitle")}
           </p>
 
           <p className="text-[clamp(14px,1.6vw,17px)] text-[#4a3a62] max-w-[680px] mx-auto leading-relaxed mb-9">
-            ✓ +35% نسبة التجديد &nbsp;·&nbsp; ✓ استقبال البلاغات 24/7
-            &nbsp;·&nbsp; ✓ 80% أتمتة الاستفسارات
+            {t("ins.hero.proof")}
           </p>
 
           {/* Hero stats pills */}
           <div className="flex flex-wrap justify-center gap-4 mb-10">
             {[
-              { value: "+35%", label: "نسبة التجديد", icon: "🔄" },
-              { value: "24/7", label: "استقبال البلاغات", icon: "🚨" },
-              { value: "80%", label: "أتمتة الاستفسارات", icon: "🤖" },
+              {
+                value: t("ins.hero.stat1.value"),
+                label: t("ins.hero.stat1.label"),
+                icon: "🔄",
+              },
+              {
+                value: t("ins.hero.stat2.value"),
+                label: t("ins.hero.stat2.label"),
+                icon: "🚨",
+              },
+              {
+                value: t("ins.hero.stat3.value"),
+                label: t("ins.hero.stat3.label"),
+                icon: "🤖",
+              },
             ].map((stat, i) => (
               <div
                 key={i}
@@ -547,7 +556,7 @@ const SondosInsurance = () => {
                   background: "linear-gradient(135deg, #5a189a, #7b2fff)",
                 }}
               >
-                احجز عرضك التجريبي
+                {t("ins.hero.cta")}
               </button>
             </a>
           </div>
@@ -578,16 +587,16 @@ const SondosInsurance = () => {
       </section>
 
       {/* ==================== CUSTOMER JOURNEY ==================== */}
-      <section id="رحلة العميل" className="py-24 px-6">
+      <section id="journey" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2
               className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
             >
-              تحسين كل مرحلة في{" "}
-              <span className="text-[#9d4edd]">رحلة العميل</span>
+              {t("ins.journey.title")}{" "}
+              <span className="text-[#9d4edd]">{t("ins.journey.title2")}</span>
             </h2>
-            <p className={muted}>سندس يحسّن تجربة العميل في كل نقطة تواصل</p>
+            <p className={muted}>{t("ins.journey.subtitle")}</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {insuranceJourney.map((stage, idx) => (
@@ -610,7 +619,7 @@ const SondosInsurance = () => {
                     }}
                   >
                     <div className="text-xs font-medium mb-1 text-red-400">
-                      ❌ تقليدي
+                      ❌ {t("ins.journey.traditional")}
                     </div>
                     <div className="text-sm text-[#7F1D1D]">
                       {stage.traditional}
@@ -624,7 +633,7 @@ const SondosInsurance = () => {
                     }}
                   >
                     <div className="text-xs font-medium mb-1 text-[#9d4edd]">
-                      ✓ مع سندس
+                      ✓ {t("ins.journey.withSondos")}
                     </div>
                     <div className="text-sm text-[#1a0a2e]">{stage.sondos}</div>
                   </div>
@@ -633,7 +642,7 @@ const SondosInsurance = () => {
                   className="mt-4 text-center py-2 rounded-full font-bold text-sm text-[#10B981]"
                   style={{ background: "rgba(16,185,129,0.1)" }}
                 >
-                  التحسين: {stage.improvement}
+                  {t("ins.journey.improvement")}: {stage.improvement}
                 </div>
               </div>
             ))}
@@ -642,17 +651,18 @@ const SondosInsurance = () => {
       </section>
 
       {/* ==================== SEGMENTS SECTION ==================== */}
-      <section id="الحلول" className={`py-24 px-6 ${sectionSoft}`}>
+      <section id="solutions" className={`py-24 px-6 ${sectionSoft}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2
               className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
             >
-              حلول لكل نوع <span className="text-[#9d4edd]">تأمين</span>
+              {t("ins.segments.title")}{" "}
+              <span className="text-[#9d4edd]">{t("ins.segments.title2")}</span>
             </h2>
           </div>
 
-          {/* Segment filter pills — healthcare style */}
+          {/* Segment filter pills */}
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {segments.map((segment, idx) => {
               const isActive = activeSegment === idx;
@@ -687,7 +697,7 @@ const SondosInsurance = () => {
                   <h3
                     className={`${headingFont} text-xl font-bold text-red-400`}
                   >
-                    التحديات
+                    {t("ins.segments.pain")}
                   </h3>
                 </div>
                 <ul className="space-y-4">
@@ -708,7 +718,7 @@ const SondosInsurance = () => {
                   <h3
                     className={`${headingFont} text-xl font-bold text-[#9d4edd]`}
                   >
-                    مع سندس
+                    {t("ins.segments.solution")}
                   </h3>
                 </div>
                 <ul className="space-y-4">
@@ -725,7 +735,7 @@ const SondosInsurance = () => {
               <div className="flex flex-wrap items-center justify-between gap-6">
                 <div>
                   <div className="text-sm font-medium mb-2 text-[#8878a0]">
-                    حالات الاستخدام:
+                    {t("ins.segments.useCases")}:
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {segments[activeSegment].useCases.map((useCase, i) => (
@@ -761,13 +771,14 @@ const SondosInsurance = () => {
       </section>
 
       {/* ==================== FEATURES SECTION ==================== */}
-      <section id="المميزات" className="py-24 px-6">
+      <section id="features" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2
               className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
             >
-              مميزات مصممة <span className="text-[#9d4edd]">لقطاع التأمين</span>
+              {t("ins.features.title")}{" "}
+              <span className="text-[#9d4edd]">{t("ins.features.title2")}</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -803,7 +814,8 @@ const SondosInsurance = () => {
             <h2
               className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
             >
-              شاهد سندس <span className="text-[#9d4edd]">أثناء العمل</span>
+              {t("ins.usecases.title")}{" "}
+              <span className="text-[#9d4edd]">{t("ins.usecases.title2")}</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
@@ -819,7 +831,11 @@ const SondosInsurance = () => {
                   {useCase.conversation.map((msg, i) => (
                     <div
                       key={i}
-                      className={`p-4 rounded-2xl text-sm ${msg.role === "ai" ? "rounded-tr-md max-w-[85%] mr-auto border border-[rgba(90,24,154,0.1)]" : "rounded-tl-md max-w-[75%] ml-auto"}`}
+                      className={`p-4 rounded-2xl text-sm ${
+                        msg.role === "ai"
+                          ? "rounded-tr-md max-w-[85%] mr-auto border border-[rgba(90,24,154,0.1)]"
+                          : "rounded-tl-md max-w-[75%] ml-auto"
+                      }`}
                       style={{
                         background:
                           msg.role === "ai"
@@ -839,166 +855,19 @@ const SondosInsurance = () => {
         </div>
       </section>
 
-      {/* ==================== ROI CALCULATOR ==================== 
-      <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-[13px] font-medium mb-3 text-[#9d4edd]">
-              🧮 حاسبة مبنية على بيانات حقيقية
-            </p>
-            <h2
-              className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight text-[#1a0a2e]`}
-            >
-              احسب <span className="text-[#9d4edd]">عائد الاستثمار</span>
-            </h2>
-            <p className="mt-2 text-[#4a3a62]">
-              اكتشف كم يمكنك كسبه من زيادة التجديد وتقليل تكلفة الدعم
-            </p>
-          </div>
-
-          <div className="rounded-3xl p-8 sm:p-10 shadow-[0_0_60px_rgba(90,24,154,0.08)] bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)]">
-            <div className="grid md:grid-cols-2 gap-8 mb-10">
-              {[
-                {
-                  label: "المكالمات اليومية",
-                  key: "dailyCalls",
-                  min: 50,
-                  max: 1000,
-                  step: 50,
-                  display: `${roiInputs.dailyCalls} مكالمة`,
-                },
-                {
-                  label: "وثائق للتجديد شهرياً",
-                  key: "policyRenewals",
-                  min: 100,
-                  max: 5000,
-                  step: 100,
-                  display: `${roiInputs.policyRenewals} وثيقة`,
-                },
-                {
-                  label: "نسبة التجديد الحالية",
-                  key: "renewalRate",
-                  min: 50,
-                  max: 85,
-                  step: 1,
-                  display: `${roiInputs.renewalRate}%`,
-                },
-                {
-                  label: "متوسط قسط التأمين (ر.س)",
-                  key: "avgPremium",
-                  min: 1000,
-                  max: 10000,
-                  step: 500,
-                  display: `${roiInputs.avgPremium.toLocaleString()} ر.س`,
-                },
-              ].map((slider) => (
-                <div key={slider.key}>
-                  <div className="flex justify-between mb-2">
-                    <label className="text-sm text-[#4a3a62]">
-                      {slider.label}
-                    </label>
-                    <span className={`${headingFont} font-bold text-[#1a0a2e]`}>
-                      {slider.display}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min={slider.min}
-                    max={slider.max}
-                    step={slider.step}
-                    value={roiInputs[slider.key]}
-                    onChange={(e) =>
-                      setRoiInputs({
-                        ...roiInputs,
-                        [slider.key]: parseInt(e.target.value),
-                      })
-                    }
-                    className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                    style={{ background: "rgba(90,24,154,0.12)" }}
-                  />
-                </div>
-              ))}
-            </div>
-
-            <div className="p-6 rounded-2xl mb-6 bg-[rgba(90,24,154,0.04)] border border-[rgba(90,24,154,0.1)]">
-              <div className="grid md:grid-cols-4 gap-4 text-center">
-                {[
-                  {
-                    label: "إيرادات تجديد إضافية",
-                    value: `+${roiResults.additionalRevenue.toLocaleString()} ر.س`,
-                    sub: "شهرياً",
-                    color: "#10B981",
-                  },
-                  {
-                    label: "توفير تكلفة الدعم",
-                    value: `${roiResults.supportSavings.toLocaleString()} ر.س`,
-                    sub: "شهرياً",
-                    color: "#9d4edd",
-                  },
-                  {
-                    label: "تكلفة سندس",
-                    value: `${roiResults.sondosCost.toLocaleString()} ر.س`,
-                    sub: "شهرياً",
-                    color: "#7b2fff",
-                  },
-                  {
-                    label: "نسبة التجديد الجديدة",
-                    value: `${roiResults.newRenewalRate}%`,
-                    sub: `+${roiResults.newRenewalRate - roiInputs.renewalRate}%`,
-                    color: "#10B981",
-                  },
-                ].map((card, i) => (
-                  <div
-                    key={i}
-                    className="p-4 rounded-xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.08)]"
-                  >
-                    <div className="text-xs mb-1 text-[#8878a0]">
-                      {card.label}
-                    </div>
-                    <div
-                      className={`${headingFont} text-xl font-bold`}
-                      style={{ color: card.color }}
-                    >
-                      {card.value}
-                    </div>
-                    <div className="text-xs text-[#8878a0]">{card.sub}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div
-              className="p-6 rounded-2xl text-center"
-              style={{
-                background: "rgba(90,24,154,0.08)",
-                border: "1px solid rgba(157,78,221,0.35)",
-              }}
-            >
-              <div className="text-[#4a3a62] mb-2">صافي العائد الشهري</div>
-              <div
-                className={`${headingFont} text-5xl font-bold mb-2 text-[#9d4edd]`}
-              >
-                +{roiResults.netGain.toLocaleString()} ر.س
-              </div>
-              <div className="text-[#4a3a62] text-sm">
-                ROI: {roiResults.roi}% | +{roiResults.additionalPolicies} وثيقة
-                مُجددة إضافية
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* ==================== INTEGRATIONS ==================== */}
       <section className={`py-24 px-6 ${sectionSoft}`}>
         <div className="max-w-7xl mx-auto text-center">
           <h2
             className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
           >
-            يتكامل مع <span className="text-[#9d4edd]">أنظمة التأمين</span>
+            {t("ins.integrations.title")}{" "}
+            <span className="text-[#9d4edd]">
+              {t("ins.integrations.title2")}
+            </span>
           </h2>
           <p className="mb-12 text-[#4a3a62]">
-            تكامل سلس مع أشهر أنظمة التأمين والجهات التنظيمية
+            {t("ins.integrations.subtitle")}
           </p>
           <div className="flex flex-wrap justify-center gap-6">
             {integrations.map((int, idx) => (
@@ -1022,7 +891,10 @@ const SondosInsurance = () => {
             <h2
               className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
             >
-              قصص نجاح <span className="text-[#9d4edd]">شركات التأمين</span>
+              {t("ins.testimonials.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("ins.testimonials.title2")}
+              </span>
             </h2>
           </div>
           <div
@@ -1090,9 +962,10 @@ const SondosInsurance = () => {
             <h2
               className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
             >
-              أسئلة <span className="text-[#9d4edd]">شائعة</span>
+              {t("ins.faq.title")}{" "}
+              <span className="text-[#9d4edd]">{t("ins.faq.title2")}</span>
             </h2>
-            <p className="text-[#4a3a62]">كل شيء تحتاج معرفته قبل البدء</p>
+            <p className="text-[#4a3a62]">{t("ins.faq.subtitle")}</p>
           </div>
           <div className="space-y-4">
             {faqs.map((faq, idx) => {
@@ -1140,13 +1013,12 @@ const SondosInsurance = () => {
           <h2
             className={`${headingFont} text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-[#1a0a2e]`}
           >
-            جاهز ترفع نسبة التجديد
+            {t("ins.cta.title1")}
             <br />
-            <span className="text-[#9d4edd]">وتقلّل تكلفة الدعم؟</span>
+            <span className="text-[#9d4edd]}">{t("ins.cta.title2")}</span>
           </h2>
           <p className="text-xl mb-10 max-w-2xl mx-auto text-[#4a3a62]">
-            انضم لأكثر من 30 شركة تأمين تستخدم سندس لتحسين تجربة العملاء وزيادة
-            الإيرادات
+            {t("ins.cta.subtitle")}
           </p>
           <div className="flex justify-center">
             <a href="/demo">
@@ -1156,14 +1028,14 @@ const SondosInsurance = () => {
                   background: "linear-gradient(135deg, #5a189a, #7b2fff)",
                 }}
               >
-                احجز عرضك التجريبي
+                {t("ins.cta.button")}
               </button>
             </a>
           </div>
           <div className="flex flex-wrap justify-center gap-6 mt-12 text-sm text-[#8878a0]">
-            <span>🔗 تكامل مع نجم وساما</span>
-            <span>🔒 متوافق مع PDPL</span>
-            <span>📊 تقارير تنظيمية</span>
+            <span>🔗 {t("ins.cta.badge1")}</span>
+            <span>🔒 {t("ins.cta.badge2")}</span>
+            <span>📊 {t("ins.cta.badge3")}</span>
           </div>
         </div>
       </section>

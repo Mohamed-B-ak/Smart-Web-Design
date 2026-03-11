@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 import "../index.css";
 
 const SondosTech = () => {
+  const { t, lang } = useLanguage();
   const [activeSegment, setActiveSegment] = useState(0);
   const [activeFAQ, setActiveFAQ] = useState(null);
   const [statsVisible, setStatsVisible] = useState(false);
@@ -37,142 +39,154 @@ const SondosTech = () => {
   const segments = [
     {
       id: "saas",
-      name: "شركات SaaS",
+      name: t("tech.segment.saas.name"),
       icon: "☁️",
-      description: "برمجيات كخدمة واشتراكات",
+      description: t("tech.segment.saas.desc"),
       painPoints: [
-        "تذاكر دعم متكررة عن نفس المشاكل",
-        "Onboarding بطيء يقلل التحويل",
-        "دعم 24/7 متعدد اللغات مكلف",
+        t("tech.segment.saas.pain1"),
+        t("tech.segment.saas.pain2"),
+        t("tech.segment.saas.pain3"),
       ],
       solutions: [
-        "حل 70% من التذاكر تلقائياً من قاعدة المعرفة",
-        "Onboarding تفاعلي يرفع التحويل 40%",
-        "دعم بكل اللغات بتكلفة ثابتة",
+        t("tech.segment.saas.sol1"),
+        t("tech.segment.saas.sol2"),
+        t("tech.segment.saas.sol3"),
       ],
       stats: { tickets: "-70%", onboarding: "+40%", support: "24/7" },
       useCases: [
-        "الدعم الفني",
-        "Onboarding",
-        "شرح المميزات",
-        "الفواتير",
-        "التجديد",
+        t("tech.segment.saas.use1"),
+        t("tech.segment.saas.use2"),
+        t("tech.segment.saas.use3"),
+        t("tech.segment.saas.use4"),
+        t("tech.segment.saas.use5"),
       ],
     },
     {
       id: "startups",
-      name: "الشركات الناشئة",
+      name: t("tech.segment.startups.name"),
       icon: "🚀",
-      description: "Startups وScale-ups",
+      description: t("tech.segment.startups.desc"),
       painPoints: [
-        "فريق صغير لا يكفي للدعم 24/7",
-        "العملاء من مناطق زمنية مختلفة",
-        "الميزانية محدودة للتوظيف",
+        t("tech.segment.startups.pain1"),
+        t("tech.segment.startups.pain2"),
+        t("tech.segment.startups.pain3"),
       ],
       solutions: [
-        "دعم على مستوى Enterprise بتكلفة Startup",
-        "تغطية كل المناطق الزمنية",
-        "تكلفة ثابتة تنمو معك",
+        t("tech.segment.startups.sol1"),
+        t("tech.segment.startups.sol2"),
+        t("tech.segment.startups.sol3"),
       ],
       stats: { coverage: "24/7", cost: "-80%", scale: "∞" },
       useCases: [
-        "دعم العملاء",
-        "جمع Feedback",
-        "تأهيل العملاء",
-        "العروض التوضيحية",
+        t("tech.segment.startups.use1"),
+        t("tech.segment.startups.use2"),
+        t("tech.segment.startups.use3"),
+        t("tech.segment.startups.use4"),
       ],
     },
     {
       id: "enterprise",
-      name: "حلول المؤسسات",
+      name: t("tech.segment.enterprise.name"),
       icon: "🏢",
-      description: "Enterprise Software",
+      description: t("tech.segment.enterprise.desc"),
       painPoints: [
-        "عملاء VIP يتوقعون دعم فوري",
-        "تكاملات معقدة تحتاج متابعة",
-        "SLAs صارمة يصعب الالتزام بها",
+        t("tech.segment.enterprise.pain1"),
+        t("tech.segment.enterprise.pain2"),
+        t("tech.segment.enterprise.pain3"),
       ],
       solutions: [
-        "تعريف فوري لـ VIP ومعاملة خاصة",
-        "متابعة التكاملات والمشاريع",
-        "استجابة فورية تضمن SLA",
+        t("tech.segment.enterprise.sol1"),
+        t("tech.segment.enterprise.sol2"),
+        t("tech.segment.enterprise.sol3"),
       ],
-      stats: { vip: "فوري", sla: "99.9%", response: "< 30 ثانية" },
+      stats: {
+        vip: t("tech.stat.instant"),
+        sla: "99.9%",
+        response: t("tech.stat.under30"),
+      },
       useCases: [
-        "دعم VIP",
-        "متابعة المشاريع",
-        "التصعيد الذكي",
-        "تقارير العملاء",
+        t("tech.segment.enterprise.use1"),
+        t("tech.segment.enterprise.use2"),
+        t("tech.segment.enterprise.use3"),
+        t("tech.segment.enterprise.use4"),
       ],
     },
     {
       id: "apps",
-      name: "تطبيقات الجوال",
+      name: t("tech.segment.apps.name"),
       icon: "📱",
-      description: "iOS, Android, Cross-platform",
+      description: t("tech.segment.apps.desc"),
       painPoints: [
-        "تقييمات سلبية بسبب مشاكل غير محلولة",
-        "حجم كبير من استفسارات الاستخدام",
-        "صعوبة دعم إصدارات متعددة",
+        t("tech.segment.apps.pain1"),
+        t("tech.segment.apps.pain2"),
+        t("tech.segment.apps.pain3"),
       ],
       solutions: [
-        "رد سريع يحسّن التقييمات",
-        "إجابات فورية من Help Center",
-        "دعم مخصص لكل إصدار",
+        t("tech.segment.apps.sol1"),
+        t("tech.segment.apps.sol2"),
+        t("tech.segment.apps.sol3"),
       ],
-      stats: { rating: "+0.8⭐", reviews: "+150%", response: "فوري" },
+      stats: {
+        rating: "+0.8⭐",
+        reviews: "+150%",
+        response: t("tech.stat.instant"),
+      },
       useCases: [
-        "مشاكل التطبيق",
-        "الاشتراكات",
-        "استرجاع الحساب",
-        "شرح المميزات",
+        t("tech.segment.apps.use1"),
+        t("tech.segment.apps.use2"),
+        t("tech.segment.apps.use3"),
+        t("tech.segment.apps.use4"),
       ],
     },
     {
       id: "hosting",
-      name: "الاستضافة والسحابة",
+      name: t("tech.segment.hosting.name"),
       icon: "🖥️",
-      description: "Cloud, Hosting, Infrastructure",
+      description: t("tech.segment.hosting.desc"),
       painPoints: [
-        "مشاكل تقنية عاجلة 24/7",
-        "استفسارات التسعير والخطط",
-        "طلبات الترقية والتعديل",
+        t("tech.segment.hosting.pain1"),
+        t("tech.segment.hosting.pain2"),
+        t("tech.segment.hosting.pain3"),
       ],
       solutions: [
-        "دعم تقني أولي يحل 50% من المشاكل",
-        "حاسبة أسعار ذكية",
-        "ترقية وتعديل بالمحادثة",
+        t("tech.segment.hosting.sol1"),
+        t("tech.segment.hosting.sol2"),
+        t("tech.segment.hosting.sol3"),
       ],
       stats: { uptime: "99.9%", resolution: "-50%", sales: "+35%" },
       useCases: [
-        "الدعم الفني",
-        "التسعير",
-        "الترقية",
-        "مشاكل DNS",
-        "النسخ الاحتياطي",
+        t("tech.segment.hosting.use1"),
+        t("tech.segment.hosting.use2"),
+        t("tech.segment.hosting.use3"),
+        t("tech.segment.hosting.use4"),
+        t("tech.segment.hosting.use5"),
       ],
     },
     {
       id: "security",
-      name: "الأمن السيبراني",
+      name: t("tech.segment.security.name"),
       icon: "🔐",
-      description: "Security Solutions",
+      description: t("tech.segment.security.desc"),
       painPoints: [
-        "تنبيهات أمنية تحتاج استجابة فورية",
-        "عملاء قلقون يحتاجون طمأنة",
-        "شرح التقارير الأمنية معقد",
+        t("tech.segment.security.pain1"),
+        t("tech.segment.security.pain2"),
+        t("tech.segment.security.pain3"),
       ],
       solutions: [
-        "تصنيف التنبيهات وتصعيد العاجل",
-        "طمأنة العملاء بمعلومات دقيقة",
-        "شرح مبسط للتقارير والتوصيات",
+        t("tech.segment.security.sol1"),
+        t("tech.segment.security.sol2"),
+        t("tech.segment.security.sol3"),
       ],
-      stats: { alerts: "فوري", response: "< 1 دقيقة", clarity: "100%" },
+      stats: {
+        alerts: t("tech.stat.instant"),
+        response: t("tech.stat.under1min"),
+        clarity: "100%",
+      },
       useCases: [
-        "التنبيهات الأمنية",
-        "شرح التقارير",
-        "التوصيات",
-        "حالات الطوارئ",
+        t("tech.segment.security.use1"),
+        t("tech.segment.security.use2"),
+        t("tech.segment.security.use3"),
+        t("tech.segment.security.use4"),
       ],
     },
   ];
@@ -180,168 +194,121 @@ const SondosTech = () => {
   const features = [
     {
       icon: "📚",
-      title: "تكامل قاعدة المعرفة",
-      description:
-        "سندس يتصل بـ Notion, Confluence, Help Center ويجيب من وثائقك مباشرة",
-      highlight: "Knowledge Base",
+      title: t("tech.feature.kb.title"),
+      description: t("tech.feature.kb.desc"),
+      highlight: t("tech.feature.kb.highlight"),
     },
     {
       icon: "🎯",
-      title: "Onboarding تفاعلي",
-      description:
-        "يرشد العملاء الجدد خطوة بخطوة، يجيب أسئلتهم، ويضمن تفعيل ناجح",
-      highlight: "+40% تحويل",
+      title: t("tech.feature.onboarding.title"),
+      description: t("tech.feature.onboarding.desc"),
+      highlight: t("tech.feature.onboarding.highlight"),
     },
     {
       icon: "🎫",
-      title: "تقليل تذاكر الدعم",
-      description:
-        "حل 70% من الاستفسارات فوراً = فريقك يركز على المشاكل الحقيقية",
-      highlight: "-70% تذاكر",
+      title: t("tech.feature.tickets.title"),
+      description: t("tech.feature.tickets.desc"),
+      highlight: t("tech.feature.tickets.highlight"),
     },
     {
       icon: "🔄",
-      title: "تجديد الاشتراكات",
-      description: "تذكير ذكي قبل انتهاء الاشتراك + عروض مخصصة = تقليل Churn",
-      highlight: "-25% Churn",
+      title: t("tech.feature.renewal.title"),
+      description: t("tech.feature.renewal.desc"),
+      highlight: t("tech.feature.renewal.highlight"),
     },
     {
       icon: "💻",
-      title: "دعم تقني ذكي",
-      description:
-        "خطوات استكشاف الأخطاء، جمع المعلومات التقنية، وتصعيد ذكي للفريق",
-      highlight: "L1 Support",
+      title: t("tech.feature.techsupport.title"),
+      description: t("tech.feature.techsupport.desc"),
+      highlight: t("tech.feature.techsupport.highlight"),
     },
     {
       icon: "🌍",
-      title: "متعدد اللغات والمناطق",
-      description:
-        "دعم بكل اللغات الرئيسية، في كل المناطق الزمنية، بتكلفة واحدة",
-      highlight: "24/7 Global",
+      title: t("tech.feature.global.title"),
+      description: t("tech.feature.global.desc"),
+      highlight: t("tech.feature.global.highlight"),
     },
   ];
 
   const testimonials = [
     {
-      quote:
-        "كنا نستقبل 200 تذكرة يومياً. سندس يحل 70% منها تلقائياً الآن. فريق الدعم أصبح يركز على المشاكل المعقدة فقط.",
-      name: "م. أحمد الشهري",
-      role: "VP of Customer Success",
-      company: "منصة SaaS سعودية",
+      quote: t("tech.testimonial1.quote"),
+      name: t("tech.testimonial1.name"),
+      role: t("tech.testimonial1.role"),
+      company: t("tech.testimonial1.company"),
       image: "👨‍💻",
-      metric: "-70% تذاكر الدعم",
+      metric: t("tech.testimonial1.metric"),
     },
     {
-      quote:
-        "نسبة تحويل Trial كانت 12%. بعد Onboarding سندس التفاعلي، ارتفعت إلى 22%. فرق كبير في الإيرادات!",
-      name: "أ. سارة القحطاني",
-      role: "Growth Manager",
-      company: "تطبيق Fintech",
+      quote: t("tech.testimonial2.quote"),
+      name: t("tech.testimonial2.name"),
+      role: t("tech.testimonial2.role"),
+      company: t("tech.testimonial2.company"),
       image: "👩‍💼",
-      metric: "+83% تحويل Trial",
+      metric: t("tech.testimonial2.metric"),
     },
     {
-      quote:
-        "عملاؤنا من 20 دولة. كنا نحتاج فريق متعدد اللغات. سندس يخدمهم بـ 8 لغات 24/7 وتكلفته أقل من موظف واحد.",
-      name: "أ. فهد المالكي",
-      role: "CEO",
-      company: "شركة استضافة",
+      quote: t("tech.testimonial3.quote"),
+      name: t("tech.testimonial3.name"),
+      role: t("tech.testimonial3.role"),
+      company: t("tech.testimonial3.company"),
       image: "🧔",
-      metric: "8 لغات بتكلفة موظف",
+      metric: t("tech.testimonial3.metric"),
     },
   ];
 
   const faqs = [
-    {
-      q: "كيف يتصل سندس بقاعدة المعرفة الخاصة بنا؟",
-      a: "سندس يتكامل مباشرة مع Notion, Confluence, Zendesk, Intercom, GitBook, وأي Help Center عبر API. يقرأ مقالاتك ووثائقك ويجيب العملاء منها مباشرة. يتحدث تلقائياً عند تحديث المحتوى.",
-    },
-    {
-      q: "كيف يساعد في Onboarding العملاء الجدد؟",
-      a: "سندس يرحب بالعميل الجديد، يسأله عن أهدافه، يرشده للخطوات الأولى، يجيب أسئلته فوراً، ويتابع معه حتى يصبح مستخدم نشط. يمكنه إرسال رسائل متابعة عبر واتساب أو البريد.",
-    },
-    {
-      q: "هل يستطيع التعامل مع المشاكل التقنية؟",
-      a: "نعم! سندس مدرّب على سيناريوهات الدعم الفني: جمع معلومات النظام، خطوات استكشاف الأخطاء، فحص الـ Logs، وتصعيد ذكي للفريق مع كل التفاصيل. يحل 40-50% من المشاكل التقنية الشائعة تلقائياً.",
-    },
-    {
-      q: "كيف يتعامل مع العملاء VIP والـ Enterprise؟",
-      a: "سندس يتعرف على عملاء VIP من رقم الهاتف أو البريد. يعاملهم بطريقة مميزة، يمكنه الوصول لبياناتهم الخاصة، وتحويلهم لمدير الحساب المخصص إذا لزم الأمر - مع context كامل عن المحادثة.",
-    },
-    {
-      q: "ما الأنظمة التي يتكامل معها؟",
-      a: "سندس يتكامل مع: CRM (Salesforce, HubSpot, Pipedrive)، Help Desk (Zendesk, Freshdesk, Intercom)، Knowledge Base (Notion, Confluence)، Communication (Slack, Teams)، و Billing (Stripe, Paddle). نوفر Webhooks و API لأي تكامل مخصص.",
-    },
-    {
-      q: "كم يستغرق التفعيل؟",
-      a: "التفعيل الأساسي (FAQ + Knowledge Base) خلال 3-5 أيام. التكاملات المتقدمة (CRM, Billing) تحتاج 1-2 أسبوع. نوفر فريق Customer Success يساعدك في الإعداد والتخصيص.",
-    },
+    { q: t("tech.faq1.q"), a: t("tech.faq1.a") },
+    { q: t("tech.faq2.q"), a: t("tech.faq2.a") },
+    { q: t("tech.faq3.q"), a: t("tech.faq3.a") },
+    { q: t("tech.faq4.q"), a: t("tech.faq4.a") },
+    { q: t("tech.faq5.q"), a: t("tech.faq5.a") },
+    { q: t("tech.faq6.q"), a: t("tech.faq6.a") },
   ];
 
   const stats = [
-    { value: "500K+", label: "محادثة دعم شهرياً", icon: "💬" },
-    { value: "100+", label: "شركة تقنية", icon: "🏢" },
-    { value: "-70%", label: "تقليل تذاكر الدعم", icon: "🎫" },
-    { value: "+40%", label: "تحويل Onboarding", icon: "🎯" },
+    { value: "500K+", label: t("tech.stat.conversations"), icon: "💬" },
+    { value: "100+", label: t("tech.stat.companies"), icon: "🏢" },
+    { value: "-70%", label: t("tech.stat.tickets"), icon: "🎫" },
+    { value: "+40%", label: t("tech.stat.conversion"), icon: "🎯" },
   ];
 
   const techStack = [
-    { name: "Zendesk", icon: "🎫", type: "Help Desk" },
-    { name: "Intercom", icon: "💬", type: "Help Desk" },
-    { name: "Freshdesk", icon: "🎧", type: "Help Desk" },
-    { name: "Salesforce", icon: "☁️", type: "CRM" },
-    { name: "HubSpot", icon: "🧡", type: "CRM" },
-    { name: "Notion", icon: "📝", type: "Knowledge" },
-    { name: "Confluence", icon: "📚", type: "Knowledge" },
-    { name: "Slack", icon: "💼", type: "Communication" },
-    { name: "Stripe", icon: "💳", type: "Billing" },
-    { name: "GitHub", icon: "🐙", type: "Dev" },
+    { name: "Zendesk", icon: "🎫", type: t("tech.integration.helpdesk") },
+    { name: "Intercom", icon: "💬", type: t("tech.integration.helpdesk") },
+    { name: "Freshdesk", icon: "🎧", type: t("tech.integration.helpdesk") },
+    { name: "Salesforce", icon: "☁️", type: t("tech.integration.crm") },
+    { name: "HubSpot", icon: "🧡", type: t("tech.integration.crm") },
+    { name: "Notion", icon: "📝", type: t("tech.integration.knowledge") },
+    { name: "Confluence", icon: "📚", type: t("tech.integration.knowledge") },
+    { name: "Slack", icon: "💼", type: t("tech.integration.communication") },
+    { name: "Stripe", icon: "💳", type: t("tech.integration.billing") },
+    { name: "GitHub", icon: "🐙", type: t("tech.integration.dev") },
   ];
 
   const useCaseDemo = [
     {
-      title: "🎫 حل تذكرة دعم",
+      title: t("tech.usecase.ticket.title"),
       conversation: [
-        { role: "ai", text: "مرحباً! دعم TechApp 🚀\nكيف أقدر أساعدك اليوم؟" },
-        { role: "user", text: "التطبيق يعطيني خطأ لما أحاول أرفع ملف" },
-        {
-          role: "ai",
-          text: "آسف على هذا الإزعاج! خلني أساعدك 🔧\n\nما نوع الملف اللي تحاول ترفعه؟ وما حجمه؟",
-        },
-        { role: "user", text: "PDF حجمه 15 ميجا" },
-        {
-          role: "ai",
-          text: "وجدت المشكلة! 💡\n\nالحد الأقصى لحجم الملف في خطتك هو 10 ميجا.\n\nعندك خيارين:\n1️⃣ ضغط الملف إلى أقل من 10 ميجا\n2️⃣ ترقية لخطة Pro (حد 100 ميجا)\n\nتبي أساعدك في أي منهم؟",
-        },
-        { role: "user", text: "كم سعر الترقية؟" },
-        {
-          role: "ai",
-          text: "خطة Pro:\n💰 99 ر.س/شهر (بدل 149)\n✅ رفع ملفات حتى 100 ميجا\n✅ مساحة تخزين 50 جيجا\n✅ دعم أولوية\n\nتبي أفعّلها لك؟ أقدر أضيفها لحسابك الآن 😊",
-        },
+        { role: "ai", text: t("tech.usecase.ticket.msg1") },
+        { role: "user", text: t("tech.usecase.ticket.msg2") },
+        { role: "ai", text: t("tech.usecase.ticket.msg3") },
+        { role: "user", text: t("tech.usecase.ticket.msg4") },
+        { role: "ai", text: t("tech.usecase.ticket.msg5") },
+        { role: "user", text: t("tech.usecase.ticket.msg6") },
+        { role: "ai", text: t("tech.usecase.ticket.msg7") },
       ],
     },
     {
-      title: "🎯 Onboarding عميل جديد",
+      title: t("tech.usecase.onboarding.title"),
       conversation: [
-        {
-          role: "ai",
-          text: "مرحباً بك في TechApp! 🎉\n\nأنا هنا أساعدك تبدأ بسرعة.\n\nإيش الهدف الرئيسي من استخدامك للتطبيق؟",
-        },
-        { role: "user", text: "أبغى أنظم مشاريع فريقي" },
-        {
-          role: "ai",
-          text: "اختيار ممتاز! 👍\n\nخلني أرشدك للخطوات الأولى:\n\n1️⃣ أنشئ مشروعك الأول\n2️⃣ أضف أعضاء الفريق\n3️⃣ أنشئ أول مهمة\n\nتبي أبدأ معك الخطوة الأولى؟",
-        },
-        { role: "user", text: "إيه" },
-        {
-          role: "ai",
-          text: 'ممتاز! 🚀\n\nاضغط على "مشروع جديد" في الزاوية العليا.\n\nسمّه مثلاً "مشروع تجريبي"\n\nجاهز؟ أخبرني لما تنتهي 😊',
-        },
-        { role: "user", text: "تم" },
-        {
-          role: "ai",
-          text: 'رائع! 🎊\n\nالآن أضف أعضاء فريقك:\n1. اضغط على "إعدادات المشروع"\n2. اختر "أعضاء الفريق"\n3. أدخل بريدهم الإلكتروني\n\nنصيحة: يمكنك تحديد صلاحيات مختلفة لكل عضو 💡',
-        },
+        { role: "ai", text: t("tech.usecase.onboarding.msg1") },
+        { role: "user", text: t("tech.usecase.onboarding.msg2") },
+        { role: "ai", text: t("tech.usecase.onboarding.msg3") },
+        { role: "user", text: t("tech.usecase.onboarding.msg4") },
+        { role: "ai", text: t("tech.usecase.onboarding.msg5") },
+        { role: "user", text: t("tech.usecase.onboarding.msg6") },
+        { role: "ai", text: t("tech.usecase.onboarding.msg7") },
       ],
     },
   ];
@@ -380,29 +347,31 @@ const SondosTech = () => {
 
   const roiResults = calculateROI();
 
-  const statKeyLabel = (key: string) =>
-    ({
-      tickets: "التذاكر",
-      onboarding: "Onboarding",
-      support: "الدعم",
-      coverage: "التغطية",
-      cost: "التكلفة",
-      scale: "التوسع",
-      vip: "VIP",
+  const statKeyLabel = (key: string) => {
+    const labels: Record<string, string> = {
+      tickets: t("tech.stat.tickets"),
+      onboarding: t("tech.stat.onboarding"),
+      support: t("tech.stat.support"),
+      coverage: t("tech.stat.coverage"),
+      cost: t("tech.stat.cost"),
+      scale: t("tech.stat.scale"),
+      vip: t("tech.stat.vip"),
       sla: "SLA",
-      response: "الاستجابة",
-      rating: "التقييم",
-      reviews: "المراجعات",
+      response: t("tech.stat.response"),
+      rating: t("tech.stat.rating"),
+      reviews: t("tech.stat.reviews"),
       uptime: "Uptime",
-      resolution: "الحل",
-      sales: "المبيعات",
-      alerts: "التنبيهات",
-      clarity: "الوضوح",
-    })[key] ?? key;
+      resolution: t("tech.stat.resolution"),
+      sales: t("tech.stat.sales"),
+      alerts: t("tech.stat.alerts"),
+      clarity: t("tech.stat.clarity"),
+    };
+    return labels[key] ?? key;
+  };
 
   return (
     <div
-      dir="rtl"
+      dir={lang === "ar" ? "rtl" : "ltr"}
       className="min-h-screen font-arabic bg-[var(--bg)] text-[var(--t1)]"
     >
       {/* ==================== HERO SECTION ==================== */}
@@ -453,34 +422,33 @@ const SondosTech = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
-            دعم ذكي لشركات التقنية
+            {t("tech.hero.badge")}
           </div>
 
           {/* Headline */}
           <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto animate-fade-up animation-delay-100">
-            قلّل تذاكر الدعم <span className="text-[#9d4edd]">70%</span>
+            {t("tech.hero.title1")}{" "}
+            <span className="text-[#9d4edd]">{t("tech.hero.title2")}</span>
             <br />
-            وارفع التحويل 40%
+            {t("tech.hero.title3")}
           </h1>
 
           {/* Subheadline */}
           <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[var(--t1)] max-w-[580px] mx-auto leading-relaxed mb-4 animate-fade-up animation-delay-150">
-            سندس يحل استفسارات العملاء من قاعدة معرفتك، يساعد في Onboarding،
-            ويقدم دعم تقني Level 1 - 24/7 بكل اللغات 🎫
+            {t("tech.hero.subtitle")}
           </p>
 
           {/* Social proof */}
           <p className="text-[clamp(14px,1.6vw,17px)] text-[var(--t2)] max-w-[680px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
-            ✓ +100 شركة تقنية &nbsp;·&nbsp; ✓ 500,000+ محادثة شهرياً
-            &nbsp;·&nbsp; ✓ 24/7 بكل اللغات
+            {t("tech.hero.proof")}
           </p>
 
           {/* Stats row */}
           <div className="flex flex-wrap justify-center gap-4 mb-10 animate-fade-up animation-delay-300">
             {[
-              { value: "-70%", label: "تذاكر الدعم", icon: "🎫" },
-              { value: "+40%", label: "تحويل Trial", icon: "🎯" },
-              { value: "24/7", label: "دعم عالمي", icon: "🌍" },
+              { value: "-70%", label: t("tech.stat.tickets"), icon: "🎫" },
+              { value: "+40%", label: t("tech.stat.conversion"), icon: "🎯" },
+              { value: "24/7", label: t("tech.stat.global"), icon: "🌍" },
             ].map((stat, i) => (
               <div
                 key={i}
@@ -501,13 +469,15 @@ const SondosTech = () => {
               href="/demo"
               className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
             >
-              احجز عرضك التجريبي
+              {t("tech.hero.cta")}
             </a>
           </div>
 
           {/* Integrations hint */}
           <div className="flex flex-wrap justify-center items-center gap-3 animate-fade-up animation-delay-300">
-            <span className="text-sm text-[var(--t2)]">يتكامل مع:</span>
+            <span className="text-sm text-[var(--t2)]">
+              {t("tech.integrations.with")}:
+            </span>
             {["Zendesk", "Intercom", "Notion", "Slack"].map((tool, i) => (
               <span
                 key={i}
@@ -525,7 +495,10 @@ const SondosTech = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              تحديات شركات <span className="text-[#9d4edd]">التقنية</span>
+              {t("tech.problems.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.problems.title2")}
+              </span>
             </h2>
           </div>
 
@@ -534,23 +507,23 @@ const SondosTech = () => {
             {[
               {
                 icon: "🎫",
-                title: "تذاكر متكررة",
-                desc: "نفس الأسئلة مراراً تستهلك وقت الفريق",
+                title: t("tech.problem1.title"),
+                desc: t("tech.problem1.desc"),
               },
               {
                 icon: "🐌",
-                title: "Onboarding بطيء",
-                desc: "عملاء جدد يضيعون = Trial لا يتحول",
+                title: t("tech.problem2.title"),
+                desc: t("tech.problem2.desc"),
               },
               {
                 icon: "🌍",
-                title: "مناطق زمنية",
-                desc: "عملاء عالميين يحتاجون دعم 24/7",
+                title: t("tech.problem3.title"),
+                desc: t("tech.problem3.desc"),
               },
               {
                 icon: "💸",
-                title: "تكلفة الدعم",
-                desc: "فريق كبير للدعم = تكلفة عالية",
+                title: t("tech.problem4.title"),
+                desc: t("tech.problem4.desc"),
               },
             ].map((item, idx) => (
               <div
@@ -571,7 +544,9 @@ const SondosTech = () => {
           <div className="text-center my-12">
             <div className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.15)]">
               <span className="text-2xl">⬇️</span>
-              <span className="font-bold text-[#9d4edd]">سندس يحل كل هذا</span>
+              <span className="font-bold text-[#9d4edd]">
+                {t("tech.problems.solution")}
+              </span>
               <span className="text-2xl">⬇️</span>
             </div>
           </div>
@@ -581,23 +556,23 @@ const SondosTech = () => {
             {[
               {
                 icon: "🤖",
-                title: "-70% تذاكر",
-                desc: "إجابات فورية من قاعدة المعرفة",
+                title: t("tech.solution1.title"),
+                desc: t("tech.solution1.desc"),
               },
               {
                 icon: "🎯",
-                title: "+40% تحويل",
-                desc: "Onboarding تفاعلي يرشد العميل",
+                title: t("tech.solution2.title"),
+                desc: t("tech.solution2.desc"),
               },
               {
                 icon: "🌐",
-                title: "24/7 عالمي",
-                desc: "كل اللغات، كل المناطق الزمنية",
+                title: t("tech.solution3.title"),
+                desc: t("tech.solution3.desc"),
               },
               {
                 icon: "💰",
-                title: "-80% تكلفة",
-                desc: "دعم Enterprise بتكلفة Startup",
+                title: t("tech.solution4.title"),
+                desc: t("tech.solution4.desc"),
               },
             ].map((item, idx) => (
               <div
@@ -643,10 +618,13 @@ const SondosTech = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              حلول لكل نوع <span className="text-[#9d4edd]">شركة تقنية</span>
+              {t("tech.segments.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.segments.title2")}
+              </span>
             </h2>
             <p className="text-[var(--t2)] text-lg">
-              سندس يتكيف مع طبيعة عملك التقني
+              {t("tech.segments.subtitle")}
             </p>
           </div>
 
@@ -677,7 +655,7 @@ const SondosTech = () => {
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">😫</span>
                   <h3 className="text-xl font-bold text-red-400">
-                    التحديات الحالية
+                    {t("tech.segments.pain")}
                   </h3>
                 </div>
                 <ul className="space-y-4">
@@ -693,7 +671,9 @@ const SondosTech = () => {
               <div className="p-8 sm:p-10 bg-[rgba(90,24,154,0.04)]">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">🎉</span>
-                  <h3 className="text-xl font-bold text-[#9d4edd]">مع سندس</h3>
+                  <h3 className="text-xl font-bold text-[#9d4edd]">
+                    {t("tech.segments.solution")}
+                  </h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].solutions.map((solution, i) => (
@@ -709,7 +689,7 @@ const SondosTech = () => {
               <div className="flex flex-wrap items-center justify-between gap-6">
                 <div>
                   <div className="text-sm font-medium mb-2 text-[var(--t2)]">
-                    حالات الاستخدام:
+                    {t("tech.segments.useCases")}:
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {segments[activeSegment].useCases.map((useCase, i) => (
@@ -747,7 +727,10 @@ const SondosTech = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              مميزات مصممة <span className="text-[#9d4edd]">للتقنية</span>
+              {t("tech.features.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.features.title2")}
+              </span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -779,7 +762,10 @@ const SondosTech = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              شاهد سندس <span className="text-[#9d4edd]">أثناء العمل</span>
+              {t("tech.usecases.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.usecases.title2")}
+              </span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
@@ -817,10 +803,13 @@ const SondosTech = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              يتكامل مع <span className="text-[#9d4edd]">أدواتك المفضلة</span>
+              {t("tech.integrations.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.integrations.title2")}
+              </span>
             </h2>
             <p className="text-[var(--t2)]">
-              ربط مباشر مع أشهر أدوات الدعم والتطوير
+              {t("tech.integrations.subtitle")}
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-4">
@@ -843,157 +832,23 @@ const SondosTech = () => {
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
               <span className="text-2xl">🔌</span>
               <span className="text-[var(--t1)]">
-                <strong>API مفتوح</strong> للتكامل مع أي نظام آخر
+                <strong>{t("tech.integrations.api")}</strong>{" "}
+                {t("tech.integrations.api_desc")}
               </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ==================== ROI CALCULATOR ==================== 
-      <section id="roi" className="py-24 px-6 bg-[var(--bg2)]">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-[13px] font-medium mb-3 text-[#9d4edd]">
-              🧮 حاسبة مبنية على بيانات حقيقية
-            </p>
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight">
-              احسب <span className="text-[#9d4edd]">عائد الاستثمار</span>
-            </h2>
-            <p className="mt-3 text-[var(--t2)]">
-              اكتشف كم يمكنك توفيره وكسبه مع سندس
-            </p>
-          </div>
-
-          <div className="rounded-3xl p-8 sm:p-10 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.08)]">
-            <div className="grid md:grid-cols-2 gap-6 mb-10">
-              {[
-                {
-                  label: "تذاكر الدعم الشهرية",
-                  key: "monthlyTickets",
-                  min: 100,
-                  max: 10000,
-                  step: 100,
-                  suffix: " تذكرة",
-                },
-                {
-                  label: "فريق الدعم (عدد الموظفين)",
-                  key: "supportAgents",
-                  min: 2,
-                  max: 30,
-                  step: 1,
-                  suffix: " موظف",
-                },
-                {
-                  label: "Free Trials الشهرية",
-                  key: "monthlyTrials",
-                  min: 50,
-                  max: 2000,
-                  step: 50,
-                  suffix: " Trial",
-                },
-                {
-                  label: "نسبة التحويل الحالية",
-                  key: "trialConversion",
-                  min: 5,
-                  max: 30,
-                  step: 1,
-                  suffix: "%",
-                },
-              ].map(({ label, key, min, max, step, suffix }) => (
-                <div key={key}>
-                  <div className="flex justify-between mb-2">
-                    <label className="text-sm text-[var(--t2)]">{label}</label>
-                    <span className="font-bold text-[var(--t1)]">
-                      {(roiInputs as any)[key].toLocaleString()}
-                      {suffix}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min={min}
-                    max={max}
-                    step={step}
-                    value={(roiInputs as any)[key]}
-                    onChange={(e) =>
-                      setRoiInputs({
-                        ...roiInputs,
-                        [key]: parseInt(e.target.value),
-                      })
-                    }
-                    className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                    style={{ background: "rgba(90,24,154,0.12)" }}
-                  />
-                  <div className="text-center mt-2 font-bold text-[#9d4edd]">
-                    {(roiInputs as any)[key].toLocaleString()}
-                    {suffix}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="grid md:grid-cols-4 gap-4 mb-6">
-              <div className="p-6 rounded-2xl text-center bg-[rgba(16,185,129,0.07)] border border-[rgba(16,185,129,0.2)]">
-                <div className="text-sm mb-2 text-emerald-600">
-                  توفير تكلفة الدعم
-                </div>
-                <div className="text-2xl font-bold text-emerald-600">
-                  {roiResults.supportSavings.toLocaleString()} ر.س
-                </div>
-                <div className="text-xs text-[var(--t3)]">
-                  -{roiResults.agentsReduced} موظف
-                </div>
-              </div>
-              <div className="p-6 rounded-2xl text-center bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.15)]">
-                <div className="text-sm mb-2 text-[#9d4edd]">
-                  زيادة إيرادات التحويل
-                </div>
-                <div className="text-2xl font-bold text-[#9d4edd]">
-                  +{roiResults.conversionGain.toLocaleString()} ر.س
-                </div>
-                <div className="text-xs text-[var(--t3)]">
-                  {roiResults.newConversion}% تحويل جديد
-                </div>
-              </div>
-              <div className="p-6 rounded-2xl text-center bg-[rgba(239,68,68,0.07)] border border-[rgba(239,68,68,0.2)]">
-                <div className="text-sm mb-2 text-red-400">تكلفة سندس</div>
-                <div className="text-2xl font-bold text-red-500">
-                  {roiResults.sondosCost.toLocaleString()} ر.س
-                </div>
-                <div className="text-xs text-[var(--t3)]">شهرياً</div>
-              </div>
-              <div className="p-6 rounded-2xl text-center bg-[rgba(16,185,129,0.07)] border border-[rgba(16,185,129,0.2)]">
-                <div className="text-sm mb-2 text-emerald-600">
-                  تذاكر تُحل تلقائياً
-                </div>
-                <div className="text-2xl font-bold text-emerald-600">
-                  {roiResults.ticketsAutomated.toLocaleString()}
-                </div>
-                <div className="text-xs text-[var(--t3)]">70% من التذاكر</div>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex flex-wrap justify-center items-center gap-4 px-8 py-4 rounded-2xl gradient-bg">
-                <span className="text-white text-lg">صافي العائد الشهري:</span>
-                <span className="text-white text-4xl font-bold">
-                  +{roiResults.netGain.toLocaleString()} ر.س
-                </span>
-                <span className="text-white/80 text-sm">
-                  ROI: {roiResults.roi}%
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* ==================== TESTIMONIALS ==================== */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              قصص نجاح <span className="text-[#9d4edd]">شركات التقنية</span>
+              {t("tech.testimonials.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.testimonials.title2")}
+              </span>
             </h2>
           </div>
           <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.1)] relative">
@@ -1047,7 +902,8 @@ const SondosTech = () => {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              أسئلة <span className="text-[#9d4edd]">شائعة</span>
+              {t("tech.faq.title")}{" "}
+              <span className="text-[#9d4edd]">{t("tech.faq.title2")}</span>
             </h2>
           </div>
           <div className="space-y-4">
@@ -1084,19 +940,19 @@ const SondosTech = () => {
         <div className="max-w-4xl mx-auto text-center">
           <div className="text-6xl mb-6">💻</div>
           <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-white">
-            جاهز تقلّل تذاكر الدعم 70%
+            {t("tech.cta.title1")}
             <br />
-            وترفع التحويل 40%؟
+            {t("tech.cta.title2")}
           </h2>
           <p className="text-white/80 text-xl mb-10 max-w-2xl mx-auto">
-            انضم لأكثر من 100 شركة تقنية تستخدم سندس لتحسين تجربة العملاء
+            {t("tech.cta.subtitle")}
           </p>
           <div className="flex justify-center mb-12">
             <a
               href="/demo"
               className="inline-flex items-center gap-2 px-10 py-5 bg-[rgba(255,255,255,0.95)] rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:bg-white text-[#5a189a] shimmer"
             >
-              احجز عرضك التجريبي
+              {t("tech.cta.button")}
             </a>
           </div>
           <div className="flex flex-wrap justify-center gap-4 text-white/70 text-sm">

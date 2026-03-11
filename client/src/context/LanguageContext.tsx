@@ -5,11 +5,13 @@ type Language = "en" | "ar";
 interface LanguageContextType {
   lang: Language;
   setLang: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string, vars?: Record<string, string | number>) => string;
+  tList: (key: string) => string[];
 }
 
 const translations: Record<Language, Record<string, string>> = {
   en: {
+    // ─── Nav ─────────────────────────────────────────────────────────────────
     "nav.product": "Product",
     "nav.pricing": "Pricing",
     "nav.for_business": "For Business",
@@ -19,6 +21,10 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.login": "Login",
     "nav.contact_sales": "Contact Sales",
     "nav.try_free": "Try For Free",
+    "nav.industries": "Industries",
+    "nav.partner": "About Us",
+
+    // ─── Hero ─────────────────────────────────────────────────────────────────
     "hero.badge": "#1 AI Voice Agent Platform for Automating Calls",
     "hero.title": "Meet Your AI Call Center",
     "hero.title_span": "Future",
@@ -26,7 +32,27 @@ const translations: Record<Language, Record<string, string>> = {
       "Build, deploy, and manage next-generation AI voice agents that sound human, execute tasks, and scale effortlessly.",
     "hero.cta_demo": "Try Our Live Demo",
     "hero.cta_sales": "Contact Sales",
+    "hero.title_new":
+      "Smart Calls With Human Voice — Serving Your Customers 24/7",
+    "hero.subtitle_new":
+      "Your smart voice agent books appointments, follows up with customers, and manages your calls — in Arabic and Saudi dialect.",
+    "hero.desc":
+      "Sondos AI is the Saudi integrated platform for automating phone calls with AI.",
+    "hero.stat1_val": "50,000+",
+    "hero.stat1_label": "Calls Processed",
+    "hero.stat2_val": "100+",
+    "hero.stat2_label": "Languages & Dialects",
+    "hero.stat3_val": "300+",
+    "hero.stat3_label": "Ready Integrations",
+    "hero.stat4_val": "24/7",
+    "hero.stat4_label": "Non-stop Service",
+    "hero.cta_try": "Try a Free Call Now",
+    "hero.cta_book": "Book Your Demo",
+
+    // ─── Logo carousel ────────────────────────────────────────────────────────
     "logo_carousel.title": "Trusted by leading companies worldwide",
+
+    // ─── Scale ───────────────────────────────────────────────────────────────
     "scale.title": "Built to Scale",
     "scale.subtitle":
       "Handle millions of calls with enterprise-grade reliability",
@@ -34,10 +60,12 @@ const translations: Record<Language, Record<string, string>> = {
     "scale.languages": "Languages Supported",
     "scale.uptime": "Uptime",
     "scale.satisfaction": "Customer Satisfaction",
+
+    // ─── What is ─────────────────────────────────────────────────────────────
     "whatis.label": "What is Sondos AI",
     "whatis.title": "The Next Generation of Customer Communication",
     "whatis.desc":
-      "Sondos AI is a comprehensive AI-powered call center platform that transforms how businesses handle customer interactions. Our intelligent voice agents understand context, respond naturally, and resolve issues autonomously.",
+      "Sondos AI is a comprehensive AI-powered call center platform that transforms how businesses handle customer interactions.",
     "whatis.f1_title": "Natural Conversations",
     "whatis.f1_desc":
       "AI agents that understand context and respond like real humans",
@@ -50,15 +78,17 @@ const translations: Record<Language, Record<string, string>> = {
     "whatis.f4_title": "Smart Agents",
     "whatis.f4_desc":
       "Voice and text AI agents that interact naturally with customers.",
-
     "whatis.f5_title": "Advanced Security",
     "whatis.f5_desc":
       "Your data protected with the highest global security standards.",
-
     "whatis.f6_title": "Lightning Speed",
     "whatis.f6_desc":
       "Instant responses and real-time analysis of every interaction.",
+
+    // ─── Common ───────────────────────────────────────────────────────────────
     "common.read_more": "Read More",
+
+    // ─── Demo ─────────────────────────────────────────────────────────────────
     "demo.label": "Live Demo",
     "demo.title": "See Sondos AI in Action",
     "demo.desc":
@@ -66,12 +96,45 @@ const translations: Record<Language, Record<string, string>> = {
     "demo.start": "Start Demo Call",
     "demo.agent": "AI Agent",
     "demo.speaking": "Speaking...",
+    "demo.title1": "Book Your Demo",
+    "demo.subtitle":
+      "Fill out the form and our team will contact you within 24 hours",
+    "demo.full_name": "Full Name *",
+    "demo.full_name_placeholder": "Enter your name",
+    "demo.email": "Email Address *",
+    "demo.phone": "Phone Number *",
+    "demo.phone_prefix": "+966",
+    "demo.phone_placeholder": "XX XXX XXXX",
+    "demo.company": "Company Name *",
+    "demo.company_placeholder": "Enter your company name",
+    "demo.industry": "Industry *",
+    "demo.industry_select_placeholder": "Select your sector",
+    "demo.questions": "Questions (Optional)",
+    "demo.questions_placeholder":
+      "Write your question or any additional details...",
+    "demo.submit": "Submit Request 🚀",
+    "demo.loading": "⏳ Sending...",
+    "demo.success": "Your request has been sent successfully!",
+    "demo.error": "❌ An error occurred. Please try again.",
+    "demo.phone_digits_remaining": "{n} digits remaining",
+
+    // ─── Validation ───────────────────────────────────────────────────────────
+    "validation.required": "This field is required.",
+    "validation.email_invalid":
+      "Please include a valid '@' in the email address.",
+    "validation.phone_invalid": "Please enter a valid 9-digit Saudi number.",
+
+    // ─── Testimonials ─────────────────────────────────────────────────────────
     "testimonials.label": "Testimonials",
     "testimonials.title": "What Our Clients Say",
+
+    // ─── Talks ───────────────────────────────────────────────────────────────
     "talks.label": "Natural Language",
     "talks.title": "Talks Like People, Thinks Like AI",
     "talks.desc":
-      "Our AI agents engage in natural, flowing conversations that customers love. Powered by advanced NLP and contextual understanding.",
+      "Our AI agents engage in natural, flowing conversations that customers love.",
+
+    // ─── Highlights ───────────────────────────────────────────────────────────
     "highlights.label": "Highlights",
     "highlights.title": "Why Choose Sondos AI",
     "highlights.h1_title": "70% Cost Reduction",
@@ -84,6 +147,8 @@ const translations: Record<Language, Record<string, string>> = {
     "highlights.h4_title": "95% Resolution Rate",
     "highlights.h4_desc":
       "First-call resolution powered by intelligent automation",
+
+    // ─── Features ───────────────────────────────at�─────────────────────────────
     "features.label": "Features",
     "features.title": "Everything You Need",
     "features.f1": "Intelligent Call Routing",
@@ -92,10 +157,14 @@ const translations: Record<Language, Record<string, string>> = {
     "features.f4": "CRM Integration",
     "features.f5": "Call Recording & Transcription",
     "features.f6": "Custom AI Training",
+
+    // ─── QA ──────────────────────────────────────────────────────────────────
     "qa.label": "Quality Assurance",
     "qa.title": "Enterprise-Grade Quality",
     "qa.desc":
       "Every interaction is monitored, analyzed, and optimized for the best customer experience.",
+
+    // ─── Omni ─────────────────────────────────────────────────────────────────
     "omni.label": "Omnichannel",
     "omni.title": "One Platform, Every Channel",
     "omni.desc":
@@ -104,10 +173,14 @@ const translations: Record<Language, Record<string, string>> = {
     "omni.chat": "Live Chat",
     "omni.email": "Email",
     "omni.social": "Social Media",
+
+    // ─── Telephony ───────────────────────────────────────────────────────────
     "telephony.label": "Telephony",
     "telephony.title": "Cloud-Native Telephony",
     "telephony.desc":
       "Enterprise-grade telephony infrastructure built for the modern cloud era.",
+
+    // ─── Security ─────────────────────────────────────────────────────────────
     "security.label": "Security",
     "security.title": "Bank-Grade Security",
     "security.desc":
@@ -116,9 +189,13 @@ const translations: Record<Language, Record<string, string>> = {
     "security.f2": "SOC 2 Type II Certified",
     "security.f3": "GDPR Compliant",
     "security.f4": "ISO 27001 Certified",
+
+    // ─── Integrations ─────────────────────────────────────────────────────────
     "integrations.label": "Integrations",
     "integrations.title": "Connect With Your Stack",
     "integrations.desc": "Seamlessly integrate with the tools you already use.",
+
+    // ─── FAQ ─────────────────────────────────────────────────────────────────
     "faq.label": "FAQ",
     "faq.title": "Frequently Asked Questions",
     "faq.q1": "How does Sondos AI handle multiple languages?",
@@ -136,13 +213,20 @@ const translations: Record<Language, Record<string, string>> = {
     "faq.q5": "Is there a free trial?",
     "faq.a5":
       "Yes, we offer a 14-day free trial with full access to all features. No credit card required.",
+
+    // ─── CTA ─────────────────────────────────────────────────────────────────
     "cta.title": "Ready to Transform Your Call Center?",
     "cta.desc":
       "Join hundreds of companies already using Sondos AI to deliver exceptional customer experiences.",
     "cta.button": "Get Started Free",
     "cta.demo": "Schedule a Demo",
+
+    // ─── Footer ───────────────────────────────────────────────────────────────
     "footer.desc":
       "AI-powered call center platform that transforms customer communication with intelligent voice agents.",
+    "footer.description_line1": "AI-powered smart contact center platform",
+    "footer.description_line2":
+      "Redefining how you communicate with your customers.",
     "footer.product": "Product",
     "footer.company": "Company",
     "footer.resources": "Resources",
@@ -154,33 +238,24 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.api": "API Reference",
     "footer.privacy": "Privacy Policy",
     "footer.terms": "Terms of Service",
+    "footer.contact": "Contact Us",
+    "footer.email": "Email",
+    "footer.phone": "Phone Number",
+    "footer.follow_us": "Follow Us",
+    "footer.rights": "All rights reserved © 2026 Sondos AI",
+
+    // ─── Blog ─────────────────────────────────────────────────────────────────
     "blog.title": "Blog",
     "blog.subtitle":
       "Insights, updates, and best practices from the Sondos AI team",
     "blog.read_more": "Read More",
     "blog.back": "Back to Blog",
     "blog.min_read": "min read",
-    "nav.industries": "Industries",
-    "nav.partner": "About Us",
-    "hero.title_new":
-      "Smart Calls With Human Voice — Serving Your Customers 24/7",
-    "hero.subtitle_new":
-      "Your smart voice agent books appointments, follows up with customers, and manages your calls — in Arabic and Saudi dialect.",
-    "hero.desc":
-      "Sondos AI is the Saudi integrated platform for automating phone calls with AI. Voice agents that speak naturally and understand your customers needs — booking appointments, qualifying leads, and providing support — in 100+ languages, with 300+ integrations, and full compliance with Saudi regulations.",
-    "hero.stat1_val": "50,000+",
-    "hero.stat1_label": "Calls Processed",
-    "hero.stat2_val": "100+",
-    "hero.stat2_label": "Languages & Dialects",
-    "hero.stat3_val": "300+",
-    "hero.stat3_label": "Ready Integrations",
-    "hero.stat4_val": "24/7",
-    "hero.stat4_label": "Non-stop Service",
-    "hero.cta_try": "Try a Free Call Now",
-    "hero.cta_book": "Book Your Demo",
+
+    // ─── Why Sondos ──────────────────────────────────────────────────────────
     "whysondos.title": "Why Choose Sondos AI for Your Business in Saudi?",
     "whysondos.desc":
-      "In a world where digital transformation is accelerating c�� and in a kingdom leading Vision 2030 — it is no longer acceptable for your customers to wait on hold or miss a call. Sondos AI turns every call into an opportunity.",
+      "In a world where digital transformation is accelerating and in a kingdom leading Vision 2030 — it is no longer acceptable for your customers to wait on hold or miss a call. Sondos AI turns every call into an opportunity.",
     "whysondos.f1_title": "Designed for Saudi Market",
     "whysondos.f1_desc":
       "Understands Saudi dialect and local culture. Your voice agent speaks your customers language naturally.",
@@ -199,6 +274,8 @@ const translations: Record<Language, Record<string, string>> = {
     "whysondos.f6_title": "Works While You Sleep",
     "whysondos.f6_desc":
       "24 hours, 7 days a week. No holidays, no absences, no delays.",
+
+    // ─── How it works ─────────────────────────────────────────────────────────
     "howit.title": "How Does Sondos AI Work?",
     "howit.s1_title": "Create Your Smart Agent",
     "howit.s1_desc":
@@ -212,12 +289,16 @@ const translations: Record<Language, Record<string, string>> = {
     "howit.s4_title": "Monitor Results",
     "howit.s4_desc":
       "Track every call from the dashboard: recordings, transcripts, conversion rates, and satisfaction.",
+
+    // ─── Final CTA ───────────────────────────────────────────────────────────
     "finalcta.title": "The Future of Calls Has Begun — Are You Ready?",
     "finalcta.desc":
       "Voice AI is not the future — it is the present. Every day you delay, your competitors advance. Start today with Sondos AI.",
     "finalcta.btn1": "Start Free — No Credit Card",
     "finalcta.btn2": "Talk to Our Advisor",
     "finalcta.btn3": "Message Us on WhatsApp",
+
+    // ─── Agents ───────────────────────────────────────────────────────────────
     "agents.title": "Choose your smart assistant",
     "agents.choose_dialect": "Choose dialect to start",
     "agents.ready": "Ready",
@@ -233,38 +314,8 @@ const translations: Record<Language, Record<string, string>> = {
     "agents.saudi": "Speak Saudi",
     "agents.emirati": "Speak Emirati",
     "agents.egyptian": "Speak Egyptian",
-    "demo.title1": "Book Your Demo",
-    "demo.subtitle":
-      "Fill out the form and our team will contact you within 24 hours",
 
-    "demo.full_name": "Full Name *",
-    "demo.full_name_placeholder": "Enter your name",
-
-    "demo.email": "Email Address *",
-    "demo.phone": "Phone Number *",
-
-    "demo.company": "Company Name *",
-    "demo.company_placeholder": "Enter your company name",
-
-    "demo.industry": "Industry *",
-    "demo.industry_placeholder":
-      "Example: Real estate, Healthcare, E-commerce...",
-
-    "demo.questions": "Questions (Optional)",
-    "demo.questions_placeholder":
-      "Write your question or any additional details...",
-
-    "demo.submit": "Submit Request 🚀",
-    "footer.description_line1": "AI-powered smart contact center platform",
-    "footer.description_line2":
-      "Redefining how you communicate with your customers.",
-
-    "footer.contact": "Contact Us",
-    "footer.email": "Email",
-    "footer.phone": "Phone Number",
-
-    "footer.follow_us": "Follow Us",
-    "footer.rights": "All rights reserved © 2026 Sondos AI",
+    // ─── Partner ─────────────────────────────────────────────────────────────
     "partner.hero_title":
       "Launch Your Own Smart Calls Platform — Under Your Brand",
     "partner.hero_desc":
@@ -339,69 +390,2065 @@ const translations: Record<Language, Record<string, string>> = {
     "partner.faq4_q": "Can I white label docs and marketing materials?",
     "partner.faq4_a":
       "Yes. We provide white-label documentation, marketing templates, and sales materials that you can customize with your brand.",
+
+    // ─── Healthcare ───────────────────────────────────────────────────────────
+    "hc.hero.badge": "Trusted by verified clients",
+    "hc.hero.title1": "Turn Missed Calls into",
+    "hc.hero.title2": "Booked Appointments",
+    "hc.hero.subtitle":
+      "AI-powered voice receptionist that answers your patients 24/7 in natural Saudi dialect and books appointments automatically",
+    "hc.hero.stats":
+      "✓ 150+ healthcare facilities · ✓ 500,000+ calls/month · ✓ 97% recognition accuracy",
+    "hc.hero.cta": "Try Now",
+    "hc.problem.title": "The Problem",
+    "hc.problem.1": "✗ 40% of calls go unanswered",
+    "hc.problem.2": "✗ 25% of patients miss their appointments",
+    "hc.problem.3": "✗ Receptionists are busy or unavailable",
+    "hc.problem.4": "✗ Monthly losses up to SAR 50,000",
+    "hc.solution.title": "The Solution with Sondos",
+    "hc.solution.1": "✓ Answer 100% of calls 24/7",
+    "hc.solution.2": "✓ Reduce no-shows by 65%",
+    "hc.solution.3": "✓ Automatic booking with no human intervention",
+    "hc.solution.4": "✓ Positive ROI from the first month",
+    "hc.facilities.title": "Tailored Solutions for Every Facility Type",
+    "hc.facilities.subtitle":
+      "Based on official Saudi Ministry of Health classifications",
+    "hc.facilities.show_all": "Show all classifications ({n})",
+    "hc.facilities.filter.all": "All",
+    "hc.facility.cat.hospitals": "Hospitals",
+    "hc.facility.cat.clinics": "Clinics",
+    "hc.facility.cat.centers": "Centers",
+    "hc.facility.cat.labs": "Labs",
+    "hc.facility.cat.pharmacy": "Pharmacy",
+    "hc.facility.cat.dentistry": "Dentistry",
+    "hc.integrations.title": "Integrates with Your Existing Systems",
+    "hc.integrations.subtitle":
+      "Seamless integration with hospital and clinic systems",
+    "hc.integration.whatsapp.desc": "Appointment reminders ",
+    "hc.integration.booking.desc": "Direct booking",
+    "hc.integration.sms.desc": "Reminder messages",
+    "hc.integration.crm.desc": "Customer management",
+    "hc.integration.payments.desc": "Payments and insurance",
+    "hc.security.title": "🔒 Enterprise-Grade Security",
+    "hc.security.subtitle": "Protecting patient data is our top priority",
+    "hc.security.f1.title": "End-to-End Encryption",
+    "hc.security.f1.desc": "All calls and data encrypted with AES-256 standard",
+    "hc.security.f2.title": "Local Hosting",
+    "hc.security.f2.desc": "Servers inside the Kingdom of Saudi Arabia",
+    "hc.security.f3.title": "Granular Permissions",
+    "hc.security.f3.desc": "Full control over who accesses what",
+    "hc.security.f4.title": "Full Audit Log",
+    "hc.security.f4.desc":
+      "Track every action for audit and compliance purposes",
+    "hc.cert.pdpl.desc": "Data protection compliance",
+    "hc.cert.hipaa.desc": "Global healthcare standard",
+    "hc.cert.aes.desc": "Strong data encryption",
+    "hc.cert.audit.desc": "Full audit trail",
+    "hc.dashboard.title": "Smart & Comprehensive Dashboard",
+    "hc.dashboard.subtitle": "Monitor your facility's performance in real time",
+    "hc.dashboard.status": "Active",
+    "hc.dashboard.stat1.label": "Calls Today",
+    "hc.dashboard.stat1.sub": "↑ 12% from yesterday",
+    "hc.dashboard.stat2.label": "Answer Rate",
+    "hc.dashboard.stat2.sub": "Target: 95%",
+    "hc.dashboard.stat3.label": "New Bookings",
+    "hc.dashboard.stat3.sub": "↑ 8 from yesterday",
+    "hc.dashboard.stat4.label": "Patient Satisfaction",
+    "hc.dashboard.stat4.sub": "out of 5.0",
+    "hc.dashboard.activity.title": "Recent Activity",
+    "hc.dashboard.act1.action": "New appointment booked",
+    "hc.dashboard.act1.detail": "Internal Medicine – Dr. Ahmed",
+    "hc.dashboard.act2.action": "Appointment confirmed",
+    "hc.dashboard.act2.detail": "Tomorrow 10:30 AM – Mohammed Al-Ali",
+    "hc.dashboard.act3.action": "Transferred to agent",
+    "hc.dashboard.act3.detail": "Complex inquiry – transferred",
+    "hc.dashboard.act4.action": "Reminder sent",
+    "hc.dashboard.act4.detail": "Appointment in 2 hours – 5 patients",
+    "hc.dashboard.time1": "1 minute ago",
+    "hc.dashboard.time2": "3 minutes ago",
+    "hc.dashboard.time3": "5 minutes ago",
+    "hc.dashboard.time4": "8 minutes ago",
+    "hc.pricing.title": "Transparent & Clear Pricing",
+    "hc.pricing.subtitle": "Start small, scale as you grow",
+    "hc.pricing.monthly": "Monthly",
+    "hc.pricing.yearly": "Yearly",
+    "hc.pricing.popular": "Most Popular",
+    "hc.pricing.cta_start": "Get Started",
+    "hc.pricing.cta_contact": "Contact Us",
+    "hc.pricing.starter.desc.monthly": "/month · For small clinics and centers",
+    "hc.pricing.starter.desc.yearly": "/year · For small clinics and centers",
+    "hc.pricing.pro.desc.monthly": "/month · For medium medical complexes",
+    "hc.pricing.pro.desc.yearly": "/year · For medium medical complexes",
+    "hc.pricing.business.desc.monthly":
+      "/month · For hospitals and large facilities",
+    "hc.pricing.business.desc.yearly":
+      "/year · For hospitals and large facilities",
+    "hc.faq.title": "Frequently Asked Questions",
+    "hc.faq.subtitle": "Everything you need to know before getting started",
+    "hc.faq.q1": "Does the system respond in natural Saudi dialect?",
+    "hc.faq.a1":
+      "Yes, the model was trained to provide a natural voice experience and uses terminology appropriate for the Saudi context.",
+    "hc.faq.q2": "Can it be connected to the existing appointment system?",
+    "hc.faq.a2":
+      "Yes, we have ready-made integrations and API connection options depending on your facility's system.",
+    "hc.faq.q3": "Is data stored inside Saudi Arabia?",
+    "hc.faq.a3":
+      "Local hosting inside the Kingdom can be provided based on your facility's requirements and compliance needs.",
+    "hc.faq.q4": "How long does installation take?",
+    "hc.faq.a4":
+      "Usually the basic setup is quick, then scenarios are customized according to the facility's specialty.",
+
+    // ── Facility definitions ────────────────────────────────────────────────────
+    "hc.facility.general_hospital.name": "General Hospital",
+    "hc.facility.general_hospital.official": "Licensed by Ministry of Health",
+    "hc.facility.general_hospital.pain":
+      "High volume of daily calls overwhelms reception staff",
+    "hc.facility.general_hospital.solution":
+      "AI handles appointment booking and routine inquiries 24/7",
+    "hc.facility.general_hospital.license":
+      "Ministry of Health – General Hospital License",
+
+    "hc.facility.specialist_hospital.name": "Specialist Hospital",
+    "hc.facility.specialist_hospital.official":
+      "Specialty-licensed by Ministry of Health",
+    "hc.facility.specialist_hospital.pain":
+      "Patients calling for specific specialist availability waste staff time",
+    "hc.facility.specialist_hospital.solution":
+      "Instantly routes patients to the right specialist slot",
+    "hc.facility.specialist_hospital.license":
+      "Ministry of Health – Specialist Hospital License",
+
+    "hc.facility.solo_clinic.name": "Solo Clinic",
+    "hc.facility.solo_clinic.official": "Single-physician licensed clinic",
+    "hc.facility.solo_clinic.pain":
+      "Doctor cannot answer calls during consultations",
+    "hc.facility.solo_clinic.solution":
+      "Never miss a patient call even while with another patient",
+    "hc.facility.solo_clinic.license":
+      "Ministry of Health – Medical Clinic License",
+
+    "hc.facility.dental_clinic.name": "Dental Clinic",
+    "hc.facility.dental_clinic.official": "Licensed dental facility",
+    "hc.facility.dental_clinic.pain":
+      "High no-show rate and last-minute cancellations",
+    "hc.facility.dental_clinic.solution":
+      "Automated reminders reduce no-shows by up to 65%",
+    "hc.facility.dental_clinic.license":
+      "Ministry of Health – Dental Clinic License",
+
+    "hc.facility.general_complex.name": "General Medical Complex",
+    "hc.facility.general_complex.official": "Multi-specialty licensed complex",
+    "hc.facility.general_complex.pain":
+      "Multiple departments, one overwhelmed reception desk",
+    "hc.facility.general_complex.solution":
+      "Department-aware routing and booking for all specialties",
+    "hc.facility.general_complex.license":
+      "Ministry of Health – Medical Complex License",
+
+    "hc.facility.cosmetic_complex.name": "Cosmetic & Aesthetic Complex",
+    "hc.facility.cosmetic_complex.official":
+      "Licensed cosmetic medicine facility",
+    "hc.facility.cosmetic_complex.pain":
+      "Sensitive inquiries require discretion and after-hours availability",
+    "hc.facility.cosmetic_complex.solution":
+      "Private, natural-sounding AI available around the clock",
+    "hc.facility.cosmetic_complex.license":
+      "Ministry of Health – Cosmetic Medicine License",
+
+    "hc.facility.lab.name": "Medical Laboratory",
+    "hc.facility.lab.official": "Licensed diagnostic laboratory",
+    "hc.facility.lab.pain":
+      "Patients repeatedly calling for results creates bottlenecks",
+    "hc.facility.lab.solution":
+      "Automated result-ready notifications and appointment scheduling",
+    "hc.facility.lab.license": "Ministry of Health – Laboratory License",
+
+    "hc.facility.pharmacy.name": "Pharmacy",
+    "hc.facility.pharmacy.official": "Licensed community pharmacy",
+    "hc.facility.pharmacy.pain":
+      "Prescription availability inquiries tie up staff",
+    "hc.facility.pharmacy.solution":
+      "Instant answers to stock and pickup queries via AI",
+    "hc.facility.pharmacy.license":
+      "Saudi Food & Drug Authority – Pharmacy License",
+
+    "hc.facility.physio.name": "Physiotherapy Center",
+    "hc.facility.physio.official":
+      "Licensed physiotherapy and rehabilitation facility",
+    "hc.facility.physio.pain":
+      "Session scheduling requires constant back-and-forth calls",
+    "hc.facility.physio.solution":
+      "Automated session booking and reminder system",
+    "hc.facility.physio.license": "Ministry of Health – Physiotherapy License",
+
+    "hc.facility.radiology.name": "Radiology & Imaging Center",
+    "hc.facility.radiology.official": "Licensed radiology facility",
+    "hc.facility.radiology.pain":
+      "Appointment prep instructions often not communicated clearly",
+    "hc.facility.radiology.solution":
+      "AI delivers prep instructions and confirms appointments automatically",
+    "hc.facility.radiology.license": "Ministry of Health – Radiology License",
+
+    "hc.facility.eye.name": "Eye Clinic",
+    "hc.facility.eye.official": "Licensed ophthalmology clinic",
+    "hc.facility.eye.pain": "Long waits for routine check-up appointments",
+    "hc.facility.eye.solution":
+      "Smart scheduling fills slots instantly without phone queues",
+    "hc.facility.eye.license":
+      "Ministry of Health – Ophthalmology Clinic License",
+
+    // ── Pricing features – Starter (EN) ────────────────────────────────────────
+    "hc.pricing.starter.f1": "24/7 auto-reply",
+    "hc.pricing.starter.f2": "WhatsApp + Web Chat",
+    "hc.pricing.starter.f3": "Transfer to human agent",
+    "hc.pricing.starter.f4": "3 specialties",
+    "hc.pricing.starter.f5": "3 ready scenarios",
+    "hc.pricing.starter.f6": "Instant booking confirmation",
+    "hc.pricing.starter.f7": "2 simultaneous calls",
+    "hc.pricing.starter.f8": "2,300 AI minutes/month",
+    "hc.pricing.starter.f9": "1,000 AI messages",
+    "hc.pricing.starter.f10": "Email & chat support",
+    "hc.pricing.starter.f11": "Custom voice & persona",
+    "hc.pricing.starter.f12": "EHR / HIS integration",
+
+    // ── Pricing features – Pro (EN) ────────────────────────────────────────────
+    "hc.pricing.pro.f1": "Everything in Starter",
+    "hc.pricing.pro.f2": "10 specialties",
+    "hc.pricing.pro.f3": "10 custom scenarios",
+    "hc.pricing.pro.f4": "Double reminder (24/48 hours)",
+    "hc.pricing.pro.f5": "Post-visit patient follow-up",
+    "hc.pricing.pro.f6": "Patient satisfaction survey",
+    "hc.pricing.pro.f7": "Voice reminder campaigns",
+    "hc.pricing.pro.f8": "Web Widget",
+    "hc.pricing.pro.f9": "5 simultaneous calls",
+    "hc.pricing.pro.f10": "7,000 AI minutes/month",
+    "hc.pricing.pro.f11": "3,500 AI messages",
+
+    // ── Pricing features – Business (EN) ───────────────────────────────────────
+    "hc.pricing.business.f1": "Everything in Pro",
+    "hc.pricing.business.f2": "Unlimited specialties",
+    "hc.pricing.business.f3": "Unlimited scenarios",
+    "hc.pricing.business.f4": "Tele-Sales",
+    "hc.pricing.business.f5": "Upselling",
+    "hc.pricing.business.f6": "Recurring campaigns",
+    "hc.pricing.business.f7": "12 simultaneous calls",
+    "hc.pricing.business.f8": "24,000 AI minutes/month",
+    "hc.pricing.business.f9": "10,000 AI messages",
+    "hc.pricing.business.f10": "Executive satisfaction reports",
+    "hc.pricing.business.f11": "Full scenario customization",
+    "hc.integration.whatsapp.name": "WhatsApp",
+    "hc.integration.booking.name": "Booking System",
+    "hc.integration.sms.name": "SMS",
+    "hc.integration.crm.name": "CRM",
+    "hc.integration.payments.name": "Payments",
+
+    // ─── Call Center ──────────────────────────────────────────────────────────
+    "cc.hero.badge": "The Future of Call Centers",
+    "cc.hero.title1": "Save",
+    "cc.hero.title2": "70%",
+    "cc.hero.title3": "on Call Center Costs",
+    "cc.hero.subtitle":
+      "Sondos handles 75% of your calls automatically with higher quality",
+    "cc.hero.proof":
+      "✓ Zero wait time · ✓ 24/7 non-stop · ✓ Your team focuses on what matters",
+    "cc.hero.stat1.value": "0 sec",
+    "cc.hero.stat1.label": "Wait time",
+    "cc.hero.stat2.value": "75%",
+    "cc.hero.stat2.label": "Automation",
+    "cc.hero.stat3.value": "70%",
+    "cc.hero.stat3.label": "Savings",
+    "cc.hero.cta": "Book a Demo",
+    "cc.problems.title1": "Challenges of",
+    "cc.problems.title2": "Traditional Call Centers",
+    "cc.problems.bridge": "Sondos solves all of this",
+    "cc.prob1.title": "High Cost",
+    "cc.prob1.desc":
+      "Salaries, training, equipment, management = thousands of SAR/month",
+    "cc.prob2.title": "Long Wait",
+    "cc.prob2.desc": "Customers wait minutes and leave frustrated",
+    "cc.prob3.title": "Staff Turnover",
+    "cc.prob3.desc": "30-50% leave annually = constant retraining",
+    "cc.prob4.title": "Inconsistent Quality",
+    "cc.prob4.desc": "Each agent responds differently = non-unified experience",
+    "cc.sol1.title": "Save 70%",
+    "cc.sol1.desc": "Fixed, predictable costs with no surprises",
+    "cc.sol2.title": "0 Wait",
+    "cc.sol2.desc": "Instant answer to every call at any time",
+    "cc.sol3.title": "100% Stability",
+    "cc.sol3.desc": "No holidays, no resignations, no sick days",
+    "cc.sol4.title": "Unified Quality",
+    "cc.sol4.desc": "Same excellent standard on every single call",
+    "cc.stats.calls": "calls/month",
+    "cc.stats.centers": "call centers",
+    "cc.stats.savings": "cost savings",
+    "cc.stats.wait": "wait time",
+    "cc.segments.title1": "Solutions for Every",
+    "cc.segments.title2": "Call Type",
+    "cc.segments.subtitle": "Sondos adapts to the nature of your call center",
+    "cc.segments.pain_title": "Current Challenges",
+    "cc.segments.solution_title": "With Sondos",
+    "cc.seg.inbound.name": "Inbound Calls",
+    "cc.seg.inbound.pain1": "Long queues that frustrate customers",
+    "cc.seg.inbound.pain2": "High cost for full-time staff",
+    "cc.seg.inbound.pain3": "Inconsistent service quality between agents",
+    "cc.seg.inbound.sol1": "Instant answer with no wait — 0 seconds",
+    "cc.seg.inbound.sol2": "Fixed cost regardless of volume",
+    "cc.seg.inbound.sol3": "Unified 100% quality on every call",
+    "cc.seg.inbound.stat.waitTime": "0 sec",
+    "cc.seg.inbound.stat.cost": "-70%",
+    "cc.seg.inbound.stat.quality": "100%",
+    "cc.seg.outbound.name": "Outbound Calls",
+    "cc.seg.outbound.pain1": "Low agent productivity",
+    "cc.seg.outbound.pain2": "Many customers reject calls",
+    "cc.seg.outbound.pain3": "Difficulty reaching large numbers",
+    "cc.seg.outbound.sol1": "Thousands of simultaneous calls",
+    "cc.seg.outbound.sol2": "Friendly tone that reduces rejection",
+    "cc.seg.outbound.sol3": "100% coverage of target list",
+    "cc.seg.outbound.stat.capacity": "10x",
+    "cc.seg.outbound.stat.reach": "100%",
+    "cc.seg.outbound.stat.efficiency": "+300%",
+    "cc.seg.support.name": "Customer Service",
+    "cc.seg.support.pain1": "Repetitive questions consume team time",
+    "cc.seg.support.pain2": "High staff turnover",
+    "cc.seg.support.pain3": "Expensive and ongoing training",
+    "cc.seg.support.sol1": "Resolve 80% of inquiries automatically",
+    "cc.seg.support.sol2": "No turnover, no leave, no delay",
+    "cc.seg.support.sol3": "Instant updates with no training",
+    "cc.seg.support.stat.automation": "80%",
+    "cc.seg.support.stat.availability": "24/7",
+    "cc.seg.support.stat.training": "0 SAR",
+    "cc.seg.sales.name": "Telesales",
+    "cc.seg.sales.pain1": "Time wasted qualifying unsuitable leads",
+    "cc.seg.sales.pain2": "Losing customers due to slow follow-up",
+    "cc.seg.sales.pain3": "High cost per acquired customer",
+    "cc.seg.sales.sol1": "Smart qualification saves 70% of time",
+    "cc.seg.sales.sol2": "Instant follow-up = no lost customer",
+    "cc.seg.sales.sol3": "Reduce acquisition cost by 50%",
+    "cc.seg.sales.stat.qualification": "+70%",
+    "cc.seg.sales.stat.followUp": "Instant",
+    "cc.seg.sales.stat.CAC": "-50%",
+    "cc.stat_label.waitTime": "Wait",
+    "cc.stat_label.cost": "Cost",
+    "cc.stat_label.quality": "Quality",
+    "cc.stat_label.capacity": "Capacity",
+    "cc.stat_label.reach": "Reach",
+    "cc.stat_label.efficiency": "Efficiency",
+    "cc.stat_label.automation": "Automation",
+    "cc.stat_label.availability": "Availability",
+    "cc.stat_label.training": "Training",
+    "cc.stat_label.qualification": "Qualification",
+    "cc.stat_label.followUp": "Follow-up",
+    "cc.stat_label.CAC": "Acquisition Cost",
+    "cc.comparison.title1": "Full Comparison:",
+    "cc.comparison.title2": "Traditional vs Sondos",
+    "cc.comparison.tab.cost": "💰 Cost",
+    "cc.comparison.tab.quality": "⭐ Quality",
+    "cc.comparison.tab.scale": "📈 Scale",
+    "cc.comparison.traditional.header": "Traditional Call Center",
+    "cc.comparison.sondos.header": "With Sondos AI",
+    "cc.comparison.monthly_savings": "Monthly Savings",
+    "cc.comparison.annual": "= 1,488,000 SAR annually",
+    "cc.comparison.cost.title": "Monthly Cost Comparison",
+    "cc.comparison.cost.trad1.item": "Salaries of 20 agents",
+    "cc.comparison.cost.trad1.value": "120,000 SAR",
+    "cc.comparison.cost.trad2.item": "Insurance & allowances",
+    "cc.comparison.cost.trad2.value": "24,000 SAR",
+    "cc.comparison.cost.trad3.item": "Training & development",
+    "cc.comparison.cost.trad3.value": "8,000 SAR",
+    "cc.comparison.cost.trad4.item": "Equipment & offices",
+    "cc.comparison.cost.trad4.value": "15,000 SAR",
+    "cc.comparison.cost.trad5.item": "Management & supervision",
+    "cc.comparison.cost.trad5.value": "18,000 SAR",
+    "cc.comparison.cost.trad6.item": "Total",
+    "cc.comparison.cost.trad6.value": "185,000 SAR",
+    "cc.comparison.cost.son1.item": "Sondos subscription",
+    "cc.comparison.cost.son1.value": "25,000 SAR",
+    "cc.comparison.cost.son2.item": "5 agents for complex cases",
+    "cc.comparison.cost.son2.value": "30,000 SAR",
+    "cc.comparison.cost.son3.item": "Insurance & allowances",
+    "cc.comparison.cost.son3.value": "6,000 SAR",
+    "cc.comparison.cost.son4.item": "No additional training",
+    "cc.comparison.cost.son4.value": "0 SAR",
+    "cc.comparison.cost.son5.item": "No additional equipment",
+    "cc.comparison.cost.son5.value": "0 SAR",
+    "cc.comparison.cost.son6.item": "Total",
+    "cc.comparison.cost.son6.value": "61,000 SAR",
+    "cc.comparison.cost.savings": "124,000 SAR/month",
+    "cc.comparison.quality.title": "Quality Comparison",
+    "cc.comparison.quality.trad1.item": "Wait time",
+    "cc.comparison.quality.trad1.value": "3–5 minutes",
+    "cc.comparison.quality.trad2.item": "Call answer rate",
+    "cc.comparison.quality.trad2.value": "75%",
+    "cc.comparison.quality.trad3.item": "Working hours",
+    "cc.comparison.quality.trad3.value": "8–12 hours",
+    "cc.comparison.quality.trad4.item": "Quality consistency",
+    "cc.comparison.quality.trad4.value": "Varies",
+    "cc.comparison.quality.trad5.item": "Peak capacity",
+    "cc.comparison.quality.trad5.value": "Limited",
+    "cc.comparison.quality.son1.item": "Wait time",
+    "cc.comparison.quality.son1.value": "0 seconds",
+    "cc.comparison.quality.son2.item": "Call answer rate",
+    "cc.comparison.quality.son2.value": "100%",
+    "cc.comparison.quality.son3.item": "Working hours",
+    "cc.comparison.quality.son3.value": "24/7/365",
+    "cc.comparison.quality.son4.item": "Quality consistency",
+    "cc.comparison.quality.son4.value": "100%",
+    "cc.comparison.quality.son5.item": "Peak capacity",
+    "cc.comparison.quality.son5.value": "Unlimited",
+    "cc.comparison.scale.title": "Scalability Comparison",
+    "cc.comparison.scale.trad1.item": "Time to hire new agent",
+    "cc.comparison.scale.trad1.value": "2–4 weeks",
+    "cc.comparison.scale.trad2.item": "Hiring cost",
+    "cc.comparison.scale.trad2.value": "5,000+ SAR",
+    "cc.comparison.scale.trad3.item": "Training time",
+    "cc.comparison.scale.trad3.value": "2–4 weeks",
+    "cc.comparison.scale.trad4.item": "Staff turnover rate",
+    "cc.comparison.scale.trad4.value": "30–50% annually",
+    "cc.comparison.scale.trad5.item": "Seasonal scaling",
+    "cc.comparison.scale.trad5.value": "Difficult & costly",
+    "cc.comparison.scale.son1.item": "Time to scale capacity",
+    "cc.comparison.scale.son1.value": "Instant",
+    "cc.comparison.scale.son2.item": "Scaling cost",
+    "cc.comparison.scale.son2.value": "Pay as you go",
+    "cc.comparison.scale.son3.item": "Training time",
+    "cc.comparison.scale.son3.value": "Hours",
+    "cc.comparison.scale.son4.item": "Turnover rate",
+    "cc.comparison.scale.son4.value": "0%",
+    "cc.comparison.scale.son5.item": "Seasonal scaling",
+    "cc.comparison.scale.son5.value": "Automatic & flexible",
+    "cc.features.title1": "Features Built",
+    "cc.features.title2": "for Call Centers",
+    "cc.feat1.title": "Instant Answer — 0 Wait",
+    "cc.feat1.desc":
+      'Customer calls and gets a reply in under 3 seconds. No queues, no "all our agents are busy".',
+    "cc.feat1.highlight": "< 3 seconds",
+    "cc.feat2.title": "Unlimited Capacity",
+    "cc.feat2.desc":
+      "Whether 10 or 10,000 simultaneous calls, Sondos handles them all with the same quality.",
+    "cc.feat2.highlight": "∞ calls",
+    "cc.feat3.title": "Smart Qualification",
+    "cc.feat3.desc":
+      "Custom questions determine the customer's seriousness, needs, and priority before transfer to the team.",
+    "cc.feat3.highlight": "Lead Scoring",
+    "cc.feat4.title": "Smooth Transfer",
+    "cc.feat4.desc":
+      "When a customer needs a human agent, Sondos transfers with a full conversation summary.",
+    "cc.feat4.highlight": "Warm Transfer",
+    "cc.feat5.title": "Advanced Analytics",
+    "cc.feat5.desc":
+      "Comprehensive dashboard: call reasons, resolution rate, customer satisfaction, and peak forecasts.",
+    "cc.feat5.highlight": "Real-time",
+    "cc.feat6.title": "Multi-language",
+    "cc.feat6.desc":
+      "Formal Arabic, Saudi dialects, English — Sondos speaks your customer's language.",
+    "cc.feat6.highlight": "3+ languages",
+    "cc.integrations.title1": "Integrates with",
+    "cc.integrations.title2": "Your Existing Systems",
+    "cc.integration.type.callcenter": "Call Center",
+    "cc.integration.type.crm": "CRM",
+    "cc.integration.type.tickets": "Tickets",
+    "cc.integration.type.comms": "Communication",
+    "cc.testimonials.title1": "Success Stories of",
+    "cc.testimonials.title2": "Call Centers",
+    "cc.test1.quote":
+      "We had 15 agents answering calls. Now Sondos handles 70% of them and our team focuses on complex cases. We saved 40% in cost.",
+    "cc.test1.name": "Mr. Abdullah Al-Shahri",
+    "cc.test1.role": "Call Center Manager",
+    "cc.test1.company": "Advanced Telecom Company",
+    "cc.test1.metric": "40% cost saving",
+    "cc.test2.quote":
+      "Average wait time was 4 minutes. After Sondos it became zero. Customer satisfaction rose from 3.2 to 4.7 stars.",
+    "cc.test2.name": "Ms. Mona Al-Harbi",
+    "cc.test2.role": "Customer Experience Manager",
+    "cc.test2.company": "Saudi Investment Bank",
+    "cc.test2.metric": "4.7⭐ customer satisfaction",
+    "cc.test3.quote":
+      "We needed to call 5,000 clients monthly for appointment reminders. It required 3 full-time staff. Now Sondos does it in hours.",
+    "cc.test3.name": "Dr. Faisal Al-Malki",
+    "cc.test3.role": "CEO",
+    "cc.test3.company": "Al-Riaya Medical Complex",
+    "cc.test3.metric": "5,000 calls/month automated",
+    "cc.faq.title1": "Frequently Asked",
+    "cc.faq.title2": "Questions",
+    "cc.faq.q1": "Does Sondos replace the entire call center team?",
+    "cc.faq.a1":
+      "Not necessarily. Sondos is designed to be the first line (Tier 1) — handling 70-80% of routine calls and escalating complex cases to your team.",
+    "cc.faq.q2": "How does it handle angry customers?",
+    "cc.faq.a2":
+      "Sondos is trained to detect tones of anger or frustration. In these cases, it apologizes empathetically and if anger persists, immediately transfers to a human agent.",
+    "cc.faq.q3": "Does it integrate with the current call center system?",
+    "cc.faq.a3":
+      "Yes! Sondos integrates with the most popular call center systems: Genesys, Avaya, Cisco, Five9, and more.",
+    "cc.faq.q4": "What about voice quality and dialect?",
+    "cc.faq.a4":
+      "Sondos uses the latest text-to-speech (TTS) technology with very natural voices in formal Arabic, Saudi dialects and English.",
+    "cc.faq.q5": "How do I ensure Sondos responds correctly?",
+    "cc.faq.a5":
+      "We start with a training phase where we customize scenarios and responses for your business, then a testing phase before launch.",
+    "cc.faq.q6": "What's the difference between you and traditional IVR?",
+    "cc.faq.a6":
+      "IVR says 'press 1 for sales' — frustrating and slow. Sondos speaks naturally and understands what the customer says in any way.",
+    "cc.cta.title1": "Ready to Save 70%",
+    "cc.cta.title2": "on Call Center Costs?",
+    "cc.cta.subtitle":
+      "Join over 50 call centers using Sondos to deliver better service at lower cost",
+    "cc.cta.button": "Book a Demo",
+    "cc.cta.badge1": "🔗 Integration with Genesys & Avaya",
+    "cc.cta.badge2": "🎧 24/7 Technical Support",
+    "cc.cta.badge3": "📊 Detailed Reports",
+    "cc.stats.calls.value": "2M+",
+    "cc.stats.centers.value": "50+",
+    "cc.stats.savings.value": "70%",
+    "cc.stats.wait.value": "0",
+
+    // ─── Real Estate ─────────────────────────────────────────────────────────
+    "re.hero.badge": "The Optimal Solution for Real Estate",
+    "re.hero.title": "Never Lose a Single Real Estate",
+    "re.hero.title_span": "Lead Again",
+    "re.hero.subtitle":
+      "Sondos responds to customer inquiries 24/7, qualifies serious buyers, and books inspection appointments automatically",
+    "re.hero.proof":
+      "✓ 150+ real estate companies · ✓ 200,000+ calls/month · ✓ 3-second response",
+    "re.hero.stat1.value": "+45%",
+    "re.hero.stat1.label": "Qualified Leads",
+    "re.hero.stat1.icon": "📈",
+    "re.hero.stat2.value": "100%",
+    "re.hero.stat2.label": "Answer Rate",
+    "re.hero.stat2.icon": "📞",
+    "re.hero.stat3.value": "+30%",
+    "re.hero.stat3.label": "Closed Deals",
+    "re.hero.stat3.icon": "🤝",
+    "re.hero.cta": "Book Your Free Demo",
+
+    "re.problems.title": "Are You Facing These",
+    "re.problems.title_span": "Challenges?",
+    "re.prob1.icon": "📵",
+    "re.prob1.title": "Missed Calls",
+    "re.prob1.desc": "40% of inquiries are lost because the team is busy",
+    "re.prob2.icon": "⏰",
+    "re.prob2.title": "Limited Hours",
+    "re.prob2.desc": "Customers call after hours and no one answers",
+    "re.prob3.icon": "😤",
+    "re.prob3.title": "Unqualified Leads",
+    "re.prob3.desc":
+      "Long time wasted in conversations with unserious customers",
+    "re.prob4.icon": "📉",
+    "re.prob4.title": "Lost Opportunities",
+    "re.prob4.desc": "Your competitors respond faster and win the customer",
+    "re.bridge.text": "Sondos Solves All This",
+    "re.sol1.icon": "✅",
+    "re.sol1.title": "100% Answer Rate",
+    "re.sol1.desc": "Every call answered in under 3 seconds",
+    "re.sol2.icon": "🌙",
+    "re.sol2.title": "Available 24/7",
+    "re.sol2.desc": "Sondos works even at midnight and on holidays",
+    "re.sol3.icon": "🎯",
+    "re.sol3.title": "Smart Qualification",
+    "re.sol3.desc": "Smart questions identify serious buyers instantly",
+    "re.sol4.icon": "🚀",
+    "re.sol4.title": "Instant Response",
+    "re.sol4.desc": "Customer gets information before competitors can",
+
+    "re.stats.stat1.value": "200K+",
+    "re.stats.stat1.label": "Monthly Real Estate Calls",
+    "re.stats.stat1.icon": "📞",
+    "re.stats.stat2.value": "150+",
+    "re.stats.stat2.label": "Real Estate Companies",
+    "re.stats.stat2.icon": "🏢",
+    "re.stats.stat3.value": "45%",
+    "re.stats.stat3.label": "Increase in Qualified Leads",
+    "re.stats.stat3.icon": "📈",
+    "re.stats.stat4.value": "3 sec",
+    "re.stats.stat4.label": "Average Response Time",
+    "re.stats.stat4.icon": "⚡",
+
+    "re.segments.title": "Tailored Solutions for Every",
+    "re.segments.title_span": "Business Type",
+    "re.segments.subtitle": "Sondos adapts to your real estate business",
+    "re.segments.pain_title": "Current Challenges",
+    "re.segments.sol_title": "With Sondos",
+
+    "re.seg.offices.name": "Real Estate Offices",
+    "re.seg.offices.icon": "🏢",
+    "re.seg.offices.description":
+      "Selling and renting residential and commercial properties",
+    "re.seg.offices.pain1": "Losing 40% of potential customer inquiries",
+    "re.seg.offices.pain2": "No immediate follow-up with interested parties",
+    "re.seg.offices.pain3": "Missing sales opportunities due to busy staff",
+    "re.seg.offices.sol1": "Instant reply to every inquiry 24/7",
+    "re.seg.offices.sol2": "Qualify customers and schedule inspection tours",
+    "re.seg.offices.sol3": "Automatic follow-up with potential customers",
+    "re.seg.offices.stat.leads": "+45%",
+    "re.seg.offices.stat.response": "3 seconds",
+    "re.seg.offices.stat.deals": "+30%",
+
+    "re.seg.developers.name": "Real Estate Developers",
+    "re.seg.developers.icon": "🏗️",
+    "re.seg.developers.description":
+      "Residential, commercial projects and compounds",
+    "re.seg.developers.pain1": "Large volume of project inquiries",
+    "re.seg.developers.pain2": "Difficulty qualifying serious customers",
+    "re.seg.developers.pain3": "High cost of sales team",
+    "re.seg.developers.sol1": "Receive thousands of inquiries efficiently",
+    "re.seg.developers.sol2": "Qualify by budget and interest level",
+    "re.seg.developers.sol3": "Auto-book project visit appointments",
+    "re.seg.developers.stat.leads": "+60%",
+    "re.seg.developers.stat.response": "< 5 seconds",
+    "re.seg.developers.stat.deals": "+40%",
+
+    "re.seg.property.name": "Property Management",
+    "re.seg.property.icon": "🔑",
+    "re.seg.property.description": "Managing properties and rentals",
+    "re.seg.property.pain1": "Tenant complaints outside working hours",
+    "re.seg.property.pain2": "Following up on rent collection",
+    "re.seg.property.pain3": "Coordinating maintenance appointments",
+    "re.seg.property.sol1": "Receive complaints and emergencies 24/7",
+    "re.seg.property.sol2": "Automatic payment due date reminders",
+    "re.seg.property.sol3": "Schedule maintenance and inspection appointments",
+    "re.seg.property.stat.satisfaction": "95%",
+    "re.seg.property.stat.response": "Instant",
+    "re.seg.property.stat.efficiency": "+50%",
+
+    "re.seg.brokers.name": "Real Estate Brokers",
+    "re.seg.brokers.icon": "🤝",
+    "re.seg.brokers.description": "Brokerage for buying, selling and renting",
+    "re.seg.brokers.pain1": "Losing customers when busy",
+    "re.seg.brokers.pain2": "Difficulty following up with multiple clients",
+    "re.seg.brokers.pain3": "Intense competition for customers",
+    "re.seg.brokers.sol1": "Never miss an opportunity even when busy",
+    "re.seg.brokers.sol2": "Organized follow-up with all customers",
+    "re.seg.brokers.sol3": "Professional response that reflects a great image",
+    "re.seg.brokers.stat.leads": "+55%",
+    "re.seg.brokers.stat.response": "24/7",
+    "re.seg.brokers.stat.conversion": "+35%",
+
+    "re.stat_label.leads": "Leads Increase",
+    "re.stat_label.response": "Response Time",
+    "re.stat_label.deals": "Deals Increase",
+    "re.stat_label.satisfaction": "Customer Satisfaction",
+    "re.stat_label.efficiency": "Efficiency Increase",
+    "re.stat_label.conversion": "Conversion Rate",
+
+    "re.features.title": "Features Designed for",
+    "re.features.title_span": "Real Estate Professionals",
+    "re.feat1.icon": "📞",
+    "re.feat1.title": "Inquiry Reception",
+    "re.feat1.desc":
+      "Instant response to every call with a natural voice that understands customer real estate needs",
+    "re.feat1.highlight": "3-second reply",
+    "re.feat2.icon": "🎯",
+    "re.feat2.title": "Customer Qualification",
+    "re.feat2.desc":
+      "Smart questions to determine budget, preferred location, and desired property type",
+    "re.feat2.highlight": "Precise qualification",
+    "re.feat3.icon": "📅",
+    "re.feat3.title": "Inspection Scheduling",
+    "re.feat3.desc":
+      "Automatically book inspection tour appointments in the agent or office calendar",
+    "re.feat3.highlight": "Auto-booking",
+    "re.feat4.icon": "💬",
+    "re.feat4.title": "WhatsApp Follow-up",
+    "re.feat4.desc":
+      "Automatically send property details, photos, and locations via WhatsApp",
+    "re.feat4.highlight": "Instant messages",
+    "re.feat5.icon": "📊",
+    "re.feat5.title": "Customer Reports",
+    "re.feat5.desc":
+      "Comprehensive analytics on customer interests, requested prices, and areas",
+    "re.feat5.highlight": "Smart insights",
+    "re.feat6.icon": "🔄",
+    "re.feat6.title": "Automatic Follow-up",
+    "re.feat6.desc":
+      "Follow-up calls with potential customers who didn't complete the booking",
+    "re.feat6.highlight": "Never lose a lead",
+
+    "re.usecases.title": "Watch Sondos",
+    "re.usecases.title_span": "in Action",
+    "re.usecase1.title": "Rental Apartment Inquiry",
+    "re.usecase1.msg1.ai": "Welcome to Elite Real Estate! How can I help you?",
+    "re.usecase1.msg2.user": "I'm looking for an apartment for rent in Riyadh",
+    "re.usecase1.msg3.ai": "Great! Which neighborhood do you prefer in Riyadh?",
+    "re.usecase1.msg4.user": "Al-Narjis or Al-Yasmin",
+    "re.usecase1.msg5.ai":
+      "Excellent! How many rooms do you need and what's your monthly budget?",
+    "re.usecase1.msg6.user": "3 rooms, up to 35,000 annually",
+    "re.usecase1.msg7.ai":
+      "We have 3 suitable apartments! I can send you details on WhatsApp and book an inspection appointment. Does tomorrow at 5pm work for you?",
+    "re.usecase2.title": "New Project Inquiry",
+    "re.usecase2.msg1.ai":
+      "Welcome to Al-Emar Development Company! Would you like to learn about our projects?",
+    "re.usecase2.msg2.user": "Yes, do you have villas in North Riyadh?",
+    "re.usecase2.msg3.ai":
+      "We have the 'Oasis of Palms' project in Al-Malqa district. Villas from 4-6 rooms starting from 2.5 million. Shall I send you the catalog?",
+    "re.usecase2.msg4.user": "Yes, send it",
+    "re.usecase2.msg5.ai":
+      "Sent to WhatsApp! We also have open days every Saturday for viewing. Shall I book you in?",
+
+    "re.testimonials.title": "Real Estate",
+    "re.testimonials.title_span": "Success Stories",
+    "re.test1.quote":
+      "Sondos increased our inquiry response rate from 60% to 100%. Now we don't lose any potential customer even at midnight.",
+    "re.test1.name": "Eng. Khalid Al-Ghamdi",
+    "re.test1.role": "CEO",
+    "re.test1.company": "Al-Ghamdi Real Estate",
+    "re.test1.metric": "+40% in deals",
+    "re.test2.quote":
+      "We saved two employees' salaries and customers now get faster, more professional responses. Positive ROI from the first month.",
+    "re.test2.name": "Sara Al-Mutairi",
+    "re.test2.role": "Sales Manager",
+    "re.test2.company": "Dar Al-Emar Development",
+    "re.test2.metric": "Saving 15,000 SAR/month",
+    "re.test3.quote":
+      "Tenants are happy because they can report any issue at any time. And I monitor everything from the control panel.",
+    "re.test3.name": "Fahad Al-Otaibi",
+    "re.test3.role": "Owner",
+    "re.test3.company": "Al-Otaibi Properties Group",
+    "re.test3.metric": "95% tenant satisfaction",
+
+    "re.pricing.title": "Real Estate",
+    "re.pricing.title_span": "Packages",
+    "re.pricing.monthly": "Monthly",
+    "re.pricing.annual": "Annual",
+    "re.pricing.save": "🎉 Save up to 10% with annual subscription",
+    "re.pricing.popular": "Most Popular ⭐",
+
+    "re.pricing.starter.tier": "🟢",
+    "re.pricing.starter.name": "Starter",
+    "re.pricing.starter.price.monthly": "2,499",
+    "re.pricing.starter.price.annual": "26,989",
+    "re.pricing.starter.desc.monthly": "/month · For small real estate offices",
+    "re.pricing.starter.desc.annual": "/year · For small real estate offices",
+    "re.pricing.starter.cta": "Start Now",
+
+    "re.pricing.pro.tier": "🟣",
+    "re.pricing.pro.name": "Professional",
+    "re.pricing.pro.price.monthly": "7,999",
+    "re.pricing.pro.price.annual": "86,389",
+    "re.pricing.pro.desc.monthly": "/month · For medium brokerage companies",
+    "re.pricing.pro.desc.annual": "/year · For medium brokerage companies",
+    "re.pricing.pro.cta": "Start Now",
+
+    "re.pricing.enterprise.tier": "⚫",
+    "re.pricing.enterprise.name": "Enterprise",
+    "re.pricing.enterprise.price.monthly": "24,999",
+    "re.pricing.enterprise.price.annual": "269,989",
+    "re.pricing.enterprise.desc.monthly":
+      "/month · For developers and large companies",
+    "re.pricing.enterprise.desc.annual":
+      "/year · For developers and large companies",
+    "re.pricing.enterprise.cta": "Contact Us",
+
+    "re.faq.title": "Frequently Asked",
+    "re.faq.title_span": "Questions",
+    "re.faq.q1": "How does Sondos understand real estate customer needs?",
+    "re.faq.a1":
+      "Sondos is trained on thousands of real estate conversations. It asks smart questions like: property type (apartment/villa/land), purpose (residence/investment), budget, preferred location, and number of rooms. Then sends a complete summary to the agent.",
+    "re.faq.q2": "Can it send property details to the customer?",
+    "re.faq.a2":
+      "Yes! Sondos integrates with WhatsApp and can automatically send property photos, map locations, prices, and specifications based on customer interest.",
+    "re.faq.q3": "How does it handle serious customers vs. casual inquirers?",
+    "re.faq.a3":
+      "Sondos uses a smart qualification system that classifies customers (Hot/Warm/Cold) based on their answers. Serious customers are transferred immediately or scheduled an appointment, while inquirers are followed up later.",
+    "re.faq.q4": "Does it work with real estate CRM systems?",
+    "re.faq.a4":
+      "Yes, Sondos integrates with the most popular real estate CRM systems like Zoho, HubSpot, and local property management systems. Every new customer is automatically added with all their data.",
+    "re.faq.q5": "What about complaint or emergency calls?",
+    "re.faq.a5":
+      "Sondos distinguishes between regular inquiries and urgent cases. In emergencies (water leak, electrical fault), it immediately transfers the call to the responsible person with a WhatsApp alert.",
+    "re.faq.q6": "How long does activation take?",
+    "re.faq.a6":
+      "Basic activation within 24-48 hours. We customize scenarios based on your business type (sales/rental/property management) and connect with your existing systems.",
+
+    "re.cta.icon": "🏢",
+    "re.cta.title": "Ready to Win Every Potential",
+    "re.cta.title2": "Real Estate Customer?",
+    "re.cta.subtitle":
+      "Join more than 150 Saudi real estate companies using Sondos to increase their sales",
+    "re.cta.button": "Book Your Free Demo",
+    // Dans l'objet translations, après la section "re" (real estate) ou avant "cc" (call center)
+
+    // ─── Technology ─────────────────────────────────────────────────────────
+    "tech.hero.badge": "AI Support for Tech Companies",
+    "tech.hero.title1": "Reduce Support Tickets by",
+    "tech.hero.title2": "70%",
+    "tech.hero.title3": "and Boost Conversion 40%",
+    "tech.hero.subtitle":
+      "Sondos handles customer inquiries from your knowledge base, helps with onboarding, and provides Level 1 technical support - 24/7 in all languages",
+    "tech.hero.proof":
+      "✓ +100 tech companies · ✓ 500,000+ conversations/month · ✓ 24/7 multilingual",
+    "tech.hero.cta": "Book Your Demo",
+
+    "tech.stat.tickets": "Support Tickets",
+    "tech.stat.conversion": "Trial Conversion",
+    "tech.stat.global": "Global Support",
+    "tech.stat.conversations": "Monthly Conversations",
+    "tech.stat.companies": "Tech Companies",
+    "tech.stat.onboarding": "Onboarding",
+    "tech.stat.support": "Support",
+    "tech.stat.coverage": "Coverage",
+    "tech.stat.cost": "Cost",
+    "tech.stat.scale": "Scale",
+    "tech.stat.vip": "VIP",
+    "tech.stat.response": "Response",
+    "tech.stat.rating": "Rating",
+    "tech.stat.reviews": "Reviews",
+    "tech.stat.resolution": "Resolution",
+    "tech.stat.sales": "Sales",
+    "tech.stat.alerts": "Alerts",
+    "tech.stat.clarity": "Clarity",
+    "tech.stat.instant": "Instant",
+    "tech.stat.under30": "< 30 seconds",
+    "tech.stat.under1min": "< 1 minute",
+
+    "tech.problems.title": "Challenges of",
+    "tech.problems.title2": "Tech Companies",
+    "tech.problems.solution": "Sondos Solves All This",
+
+    "tech.problem1.title": "Repetitive Tickets",
+    "tech.problem1.desc": "Same questions over and over consume team time",
+    "tech.problem2.title": "Slow Onboarding",
+    "tech.problem2.desc": "New customers get lost = Trials don't convert",
+    "tech.problem3.title": "Time Zones",
+    "tech.problem3.desc": "Global customers need 24/7 support",
+    "tech.problem4.title": "Support Cost",
+    "tech.problem4.desc": "Large support team = high cost",
+
+    "tech.solution1.title": "-70% Tickets",
+    "tech.solution1.desc": "Instant answers from knowledge base",
+    "tech.solution2.title": "+40% Conversion",
+    "tech.solution2.desc": "Interactive onboarding guides customers",
+    "tech.solution3.title": "24/7 Global",
+    "tech.solution3.desc": "All languages, all time zones",
+    "tech.solution4.title": "-80% Cost",
+    "tech.solution4.desc": "Enterprise support at Startup cost",
+
+    "tech.segments.title": "Solutions for Every",
+    "tech.segments.title2": "Tech Company",
+    "tech.segments.subtitle": "Sondos adapts to your tech business",
+    "tech.segments.pain": "Current Challenges",
+    "tech.segments.solution": "With Sondos",
+    "tech.segments.useCases": "Use Cases",
+
+    "tech.segment.saas.name": "SaaS Companies",
+    "tech.segment.saas.desc": "Software as a Service",
+    "tech.segment.saas.pain1":
+      "Repetitive support tickets about the same issues",
+    "tech.segment.saas.pain2": "Slow onboarding reduces conversion",
+    "tech.segment.saas.pain3": "24/7 multilingual support is expensive",
+    "tech.segment.saas.sol1":
+      "Solve 70% of tickets automatically from knowledge base",
+    "tech.segment.saas.sol2": "Interactive onboarding boosts conversion 40%",
+    "tech.segment.saas.sol3": "Support in all languages at fixed cost",
+    "tech.segment.saas.use1": "Technical Support",
+    "tech.segment.saas.use2": "Onboarding",
+    "tech.segment.saas.use3": "Feature Explanation",
+    "tech.segment.saas.use4": "Invoicing",
+    "tech.segment.saas.use5": "Renewals",
+
+    "tech.segment.startups.name": "Startups",
+    "tech.segment.startups.desc": "Startups & Scale-ups",
+    "tech.segment.startups.pain1": "Small team can't handle 24/7 support",
+    "tech.segment.startups.pain2": "Customers in different time zones",
+    "tech.segment.startups.pain3": "Limited budget for hiring",
+    "tech.segment.startups.sol1": "Enterprise-level support at startup cost",
+    "tech.segment.startups.sol2": "Cover all time zones",
+    "tech.segment.startups.sol3": "Fixed cost that scales with you",
+    "tech.segment.startups.use1": "Customer Support",
+    "tech.segment.startups.use2": "Feedback Collection",
+    "tech.segment.startups.use3": "Customer Qualification",
+    "tech.segment.startups.use4": "Product Demos",
+
+    "tech.segment.enterprise.name": "Enterprise",
+    "tech.segment.enterprise.desc": "Enterprise Software",
+    "tech.segment.enterprise.pain1": "VIP customers expect instant support",
+    "tech.segment.enterprise.pain2": "Complex integrations need follow-up",
+    "tech.segment.enterprise.pain3": "Strict SLAs hard to maintain",
+    "tech.segment.enterprise.sol1":
+      "Instant VIP identification and special treatment",
+    "tech.segment.enterprise.sol2": "Integration and project follow-up",
+    "tech.segment.enterprise.sol3": "Instant response ensures SLA compliance",
+    "tech.segment.enterprise.use1": "VIP Support",
+    "tech.segment.enterprise.use2": "Project Follow-up",
+    "tech.segment.enterprise.use3": "Smart Escalation",
+    "tech.segment.enterprise.use4": "Customer Reports",
+
+    "tech.segment.apps.name": "Mobile Apps",
+    "tech.segment.apps.desc": "iOS, Android, Cross-platform",
+    "tech.segment.apps.pain1": "Negative reviews due to unresolved issues",
+    "tech.segment.apps.pain2": "High volume of usage inquiries",
+    "tech.segment.apps.pain3": "Difficulty supporting multiple versions",
+    "tech.segment.apps.sol1": "Quick responses improve ratings",
+    "tech.segment.apps.sol2": "Instant answers from Help Center",
+    "tech.segment.apps.sol3": "Custom support for each version",
+    "tech.segment.apps.use1": "App Issues",
+    "tech.segment.apps.use2": "Subscriptions",
+    "tech.segment.apps.use3": "Account Recovery",
+    "tech.segment.apps.use4": "Feature Explanation",
+
+    "tech.segment.hosting.name": "Hosting & Cloud",
+    "tech.segment.hosting.desc": "Cloud, Hosting, Infrastructure",
+    "tech.segment.hosting.pain1": "Urgent technical issues 24/7",
+    "tech.segment.hosting.pain2": "Pricing and plan inquiries",
+    "tech.segment.hosting.pain3": "Upgrade and modification requests",
+    "tech.segment.hosting.sol1": "Level 1 support solves 50% of issues",
+    "tech.segment.hosting.sol2": "Smart pricing calculator",
+    "tech.segment.hosting.sol3": "Conversational upgrades",
+    "tech.segment.hosting.use1": "Technical Support",
+    "tech.segment.hosting.use2": "Pricing",
+    "tech.segment.hosting.use3": "Upgrades",
+    "tech.segment.hosting.use4": "DNS Issues",
+    "tech.segment.hosting.use5": "Backup",
+
+    "tech.segment.security.name": "Cybersecurity",
+    "tech.segment.security.desc": "Security Solutions",
+    "tech.segment.security.pain1": "Security alerts need instant response",
+    "tech.segment.security.pain2": "Worried customers need reassurance",
+    "tech.segment.security.pain3": "Complex security reports hard to explain",
+    "tech.segment.security.sol1": "Alert classification and urgent escalation",
+    "tech.segment.security.sol2": "Reassure customers with accurate info",
+    "tech.segment.security.sol3": "Simplified report explanation",
+    "tech.segment.security.use1": "Security Alerts",
+    "tech.segment.security.use2": "Report Explanation",
+    "tech.segment.security.use3": "Recommendations",
+    "tech.segment.security.use4": "Emergency Cases",
+
+    "tech.feature.kb.title": "Knowledge Base Integration",
+    "tech.feature.kb.desc":
+      "Sondos connects to Notion, Confluence, Help Center and answers from your docs directly",
+    "tech.feature.kb.highlight": "Knowledge Base",
+    "tech.feature.onboarding.title": "Interactive Onboarding",
+    "tech.feature.onboarding.desc":
+      "Guides new customers step by step, answers questions, ensures successful activation",
+    "tech.feature.onboarding.highlight": "+40% Conversion",
+    "tech.feature.tickets.title": "Reduce Support Tickets",
+    "tech.feature.tickets.desc":
+      "Solve 70% of inquiries instantly = team focuses on real issues",
+    "tech.feature.tickets.highlight": "-70% Tickets",
+    "tech.feature.renewal.title": "Subscription Renewal",
+    "tech.feature.renewal.desc":
+      "Smart reminders before renewal + personalized offers = reduce churn",
+    "tech.feature.renewal.highlight": "-25% Churn",
+    "tech.feature.techsupport.title": "Smart Technical Support",
+    "tech.feature.techsupport.desc":
+      "Troubleshooting steps, technical info gathering, smart escalation to team",
+    "tech.feature.techsupport.highlight": "L1 Support",
+    "tech.feature.global.title": "Multilingual Global",
+    "tech.feature.global.desc":
+      "Support in all major languages, all time zones, single cost",
+    "tech.feature.global.highlight": "24/7 Global",
+
+    "tech.integrations.with": "Integrates with",
+    "tech.integration.helpdesk": "Help Desk",
+    "tech.integration.crm": "CRM",
+    "tech.integration.knowledge": "Knowledge",
+    "tech.integration.communication": "Communication",
+    "tech.integration.billing": "Billing",
+    "tech.integration.dev": "Dev",
+
+    "tech.usecase.ticket.title": "🎫 Support Ticket Resolution",
+    "tech.usecase.ticket.msg1":
+      "Welcome! TechApp Support 🚀\nHow can I help you today?",
+    "tech.usecase.ticket.msg2":
+      "The app gives me an error when I try to upload a file",
+    "tech.usecase.ticket.msg3":
+      "Sorry for the inconvenience! Let me help 🔧\n\nWhat file type are you trying to upload? And what's the size?",
+    "tech.usecase.ticket.msg4": "PDF, 15MB",
+    "tech.usecase.ticket.msg5":
+      "Found the issue! 💡\n\nThe max file size in your plan is 10MB.\n\nYou have 2 options:\n1️⃣ Compress the file to under 10MB\n2️⃣ Upgrade to Pro plan (100MB limit)\n\nWant help with either?",
+    "tech.usecase.ticket.msg6": "How much is the upgrade?",
+    "tech.usecase.ticket.msg7":
+      "Pro plan:\n💰 99 SAR/month (was 149)\n✅ Upload files up to 100MB\n✅ 50GB storage\n✅ Priority support\n\nWant me to activate it? I can add it to your account now 😊",
+
+    "tech.usecase.onboarding.title": "🎯 New Customer Onboarding",
+    "tech.usecase.onboarding.msg1":
+      "Welcome to TechApp! 🎉\n\nI'm here to help you get started quickly.\n\nWhat's your main goal with the app?",
+    "tech.usecase.onboarding.msg2": "I want to organize my team's projects",
+    "tech.usecase.onboarding.msg3":
+      "Great choice! 👍\n\nLet me guide you through the first steps:\n\n1️⃣ Create your first project\n2️⃣ Add team members\n3️⃣ Create your first task\n\nWant me to start with step 1?",
+    "tech.usecase.onboarding.msg4": "Yes",
+    "tech.usecase.onboarding.msg5":
+      "Excellent! 🚀\n\nClick 'New Project' in the top corner.\n\nName it 'Test Project' for example.\n\nReady? Let me know when done 😊",
+    "tech.usecase.onboarding.msg6": "Done",
+    "tech.usecase.onboarding.msg7":
+      "Great! 🎊\n\nNow add team members:\n1. Click 'Project Settings'\n2. Choose 'Team Members'\n3. Enter their email\n\nTip: You can set different permissions for each member 💡",
+
+    "tech.testimonial1.quote":
+      "We used to get 200 tickets daily. Now Sondos solves 70% of them automatically. Our support team focuses only on complex issues.",
+    "tech.testimonial1.name": "Eng. Ahmed Al-Shahri",
+    "tech.testimonial1.role": "VP of Customer Success",
+    "tech.testimonial1.company": "Saudi SaaS Platform",
+    "tech.testimonial1.metric": "-70% Support Tickets",
+
+    "tech.testimonial2.quote":
+      "Trial conversion was 12%. After Sondos interactive onboarding, it jumped to 22%. Huge revenue impact!",
+    "tech.testimonial2.name": "Sara Al-Qahtani",
+    "tech.testimonial2.role": "Growth Manager",
+    "tech.testimonial2.company": "Fintech App",
+    "tech.testimonial2.metric": "+83% Trial Conversion",
+
+    "tech.testimonial3.quote":
+      "Our customers are from 20 countries. We needed a multilingual team. Sondos serves them in 8 languages 24/7 at less than one employee cost.",
+    "tech.testimonial3.name": "Fahad Al-Maliki",
+    "tech.testimonial3.role": "CEO",
+    "tech.testimonial3.company": "Hosting Company",
+    "tech.testimonial3.metric": "8 languages at cost of 1 employee",
+
+    "tech.faq1.q": "How does Sondos connect to our knowledge base?",
+    "tech.faq1.a":
+      "Sondos integrates directly with Notion, Confluence, Zendesk, Intercom, GitBook, and any Help Center via API. It reads your articles and docs and answers customers directly. Updates automatically when content changes.",
+
+    "tech.faq2.q": "How does it help with customer onboarding?",
+    "tech.faq2.a":
+      "Sondos welcomes new customers, asks about their goals, guides them through first steps, answers questions immediately, and follows up until they become active users. It can send follow-up messages via WhatsApp or email.",
+
+    "tech.faq3.q": "Can it handle technical issues?",
+    "tech.faq3.a":
+      "Yes! Sondos is trained on technical support scenarios: system info gathering, troubleshooting steps, log checking, and smart escalation to team with full context. It solves 40-50% of common technical issues automatically.",
+
+    "tech.faq4.q": "How does it handle VIP and Enterprise customers?",
+    "tech.faq4.a":
+      "Sondos recognizes VIP customers by phone number or email. It treats them specially, can access their specific data, and escalates to their dedicated account manager when needed - with full conversation context.",
+
+    "tech.faq5.q": "What systems does it integrate with?",
+    "tech.faq5.a":
+      "Sondos integrates with: CRM (Salesforce, HubSpot, Pipedrive), Help Desk (Zendesk, Freshdesk, Intercom), Knowledge Base (Notion, Confluence), Communication (Slack, Teams), and Billing (Stripe, Paddle). We provide Webhooks and API for custom integrations.",
+
+    "tech.faq6.q": "How long does implementation take?",
+    "tech.faq6.a":
+      "Basic implementation (FAQ + Knowledge Base) takes 3-5 days. Advanced integrations (CRM, Billing) need 1-2 weeks. We provide a Customer Success team to help with setup and customization.",
+    "tech.usecases.title": "See Sondos",
+    "tech.usecases.title2": "in Action",
+    "tech.integrations.title": "Integrates with",
+    "tech.integrations.title2": "Your Favorite Tools",
+    "tech.integrations.subtitle":
+      "Direct integration with popular support and development tools",
+    "tech.integrations.api": "Open API",
+    "tech.integrations.api_desc": "for integration with any other system",
+    "tech.testimonials.title": "Success Stories of",
+    "tech.testimonials.title2": "Tech Companies",
+    "tech.faq.title": "Frequently Asked",
+    "tech.faq.title2": "Questions",
+    "tech.cta.title1": "Ready to Reduce Support Tickets by 70%",
+    "tech.cta.title2": "and Boost Conversion 40%?",
+    "tech.cta.subtitle":
+      "Join over 100 tech companies using Sondos to improve customer experience",
+    "tech.cta.button": "Book Your Demo",
+    "tech.features.title": "Features Designed for",
+    "tech.features.title2": "Tech Companies",
+    // ─── Governance ─────────────────────────────────────────────────────
+    "gov.hero.badge": "Smart Solutions for Government Sector",
+    "gov.hero.title1": "Citizen Service",
+    "gov.hero.title2": "24/7",
+    "gov.hero.title3": "No Waiting",
+    "gov.hero.subtitle":
+      "Sondos handles 85% of citizen inquiries automatically: transaction tracking, appointment booking, report reception - with government security and Nafath integration",
+    "gov.hero.proof":
+      "✓ +20 government entities · ✓ 5 million transactions/month · ✓ 85% automation",
+    "gov.hero.cta": "Book Your Demo",
+
+    "gov.badge.security": "Security Certified",
+    "gov.badge.servers": "Local Servers",
+    "gov.badge.compliance": "PDPL Compliant",
+
+    "gov.stat.automation": "Automation",
+    "gov.stat.service": "Service",
+    "gov.stat.satisfaction": "Satisfaction",
+    "gov.stat.transactions": "Monthly Transactions",
+    "gov.stat.entities": "Government Entities",
+    "gov.stat.availability": "Availability",
+    "gov.stat.accuracy": "Accuracy",
+    "gov.stat.reports": "Reports",
+    "gov.stat.tracking": "Tracking",
+    "gov.stat.resolution": "Resolution",
+    "gov.stat.booking": "Booking",
+    "gov.stat.inquiries": "Inquiries",
+    "gov.stat.noShow": "No-Show",
+    "gov.stat.admissions": "Admissions",
+    "gov.stat.support": "Support",
+    "gov.stat.clarity": "Clarity",
+    "gov.stat.compliance": "Compliance",
+    "gov.stat.billing": "Billing",
+    "gov.stat.requests": "Requests",
+    "gov.stat.outages": "Outages",
+    "gov.stat.instant": "Instant",
+    "gov.stat.automatic": "Automatic",
+
+    "gov.journey.title": "Optimized",
+    "gov.journey.title2": "Citizen Journey",
+    "gov.journey.subtitle":
+      "How Sondos improves citizen experience at every step",
+    "gov.journey.step1.title": "Contact",
+    "gov.journey.step1.desc": "Citizen calls or messages via any channel",
+    "gov.journey.step1.traditional": "Wait 5-15 minutes",
+    "gov.journey.step1.sondos": "Instant reply < 3 seconds",
+    "gov.journey.step2.title": "Verification",
+    "gov.journey.step2.desc": "Identity verification via Nafath or OTP",
+    "gov.journey.step2.traditional": "Long Q&A",
+    "gov.journey.step2.sondos": "Secure automatic verification",
+    "gov.journey.step3.title": "Understanding",
+    "gov.journey.step3.desc": "Determine required service type",
+    "gov.journey.step3.traditional": "Transfer between departments",
+    "gov.journey.step3.sondos": "Instant understanding & correct routing",
+    "gov.journey.step4.title": "Service",
+    "gov.journey.step4.desc": "Execute request or provide information",
+    "gov.journey.step4.traditional": "Manual procedures",
+    "gov.journey.step4.sondos": "Instant automatic execution",
+    "gov.journey.step5.title": "Follow-up",
+    "gov.journey.step5.desc": "Track request status",
+    "gov.journey.step5.traditional": "Call and inquire each time",
+    "gov.journey.step5.sondos": "Proactive notifications",
+
+    "gov.segments.title": "Solutions for Every",
+    "gov.segments.title2": "Government Sector",
+    "gov.segments.subtitle": "Sondos adapts to each entity's nature",
+    "gov.segments.pain": "Challenges",
+    "gov.segments.solution": "With Sondos",
+    "gov.segments.useCases": "Use Cases",
+
+    "gov.segment.government.name": "Government Entities",
+    "gov.segment.government.desc":
+      "Ministries, Authorities, Public Institutions",
+    "gov.segment.government.pain1": "High volume of citizen inquiries",
+    "gov.segment.government.pain2": "Pressure on government call centers",
+    "gov.segment.government.pain3":
+      "Inconsistent service quality between employees",
+    "gov.segment.government.sol1": "Automate 80% of routine inquiries",
+    "gov.segment.government.sol2": "24/7 service with no waiting",
+    "gov.segment.government.sol3":
+      "Uniform quality and accurate information always",
+    "gov.segment.government.use1": "Service Inquiry",
+    "gov.segment.government.use2": "Appointment Booking",
+    "gov.segment.government.use3": "Transaction Tracking",
+    "gov.segment.government.use4": "Complaints & Reports",
+
+    "gov.segment.municipalities.name": "Municipalities",
+    "gov.segment.municipalities.desc": "City and regional services",
+    "gov.segment.municipalities.pain1":
+      "High volume of maintenance and cleaning reports",
+    "gov.segment.municipalities.pain2": "Building and shop license inquiries",
+    "gov.segment.municipalities.pain3": "Citizen complaints need follow-up",
+    "gov.segment.municipalities.sol1":
+      "Receive and classify reports automatically",
+    "gov.segment.municipalities.sol2":
+      "Instant information about procedures and requirements",
+    "gov.segment.municipalities.sol3": "Track complaint and report status",
+    "gov.segment.municipalities.use1": "Cleaning Reports",
+    "gov.segment.municipalities.use2": "Building Licenses",
+    "gov.segment.municipalities.use3": "Violations",
+    "gov.segment.municipalities.use4": "Service Inquiry",
+
+    "gov.segment.healthcare.name": "Public Healthcare",
+    "gov.segment.healthcare.desc": "Government hospitals and health centers",
+    "gov.segment.healthcare.pain1": "Appointment booking consumes staff time",
+    "gov.segment.healthcare.pain2": "Inquiries about services and coverage",
+    "gov.segment.healthcare.pain3": "Test result follow-up",
+    "gov.segment.healthcare.sol1":
+      "Automatic appointment booking and cancellation",
+    "gov.segment.healthcare.sol2":
+      "Comprehensive information about available services",
+    "gov.segment.healthcare.sol3": "Proactive patient notifications",
+    "gov.segment.healthcare.use1": "Appointment Booking",
+    "gov.segment.healthcare.use2": "Test Results",
+    "gov.segment.healthcare.use3": "Doctor Inquiries",
+    "gov.segment.healthcare.use4": "Health Insurance",
+
+    "gov.segment.education.name": "Education Sector",
+    "gov.segment.education.desc": "Universities, Schools, Training",
+    "gov.segment.education.pain1": "Admission and registration inquiries",
+    "gov.segment.education.pain2": "Student questions about procedures",
+    "gov.segment.education.pain3": "Parent support",
+    "gov.segment.education.sol1":
+      "Instant answers about admission requirements",
+    "gov.segment.education.sol2": "Guide students through correct procedures",
+    "gov.segment.education.sol3": "Unified communication channel for parents",
+    "gov.segment.education.use1": "Admission & Registration",
+    "gov.segment.education.use2": "Academic Schedules",
+    "gov.segment.education.use3": "Results",
+    "gov.segment.education.use4": "Fees & Payments",
+
+    "gov.segment.compliance.name": "Compliance & Regulatory",
+    "gov.segment.compliance.desc": "Regulatory and supervisory bodies",
+    "gov.segment.compliance.pain1": "Inquiries about regulations and laws",
+    "gov.segment.compliance.pain2": "License and permit applications",
+    "gov.segment.compliance.pain3": "Violation reports",
+    "gov.segment.compliance.sol1": "Simplified explanation of regulations",
+    "gov.segment.compliance.sol2": "Step-by-step guidance for licenses",
+    "gov.segment.compliance.sol3": "Receive and classify reports",
+    "gov.segment.compliance.use1": "Regulations & Laws",
+    "gov.segment.compliance.use2": "Licenses",
+    "gov.segment.compliance.use3": "Reports",
+    "gov.segment.compliance.use4": "Violation Inquiries",
+
+    "gov.segment.publicservices.name": "Public Services",
+    "gov.segment.publicservices.desc": "Electricity, Water, Postal",
+    "gov.segment.publicservices.pain1": "Bills, consumption, complaints",
+    "gov.segment.publicservices.pain2": "Connection and disconnection requests",
+    "gov.segment.publicservices.pain3": "Urgent fault reports",
+    "gov.segment.publicservices.sol1": "Instant bill and consumption inquiry",
+    "gov.segment.publicservices.sol2": "Service requests via conversation",
+    "gov.segment.publicservices.sol3": "24/7 fault reports with tracking",
+    "gov.segment.publicservices.use1": "Bills",
+    "gov.segment.publicservices.use2": "Service Requests",
+    "gov.segment.publicservices.use3": "Fault Reports",
+    "gov.segment.publicservices.use4": "Data Change",
+
+    "gov.feature.security.title": "Government Security & Privacy",
+    "gov.feature.security.desc":
+      "Compliant with national cybersecurity requirements and PDPL",
+    "gov.feature.security.highlight": "Certified",
+    "gov.feature.omnichannel.title": "Multi-Channel",
+    "gov.feature.omnichannel.desc":
+      "Phone, WhatsApp, website, app - unified channel for citizen service",
+    "gov.feature.omnichannel.highlight": "Omnichannel",
+    "gov.feature.dashboard.title": "Government Dashboard",
+    "gov.feature.dashboard.desc":
+      "Performance reports, beneficiary satisfaction, wait times, advanced analytics",
+    "gov.feature.dashboard.highlight": "Dashboard",
+    "gov.feature.routing.title": "Smart Request Classification",
+    "gov.feature.routing.desc":
+      "Automatically identify request type, priority, and responsible department",
+    "gov.feature.routing.highlight": "Smart Routing",
+    "gov.feature.integration.title": "Government Systems Integration",
+    "gov.feature.integration.desc":
+      "Integration with Absher, Nafath, Tawakkalna, and internal systems via secure API",
+    "gov.feature.integration.highlight": "Integration",
+    "gov.feature.accessibility.title": "Inclusive & Accessible",
+    "gov.feature.accessibility.desc":
+      "Support for people with disabilities, elderly, and multiple dialects and languages",
+    "gov.feature.accessibility.highlight": "Accessibility",
+
+    "gov.integration.nafath": "Nafath",
+    "gov.integration.absher": "Absher",
+    "gov.integration.tawakkalna": "Tawakkalna",
+    "gov.integration.integration_center": "Integration Center",
+    "gov.integration.najiz": "Najiz",
+    "gov.integration.ejar": "Ejar",
+    "gov.integration.quwwa": "Quwwa",
+    "gov.integration.etimad": "Etimad",
+    "gov.integration.type.identity": "Identity",
+    "gov.integration.type.services": "Services",
+    "gov.integration.type.app": "App",
+    "gov.integration.type.gov": "Government",
+    "gov.integration.type.justice": "Justice",
+    "gov.integration.type.housing": "Housing",
+    "gov.integration.type.labor": "Labor",
+    "gov.integration.type.finance": "Finance",
+
+    "gov.usecases.title": "See Sondos",
+    "gov.usecases.title2": "in Action",
+    "gov.usecase.inquiry.title": "📋 Transaction Inquiry",
+    "gov.usecase.inquiry.msg1":
+      "Hello! Beneficiary Service 🏛️\nHow can I help you today?",
+    "gov.usecase.inquiry.msg2": "I want to know where my transaction is",
+    "gov.usecase.inquiry.msg3":
+      "Gladly! To inquire about your transaction, I need:\n\n1️⃣ Transaction number\nOR\n2️⃣ ID number for verification",
+    "gov.usecase.inquiry.msg4": "Transaction number 1445-789456",
+    "gov.usecase.inquiry.msg5":
+      "Transaction found ✅\n\n📋 Transaction type: Permit application\n📍 Status: Under review\n🏢 Department: Licenses Administration\n📅 Received date: January 15\n⏱️ Expected: Within 5 working days\n\nWant me to notify you when status updates?",
+    "gov.usecase.inquiry.msg6": "Yes",
+    "gov.usecase.inquiry.msg7":
+      "Notifications activated ✅\n\nYou'll receive a message on your registered mobile (05XX XXX XX89) for any updates.\n\nNeed anything else? 😊",
+
+    "gov.usecase.report.title": "🏙️ Municipality Report",
+    "gov.usecase.report.msg1":
+      "Welcome to the Municipality! 🏙️\nHow can I help you?",
+    "gov.usecase.report.msg2": "There's a big pothole in the street near us",
+    "gov.usecase.report.msg3":
+      "Thanks for your report! 🙏\n\nLet me register it. I need some information:\n\n📍 What neighborhood and street?",
+    "gov.usecase.report.msg4":
+      "Al-Narjis neighborhood, Prince Mohammed bin Saad Street",
+    "gov.usecase.report.msg5":
+      "Great! Is the pothole near any landmark? (mosque, school, known shop)",
+    "gov.usecase.report.msg6": "Near Al-Noor mosque",
+    "gov.usecase.report.msg7":
+      "Excellent! Can you send a photo of the pothole on WhatsApp (05XXXXXXXX)?\n\nThis helps the team assess priority better.\n\n📝 Report number: BLD-2024-45678\n📍 Location: Al-Narjis, Prince Mohammed bin Saad St (near Al-Noor mosque)\n🔧 Type: Road maintenance - pothole\n⚡ Priority: High\n\nThe technical team will contact you soon. Thanks for contributing to improving the city! 💜",
+
+    "gov.testimonials.title": "Success Stories of",
+    "gov.testimonials.title2": "Government Entities",
+    "gov.testimonial1.quote":
+      "We used to receive 3000 daily calls about transaction status. Now Sondos answers 85% of them instantly. Citizens get information without waiting.",
+    "gov.testimonial1.name": "Mohammed Al-Otaibi",
+    "gov.testimonial1.role": "Beneficiary Services Manager",
+    "gov.testimonial1.company": "Major Government Entity",
+    "gov.testimonial1.metric": "85% Automation",
+    "gov.testimonial2.quote":
+      "Cleaning and maintenance reports used to get lost sometimes. Now Sondos receives them, classifies them, and sends them to the responsible team with location coordinates.",
+    "gov.testimonial2.name": "Sara Al-Ghamdi",
+    "gov.testimonial2.role": "Reports Center Manager",
+    "gov.testimonial2.company": "Riyadh Municipality",
+    "gov.testimonial2.metric": "100% Report Tracking",
+    "gov.testimonial3.quote":
+      "Beneficiary satisfaction rose from 3.2 to 4.6 stars. Main reason: no waiting + accurate information + 24/7 service.",
+    "gov.testimonial3.name": "Dr. Fahad Al-Maliki",
+    "gov.testimonial3.role": "General Supervisor",
+    "gov.testimonial3.company": "Government Hospital",
+    "gov.testimonial3.metric": "4.6⭐ Satisfaction",
+
+    "gov.faq.title": "Frequently Asked",
+    "gov.faq.title2": "Questions",
+    "gov.faq1.q":
+      "Is Sondos compliant with government cybersecurity requirements?",
+    "gov.faq1.a":
+      "Yes, Sondos is designed according to highest security standards: National Cybersecurity Authority certification, AES-256 encryption, servers inside the Kingdom, multi-factor authentication, and complete audit logs. Compliant with PDPL and digital governance requirements.",
+    "gov.faq2.q": "How does it integrate with existing government systems?",
+    "gov.faq2.a":
+      "Sondos integrates via secure API with: Nafath for identity verification, Absher for services, Tawakkalna, and the Government Integration Center. Also integrates with Document Management Systems (DMS) and government ERP systems.",
+    "gov.faq3.q": "Can it perform actual transactions?",
+    "gov.faq3.a":
+      "Yes, after beneficiary identity verification via Nafath or OTP, Sondos can: book appointments, update data, submit applications, and track transactions. All actions are logged and audited.",
+    "gov.faq4.q": "How does it handle complaints and reports?",
+    "gov.faq4.a":
+      "Sondos receives the complaint, collects details (location, photos, description), classifies by type and priority, opens a ticket in the system, and gives the beneficiary a tracking number. Beneficiaries can inquire about their report status later.",
+    "gov.faq5.q": "Does it support Arabic and dialects?",
+    "gov.faq5.a":
+      "Yes, Sondos speaks fluent Modern Standard Arabic and Saudi dialects (Najdi, Hijazi, Eastern). Also supports English, Urdu, and Hindi to serve all residents.",
+    "gov.faq6.q": "What is the implementation time for government entities?",
+    "gov.faq6.a":
+      "Basic implementation (general inquiries) takes 2-3 weeks. Integrations with government systems need 4-8 weeks. We provide a dedicated implementation team for government entities with 24/7 technical support.",
+
+    "gov.cta.title1": "Ready to Improve Beneficiary Service",
+    "gov.cta.title2": "and Increase Satisfaction?",
+    "gov.cta.subtitle":
+      "Join over 20 government entities using Sondos to better serve citizens",
+    "gov.cta.button": "Book Your Demo",
+    // Dans la section anglaise (en)
+    "gov.security.title": "Security and Governance",
+    "gov.security.title2": "at Government Level",
+
+    "gov.security.item1.title": "AES-256 Encryption",
+    "gov.security.item1.desc":
+      "All data encrypted in transit and storage with highest encryption standards",
+
+    "gov.security.item2.title": "Servers Inside the Kingdom",
+    "gov.security.item2.desc":
+      "Data remains inside Saudi Arabia, compliant with digital sovereignty requirements",
+
+    "gov.security.item3.title": "PDPL Compliant",
+    "gov.security.item3.desc":
+      "Compliant with Saudi Personal Data Protection Law",
+
+    "gov.security.item4.title": "NCA Certified",
+    "gov.security.item4.desc":
+      "Compliant with National Cybersecurity Authority requirements",
+
+    "gov.security.item5.title": "Nafath Verification",
+    "gov.security.item5.desc":
+      "Integration with Nafath for beneficiary identity verification",
+
+    "gov.security.item6.title": "Audit Logs",
+    "gov.security.item6.desc":
+      "Complete logging of all operations for review and auditing",
+
+    "gov.features.title": "Features for",
+    "gov.features.title2": "Government Sector",
+
+    "gov.integrations.title": "Integration with",
+    "gov.integrations.title2": "Government Systems",
+    // ─── Insurance ─────────────────────────────────────────────────────
+    "ins.hero.badge": "Smart Solutions for Insurance Sector 🛡️",
+    "ins.hero.title1": "Boost Renewal Rate",
+    "ins.hero.title2": "35%",
+    "ins.hero.title3": "and Reduce Support Cost 70%",
+    "ins.hero.subtitle":
+      "Sondos handles customer inquiries, receives claims 24/7, and sends renewal reminders automatically - while your team focuses on important cases",
+    "ins.hero.proof":
+      "✓ +35% renewal rate · ✓ 24/7 claims reception · ✓ 80% inquiry automation",
+    "ins.hero.cta": "Book Your Demo",
+    "ins.hero.stat1.value": "+35%",
+    "ins.hero.stat1.label": "Renewal Rate",
+    "ins.hero.stat2.value": "24/7",
+    "ins.hero.stat2.label": "Claims Reception",
+    "ins.hero.stat3.value": "80%",
+    "ins.hero.stat3.label": "Inquiry Automation",
+
+    "ins.stat.calls": "Insurance Calls Monthly",
+    "ins.stat.companies": "Insurance Companies",
+    "ins.stat.renewal": "Renewal Increase",
+    "ins.stat.claims": "Claims Reception",
+    "ins.stat.quotes": "Quotes",
+    "ins.stat.satisfaction": "Satisfaction",
+    "ins.stat.response": "Response Time",
+    "ins.stat.resolution": "Resolution",
+    "ins.stat.assessment": "Assessment",
+    "ins.stat.retention": "Retention",
+    "ins.stat.leads": "Leads",
+    "ins.stat.conversion": "Conversion",
+    "ins.stat.nps": "NPS",
+    "ins.stat.issuance": "Issuance",
+    "ins.stat.emergency": "Emergency",
+    "ins.stat.languages": "Languages",
+    "ins.stat.comparison": "Comparison",
+    "ins.stat.portfolio": "Portfolio",
+    "ins.stat.efficiency": "Efficiency",
+    "ins.stat.instant": "Instant",
+    "ins.stat.centralized": "Centralized",
+
+    "ins.journey.title": "Improving Every Stage of the",
+    "ins.journey.title2": "Customer Journey",
+    "ins.journey.subtitle":
+      "Sondos improves customer experience at every touchpoint",
+    "ins.journey.traditional": "Traditional",
+    "ins.journey.withSondos": "With Sondos",
+    "ins.journey.improvement": "Improvement",
+    "ins.journey.stage1": "Inquiry",
+    "ins.journey.stage1.traditional": "Wait 5+ minutes for response",
+    "ins.journey.stage1.sondos": "Instant reply in 3 seconds",
+    "ins.journey.stage1.improvement": "-99% time",
+    "ins.journey.stage2": "Quote",
+    "ins.journey.stage2.traditional": "Request call back",
+    "ins.journey.stage2.sondos": "Instant quote",
+    "ins.journey.stage2.improvement": "Instant",
+    "ins.journey.stage3": "Issuance",
+    "ins.journey.stage3.traditional": "Long paper procedures",
+    "ins.journey.stage3.sondos": "Smooth digital guidance",
+    "ins.journey.stage3.improvement": "-80% time",
+    "ins.journey.stage4": "Claim",
+    "ins.journey.stage4.traditional": "Outside working hours = waiting",
+    "ins.journey.stage4.sondos": "24/7 instant reception",
+    "ins.journey.stage4.improvement": "0 waiting",
+    "ins.journey.stage5": "Follow-up",
+    "ins.journey.stage5.traditional": "Call and inquire each time",
+    "ins.journey.stage5.sondos": "Proactive updates",
+    "ins.journey.stage5.improvement": "Transparency",
+    "ins.journey.stage6": "Renewal",
+    "ins.journey.stage6.traditional": "Customer might forget",
+    "ins.journey.stage6.sondos": "Smart reminder + offer",
+    "ins.journey.stage6.improvement": "+35%",
+
+    "ins.segments.title": "Solutions for Every",
+    "ins.segments.title2": "Insurance Type",
+    "ins.segments.pain": "Challenges",
+    "ins.segments.solution": "With Sondos",
+    "ins.segments.useCases": "Use Cases",
+
+    "ins.segment.auto.name": "Auto Insurance",
+    "ins.segment.auto.desc": "Comprehensive and TPL",
+    "ins.segment.auto.pain1": "Frequent inquiries about coverage and prices",
+    "ins.segment.auto.pain2": "Accident reports need instant response",
+    "ins.segment.auto.pain3": "Renewal reminders consume team time",
+    "ins.segment.auto.sol1": "Instant quotes based on vehicle data",
+    "ins.segment.auto.sol2":
+      "24/7 accident report reception with details collection",
+    "ins.segment.auto.sol3": "Automatic reminders before policy expiry",
+    "ins.segment.auto.use1": "Price Quotes",
+    "ins.segment.auto.use2": "Accident Reports",
+    "ins.segment.auto.use3": "Policy Renewal",
+    "ins.segment.auto.use4": "Coverage Inquiries",
+
+    "ins.segment.health.name": "Health Insurance",
+    "ins.segment.health.desc":
+      "Medical insurance for individuals and companies",
+    "ins.segment.health.pain1":
+      "Many questions about medical network and coverage",
+    "ins.segment.health.pain2": "Pre-approvals need follow-up",
+    "ins.segment.health.pain3": "Approval delay complaints",
+    "ins.segment.health.sol1":
+      "Instant information about hospitals and coverage",
+    "ins.segment.health.sol2": "Automatic approval status tracking",
+    "ins.segment.health.sol3": "Escalate urgent complaints to specialists",
+    "ins.segment.health.use1": "Medical Network",
+    "ins.segment.health.use2": "Pre-approvals",
+    "ins.segment.health.use3": "Coverage Limits",
+    "ins.segment.health.use4": "Add Dependents",
+
+    "ins.segment.property.name": "Property Insurance",
+    "ins.segment.property.desc": "Homes, Buildings, Commercial",
+    "ins.segment.property.pain1": "Risk assessment needs lots of information",
+    "ins.segment.property.pain2": "Damage reports need quick documentation",
+    "ins.segment.property.pain3": "Many annual renewals",
+    "ins.segment.property.sol1":
+      "Collect assessment info via smart conversation",
+    "ins.segment.property.sol2": "Receive reports with photos and details",
+    "ins.segment.property.sol3": "Automatic renewal campaigns and follow-up",
+    "ins.segment.property.use1": "Property Assessment",
+    "ins.segment.property.use2": "Damage Reports",
+    "ins.segment.property.use3": "Annual Renewal",
+    "ins.segment.property.use4": "Coverage Modification",
+
+    "ins.segment.life.name": "Life Insurance",
+    "ins.segment.life.desc": "Protection and Savings",
+    "ins.segment.life.pain1": "Complex products need detailed explanation",
+    "ins.segment.life.pain2": "Potential leads need long follow-up",
+    "ins.segment.life.pain3": "Inquiries about beneficiaries and value",
+    "ins.segment.life.sol1":
+      "Simplified product explanation based on customer need",
+    "ins.segment.life.sol2": "Qualify and follow up with potential customers",
+    "ins.segment.life.sol3": "Beneficiary and heir service with sensitivity",
+    "ins.segment.life.use1": "Product Explanation",
+    "ins.segment.life.use2": "Lead Qualification",
+    "ins.segment.life.use3": "Beneficiary Service",
+    "ins.segment.life.use4": "Policy Modification",
+
+    "ins.segment.travel.name": "Travel Insurance",
+    "ins.segment.travel.desc": "Travel and Emergency",
+    "ins.segment.travel.pain1": "Urgent requests right before travel",
+    "ins.segment.travel.pain2": "Emergency cases abroad",
+    "ins.segment.travel.pain3": "International coverage inquiries",
+    "ins.segment.travel.sol1": "Instant policy issuance 24/7",
+    "ins.segment.travel.sol2": "Emergency line in all languages",
+    "ins.segment.travel.sol3":
+      "Clear information about coverage in each country",
+    "ins.segment.travel.use1": "Policy Issuance",
+    "ins.segment.travel.use2": "Emergency Cases",
+    "ins.segment.travel.use3": "Coverage Extension",
+    "ins.segment.travel.use4": "Claims",
+
+    "ins.segment.broker.name": "Insurance Brokers",
+    "ins.segment.broker.desc": "Brokerage and Marketing",
+    "ins.segment.broker.pain1": "Comparing offers from multiple companies",
+    "ins.segment.broker.pain2": "Following up with many clients",
+    "ins.segment.broker.pain3": "Renewals from different companies",
+    "ins.segment.broker.sol1":
+      "Comparative quotes from all companies instantly",
+    "ins.segment.broker.sol2": "Complete client portfolio management",
+    "ins.segment.broker.sol3": "Unified reminders for all renewals",
+    "ins.segment.broker.use1": "Offer Comparison",
+    "ins.segment.broker.use2": "Portfolio Management",
+    "ins.segment.broker.use3": "Renewals",
+    "ins.segment.broker.use4": "Customer Service",
+
+    "ins.feature.quotes.title": "Instant Quotes",
+    "ins.feature.quotes.desc":
+      "Customer mentions their car data or age and gets an approximate quote in seconds",
+    "ins.feature.quotes.highlight": "< 30 seconds",
+    "ins.feature.claims.title": "24/7 Claim Reception",
+    "ins.feature.claims.desc":
+      "Accident in the middle of the night? Sondos receives the report, collects details, and opens the claim",
+    "ins.feature.claims.highlight": "No Waiting",
+    "ins.feature.renewal.title": "Smart Renewal Reminder",
+    "ins.feature.renewal.desc":
+      "Automatic calls before policy expiry - with special offer",
+    "ins.feature.renewal.highlight": "+35% Renewal",
+    "ins.feature.tracking.title": "Claim Tracking",
+    "ins.feature.tracking.desc":
+      "Customer asks about their claim and gets latest updates instantly from the system",
+    "ins.feature.tracking.highlight": "Full Transparency",
+    "ins.feature.leads.title": "Lead Qualification",
+    "ins.feature.leads.desc":
+      "Smart questions identify customer need, budget, and seriousness before transfer to sales",
+    "ins.feature.leads.highlight": "Lead Scoring",
+    "ins.feature.languages.title": "Multilingual",
+    "ins.feature.languages.desc":
+      "Arabic, English, Urdu, Filipino - Sondos speaks your customer's language in Saudi",
+    "ins.feature.languages.highlight": "4+ Languages",
+
+    "ins.features.title": "Features Designed for",
+    "ins.features.title2": "Insurance Sector",
+
+    "ins.integration.najm": "Najm",
+    "ins.integration.sama": "SAMA",
+    "ins.integration.elm": "Elm",
+    "ins.integration.absher": "Absher",
+    "ins.integration.type.accidents": "Accidents",
+    "ins.integration.type.regulatory": "Regulatory",
+    "ins.integration.type.crm": "CRM",
+    "ins.integration.type.policy": "Policy Admin",
+    "ins.integration.type.claims": "Claims",
+    "ins.integration.type.communication": "Communication",
+    "ins.integration.type.gov": "Gov Integration",
+    "ins.integration.type.verification": "Verification",
+
+    "ins.integrations.title": "Integrates with",
+    "ins.integrations.title2": "Insurance Systems",
+    "ins.integrations.subtitle":
+      "Seamless integration with leading insurance systems and regulatory bodies",
+
+    "ins.usecases.title": "See Sondos",
+    "ins.usecases.title2": "in Action",
+    "ins.usecase.claim.title": "🚗 Car Accident Report",
+    "ins.usecase.claim.msg1": "Hello! Al-Dira Insurance, how can I help you?",
+    "ins.usecase.claim.msg2": "I had an accident and want to report it",
+    "ins.usecase.claim.msg3":
+      "Hope you're safe! 🙏 Let me help with the report.\n\nFirst: Any injuries to you or the other party?",
+    "ins.usecase.claim.msg4": "No injuries, thank God",
+    "ins.usecase.claim.msg5":
+      "Thank God for your safety.\n\nYour insurance policy number?",
+    "ins.usecase.claim.msg6": "123456789",
+    "ins.usecase.claim.msg7":
+      "Great, I see your policy is active. 👍\n\nWhere did the accident happen?",
+
+    "ins.usecase.renewal.title": "🔔 Renewal Reminder",
+    "ins.usecase.renewal.msg1":
+      "Hello Mr. Mohammed! This is Sondos from Al-Aman Insurance.\n\nReminding you that your car insurance expires in two weeks (March 15). 📅",
+    "ins.usecase.renewal.msg2": "Yes right, how much is renewal?",
+    "ins.usecase.renewal.msg3":
+      "Because you're a customer with no claims this year, you have a VIP discount! 🌟\n\nComprehensive: 2,400 SAR (was 3,200)\nTPL: 950 SAR\n\nWant me to renew the comprehensive?",
+    "ins.usecase.renewal.msg4": "Yes renew comprehensive",
+    "ins.usecase.renewal.msg5":
+      "Done! ✅ I sent you the payment link on WhatsApp.\n\nAfter payment, your new policy will arrive within minutes. Thanks for trusting us! 💜",
+
+    "ins.testimonials.title": "Success Stories of",
+    "ins.testimonials.title2": "Insurance Companies",
+    "ins.testimonial1.quote":
+      "Policy renewal rate was 68%. After Sondos automatic reminders, it increased to 89%. That means millions in additional annual revenue.",
+    "ins.testimonial1.name": "Khaled Al-Ghamdi",
+    "ins.testimonial1.role": "Operations Manager",
+    "ins.testimonial1.company": "Al-Dira Insurance",
+    "ins.testimonial1.metric": "+21% Renewal Rate",
+    "ins.testimonial2.quote":
+      "We needed 8 employees to answer coverage and medical network inquiries. Now Sondos handles 85% of them with high accuracy.",
+    "ins.testimonial2.name": "Dr. Sara Al-Mutairi",
+    "ins.testimonial2.role": "Customer Service Manager",
+    "ins.testimonial2.company": "Al-Taawuniya Health Insurance",
+    "ins.testimonial2.metric": "85% Inquiry Automation",
+    "ins.testimonial3.quote":
+      "Accident reports were a nightmare outside working hours. Now Sondos receives them 24/7 and prepares the complete file for our team in the morning.",
+    "ins.testimonial3.name": "Fahad Al-Otaibi",
+    "ins.testimonial3.role": "Claims Manager",
+    "ins.testimonial3.company": "Wiqaya Insurance",
+    "ins.testimonial3.metric": "24/7 Report Reception",
+
+    "ins.faq.title": "Frequently Asked",
+    "ins.faq.title2": "Questions",
+    "ins.faq.subtitle": "Everything you need to know before getting started",
+    "ins.faq1.q": "How does Sondos provide quotes?",
+    "ins.faq1.a":
+      "Sondos asks the customer for required data (car type, year, age, claims history) then uses API to connect to your pricing system and provides an instant quote. It can be customized to give a price range or exact price based on your preference.",
+    "ins.faq2.q": "Can it receive accident reports?",
+    "ins.faq2.a":
+      "Yes! Sondos collects all details: accident location, involved parties, injuries, damages, and contact information. It can request photos via WhatsApp and automatically opens a claim in your system. Urgent cases (serious injuries) are immediately transferred to the emergency team.",
+    "ins.faq3.q": "How does it handle complex coverage inquiries?",
+    "ins.faq3.a":
+      "Sondos is trained on your policies and coverage terms. It answers common questions accurately. For complex cases or exceptions, it collects case details and transfers to a specialist with complete summary. Our goal is to solve 80% of inquiries automatically.",
+    "ins.faq4.q": "Does it integrate with existing insurance systems?",
+    "ins.faq4.a":
+      "Yes, Sondos integrates with leading Policy Administration Systems and Claims Management Systems. It also integrates with Najm, SAMA systems, and CRM platforms. We provide a flexible API for integration with any system.",
+    "ins.faq5.q": "What about customer data privacy?",
+    "ins.faq5.a":
+      "Data security is our priority. We comply with Saudi Central Bank (SAMA) requirements and Personal Data Protection Law (PDPL). All data is encrypted, servers are in Saudi Arabia, with specific access permissions and complete audit logs.",
+    "ins.faq6.q": "How long does implementation take?",
+    "ins.faq6.a":
+      "Basic implementation (general inquiries) takes one week. Integrations with pricing and claims systems need 2-4 weeks. We provide a dedicated implementation team to ensure project success.",
+
+    "ins.cta.title1": "Ready to Boost Renewal Rate",
+    "ins.cta.title2": "and Reduce Support Cost?",
+    "ins.cta.subtitle":
+      "Join over 30 insurance companies using Sondos to improve customer experience and increase revenue",
+    "ins.cta.button": "Book Your Demo",
+    "ins.cta.badge1": "Integration with Najm & SAMA",
+    "ins.cta.badge2": "PDPL Compliant",
+    "ins.cta.badge3": "Regulatory Reports",
+    // ─── E-commerce ─────────────────────────────────────────────────────
+    "ecom.hero.badge": "The Optimal Solution for E-commerce",
+    "ecom.hero.title1": "Turn Every",
+    "ecom.hero.title2": "Abandoned Cart",
+    "ecom.hero.title3": "into a Completed Order",
+    "ecom.hero.subtitle":
+      "Sondos answers customer inquiries, tracks orders, recovers abandoned carts, and manages returns - 24/7 without your intervention",
+    "ecom.hero.cta": "Book Your Demo",
+    "ecom.hero.stat1.value": "+35%",
+    "ecom.hero.stat1.label": "Cart Recovery",
+    "ecom.hero.stat2.value": "80%",
+    "ecom.hero.stat2.label": "Support Automation",
+    "ecom.hero.stat3.value": "5 sec",
+    "ecom.hero.stat3.label": "Response Time",
+    "ecom.hero.badge1": "🔗 Integrates with Salla & Zid",
+    "ecom.hero.badge2": "📦 Shipping Company Integration",
+    "ecom.hero.badge3": "💳 Tabby & Tamara Support",
+
+    "ecom.problems.title": "Daily E-commerce",
+    "ecom.problems.title2": "Challenges",
+    "ecom.problems.solution": "Sondos Solves All This Automatically",
+
+    "ecom.problem1.title": "70% Abandoned Carts",
+    "ecom.problem1.desc": "Customers add products but don't complete purchase",
+    "ecom.problem2.title": '"Where is my order?"',
+    "ecom.problem2.desc": "Most frequent question consuming your team's time",
+    "ecom.problem3.title": "15% Returns",
+    "ecom.problem3.desc": "Return requests need time and follow-up",
+    "ecom.problem4.title": "Slow Responses",
+    "ecom.problem4.desc": "Angry customers and negative reviews",
+
+    "ecom.solution1.title": "+35% Recovery",
+    "ecom.solution1.desc":
+      "Automatic follow-up turns abandoned carts into orders",
+    "ecom.solution2.title": "Instant Tracking",
+    "ecom.solution2.desc": "Customer knows where their order is in seconds",
+    "ecom.solution3.title": "Smooth Returns",
+    "ecom.solution3.desc": "Return requests managed without intervention",
+    "ecom.solution4.title": "96% Satisfaction",
+    "ecom.solution4.desc": "Instant responses = happy customers",
+
+    "ecom.stat.orders": "Orders Tracked",
+    "ecom.stat.stores": "Online Stores",
+    "ecom.stat.recovery": "Cart Recovery",
+    "ecom.stat.response": "Avg Response Time",
+    "ecom.stat.under5sec": "< 5 sec",
+    "ecom.stat.under1min": "< 1 min",
+    "ecom.stat.automatic": "Automatic",
+    "ecom.stat.support": "Support Reduction",
+    "ecom.stat.satisfaction": "Customer Satisfaction",
+    "ecom.stat.rating": "Seller Rating",
+    "ecom.stat.efficiency": "Efficiency Increase",
+    "ecom.stat.complaints": "Complaint Reduction",
+    "ecom.stat.tracking": "Tracking",
+    "ecom.stat.retention": "Retention",
+    "ecom.stat.churn": "Churn Reduction",
+    "ecom.stat.renewal": "Renewal",
+    "ecom.stat.ltv": "Customer Value",
+
+    "ecom.segments.title": "Solutions for Every",
+    "ecom.segments.title2": "E-commerce Type",
+    "ecom.segments.without": "Without Sondos",
+    "ecom.segments.with": "With Sondos",
+
+    "ecom.segment.stores.name": "Online Stores",
+    "ecom.segment.stores.desc": "Salla, Zid, Shopify, WooCommerce",
+    "ecom.segment.stores.pain1": "Frequent inquiries about orders and shipping",
+    "ecom.segment.stores.pain2": "High pressure on customer service",
+    "ecom.segment.stores.pain3": "Abandoned carts without follow-up",
+    "ecom.segment.stores.sol1": "Instant response on order status and tracking",
+    "ecom.segment.stores.sol2":
+      "24/7 automated support without additional hiring",
+    "ecom.segment.stores.sol3": "Abandoned cart follow-up and sales completion",
+
+    "ecom.segment.marketplace.name": "Marketplaces",
+    "ecom.segment.marketplace.desc": "Amazon, Noon, Jarir, Extra",
+    "ecom.segment.marketplace.pain1": "Huge volume of customer inquiries",
+    "ecom.segment.marketplace.pain2": "Delayed responses affect ratings",
+    "ecom.segment.marketplace.pain3": "Difficulty managing multiple channels",
+    "ecom.segment.marketplace.sol1": "Unified response across all channels",
+    "ecom.segment.marketplace.sol2": "Instant responses improve seller rating",
+    "ecom.segment.marketplace.sol3": "Centralized dashboard for all platforms",
+
+    "ecom.segment.dropshipping.name": "Dropshipping",
+    "ecom.segment.dropshipping.desc": "No inventory business",
+    "ecom.segment.dropshipping.pain1": "Many inquiries about delivery time",
+    "ecom.segment.dropshipping.pain2":
+      "Complaints about international shipping delays",
+    "ecom.segment.dropshipping.pain3": "Customers want constant tracking",
+    "ecom.segment.dropshipping.sol1": "Clear delivery time expectations",
+    "ecom.segment.dropshipping.sol2": "Proactive customer updates",
+    "ecom.segment.dropshipping.sol3":
+      "Custom responses for each shipping stage",
+
+    "ecom.segment.subscriptions.name": "Subscriptions",
+    "ecom.segment.subscriptions.desc": "Monthly boxes, recurring services",
+    "ecom.segment.subscriptions.pain1":
+      "Inquiries about cancellation and modification",
+    "ecom.segment.subscriptions.pain2": "Renewal follow-up",
+    "ecom.segment.subscriptions.pain3": "Retrieving churned subscribers",
+    "ecom.segment.subscriptions.sol1":
+      "Subscription management via conversation",
+    "ecom.segment.subscriptions.sol2": "Smart reminders before renewal",
+    "ecom.segment.subscriptions.sol3": "Retention offers for churned customers",
+
+    "ecom.feature.tracking.title": "Order Tracking",
+    "ecom.feature.tracking.desc":
+      'Customer asks "Where is my order?" and Sondos responds with shipping status and location instantly from your system',
+    "ecom.feature.tracking.highlight": "Direct Integration",
+    "ecom.feature.cart.title": "Cart Recovery",
+    "ecom.feature.cart.desc":
+      "Automatic call or message to customers who abandoned their carts with special offer to complete purchase",
+    "ecom.feature.cart.highlight": "+35% Recovery",
+    "ecom.feature.returns.title": "Return Requests",
+    "ecom.feature.returns.desc":
+      "Receive return and exchange requests, collect information, and open ticket automatically",
+    "ecom.feature.returns.highlight": "No Waiting",
+    "ecom.feature.faq.title": "FAQ",
+    "ecom.feature.faq.desc":
+      "Instant answers to questions about products, prices, delivery, and payment methods",
+    "ecom.feature.faq.highlight": "90% Instant Resolution",
+    "ecom.feature.reviews.title": "Review Collection",
+    "ecom.feature.reviews.desc":
+      "Follow-up call after delivery to collect customer feedback and improve products",
+    "ecom.feature.reviews.highlight": "More Reviews",
+    "ecom.feature.upsell.title": "Offers & Recommendations",
+    "ecom.feature.upsell.desc":
+      "Suggest complementary products and personalized offers based on purchase history",
+    "ecom.feature.upsell.highlight": "Smart Upselling",
+
+    "ecom.features.title": "Features Designed for",
+    "ecom.features.title2": "E-commerce",
+
+    "ecom.integration.salla": "Salla",
+    "ecom.integration.zid": "Zid",
+    "ecom.integration.aramex": "Aramex",
+    "ecom.integration.smsa": "SMSA",
+    "ecom.integration.tabby": "Tabby",
+    "ecom.integration.tamara": "Tamara",
+    "ecom.integration.type.platform": "Platform",
+    "ecom.integration.type.shipping": "Shipping",
+    "ecom.integration.type.payment": "Payment",
+    "ecom.integration.type.communication": "Communication",
+
+    "ecom.integrations.title": "Integrates with",
+    "ecom.integrations.title2": "Your Favorite Platform",
+    "ecom.integrations.subtitle":
+      "Direct integration with leading e-commerce platforms and shipping companies",
+
+    "ecom.usecases.title": "See Sondos",
+    "ecom.usecases.title2": "in Action",
+    "ecom.usecase.tracking.title": "📍 Order Inquiry",
+    "ecom.usecase.tracking.msg1":
+      "Hello! Techno Saudi Store, how can I help you? 👋",
+    "ecom.usecase.tracking.msg2": "Where is my order #45892?",
+    "ecom.usecase.tracking.msg3":
+      "Your order is on the way! 🚚\n\nStatus: Out for delivery\nShipping company: Aramex\nTracking number: 123456789\nExpected delivery: Today before 6 PM",
+    "ecom.usecase.tracking.msg4": "Great, thanks",
+    "ecom.usecase.tracking.msg5":
+      "You're welcome! You'll receive a message when the delivery person arrives. Need anything else? 😊",
+
+    "ecom.usecase.cart.title": "🛒 Abandoned Cart Recovery",
+    "ecom.usecase.cart.msg1":
+      "Hello! This is Boutique Lamsa 💜\n\nWe noticed you added products to your cart but didn't complete the order. Everything okay?",
+    "ecom.usecase.cart.msg2": "Yes, but I felt shipping was expensive",
+    "ecom.usecase.cart.msg3":
+      "I understand! I have good news 🎁\n\nAs a valued customer, we can give you free shipping on this order. Want me to send you the cart link?",
+    "ecom.usecase.cart.msg4": "Yes, send it",
+    "ecom.usecase.cart.msg5":
+      "Done! ✅ I sent the link on WhatsApp with the free shipping code: FREE2024\n\nThe code is valid for 24 hours. Any other questions?",
+
+    "ecom.testimonials.title": "Success Stories of",
+    "ecom.testimonials.title2": "Stores",
+    "ecom.testimonial1.quote":
+      "We had 3 customer service employees. Now Sondos answers 80% of inquiries and our team focuses only on complex cases.",
+    "ecom.testimonial1.name": "Mohammed Al-Dosari",
+    "ecom.testimonial1.role": "Founder",
+    "ecom.testimonial1.company": "Techno Saudi Store",
+    "ecom.testimonial1.metric": "18,000 SAR/month saved",
+    "ecom.testimonial2.quote":
+      "Cart abandonment rate was 75%. After activating Sondos automatic follow-up, we recovered 35% of them. That's a huge difference in revenue!",
+    "ecom.testimonial2.name": "Noura Al-Qahtani",
+    "ecom.testimonial2.role": "Marketing Manager",
+    "ecom.testimonial2.company": "Boutique Lamsa",
+    "ecom.testimonial2.metric": "+120,000 SAR/month",
+    "ecom.testimonial3.quote":
+      "Customers used to complain about slow responses. Now they get replies in seconds and our rating on Noon is 4.9 stars.",
+    "ecom.testimonial3.name": "Fahad Al-Omari",
+    "ecom.testimonial3.role": "Store Owner",
+    "ecom.testimonial3.company": "Gulf Electronics",
+    "ecom.testimonial3.metric": "4.9⭐ Rating",
+
+    "ecom.faq.title": "Frequently Asked",
+    "ecom.faq.title2": "Questions",
+    "ecom.faq1.q": "How does Sondos know the customer's order status?",
+    "ecom.faq1.a":
+      "Sondos integrates directly with your platform (Salla, Zid, Shopify, WooCommerce) and shipping companies (Aramex, SMSA, DHL). When a customer asks about their order, Sondos pulls information instantly and responds with status and location.",
+    "ecom.faq2.q": "How does it follow up on abandoned carts?",
+    "ecom.faq2.a":
+      "When a customer abandons their cart, Sondos waits a specific period (e.g., one hour) then calls or sends a WhatsApp message with a personalized offer. 'We noticed you didn't complete your order, we have a 10% discount if you complete it now!'",
+    "ecom.faq3.q": "Can it handle return requests?",
+    "ecom.faq3.a":
+      "Yes! Sondos asks about the return reason, collects product photos if needed, and opens a ticket in your system. It can also offer alternatives like exchange or store credit before approving the return.",
+    "ecom.faq4.q": "Does it integrate with my current platform?",
+    "ecom.faq4.a":
+      "Yes, Sondos integrates with: Salla, Zid, Shopify, WooCommerce, Magento, and any platform via API. It also integrates with shipping companies, payment gateways, and CRM systems.",
+    "ecom.faq5.q": "What about complex inquiries?",
+    "ecom.faq5.a":
+      "Sondos is smart in identifying cases that need human intervention (severe complaint, large compensation request). It transfers the call to an employee with a complete conversation summary and customer purchase history.",
+    "ecom.faq6.q": "How long does integration with my store take?",
+    "ecom.faq6.a":
+      "Basic integration with Salla and Zid takes hours. Other platforms need 1-3 days. We provide full technical support during the integration process.",
+
+    "ecom.cta.title1": "Ready to Recover 35%",
+    "ecom.cta.title2": "of Your Abandoned Carts?",
+    "ecom.cta.subtitle":
+      "Join over 200 online stores using Sondos to increase their sales",
+    "ecom.cta.button": "Book Your Demo",
+    "ecom.cta.badge1": "Integrates with Salla & Zid",
+    "ecom.cta.badge2": "Shipping Company Integration",
+    "ecom.cta.badge3": "Tabby & Tamara Support",
+    // ─── Hero ─────────────────────────────────────────────────────
+    "hero.chip.tag": "NEW",
+    "hero.chip.text": "System V3 · 33+ automation steps · Live in production",
+    "hero.title.line1": "Infrastructure",
+    "hero.title.line2": "for AI",
+    "hero.title.line3": "Without Downtime",
+    "hero.subtitle":
+      "We don't sell off-the-shelf software. We engineer custom AI systems that complete entire operations — calls, data, decisions, follow-ups — automatically, accurately, 24/7.",
+    "hero.cta.primary": "Start Your Project",
+    "hero.cta.secondary": "Explore Tech Stack",
+    "hero.stat1.value": "+50",
+    "hero.stat1.label": "projects_shipped",
+    "hero.stat2.value": "90%",
+    "hero.stat2.label": "automation_rate",
+    "hero.stat3.value": "24/7",
+    "hero.stat3.label": "uptime",
+    "hero.stat4.value": "-70%",
+    "hero.stat4.label": "cost_reduction",
+
+    // ─── Services ─────────────────────────────────────────────────
+    "services.tag": "WHAT WE BUILD",
+    "services.title.line1": "Engineered",
+    "services.title.line2": "Solutions",
+    "services.title.line3": "From Scratch",
+    "services.desc":
+      "No templates. No compromises. Every system we build is designed specifically for your operations — after deep understanding of business and technical context.",
+    "services.item1.title": "Voice Call Agents in Saudi Arabic",
+    "services.item1.desc":
+      "AI that answers, books, follows up — in natural Saudi dialect. Doesn't wait, doesn't sleep, doesn't make mistakes.",
+    "services.item2.title": "End-to-End Process Automation",
+    "services.item2.desc":
+      "We connect all your tools in one integrated pipeline — working 24/7 without supervision or intervention.",
+    "services.item3.title": "WhatsApp and Communication Channel Bots",
+    "services.item3.desc":
+      "Unified customer experience across WhatsApp, Instagram, Messenger — instant, contextual responses.",
+    "services.item4.title": "Live Dashboards and Automated Reports",
+    "services.item4.desc":
+      "Decisions based on real-time numbers — no delayed reports, no missing data.",
+    "services.item5.title": "API Integration with Your Existing Systems",
+    "services.item5.desc":
+      "We connect AI to your CRM, ERP, and any custom system — without migration, without downtime.",
+
+    // ─── Proof ───────────────────────────────────────────────────
+    "proof.tag": "ACTUAL RESULTS",
+    "proof.title.line1": "Numbers",
+    "proof.title.line2": "That need",
+    "proof.title.line3": "No comment",
+    "proof.desc":
+      "These are real results from completed projects. No expectations. No estimates. Verifiable numbers.",
+    "proof.stat1.label": "cost_savings_avg",
+    "proof.stat1.value": "70%",
+    "proof.stat1.desc": "Average operational cost reduction within 90 days.",
+    "proof.stat1.strong":
+      "One employee cost → system serving hundreds of customers.",
+    "proof.stat2.label": "tasks_automated",
+    "proof.stat2.value": "90%",
+    "proof.stat2.desc":
+      "of repetitive operational tasks are completed automatically.",
+    "proof.stat2.strong":
+      "Responses, scheduling, reports, follow-ups — all work on their own.",
+    "proof.stat3.label": "response_improvement",
+    "proof.stat3.value": "3×",
+    "proof.stat3.desc": "Faster response compared to human teams.",
+    "proof.stat3.strong": "Every inquiry processed in seconds.",
+    "proof.story1.tag": "healthcare · riyadh",
+    "proof.story1.value": "-73%",
+    "proof.story1.title": "Reception and booking costs",
+    "proof.story1.desc":
+      "Call agent answers patients, books appointments, sends reminders.",
+    "proof.story1.quote":
+      '"The system responds faster than me and never gets tired. Patients can\'t tell the difference."',
+    "proof.story1.who": "Clinic Manager",
+    "proof.story2.tag": "real_estate · jeddah",
+    "proof.story2.value": "×4",
+    "proof.story2.title": "Weekly followed-up clients",
+    "proof.story2.desc":
+      "Complete automation of follow-up process — from first contact to deal closing.",
+    "proof.story2.quote":
+      '"Before, we wasted 60% of our time coordinating. Now: zero."',
+    "proof.story2.who": "Sales Manager",
+    "proof.story3.tag": "operations · dammam",
+    "proof.story3.value": "33+",
+    "proof.story3.title": "Automation steps in one system",
+    "proof.story3.desc":
+      "From call reception to follow-up — everything automated without human touch.",
+    "proof.story3.quote":
+      '"First time I feel my company works while I\'m literally asleep."',
+    "proof.story3.who": "Founder",
+
+    // ─── Workflow ────────────────────────────────────────────────
+    "workflow.tag": "REAL SYSTEM · LIVE IN PRODUCTION",
+    "workflow.title.line1": "Internal Architecture",
+    "workflow.title.line2": "of a system",
+    "workflow.title.line3": "running now",
+    "workflow.desc":
+      "This isn't a demo. This is an actual workflow from one of our clients — 33+ steps, zero human intervention.",
+    "workflow.terminal.title": "sondos.ai / workflow-v3 / production",
+    "workflow.terminal.live": "LIVE · RUNNING",
+    "workflow.step1.name": "Phone Call Ended",
+    "workflow.step1.type": "trigger · Vapi Voice Platform",
+    "workflow.step1.status": "✓ active",
+    "workflow.step2.name": "Insert Row → Sheets",
+    "workflow.step2.type": "action · call data logging",
+    "workflow.step2.status": "✓ active",
+    "workflow.step3.name": "Find Rows → Sheets",
+    "workflow.step3.type": "action · search customer record",
+    "workflow.step3.status": "✓ active",
+    "workflow.step4.name": "Branch · Conditional Logic",
+    "workflow.step4.type": "router · analyze case and route",
+    "workflow.step4.status": "⟳ routing",
+    "workflow.branch": "BRANCH SPLIT",
+    "workflow.pathA": "// PATH_A · new_customer",
+    "workflow.pathA.action1": "Send Message → Slack",
+    "workflow.pathA.action2": "HTTP Request → API",
+    "workflow.pathA.action3": "Delay Until",
+    "workflow.pathA.action4": "Make Phone Call → Vapi",
+    "workflow.pathB": "// PATH_B · returning_customer",
+    "workflow.pathB.action1": "Branch → Sub-check",
+    "workflow.pathB.action2": "Send Message → Slack",
+    "workflow.pathB.action3": "HTTP Request",
+    "workflow.pathB.action4": "Delay Until → Smart",
+    "workflow.stat1.value": "33+",
+    "workflow.stat1.label": "automation_steps",
+    "workflow.stat2.value": "0",
+    "workflow.stat2.label": "human_touches",
+    "workflow.stat3.value": "<2s",
+    "workflow.stat3.label": "response_time",
+    "workflow.stat4.value": "99.9%",
+    "workflow.stat4.label": "uptime",
+
+    // ─── Stack ────────────────────────────────────────────────────
+    "stack.tag": "TECH STACK",
+    "stack.title.line1": "We choose the best",
+    "stack.title.line2": "for every task",
+    "stack.desc":
+      "We don't stick to one tool. We choose the right model and platform for each use case.",
+    "stack.card1.cat": "AI_MODELS",
+    "stack.card1.title": "Smartest Models in the World",
+    "stack.card1.desc":
+      "We choose between models based on speed, accuracy, and cost.",
+    "stack.card2.cat": "AUTOMATION",
+    "stack.card2.title": "Unlimited Automation",
+    "stack.card2.desc":
+      "We build workflows connecting dozens of tools — scalable, stable under pressure.",
+    "stack.card3.cat": "VOICE_AI",
+    "stack.card3.title": "Voice indistinguishable from humans",
+    "stack.card3.desc":
+      "Arabic calls with real human quality — understands Saudi dialect.",
+
+    // ─── Testimonials ────────────────────────────────────────────
+    "testimonials.tag": "CLIENT TESTIMONIALS",
+    "testimonials.title.line1": "What",
+    "testimonials.title.line2": "our clients say",
+    "testimonials.sectors": "sectors_we_serve",
+    "testimonial1.quote":
+      "The first AI company that could prove numbers to me before signing. And after launch, the numbers came better than expected.",
+    "testimonial1.name": "Rana Al-Dosari",
+    "testimonial1.role": "ceo · retail_co",
+    "testimonial1.badge": "retail",
+    "testimonial2.quote":
+      "The team understands business, not just technology. One session was enough for them to understand how we work and build the right system.",
+    "testimonial2.name": "Faisal Al-Shammari",
+    "testimonial2.role": "founder · realestate_co",
+    "testimonial2.badge": "real_estate",
+    "testimonial3.quote":
+      "We saved over 40 hours weekly of manual work. The team now focuses on what really matters.",
+    "testimonial3.name": "Omar Al-Harbi",
+    "testimonial3.role": "ops_director · logistics_co",
+    "testimonial3.badge": "logistics",
+    "testimonial4.quote":
+      "The system answers patients in natural Saudi dialect. 73% reduction in reception costs.",
+    "testimonial4.name": "Khaled Al-Mutairi",
+    "testimonial4.role": "ops_manager · healthcare_co",
+    "testimonial4.badge": "healthcare",
+
+    // ─── Sectors ─────────────────────────────────────────────────
+    "sector.healthcare": "healthcare",
+    "sector.realestate": "real_estate",
+    "sector.retail": "retail",
+    "sector.logistics": "logistics",
+    "sector.education": "education",
+    "sector.banking": "banking",
+    "sector.hospitality": "hospitality",
+    "sector.government": "government",
+
+    // ─── CTA ─────────────────────────────────────────────────────
+    "cta.label": "START TODAY",
+    "cta.title.line1": "Your business",
+    "cta.title.line2": "deserves more",
+    "cta.subtitle":
+      "We analyze your operations and build a detailed engineering roadmap",
+    "cta.button1": "Start Your Project",
+    "agents.phone_required": "Please enter your phone number",
+    "agents.phone_invalid": "Invalid number — example: +966 5X XXX XXXX",
+    "agents.phone_label": "Phone number",
+    "agents.phone_placeholder": "+966 5X XXX XXXX",
   },
+
   ar: {
-    "footer.description_line1": "منصة مركز اتصال ذكية مدعومة بالذكاء الاصطناعي",
-    "footer.description_line2": "تعيد تعريف تجربة التواصل مع عملائك.",
-
-    "footer.contact": "تواصل معنا",
-    "footer.email": "البريد الإلكتروني",
-    "footer.phone": "رقم الهاتف",
-
-    "footer.follow_us": "تابعنا",
-    "footer.rights": "جميع الحقوق محفوظة © 2026 Sondos AI",
-    "demo.title1": "احجز عرضك التجريبي",
-    "demo.subtitle": "املأ النموذج وسيتواصل معك فريقنا خلال 24 ساعة",
-
-    "demo.full_name": "الاسم الكامل *",
-    "demo.full_name_placeholder": "اكتب اسمك",
-
-    "demo.email": "البريد الإلكتروني *",
-    "demo.phone": "رقم الهاتف *",
-
-    "demo.company": "اسم الشركة *",
-    "demo.company_placeholder": "اكتب اسم شركتك",
-
-    "demo.industry": "القطاع *",
-    "demo.industry_placeholder":
-      "مثال: العقارات، الصحة، التجارة الإلكترونية...",
-
-    "demo.questions": "استفسارات (اختياري)",
-    "demo.questions_placeholder": "اكتب سؤالك أو أي تفاصيل إضافية...",
-
-    "demo.submit": "إرسال الطلب 🚀",
-    "common.read_more": "اقرأ المزيد",
-    "agents.egyptian": "تحدث بالمصرية",
-
-    "agents.egyptian.voice_ready": "المساعد المصري جاهز ✨",
-    "agents.egyptian.press_to_start": "دوس وهنبدأ",
-    "agents.egyptian.start_conversation": "يلا بينا",
-    "agents.egyptian.connecting": "بنتصل دلوقتي…",
-    "agents.egyptian.please_wait": "استنى ثانية",
-    "agents.egyptian.in_call": "إحنا بنتكلم",
-    "agents.egyptian.end_call": "دوس عشان تقفل المكالمة",
-    "agents.emirati": "تحدث بالإماراتية",
-
-    "agents.emirati.voice_ready": "المساعد الإماراتي جاهز 👋",
-    "agents.emirati.press_to_start": "اضغط وخلّنا نبدأ",
-    "agents.emirati.start_conversation": "يلا نبدأ",
-    "agents.emirati.connecting": "قاعدين نتصل…",
-    "agents.emirati.please_wait": "لحظة بس",
-    "agents.emirati.in_call": "نتكلم الحين",
-    "agents.emirati.end_call": "اضغط عشان تسكر المكالمة",
-    "agents.title": "اختر مساعدك الذكي",
-    "agents.choose_dialect": "اختر اللهجة للبدء",
-    "agents.ready": "جاهز",
-    "agents.soon": "قريباً",
-    "agents.voice_ready": "المساعد الصوتي جاهز",
-    "agents.press_to_start": "اضغط للبدء",
-    "agents.start_conversation": "ابدأ المحادثة",
-    "agents.connecting": "جارٍ الاتصال…",
-    "agents.please_wait": "يرجى الانتظار لحظة",
-    "agents.in_call": "في المحادثة",
-    "agents.end_call": "اضغط لإنهاء المكالمة",
-    "agents.coming_soon": "المساعد قادم قريباً…",
-    "agents.saudi": "تحدث بالسعودية",
+    // ─── Nav ─────────────────────────────────────────────────────────────────
     "nav.product": "الرئيسية",
     "nav.pricing": "الأسعار",
     "nav.for_business": "للأعمال",
@@ -411,6 +2458,10 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.login": "دخول",
     "nav.contact_sales": "تواصل معنا",
     "nav.try_free": "جرّب مجاناً",
+    "nav.industries": "القطاعات",
+    "nav.partner": "من نحن",
+
+    // ─── Hero ─────────────────────────────────────────────────────────────────
     "hero.badge": "المنصة الأولى لوكيل الصوت الذكي لأتمتة المكالمات",
     "hero.title": "مركز الاتصال الذكي",
     "hero.title_span": "المستقبل",
@@ -418,17 +2469,38 @@ const translations: Record<Language, Record<string, string>> = {
       "ابنِ وأطلق وأدِر وكلاء صوتيين بالذكاء الاصطناعي يبدون كالبشر، ينفذون المهام، ويتوسعون بسهولة.",
     "hero.cta_demo": "جرّب العرض المباشر",
     "hero.cta_sales": "تواصل مع المبيعات",
+    "hero.title_new": "منصة سندس AI",
+    "hero.subtitle_new":
+      "نظام حلول متكاملة لتشغيل خدمة العملاء بالذكاء الاصطناعي",
+    "hero.desc":
+      "سندس AI هي المنصة السعودية المتكاملة لأتمتة المكالمات الهاتفية وإدارة تجربة العملاء بالذكاء الاصطناعي.",
+    "hero.stat1_val": "+50,000",
+    "hero.stat1_label": "مكالمة تم حلها",
+    "hero.stat2_val": "+40",
+    "hero.stat2_label": "لغة ولهجة مدعومة",
+    "hero.stat3_val": "+300",
+    "hero.stat3_label": "تكامل جاهز",
+    "hero.stat4_val": "24/7",
+    "hero.stat4_label": "خدمة بلا توقف",
+    "hero.cta_try": "جرّب مكالمة مجانية الآن",
+    "hero.cta_book": "احجز عرضك التجريبي",
+
+    // ─── Logo carousel ────────────────────────────────────────────────────────
     "logo_carousel.title": "تكامل سلس مع أنظمتك الحالية",
+
+    // ─── Scale ────────────────────────────────���──────────────────────────────
     "scale.title": "مبني للتوسع",
     "scale.subtitle": "تعامل مع ملايين المكالمات بموثوقية على مستوى المؤسسات",
     "scale.calls": "مكالمة معالجة",
     "scale.languages": "لغة مدعومة",
     "scale.uptime": "وقت التشغيل",
     "scale.satisfaction": "رضا العملاء",
+
+    // ─── What is ─────────────────────────────────────────────────────ر�───────
     "whatis.label": "ما هو سندس AI",
     "whatis.title": "الجيل القادم من التواصل مع العملاء",
     "whatis.desc":
-      "سندس AI هي منصة حلول شاملة مدعومة بالذكاء الاصطناعي، تعمل كنظام متكامل لإدارة تفاعلات العملاء وتحسين تجربة التواصل بين الشركات وعملائها.",
+      "سندس AI هي منصة حلول شاملة مدعومة بالذكاء الاصطناعي، تعمل كنظام متكامل لإدارة تفاعلات العملاء.",
     "whatis.f1_title": "محادثات طبيعية",
     "whatis.f1_desc": "وكلاء ذكاء اصطناعي يفهمون السياق ويستجيبون كالبشر",
     "whatis.f2_title": "توجيه ذكي",
@@ -438,24 +2510,58 @@ const translations: Record<Language, Record<string, string>> = {
     "whatis.f4_title": "وكلاء ذكيون",
     "whatis.f4_desc":
       "روبوتات صوتية وكتابية قادرة على التعامل مع العملاء بشكل طبيعي.",
-
     "whatis.f5_title": "أمان متقدم",
     "whatis.f5_desc": "حماية بياناتك وفق أعلى معايير الأمان العالمية.",
-
     "whatis.f6_title": "سرعة فائقة",
     "whatis.f6_desc": "استجابة فورية وتحليل لحظي لكل مكالمة وتفاعل.",
+
+    // ─── Common ───────────────────────────────────────────────────────────────
+    "common.read_more": "اقرأ المزيد",
+
+    // ─── Demo ─────────────────────────────────────────────────────────────────
     "demo.label": "عرض مباشر",
     "demo.title": "شاهد سندس AI في بث مباشر",
     "demo.desc": "اختبر قوة وكلائنا الصوتيين الذكيين مع عرض توضيحي مباشر",
     "demo.start": "ابدأ مكالمة تجريبية",
     "demo.agent": "الوكيل الذكي",
     "demo.speaking": "يتحدث...",
+    "demo.title1": "احجز عرضك التجريبي",
+    "demo.subtitle": "املأ النموذج وسيتواصل معك فريقنا خلال 24 ساعة",
+    "demo.full_name": "الاسم الكامل *",
+    "demo.full_name_placeholder": "اكتب اسمك",
+    "demo.email": "البريد الإلكتروني *",
+    "demo.phone": "رقم الهاتف *",
+    "demo.phone_prefix": "+966",
+    "demo.phone_placeholder": "XX XXX XXXX",
+    "demo.company": "اسم الشركة *",
+    "demo.company_placeholder": "اكتب اسم شركتك",
+    "demo.industry": "القطاع *",
+    "demo.industry_select_placeholder": "اختر قطاعك",
+    "demo.questions": "استفسارات (اختياري)",
+    "demo.questions_placeholder": "اكتب سؤالك أو أي تفاصيل إضافية...",
+    "demo.submit": "إرسال الطلب 🚀",
+    "demo.loading": "⏳ جاري الإرسال...",
+    "demo.success": "تم إرسال طلبك بنجاح!",
+    "demo.error": "❌ حدث خطأ. حاول مجدداً.",
+    "demo.phone_digits_remaining": "يتبقى {n} أرقام",
+
+    // ─── Validation ───────────────────────────────────────────────────────────
+    "validation.required": "هذا الحقل مطلوب.",
+    "validation.email_invalid":
+      "يرجى إدخال عنوان بريد إلكتروني صحيح يحتوي على '@'.",
+    "validation.phone_invalid": "يرجى إدخال رقم سعودي صحيح مكون من 9 أرقام.",
+
+    // ─── Testimonials ─────────────────────────────────────────────────────────
     "testimonials.label": "آراء العملاء",
     "testimonials.title": "ماذا يقول عملاؤنا",
+
+    // ─── Talks ───────────────────────────────────────────────────────────────
     "talks.label": "لغة طبيعية",
     "talks.title": "يتحدث كالبشر، يفكر كالذكاء الاصطناعي",
     "talks.desc":
       "وكلاؤنا الذكيون يشاركون في محادثات طبيعية وسلسة يحبها العملاء.",
+
+    // ─── Highlights ───────────────────────────────────────────────────────────
     "highlights.label": "المميزات",
     "highlights.title": "لماذا تختار سندس AI",
     "highlights.h1_title": "تخفيض التكاليف 70%",
@@ -467,6 +2573,8 @@ const translations: Record<Language, Record<string, string>> = {
     "highlights.h3_desc": "معالجة فائقة السرعة لمحادثات سلسة",
     "highlights.h4_title": "95% نسبة الحل",
     "highlights.h4_desc": "حل من المكالمة الأولى مدعوم بالأتمتة الذكية",
+
+    // ─── Features ─────────────────────────────────────────────────────────────
     "features.label": "المميزات",
     "features.title": "كل ما تحتاجه",
     "features.f1": "توجيه مكالمات ذكي",
@@ -475,31 +2583,43 @@ const translations: Record<Language, Record<string, string>> = {
     "features.f4": "تكامل CRM",
     "features.f5": "تسجيل ونسخ المكالمات",
     "features.f6": "تدريب AI مخصص",
+
+    // ─── QA ──────────────────────────────────────────────────────────────────
     "qa.label": "ضمان الجودة",
     "qa.title": "جودة على مستوى المؤسسات",
     "qa.desc": "كل تفاعل يتم مراقبته وتحليله وتحسينه لأفضل تجربة عملاء.",
+
+    // ─── Omni ─────────────────────────────────────────────────────────────────
     "omni.label": "قنوات متعددة",
     "omni.title": "منصة واحدة، كل القنوات",
     "omni.desc":
-      "إدارة المكا؄مات الصوتية والدردشة والبريد الإلكتروني ووسائل التواصل من لوحة واحدة.",
+      "إدارة المكالمات الصوتية والدردشة والبريد الإلكتروني ووسائل التواصل من لوحة واحدة.",
     "omni.voice": "مكالمات صوتية",
     "omni.chat": "دردشة مباشرة",
     "omni.email": "بريد إلكتروني",
     "omni.social": "وسائل التواصل",
+
+    // ─── Telephony ───────────────────────────────────────────────────────���───
     "telephony.label": "الاتصالات",
     "telephony.title": "اتصالات سحابية",
     "telephony.desc":
-      "بنية تحتية للاتصالات على مستوى الم مؤسَّسات مبنية لعصر السحابة الحديث.",
+      "بنية تحتية للاتصالات على مستوى المؤسسات مبنية لعصر السحابة الحديث.",
+
+    // ─── Security ───────────────────────────────────────────ct�─────────────────
     "security.label": "الأمان",
     "security.title": "أمان بمستوى البنوك",
-    "security.desc": "بياناتك محمية بأعلى معايير الأمان وشهادات الامتثال.",
+    "security.desc": "بياناتك محمية بأعلى م��ايير الأمان وشهادات الامتثال.",
     "security.f1": "تشفير من طرف إلى طرف",
     "security.f2": "شهادة SOC 2 Type II",
     "security.f3": "متوافق مع GDPR",
     "security.f4": "شهادة ISO 27001",
+
+    // ─── Integrations ─────────────────────────────────────────────────────────
     "integrations.label": "التكاملات",
     "integrations.title": "تواصل مع أدواتك",
     "integrations.desc": "تكامل سلس مع الأدوات التي تستخدمها بالفعل.",
+
+    // ─── FAQ ─────────────────────────────────────── ��─────────────────────────
     "faq.label": "أسئلة شائعة",
     "faq.title": "الأسئلة الشائعة",
     "faq.q1": "كيف يتعامل سندس AI مع اللغات المتعددة؟",
@@ -515,13 +2635,18 @@ const translations: Record<Language, Record<string, string>> = {
     "faq.a4":
       "نظام التصعيد الذكي ينقل المكالمة بسلاسة إلى وكيل بشري مع السياق الكامل.",
 
+    // ─── CTA ─────────────────────────────────────────────────────────────────
     "cta.title": "مستعد لتحويل مركز اتصالك؟",
     "cta.desc":
       "انضم إلى مئات الشركات التي تستخدم سندس AI بالفعل لتقديم تجارب عملاء استثنائية.",
     "cta.button": "ابدأ مجاناً",
     "cta.demo": "حجز عرض توضيحي",
+
+    // ─── Footer ───────────────────────────────────────────────────────────────
     "footer.desc":
       "منصة مركز اتصال مدعومة بالذكاء الاصطناعي تحول التواصل مع العملاء بوكلاء صوتيين ذكيين.",
+    "footer.description_line1": "منصة مركز اتصال ذكية مدعومة بالذكاء الاصطناعي",
+    "footer.description_line2": "تعيد تعريف تجربة التواصل مع عملائك.",
     "footer.product": "المنتج",
     "footer.company": "الشركة",
     "footer.resources": "الموارد",
@@ -533,31 +2658,23 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.api": "مرجع API",
     "footer.privacy": "سياسة الخصوصية",
     "footer.terms": "شروط الخدمة",
+    "footer.contact": "تواصل معنا",
+    "footer.email": "البريد الإلكتروني",
+    "footer.phone": "رقم الهاتف",
+    "footer.follow_us": "تابعنا",
+    "footer.rights": "جميع الحقوق محفوظة © 2026 Sondos AI",
+
+    // ─── Blog ─────────────────────────────────────────────────────────────────
     "blog.title": "المدونة",
     "blog.subtitle": "رؤى وتحديثات وأفضل الممارسات من فريق سندس AI",
     "blog.read_more": "اقرأ المزيد",
     "blog.back": "العودة للمدونة",
     "blog.min_read": "دقائق قراءة",
-    "nav.industries": "القطاعات",
-    "nav.partner": "من نحن",
-    "hero.title_new": "منصة سندس AI",
-    "hero.subtitle_new":
-      "نظام حلول متكاملة لتشغيل خدمة العملاء بالذكاء الاصطناعي",
-    "hero.desc":
-      "سندس AI هي المنصة السعودية المتكاملة لأتمتة المكالمات الهاتفية وإدارة تجربة العملاء بالذكاء الاصطناعي، حيث تتيح للشركات تشغيل وكلاء صوتيين أذكياء لدعم العملاء وحجز المواعيد تلقائيًا. تدعم المنصة أكثر من 40 لغة وتوفّر +300 تكامل مع أنظمة CRM وواتساب، مع امتثال كامل لأنظمة المملكة.",
-    "hero.stat1_val": "+50,000",
-    "hero.stat1_label": "مكالمة تم حلها",
-    "hero.stat2_val": "+40",
-    "hero.stat2_label": "لغة ولهجة مدعومة",
-    "hero.stat3_val": "+300",
-    "hero.stat3_label": "تكامل جاهز",
-    "hero.stat4_val": "24/7",
-    "hero.stat4_label": "خدمة بلا توقف",
-    "hero.cta_try": "جرّب مكالمة مجانية الآن",
-    "hero.cta_book": "احجز عرضك التجريبي ",
+
+    // ─── Why Sondos ──────────────────────────────────────────────────────────
     "whysondos.title": "لماذا تختار سندس AI لأعمالك في المملكة؟",
     "whysondos.desc":
-      "في عالم يتسارع فيه التحول الرقمي — وفي مملكة تقود رؤية 2030 هذا التحول — لم يعد مقبولاً أن ينتظر عملاؤك على الخط أو يفوتهم الرد. سندس AI تحوّل كل مكالمة إلى فرصة، وكل تفاعل إلى تجربة استثنائية.",
+      "في عالم يتسارع فيه التحول الرقمي — وفي مملكة تقود رؤية 2030 هذا التحول — لم يعد مقبولاً أن ينتظر عملاؤك على الخط أو يفوتهم الرد.",
     "whysondos.f1_title": "مصمّم للسوق السعودي",
     "whysondos.f1_desc":
       "يفهم اللهجة السعودية والثقافة المحلية. وكيلك الصوتي يتحدث بلغة عملائك — بطبيعية واحترافية.",
@@ -576,6 +2693,8 @@ const translations: Record<Language, Record<string, string>> = {
     "whysondos.f6_title": "يعمل وأنت نائم",
     "whysondos.f6_desc":
       "24 ساعة، 7 أيام في الأسبوع. لا إجازات، لا غياب، لا تأخير.",
+
+    // ─── How it works ─────────────────────────────────────────────────────────
     "howit.title": "كيف يعمل نظام سندس AI؟",
     "howit.s1_title": "أنشئ وكيلك الذكي",
     "howit.s1_desc":
@@ -589,12 +2708,34 @@ const translations: Record<Language, Record<string, string>> = {
     "howit.s4_title": "راقب النتائج",
     "howit.s4_desc":
       "تابع كل مكالمة من لوحة التحكم: التسجيلات، النصوص، معدلات التحويل، ورضا العملاء.",
+
+    // ─── Final CTA ─────────────────────�ٽ؀───� �─────────────────────────────────
     "finalcta.title": "مستقبل المكالمات بدأ — هل أنت مستعد؟",
     "finalcta.desc":
-      "الذكاء الاصطناعي الصوتي ليس المستقبل — إنه الحاضر. كل يوم تؤجل فيه، منافسوك يتقدمون. ابدأ اليوم مع سندس AI وحوّل كل مكالمة إلى فرصة.",
+      "الذكاء الاصطناعي الصوتي ليس المستقبل — إنه الحاضر. كل يوم تؤجل فيه، منافسوك يتقدمون. ابدأ اليوم مع سندس AI.",
     "finalcta.btn1": "ابدأ مجاناً — بدون بطاقة ائتمان",
     "finalcta.btn2": "تحدث مع مستشارنا",
     "finalcta.btn3": "راسلنا على واتساب",
+
+    // ─── Agents ─
+
+    "agents.title": "اختر مساعدك الذكي",
+    "agents.choose_dialect": "اختر اللهجة للبدء",
+    "agents.ready": "جاهز",
+    "agents.soon": "قريباً",
+    "agents.voice_ready": "المساعد الصوتي جاهز",
+    "agents.press_to_start": "اضغط للبدء",
+    "agents.start_conversation": "ابدأ المحادثة",
+    "agents.connecting": "جارٍ الاتصال…",
+    "agents.please_wait": "يرجى الانتظار لحظة",
+    "agents.in_call": "في المحادثة",
+    "agents.end_call": "اضغط لإنهاء المكالمة",
+    "agents.coming_soon": "المساعد قادم قريباً…",
+    "agents.saudi": "تحدث بالسعودية",
+    "agents.emirati": "تحدث بالإماراتية",
+    "agents.egyptian": "تحدث بالمصرية",
+
+    // ─── Partner ────────────────────────────────────────ق�────────────────────
     "partner.hero_title":
       "أطلق منصتك الخاصة للمكالمات الذكية — بعلامتك التجارية",
     "partner.hero_desc":
@@ -622,7 +2763,7 @@ const translations: Record<Language, Record<string, string>> = {
     "partner.f8_desc":
       "GDPR، TCPA، ونظام حماية البيانات السعودي مدمج في المنصة.",
     "partner.opp_title": "سوق AI ينفجر — هل ستكون في المقدمة؟",
-    "partner.opp1_title": "علامتك التجارية، قواعدك",
+    "partner.opp1_title": "علامتك التجار.�ة، قواعدك",
     "partner.opp1_desc":
       "نطاق مخصص، شعار، وألوان علامتك. عملاؤك لن يروا سندس أبداً.",
     "partner.opp2_title": "جهدك = أرباحك",
@@ -652,17 +2793,2101 @@ const translations: Record<Language, Record<string, string>> = {
     "partner.faq_title": "الأسئلة الشائعة للشركاء",
     "partner.faq1_q": "ماذا تشمل الشراكة؟",
     "partner.faq1_a":
-      "تحصل على منصة كاملة بعلامتك التجارية مع نطاقك الخاص، لوحة إدارة العملاء، والوصول لجميع ميزات سندس AI — بما في ذلك الوكلاء الصوتيين، التكاملات، أرقام الهاتف، والتحليلات.",
+      "تحصل على منصة كاملة بعلامتك التجارية مع نطاقك الخاص، لوحة إدارة العملاء، والوصول لجميع ميزات سندس AI.",
     "partner.faq2_q": "كم يستغرق الإطلاق؟",
     "partner.faq2_a":
       "معظم الشركاء يطلقون خلال 24-48 ساعة. نحن نتولى الإعداد التقني — أنت تركز على اكتساب العملاء.",
     "partner.faq3_q": "هل أحتاج مهارات تقنية؟",
     "partner.faq3_a":
-      "لا. المنصة مصممة للمستخدمين غير التقنيين. مدير الشريك يرشدك في كل شيء، والإعداد بالسحب والإفلات.",
+      "لا. المنصة مصممة للمستخدمين غير التقنيين. مدير الشريك يرشدك في كل شيء.",
     "partner.faq4_q":
       "هل يمكنني وضع علامتي التجارية على الوثائق والمواد التسويقية؟",
     "partner.faq4_a":
       "نعم. نوفر وثائق وقوالب تسويقية ومواد مبيعات يمكنك تخصيصها بعلامتك التجارية.",
+
+    // ─── Healthcare ───────────────────────────────────────────────────────────
+    "hc.hero.badge": "معتمد من عملاء موثوقين",
+    "hc.hero.title1": "حوّل المكالمات الفائتة إلى",
+    "hc.hero.title2": "مواعيد محجوزة",
+    "hc.hero.subtitle":
+      "نظام استقبال صوتي بالذكاء الاصطناعي يرد على مرضاك 24/7 بلهجة سعودية طبيعية ويحجز المواعيد تلقائياً",
+    "hc.hero.stats":
+      "✓ +150 منشأة صحية · ✓ +500,000 مكالمة شهرياً · ✓ 97% دقة التعرف",
+    "hc.hero.cta": "جرّب الآن",
+    "hc.problem.title": "المشكلة",
+    "hc.problem.1": "✗ 40% من المكالمات لا يُرد عليها",
+    "hc.problem.2": "✗ 25% من المرضى لا يحضرون مواعيدهم",
+    "hc.problem.3": "✗ موظفو الاستقبال مشغولون أو غير متاحين",
+    "hc.problem.4": "✗ خسارة شهرية تصل لـ 50,000 ريال",
+    "hc.solution.title": "الحل مع سندس",
+    "hc.solution.1": "✓ رد على 100% من المكالمات 24/7",
+    "hc.solution.2": "✓ تقليل عدم الحضور بنسبة 65%",
+    "hc.solution.3": "✓ حجز تلقائي دون تدخل بشري",
+    "hc.solution.4": "✓ ROI إيجابي من الشهر الأول",
+    "hc.facilities.title": "حلول مخصصة لكل نوع منشأة",
+    "hc.facilities.subtitle": "حسب تصنيفات وزارة الصحة السعودية الرسمية",
+    "hc.facilities.show_all": "عرض جميع التصنيفات ({n})",
+    "hc.facilities.filter.all": "الكل",
+    "hc.facility.cat.hospitals": "المستشفيات",
+    "hc.facility.cat.clinics": "العيادات",
+    "hc.facility.cat.centers": "المجمعات",
+    "hc.facility.cat.labs": "المختبرات",
+    "hc.facility.cat.pharmacy": "الصيدليات",
+    "hc.facility.cat.dentistry": "الأسنان",
+    "hc.integrations.title": "يتكامل مع أنظمتك الحالية",
+    "hc.integrations.subtitle": "تكامل سلس مع أنظمة المستشفيات والعيادات",
+    "hc.integration.whatsapp.desc": "تذكير وتأكيد المواعيد",
+    "hc.integration.booking.desc": "حجز مباشر",
+    "hc.integration.sms.desc": "رسائل تذكير",
+    "hc.integration.crm.desc": "إدارة العملاء",
+    "hc.integration.payments.desc": "دفعات وتأمين",
+    "hc.security.title": "🔒 أمان على مستوى المؤسسات",
+    "hc.security.subtitle": "حماية بيانات المرضى أ.�لويتنا القصوى",
+    "hc.security.f1.title": "تشفير من طرف لطرف",
+    "hc.security.f1.desc": "جميع المكالمات والبيانات مشفرة بمعيار AES-256",
+    "hc.security.f2.title": "استضافة محلية",
+    "hc.security.f2.desc": "الخوادم داخل المملكة العربية السعودية",
+    "hc.security.f3.title": "صلاحيات دقيقة",
+    "hc.security.f3.desc": " حكم كامل في من يصل لماذا",
+    "hc.security.f4.title": "سجل مراجعة كامل",
+    "hc.security.f4.desc": "تتبع كل إجراء لأغراض المراجعة والامتثال",
+    "hc.cert.pdpl.desc": "امتثال لحماية البيانات",
+    "hc.cert.hipaa.desc": "معيار عالمي للرعاية الصحية",
+    "hc.cert.aes.desc": "تشفير قوي للبيانات",
+    "hc.cert.audit.desc": "سجل مراجعة كامل",
+    "hc.dashboard.title": "لوحة تحكم ذكية وشاملة",
+    "hc.dashboard.subtitle": "راقب أداء منشأتك في الوقت الفعلي",
+    "hc.dashboard.status": "نشط",
+    "hc.dashboard.stat1.label": "المكالمات اليوم",
+    "hc.dashboard.stat1.sub": "↑ 12% من أمس",
+    "hc.dashboard.stat2.label": "معدل الرد",
+    "hc.dashboard.stat2.sub": "الهدف: 95%",
+    "hc.dashboard.stat3.label": "حجوزات جديدة",
+    "hc.dashboard.stat3.sub": "↑ 8 عن أمس",
+    "hc.dashboard.stat4.label": "رضا المرضى",
+    "hc.dashboard.stat4.sub": "من 5.0",
+    "hc.dashboard.activity.title": "آخر النشاطات",
+    "hc.dashboard.act1.action": "حجز موعد جديد",
+    "hc.dashboard.act1.detail": "عيادة الباطنية - د. أحمد",
+    "hc.dashboard.act2.action": "تأكيد موعد",
+    "hc.dashboard.act2.detail": "غداً 10:30 ص - محمد العلي",
+    "hc.dashboard.act3.action": "تحويل لموظف",
+    "hc.dashboard.act3.detail": "استفسار معقد - تم التحويل",
+    "hc.dashboard.act4.action": "إرسال تذكير",
+    "hc.dashboard.act4.detail": "موعد خلال ساعتين - 5 مرضى",
+    "hc.dashboard.time1": "قبل دقيقة",
+    "hc.dashboard.time2": "قبل 3 دقائق",
+    "hc.dashboard.time3": "قبل 5 دقائق",
+    "hc.dashboard.time4": "قبل 8 دقائق",
+    "hc.pricing.title": "أسعار شفافة وواضحة",
+    "hc.pricing.subtitle": "ابداً، ترقّى حسب نموك",
+    "hc.pricing.monthly": "شهري",
+    "hc.pricing.yearly": "سنوي",
+    "hc.pricing.popular": "الأكثر طلبًا",
+    "hc.pricing.cta_start": "ابدأ الآن",
+    "hc.pricing.cta_contact": "تواصل معنا",
+    "hc.pricing.starter.desc.monthly": "/شهر · للعيادات والمراكز الصغيرة",
+    "hc.pricing.starter.desc.yearly": "/سنوي · للعيادات والمراكز الصغيرة",
+    "hc.pricing.pro.desc.monthly": "/شهر · للمجمعات الطبية المتوسطة",
+    "hc.pricing.pro.desc.yearly": "/سنوي · للمجمعات الطبية المتوسطة",
+    "hc.pricing.business.desc.monthly": "/شهر · للمستشفيات والمنشآت الكبيرة",
+    "hc.pricing.business.desc.yearly": "/سنوي · للمستشفيات والمنشآت الكبيرة",
+    "hc.faq.title": "أسئلة شائعة",
+    "hc.faq.subtitle": "كل شيء تحتاج معرفته قبل البدء",
+    "hc.faq.q1": "هل يرد النظام بلهجة سعودية طبيعية؟",
+    "hc.faq.a1":
+      "نعم، تم تدريب النموذج ليقدم تجربة صوتية طبيعية ويستخدم مصطلحات مناسبة للسياق السعودي.",
+    "hc.faq.q2": "هل يمكن ربطه بنظام المواعيد الحالي؟",
+    "hc.faq.a2":
+      "نعم، لدينا تكاملات جاهزة وخيارات ربط عبر API حسب نظام منشأتك.",
+    "hc.faq.q3": "هل البيانات مخزنة داخل السعودية؟",
+    "hc.faq.a3":
+      "يمكن توفير استضافة محلية داخل المملكة حسب متطلبات منشأتك والامتثال.",
+    "hc.faq.q4": "كم يحتاج وقت للتركيب؟",
+    "hc.faq.a4":
+      "عادةً الإعداد الأساسي سريع، ثم يتم تخصيص السيناريوهات حسب تخصص المنشأة.",
+    "hc.facility.general_hospital.name": "المستشفى العام",
+    "hc.facility.general_hospital.official": "مرخص من وزارة الصحة",
+    "hc.facility.general_hospital.pain":
+      "حجم مكالمات يومي كبير يُثقل كاهل موظفي الاستقبال",
+    "hc.facility.general_hospital.solution":
+      "الذكاء الاصطناعي يتولى حجز المواعيد والاستفسارات الروتينية 24/7",
+    "hc.facility.general_hospital.license": "وزارة الصحة – ترخيص مستشفى عام",
+
+    "hc.facility.specialist_hospital.name": "المستشفى التخصصي",
+    "hc.facility.specialist_hospital.official": "مرخص تخصصياً من وزارة الصحة",
+    "hc.facility.specialist_hospital.pain":
+      "اتصالات المرضى للاستفسار عن التخصصات تستهلك وقت الموظفين",
+    "hc.facility.specialist_hospital.solution":
+      "يوجّه المريض فوراً إلى الموعد المناسب في التخصص المطلوب",
+    "hc.facility.specialist_hospital.license":
+      "وزارة الصحة – ترخيص مستشفى تخصصي",
+
+    "hc.facility.solo_clinic.name": "العيادة الفردية",
+    "hc.facility.solo_clinic.official": "عيادة طبيب واحد مرخصة",
+    "hc.facility.solo_clinic.pain":
+      "الطبيب لا يستطيع الرد على المكالمات أثناء الكشف",
+    "hc.facility.solo_clinic.solution":
+      "لا تفوت أي  مكالمة مريض حتى وأنت في غرفة الكشف",
+    "hc.facility.solo_clinic.license": "وزارة الصحة – ترخيص عيادة طبية",
+
+    "hc.facility.dental_clinic.name": "عيادة الأسنان",
+    "hc.facility.dental_clinic.official": "منشأة طب أسنان مرخصة",
+    "hc.facility.dental_clinic.pain":
+      "نسبة عالية من الغياب عن المواعيد والإلغاء اللحظي",
+    "hc.facility.dental_clinic.solution":
+      "تذكيرات آلية تقلل الغياب بنسبة تصل إلى 65%",
+    "hc.facility.dental_clinic.license": "وزارة الصحة – ترخيص عيادة أسنان",
+
+    "hc.facility.general_complex.name": "المجمع الطبي العام",
+    "hc.facility.general_complex.official": "مجمع متعدد التخصصات مرخص",
+    "hc.facility.general_complex.pain":
+      "أقسام متعددة وطاقم استقبال واحد يعاني من الضغط",
+    "hc.facility.general_complex.solution":
+      "توجيه ذكي يعرف التخصص ويحجز في القسم الصحيح",
+    "hc.facility.general_complex.license": "وزارة الصحة – ترخيص مجمع طبي",
+
+    "hc.facility.cosmetic_complex.name": "مجمع التجميل والتحسين",
+    "hc.facility.cosmetic_complex.official": "منشأة طب تجميلي مرخصة",
+    "hc.facility.cosmetic_complex.pain":
+      "الاستفسارات الحساسة تتطلب سرية وتوفر خارج أوقات العمل",
+    "hc.facility.cosmetic_complex.solution":
+      "ذكاء اصطناعي محترف وسري متاح على مدار الساعة",
+    "hc.facility.cosmetic_complex.license": "وزارة الصحة – ترخيص طب تجميلي",
+
+    "hc.facility.lab.name": "المختبر الطبي",
+    "hc.facility.lab.official": "مختبر تشخيصي مرخص",
+    "hc.facility.lab.pain":
+      "المرضى يتصلون باستمرار للاستفسار عن نتائج الفحوصات",
+    "hc.facility.lab.solution":
+      "إشعارات آلية عند جاهزية النتائج وجدولة المواعيد",
+    "hc.facility.lab.license": "وزارة الصحة – ترخيص مختبر طبي",
+
+    "hc.facility.pharmacy.name": "الصيدلية",
+    "hc.facility.pharmacy.official": "صيدلية مجتمعية مرخصة",
+    "hc.facility.pharmacy.pain": "استفسارات توفر الأدوية تشغل موظفي اn�صيدلية",
+    "hc.facility.pharmacy.solution":
+      "إجابات فورية على استفسارات المخزون والاستلام عبر الذكاء الاصطناعي",
+    "hc.facility.pharmacy.license": "هيئة الغذاء والدواء – ترخيص صيدلية",
+
+    "hc.facility.physio.name": "مركز العلاج الطبيعي",
+    "hc.facility.physio.official": "منشأة علاج طبيعي وتأهيل مرخصة",
+    "hc.facility.physio.pain": "جدولة الجلسات تستلزم مكالمات متعددة ومرهقة",
+    "hc.facility.physio.solution": "نظام حجز وتذكير آلي للجلسات",
+    "hc.facility.physio.license": "وزارة الصحة – ترخيص علاج طبيعي",
+
+    "hc.facility.radiology.name": "مركز الأشعة والتصوير الطبي",
+    "hc.facility.radiology.official": "مرفق أشعة طبية مرخص",
+    "hc.facility.radiology.pain": "تعليمات التحضير للفحص لا تصل للمريض بوضوح",
+    "hc.facility.radiology.solution":
+      "الذكاء الاصطناعي يرسل تعليمات التحضير ويؤكد المواعيد تلقائياً",
+    "hc.facility.radiology.license": "وزارة الصحة – ترخيص مركز أشعة",
+
+    "hc.facility.eye.name": "عيادة العيون",
+    "hc.facility.eye.official": "عيادة طب عيون مرخصة",
+    "hc.facility.eye.pain": "انتظار طويل لحجز مواعيد الفحص الدوري",
+    "hc.facility.eye.solution":
+      "جدولة ذكية تملأ المواعيد فوراً بدون طوابير هاتفية",
+    "hc.facility.eye.license": "وزارة الصحة – ترخيص عيادة عيون",
+
+    // ── Pricing features – Starter ─────────────────────────────────────────────
+    "hc.pricing.starter.f1": "رد آلي 24/7",
+    "hc.pricing.starter.f2": "واتساب + ويب شات",
+    "hc.pricing.starter.f3": "تحويل لموظف بشري",
+    "hc.pricing.starter.f4": "3 تخصصات",
+    "hc.pricing.starter.f5": "3 سيناريوهات جاهزة",
+    "hc.pricing.starter.f6": "تأكيد حجز فوري",
+    "hc.pricing.starter.f7": "2 مكالمات متزامنة",
+    "hc.pricing.starter.f8": "2,300 دقيقة AI شهرياً",
+    "hc.pricing.starter.f9": "1,000 رسالة AI",
+    "hc.pricing.starter.f10": "دعم عبر البريد والدردشة",
+    "hc.pricing.starter.f11": "صوت وشخصية مخصصة",
+    "hc.pricing.starter.f12": "تكامل مع أنظمة السجلات الطبية",
+
+    // ── Pricing features – Pro ─────────────────────────────────────────────────
+    "hc.pricing.pro.f1": "كل مزايا Starter",
+    "hc.pricing.pro.f2": "10 تخصصات",
+    "hc.pricing.pro.f3": "10 سيناريوهات مخصصة",
+    "hc.pricing.pro.f4": "تذكير مزدوج (24/48 ساعة)",
+    "hc.pricing.pro.f5": "متابعة مرضى بعد الزيارة",
+    "hc.pricing.pro.f6": "استبيان رضا المرضى",
+    "hc.pricing.pro.f7": "حملات صوتية تذكيرية",
+    "hc.pricing.pro.f8": "Web Widget",
+    "hc.pricing.pro.f9": "5 مكالمات متزامنة",
+    "hc.pricing.pro.f10": "7,000 دقيقة AI شهرياً",
+    "hc.pricing.pro.f11": "3,500 رسالة AI",
+
+    // ── Pricing features – Business ────────────────────────────────────────────
+    "hc.pricing.business.f1": "كل مزايا Pro",
+    "hc.pricing.business.f2": "تخصصات غير محدودة",
+    "hc.pricing.business.f3": "سيناريوهات غير محدودة",
+    "hc.pricing.business.f4": "Tele-Sales",
+    "hc.pricing.business.f5": "Upselling",
+    "hc.pricing.business.f6": "حملات دورية",
+    "hc.pricing.business.f7": "12 مكالمة متزامنة",
+    "hc.pricing.business.f8": "24,000 دقيقة AI شهرياً",
+    "hc.pricing.business.f9": "10,000 رسالة AI",
+    "hc.pricing.business.f10": "تقارير رضا المرضى للإدارة",
+    "hc.pricing.business.f11": "تخصيص كامل للسيناريوهات",
+    "hc.integration.whatsapp.name": "واتساب",
+    "hc.integration.booking.name": "نظام المواعيد",
+    "hc.integration.sms.name": "الرسائل النصية",
+    "hc.integration.crm.name": "إدارة علاقات العملاء",
+    "hc.integration.payments.name": "المدفوعات",
+
+    // ─── Call Center ──────────────────────────────────────────────────────────
+    "cc.hero.badge": "مستقبل مراكز الاتصال",
+    "cc.hero.title1": "وفّر",
+    "cc.hero.title2": "70%",
+    "cc.hero.title3": "من تكلفة مركز الاتصال",
+    "cc.hero.subtitle": "سندس يتعامل مع 75% من مكالماتك تلقائياً بجودة أعلى",
+    "cc.hero.proof":
+      "✓ وقت انتظار صفر · ✓ 24/7 بدون انقطاع · ✓ فريقك يركز على الحالات المهمة",
+    "cc.hero.stat1.value": "0 ثانية",
+    "cc.hero.stat1.label": "وقت انتظار",
+    "cc.hero.stat2.value": "75%",
+    "cc.hero.stat2.label": "أتمتة",
+    "cc.hero.stat3.value": "70%",
+    "cc.hero.stat3.label": "توفير",
+    "cc.hero.cta": "احجز عرض توضيحي",
+    "cc.problems.title1": "تحديات مراكز الاتصال",
+    "cc.problems.title2": "التقليدية",
+    "cc.problems.bridge": "سندس يحل كل هذا",
+    "cc.prob1.title": "تكلفة باهظة",
+    "cc.prob1.desc": "رواتب، تدريب، معدات، إدارة = آلاف الريالات شهرياً",
+    "cc.prob2.title": "انتظار طويل",
+    "cc.prob2.desc": "العملاء ينتظرون دقائق ويغادرون محبطين",
+    "cc.prob3.title": "دوران الموظفين",
+    "cc.prob3.desc": "30-50% يغادرون سن؈ياً = تدريب مستمر",
+    "cc.prob4.title": "جودة متفاوتة",
+    "cc.prob4.desc": "كل موظف يرد بطريقته = تجربة غير موحدة",
+    "cc.sol1.title": "توفير 70%",
+    "cc.sol1.desc": "تكلفة ثابتة ومتوقعة بدون مفاجآت",
+    "cc.sol2.title": "0 انتظار",
+    "cc.sol2.desc": "رد فوري على كل مكالمة في أي وقت",
+    "cc.sol3.title": "استقرار 100%",
+    "cc.sol3.desc": "لا إجازات، لا استقالات، لا مرض",
+    "cc.sol4.title": "جودة موحدة",
+    "cc.sol4.desc": "نفس المستوى الممتاز في كل مكالمة",
+    "cc.stats.calls": "مكالمة شهرياً",
+    "cc.stats.centers": "مركز اتصال",
+    "cc.stats.savings": "توفير في التكلفة",
+    "cc.stats.wait": "وقت الانتظار",
+    "cc.segments.title1": "حلول لكل نوع",
+    "cc.segments.title2": "مكالمات",
+    "cc.segments.subtitle": "سندس يتكيف مع طبيعة مركز اتصالك",
+    "cc.segments.pain_title": "التحديات الحالية",
+    "cc.segments.solution_title": "مع سندس",
+    "cc.seg.inbound.name": "المكالمات الواردة",
+    "cc.seg.inbound.pain1": "طوابير انتظار طويلة تُغضب العملاء",
+    "cc.seg.inbound.pain2": "تكلفة عالية للموظفين بدوام كامل",
+    "cc.seg.inbound.pain3": "جودة خدمة غير متسقة بين الموظفين",
+    "cc.seg.inbound.sol1": "رد فوري بدون انتظار - 0 ثانية",
+    "cc.seg.inbound.sol2": "تكلفة ثابتة بغض النظر عن الحجم",
+    "cc.seg.inbound.sol3": "جودة موحدة 100% في كل مكالمة",
+    "cc.seg.inbound.stat.waitTime": "0 ثانية",
+    "cc.seg.inbound.stat.cost": "-70%",
+    "cc.seg.inbound.stat.quality": "100%",
+    "cc.seg.outbound.name": "المكالمات الصادرة",
+    "cc.seg.outbound.pain1": "إنتاجية منخفضة للموظفين",
+    "cc.seg.outbound.pain2": "رفض كثير من العملاء للمكالمات",
+    "cc.seg.outbound.pain3": "صعوبة الوصول لأعداد كبيرة",
+    "cc.seg.outbound.sol1": "آلاف المكالمات المتزامنة",
+    "cc.seg.outbound.sol2": "نبرة ودودة تقلل الرفض",
+    "cc.seg.outbound.sol3": "تغطية 100% للقائمة المستهدفة",
+    "cc.seg.outbound.stat.capacity": "10x",
+    "cc.seg.outbound.stat.reach": "100%",
+    "cc.seg.outbound.stat.efficiency": "+300%",
+    "cc.seg.support.name": "خدمة العملاء",
+    "cc.seg.support.pain1": "أسئلة متكررة تستهلك وقت الفريق",
+    "cc.seg.support.pain2": "دوران عالي للموظفين",
+    "cc.seg.support.pain3": "تدريب مكلف ومستمر",
+    "cc.seg.support.sol1": "حل 80% من الاستفسارات تلقائياً",
+    "cc.seg.support.sol2": "لا دوران، لا إجازات، لا تأخير",
+    "cc.seg.support.sol3": "تحديث فوري بدون تدريب",
+    "cc.seg.support.stat.automation": "80%",
+    "cc.seg.support.stat.availability": "24/7",
+    "cc.seg.support.stat.training": "0 ر.س",
+    "cc.seg.sales.name": "المبيعات الهاتفية",
+    "cc.seg.sales.pain1": "وقت طويل في تأهيل عملاء غير مناسبين",
+    "cc.seg.sales.pain2": "فقدان عملاء بسبب بطء المتابعة",
+    "cc.seg.sales.pain3": "تكلفة عالية لكل عميل مكتسب",
+    "cc.seg.sales.sol1": "تأهيل ذكي يوفر 70% من الوقت",
+    "cc.seg.sales.sol2": "متابعة فورية = لا عميل ضائع",
+    "cc.seg.sales.sol3": "تقليل تكلفة الاكتساب 50%",
+    "cc.seg.sales.stat.qualification": "+70%",
+    "cc.seg.sales.stat.followUp": "فوري",
+    "cc.seg.sales.stat.CAC": "-50%",
+    "cc.stat_label.waitTime": "الانتظار",
+    "cc.stat_label.cost": "التكلفة",
+    "cc.stat_label.quality": "الجودة",
+    "cc.stat_label.capacity": "السعة",
+    "cc.stat_label.reach": "الوصول",
+    "cc.stat_label.efficiency": "الكفاءة",
+    "cc.stat_label.automation": "الأتمتة",
+    "cc.stat_label.availability": "التوفر",
+    "cc.stat_label.training": "التدريب",
+    "cc.stat_label.qualification": "التأهيل",
+    "cc.stat_label.followUp": "المتابعة",
+    "cc.stat_label.CAC": "تكلفة الاكتساب",
+    "cc.comparison.title1": "مقارنة شاملة:",
+    "cc.comparison.title2": "تقليدي vs سندس",
+    "cc.comparison.tab.cost": "💰 التكلفة",
+    "cc.comparison.tab.quality": "⭐ الجودة",
+    "cc.comparison.tab.scale": "📈 التوسع",
+    "cc.comparison.traditional.header": "مركز اتصال تقليدي",
+    "cc.comparison.sondos.header": "مع سندس AI",
+    "cc.comparison.monthly_savings": "التوفير الشهري",
+    "cc.comparison.annual": "= 1,488,000 ر.س سنوياً",
+    "cc.comparison.cost.title": "مقارنة التكلفة الشهرية",
+    "cc.comparison.cost.trad1.item": "رواتب 20 موظف",
+    "cc.comparison.cost.trad1.value": "120,000 ر.س",
+    "cc.comparison.cost.trad2.item": "تأمينات وبدلات",
+    "cc.comparison.cost.trad2.value": "24,000 ر.س",
+    "cc.comparison.cost.trad3.item": "تدريب وتطوير",
+    "cc.comparison.cost.trad3.value": "8,000 ر.س",
+    "cc.comparison.cost.trad4.item": "معدات ومكاتب",
+    "cc.comparison.cost.trad4.value": "15,000 ر.س",
+    "cc.comparison.cost.trad5.item": "إدارة وإشراف",
+    "cc.comparison.cost.trad5.value": "18,000 ر.س",
+    "cc.comparison.cost.trad6.item": "الإجمالي",
+    "cc.comparison.cost.trad6.value": "185,000 ر.س",
+    "cc.comparison.cost.son1.item": "اشتراك سندس",
+    "cc.comparison.cost.son1.value": "25,000 ر.س",
+    "cc.comparison.cost.son2.item": "5 موظفين للحالات المعقدة",
+    "cc.comparison.cost.son2.value": "30,000 ر.س",
+    "cc.comparison.cost.son3.item": "تأمينات وبدلات",
+    "cc.comparison.cost.son3.value": "6,000 ر.س",
+    "cc.comparison.cost.son4.item": "بدون تدريب إضافي",
+    "cc.comparison.cost.son4.value": "0 ر.س",
+    "cc.comparison.cost.son5.item": "بدون معدات إضافية",
+    "cc.comparison.cost.son5.value": "0 ر.س",
+    "cc.comparison.cost.son6.item": "الإجمالي",
+    "cc.comparison.cost.son6.value": "61,000 ر.س",
+    "cc.comparison.cost.savings": "124,000 ر.س/شهر",
+    "cc.comparison.quality.title": "مقارنة الجودة",
+    "cc.comparison.quality.trad1.item": "وقت الانتظار",
+    "cc.comparison.quality.trad1.value": "3-5 دقائق",
+    "cc.comparison.quality.trad2.item": "نسبة المكالمات المردودة",
+    "cc.comparison.quality.trad2.value": "75%",
+    "cc.comparison.quality.trad3.item": "ساعات العمل",
+    "cc.comparison.quality.trad3.value": "8-12 ساعة",
+    "cc.comparison.quality.trad4.item": "اتساق الجودة",
+    "cc.comparison.quality.trad4.value": "متفاوت",
+    "cc.comparison.quality.trad5.item": "القدرة في الذروة",
+    "cc.comparison.quality.trad5.value": "محدودة",
+    "cc.comparison.quality.son1.item": "وقت الانتظار",
+    "cc.comparison.quality.son1.value": "0 ثانية",
+    "cc.comparison.quality.son2.item": "نسبة المكالمات المردودة",
+    "cc.comparison.quality.son2.value": "100%",
+    "cc.comparison.quality.son3.item": "ساعات العمل",
+    "cc.comparison.quality.son3.value": "24/7/365",
+    "cc.comparison.quality.son4.item": "اتساق الجودة",
+    "cc.comparison.quality.son4.value": "100%",
+    "cc.comparison.quality.son5.item": "القدرة في الذروة",
+    "cc.comparison.quality.son5.value": "غير محدودة",
+    "cc.comparison.scale.title": "مقارنة القدرة على التوسع",
+    "cc.comparison.scale.trad1.item": "وقت توظيف موظف جديد",
+    "cc.comparison.scale.trad1.value": "2-4 أسابيع",
+    "cc.comparison.scale.trad2.item": "تكلفة التوظيف",
+    "cc.comparison.scale.trad2.value": "5,000+ ر.س",
+    "cc.comparison.scale.trad3.item": "وقت التدريب",
+    "cc.comparison.scale.trad3.value": "2-4 أسابيع",
+    "cc.comparison.scale.trad4.item": "معدل دوران الموظفين",
+    "cc.comparison.scale.trad4.value": "30-50% سنوياً",
+    "cc.comparison.scale.trad5.item": "التوسع الموسمي",
+    "cc.comparison.scale.trad5.value": "صعب ومكلف",
+    "cc.comparison.scale.son1.item": "وقت زيادة السعة",
+    "cc.comparison.scale.son1.value": "فe�r�ي",
+    "cc.comparison.scale.son2.item": "تكلفة التوسع",
+    "cc.comparison.scale.son2.value": "حسب الاستخدام",
+    "cc.comparison.scale.son3.item": "وقت التدريب",
+    "cc.comparison.scale.son3.value": "ساعات",
+    "cc.comparison.scale.son4.item": "معدل الدوران",
+    "cc.comparison.scale.son4.value": "0%",
+    "cc.comparison.scale.son5.item": "التوسع الموسمي",
+    "cc.comparison.scale.son5.value": "تلقائي ومرن",
+    "cc.features.title1": "مميزات مصممة",
+    "cc.features.title2": "لمراكز الاتصال",
+    "cc.feat1.title": "رد فوري - 0 انتظار",
+    "cc.feat1.desc":
+      "العميل يتصل ويحصل على رد في أقل من 3 ثوانٍ. لا طوابير، لا 'جميع موظفينا مشغولون'",
+    "cc.feat1.highlight": "< 3 ثوانٍ",
+    "cc.feat2.title": "سعة غير محدودة",
+    "cc.feat2.desc":
+      "سواء 10 مكالمات أو 10,000 مكالمة متزامنة، سندس يتعامل معها بنفس الجودة",
+    "cc.feat2.highlight": "∞ مكالمة",
+    "cc.feat3.title": "تأهيل ذكي",
+    "cc.feat3.desc":
+      "أسئلة مخصصة تحدد جدية العميل، احتياجاته، وأولويته قبل التحويل للفريق",
+    "cc.feat3.highlight": "Lead Scoring",
+    "cc.feat4.title": "تحويل سلس",
+    "cc.feat4.desc":
+      "عندما يحتاج العميل موظف بشري، سندس يحوّل المكالمة مع ملخص كامل للمحادثة",
+    "cc.feat4.highlight": "Warm Transfer",
+    "cc.feat5.title": "تحليلات متقدمة",
+    "cc.feat5.desc":
+      "لوحة تحكم شاملة: أسباب الاتصال، م��دل الحل، رضا العملاء، وتوقعات الذروة",
+    "cc.feat5.highlight": "Real-time",
+    "cc.feat6.title": "متعدد اللغات",
+    "cc.feat6.desc": "عربي فصيح، لهجات سعودية، إنجليزي - سندس يتحدث لغة عميلك",
+    "cc.feat6.highlight": "3+ لغات",
+    "cc.integrations.title1": "يتكامل مع",
+    "cc.integrations.title2": "أنظمتك الحالية",
+    "cc.integration.type.callcenter": "مركز اتصال",
+    "cc.integration.type.crm": "CRM",
+    "cc.integration.type.tickets": "تذاكر",
+    "cc.integration.type.comms": "تواصل",
+    "cc.testimonials.title1": "قصص نجاح",
+    "cc.testimonials.title2": "مراكز الاتصال",
+    "cc.test1.quote":
+      "كان عندنا 15 موظف للرد على المكالمات. الآن سندس يتعامل مع 70% منها وفريقنا يركز على الحالات المعقدة. وفرنا 40% من التكلفة.",
+    "cc.test1.name": "أ. عبدالله الشهري",
+    "cc.test1.role": "مدير مركز الاتصال",
+    "cc.test1.company": "شركة الاتصالات المتقدمة",
+    "cc.test1.metric": "توفير 40% من التكلفة",
+    "cc.test2.quote":
+      "متوسط وقت الانتظار كان 4 دقائق. بعد سندس أصبح صفر. تقييم رضا العملاء ارتفع من 3.2 إلى 4.7 نجوم.",
+    "cc.test2.name": "أ. منى الحربي",
+    "cc.test2.role": "مديرة تجربة العملاء",
+    "cc.test2.company": "بنك الاستثمار السعودي",
+    "cc.test2.metric": "4.7⭐ رضا العملاء",
+    "cc.test3.quote":
+      "نحتاج نتصل بـ 5000 عميل شهرياً للتذكير بالمواعيد. كان يحتاج 3 موظفين بدوام كامل. الآن سندس يعملها في ساعات.",
+    "cc.test3.name": "د. فيصل المالكي",
+    "cc.test3.role": "المدير التنفيذي",
+    "cc.test3.company": "مجمع الرعاية الطبية",
+    "cc.test3.metric": "5000 مكالمة/شهر آلياً",
+    "cc.faq.title1": "أسئلة",
+    "cc.faq.title2": "شائعة",
+    "cc.faq.q1": "هل سندس يستبدل فريق مركز الاتصال بالكامل؟",
+    "cc.faq.a1":
+      "ليس بالضرورة. سندس مصمم ليكون الخط الأول (Tier 1) - يتعامل مع 70-80% من المكالمات الروتينية ويحوّل الحالات المعقدة لفريقك.",
+    "cc.faq.q2": "كيف يتعامل مع العملاء الغاضبين؟",
+    "cc.faq.a2":
+      "سندس مدرّب على اكتشاف نبرة الغضب أو الإحباط. في هذه الحالات، يعتذر بتعاطف وإذا استمر الغضب، يحوّل فوراً لموظف بشري.",
+    "cc.faq.q3": "هل يتكامل مع نظام مركز الاتصال الحالي؟",
+    "cc.faq.a3":
+      "نعم! سندس يتكامل مع أشهر أنظمة مراكز الاتصال: Genesys، Avaya، Cisco، Five9، وغيرها.",
+    "cc.faq.q4": "ماذا عن جودة الصوت واللهجة؟",
+    "cc.faq.a4":
+      "سندس يستخدم أحدث تقنيات تحويل النص لصوت (TTS) مع أصوات طبيعية جداً بالعربية الفصحى واللهجات السعودية والإنجليزية.",
+    "cc.faq.q5": "كيف أضمن أن سندس يرد بشكل صحيح؟",
+    "cc.faq.a5":
+      "نبدأ بمرحلة تدريب نخصص فيها السيناريوهات والردود لعملك، ثم مرحلة اختبار قبل الإطلاق.",
+    "cc.faq.q6": "ما الفرق بينكم وبين IVR التقليدي؟",
+    "cc.faq.a6":
+      "IVR يقول 'اضغط 1 للمبيعات' - محبط وبطيء. سندس يتحدث بشكل طبيعي ويفهم ما يقوله العميل بأي طريقة.",
+    "cc.cta.title1": "جاهز توفّر 70%",
+    "cc.cta.title2": "من تكلفة مركز الاتصال؟",
+    "cc.cta.subtitle":
+      "انضم لأكثر من 50 مركز اتصال يستخدمون سندس لتقديم خدمة أفضل بتكلفة أقل",
+    "cc.cta.button": "احجز عرض توضيحي",
+    "cc.cta.badge1": "🔗 تكامل مع Genesys & Avaya",
+    "cc.cta.badge2": "🎧 دعم فني 24/7",
+    "cc.cta.badge3": "📊 تقارير مفصلة",
+    "cc.stats.calls.value": "2M+",
+    "cc.stats.centers.value": "50+",
+    "cc.stats.savings.value": "70%",
+    "cc.stats.wait.value": "0",
+
+    // ─── Real Estate ─────────────────────────────────────────────────────────
+    "re.hero.badge": "الحل الأمثل للقطاع العقاري",
+    "re.hero.title": "لا تفقد عميل عقاري",
+    "re.hero.title_span": "واحد بعد اليوم",
+    "re.hero.subtitle":
+      "سندس يرد على استفسارات العملاء 24/7، يأهّل المشترين الجادين، ويحجز مواعيد المعاينة تلقائياً",
+    "re.hero.proof":
+      "✓ +150 شركة عقارية · ✓ +200,000 مكالمة شهرياً · ✓ رد في 3 ثوانٍ",
+    "re.hero.stat1.value": "+45%",
+    "re.hero.stat1.label": "عملاء مؤهلين",
+    "re.hero.stat1.icon": "📈",
+    "re.hero.stat2.value": "100%",
+    "re.hero.stat2.label": "معدل الرد",
+    "re.hero.stat2.icon": "📞",
+    "re.hero.stat3.value": "+30%",
+    "re.hero.stat3.label": "صفقات مغلقة",
+    "re.hero.stat3.icon": "🤝",
+    "re.hero.cta": "احجز عرضك التجريبي",
+
+    "re.problems.title": "هل تواجه هذه",
+    "re.problems.title_span": "التحديات؟",
+    "re.prob1.icon": "📵",
+    "re.prob1.title": "مكالمات فائتة",
+    "re.prob1.desc": "40% من الاستفسارات تضيع بسبب انشغال الفريق",
+    "re.prob2.icon": "⏰",
+    "re.prob2.title": "ساعات محدودة",
+    "re.prob2.desc": "العملاء يتصلون بعد ساعات العمل ولا أحد يرد",
+    "re.prob3.icon": "😤",
+    "re.prob3.title": "عملاء غير مؤهلين",
+    "re.prob3.desc": "وقت طويل في محادثات مع عملاء غير جادين",
+    "re.prob4.icon": "📉",
+    "re.prob4.title": "فرص ضائعة",
+    "re.prob4.desc": "منافسيك يردون أسرع ويكسبون العميل",
+    "re.bridge.text": "سندس يحل كل هذا",
+    "re.sol1.icon": "✅",
+    "re.sol1.title": "رد 100%",
+    "re.sol1.desc": "كل مكالمة يتم الرد عليها في أقل من 3 ثوانٍ",
+    "re.sol2.icon": "🌙",
+    "re.sol2.title": "متاح 24/7",
+    "re.sol2.desc": "سندس يعمل حتى في منتصف الليل والعطلات",
+    "re.sol3.icon": "🎯",
+    "re.sol3.title": "تأهيل ذكي",
+    "re.sol3.desc": "أسئلة ذكية تحدد العملاء الجادين فوراً",
+    "re.sol4.icon": "🚀",
+    "re.sol4.title": "ر�� فوري",
+    "re.sol4.desc": "العميل يحصل على معلومات قبل المنافسين",
+
+    "re.stats.stat1.value": "+200K",
+    "re.stats.stat1.label": "مكالمة عقارية شهرياً",
+    "re.stats.stat1.icon": "📞",
+    "re.stats.stat2.value": "150+",
+    "re.stats.stat2.label": "شركة عقارية",
+    "re.stats.stat2.icon": "🏢",
+    "re.stats.stat3.value": "45%",
+    "re.stats.stat3.label": "زيادة في العملاء المؤهلين",
+    "re.stats.stat3.icon": "📈",
+    "re.stats.stat4.value": "3 ثوانٍ",
+    "re.stats.stat4.label": "متوسط وقت الرد",
+    "re.stats.stat4.icon": "⚡",
+
+    "re.segments.title": "حلول مخصصة لكل",
+    "re.segments.title_span": "نوع عمل",
+    "re.segments.subtitle": "سندس يتكيف مع طبيعة عملك العقاري",
+    "re.segments.pain_title": "التحدa�ات الحالية",
+    "re.segments.sol_title": "مع سندس",
+    "re.seg.offices.name": "المكاتب العقارية",
+    "re.seg.offices.icon": "🏢",
+    "re.seg.offices.description": "بيع وتأجير العقارات السكنية والتجارية",
+    "re.seg.offices.pain1": "فقدان 40% من استفسارات العملاء المحتملين",
+    "re.seg.offices.pain2": " عدم المتابعة الفورية مع المهتمين",
+    "re.seg.offices.pain3": "ضياع فرص البيع بسبب انشغال الموظفين",
+    "re.seg.offices.sol1": "رد فوري على كل استفسار على مدار 24/7",
+    "re.seg.offices.sol2": "تأهيل العملاء وجدولة جولات المعاينة",
+    "re.seg.offices.sol3": "متابعة تلقائية مع العملاء المحتملين",
+    "re.seg.offices.stat.leads": "+45%",
+    "re.seg.offices.stat.response": "3 ثوانٍ",
+    "re.seg.offices.stat.deals": "+30%",
+
+    "re.seg.developers.name": "شركات التطوير العقاري",
+    "re.seg.developers.icon": "🏗️",
+    "re.seg.developers.description": "مشاريع سكنية وتجارية ومجمعات",
+    "re.seg.developers.pain1": "حجم كبير من الاستفسارات عن المشاريع",
+    "re.seg.developers.pain2": "صعوبة تأهيل العملاء الجادين",
+    "re.seg.developers.pain3": "تكلفة عالية لفريق المبيعات",
+    "re.seg.developers.sol1": "استقبال آلاف الاستفسارات بكفاءة",
+    "re.seg.developers.sol2": "تأهيل العملاء حسب الميزانية والاهتمام",
+    "re.seg.developers.sol3": "حجز مواعيد زيارة المشاريع تلقائياً",
+    "re.seg.developers.stat.leads": "+60%",
+    "re.seg.developers.stat.response": "< 5 ثوانٍ",
+    "re.seg.developers.stat.deals": "+40%",
+
+    "re.seg.property.name": "إدارة الأملاك",
+    "re.seg.property.icon": "🔑",
+    "re.seg.property.description": "إدارة العقارات والإيجارات",
+    "re.seg.property.pain1": "شكاوى المستأجرين خارج أوقات العمل",
+    "re.seg.property.pain2": "متابعة تحصيل الإيجارات",
+    "re.seg.property.pain3": "تنسيق مواعيد الصيانة",
+    "re.seg.property.sol1": "استقبال الشكاوى والطوارئ 24/7",
+    "re.seg.property.sol2": "تذكيرات تلقائية بمواعيد الدفع",
+    "re.seg.property.sol3": "جدولة مواعيد الصيانة والمعاينة",
+    "re.seg.property.stat.satisfaction": "95%",
+    "re.seg.property.stat.response": "فوري",
+    "re.seg.property.stat.efficiency": "+50%",
+
+    "re.seg.brokers.name": "الوسطاء العقاريين",
+    "re.seg.brokers.icon": "🤝",
+    "re.seg.brokers.description": "وساطة البيع والشراء والتأجير",
+    "re.seg.brokers.pain1": "فقدان عملاء بسبب الانشغال",
+    "re.seg.brokers.pain2": "صعوبة المتابعة مع عدة عملاء",
+    "re.seg.brokers.pain3": "المنافسة الشديدة على العملاء",
+    "re.seg.brokers.sol1": "عدم فقدان أي فرصة حتى أثناء الانشغال",
+    "re.seg.brokers.sol2": "متابعة منظمة مع كل العملاء",
+    "re.seg.brokers.sol3": "رد احترافي يعكس صورة مهنية",
+    "re.seg.brokers.stat.leads": "+55%",
+    "re.seg.brokers.stat.response": "24/7",
+    "re.seg.brokers.stat.conversion": "+35%",
+
+    "re.stat_label.leads": "زيادة العملاء",
+    "re.stat_label.response": "وقت الرد",
+    "re.stat_label.deals": "زيادة الصفقات",
+    "re.stat_label.satisfaction": "رضا العملاء",
+    "re.stat_label.efficiency": "زيادة الكفاءة",
+    "re.stat_label.conversion": "معدل التحويل",
+
+    "re.features.title": "مميزات مصممة",
+    "re.features.title_span": "للعقاريين",
+    "re.feat1.icon": "📞",
+    "re.feat1.title": "استقبال الاستفسارات",
+    "re.feat1.desc":
+      "رد فوري على كل مكالمة بصوت طبيعي يفهم احتياجات العميل العقارية",
+    "re.feat1.highlight": "رد في 3 ثوانٍ",
+    "re.feat2.icon": "🎯",
+    "re.feat2.title": "تأهيل العملاء",
+    "re.feat2.desc":
+      "أسئلة ذكية لتحديد الميزانية، الموقع المفضل، ونوع العقار المطلوب",
+    "re.feat2.highlight": "تأهيل دقيق",
+    "re.feat3.icon": "📅",
+    "re.feat3.title": "جدولة المعاينات",
+    "re.feat3.desc":
+      "حجز مواعيد جولات المعاينة تلقائياً في تقويم الوكيل أو المكتب",
+    "re.feat3.highlight": "حجز تلقائي",
+    "re.feat4.icon": "💬",
+    "re.feat4.title": "متابعة واتساب",
+    "re.feat4.desc":
+      "إرسال تفاصيل العقارات، الصور، والمواقع عبر واتساب تلقائياً",
+    "re.feat4.highlight": "رسائل فورية",
+    "re.feat5.icon": "📊",
+    "re.feat5.title": "تقارير العملاء",
+    "re.feat5.desc":
+      "تحليلات شاملة عن اهتمامات العملاء، الأسعار المطلوبة، والمناطق",
+    "re.feat5.highlight": "رؤى ذكية",
+    "re.feat6.icon": "🔄",
+    "re.feat6.title": "متابعة تلقائية",
+    "re.feat6.desc":
+      "اتصالات متابعة مع العملاء المحتملين الذين لم يكملوا الحجز",
+    "re.feat6.highlight": "لا تفقد عميل",
+
+    "re.usecases.title": "شاهد سندس",
+    "re.usecases.title_span": "أثناء العمل",
+    "re.usecase1.title": "استفسار عن شقة للإيجار",
+    "re.usecase1.msg1.ai":
+      "أهلاً وسهلاً بمكتب النخبة العقاري! كيف أقدر أساعدك؟",
+    "re.usecase1.msg2.user": "أدور شقة للإيجار في الرياض",
+    "re.usecase1.msg3.ai": "تمام! أي حي تفضل بالرياض؟",
+    "re.usecase1.msg4.user": "النرجس أو الياسمين",
+    "re.usecase1.msg5.ai": "ممتاز! كم غرفة تحتاج وكم ميزانيتك الشهرية؟",
+    "re.usecase1.msg6.user": "3 غرف، لحد 35 ألف سنوي",
+    "re.usecase1.msg7.ai":
+      "عندنا 3 شقق مناسبة! أقدر أرسلك التفاصيل على واتساب وأحجز لك موعد معاينة. يناسبك باكر الساعة 5؟",
+    "re.usecase2.title": "استفسار عن مشروع جديد",
+    "re.usecase2.msg1.ai":
+      "مرحباً بك في شركة الإعمار للتطوير! تبي تعرف عن مشاريعنا؟",
+    "re.usecase2.msg2.user": "إيه، عندكم فلل في شمال الرياض؟",
+    "re.usecase2.msg3.ai":
+      'عندنا مشروع "واحة النخيل" في حي الملقا. فلل من 4 إلى 6 غرف بأسعار تبدأ من 2.5 مليون. تبغى أرسلك الكتالوج؟',
+    "re.usecase2.msg4.user": "إيه أرسله",
+    "re.usecase2.msg5.ai":
+      "تم إرساله على واتساب! وعندنا أيام مفتوحة كل سبت للمعاينة. أحجز لك؟",
+
+    "re.testimonials.title": "قصص نجاح",
+    "re.testimonials.title_span": "عقارية",
+    "re.test1.quote":
+      "سندس زاد معدل الردود على الاستفسارات من 60% إلى 100%. الآن لا نفقد أي عميل محتمل حتى في منتصف الليل.",
+    "re.test1.name": "م. خالد الغامدي",
+    "re.test1.role": "المدير التنفيذي",
+    "re.test1.company": "شركة الغامدي العقارية",
+    "re.test1.metric": "+40% في الصفقات",
+    "re.test2.quote":
+      "وفرنا راتب موظفين اثنين والآن العملاء يحصلون على رد أسرع وأكثر احترافية. ROI إيجابي من الشهر الأول.",
+    "re.test2.name": "أ. سارة المطيري",
+    "re.test2.role": "مديرة المبيعات",
+    "re.test2.company": "دار الإعمار للتطوير",
+    "re.test2.metric": "توفير 15,000 ر.س/شهر",
+    "re.test3.quote":
+      "المستأجرين سعيدين لأنهم يقدرون يبلغون عن أي مشكلة في أي وقت. وأنا أتابع كل شي من لوحة التحكم.",
+    "re.test3.name": "أ. فهد العتيبي",
+    "re.test3.role": "مالك",
+    "re.test3.company": "مجموعة العتيبي للأملاك",
+    "re.test3.metric": "95% رضا المستأجرين",
+
+    "re.pricing.title": "باقات",
+    "re.pricing.title_span": "العقاريين",
+    "re.pricing.monthly": "شهري",
+    "re.pricing.annual": "سنوي",
+    "re.pricing.save": "🎉 وفّر حتى 10% مع الاشتراك السنوي",
+    "re.pricing.popular": "الأكثر شعبية ⭐",
+
+    "re.pricing.starter.tier": "🟢",
+    "re.pricing.starter.name": "Starter",
+    "re.pricing.starter.price.monthly": "2,499",
+    "re.pricing.starter.price.annual": "26,989",
+    "re.pricing.starter.desc.monthly": "/شهر · للمكاتب العقارية الصغيرة",
+    "re.pricing.starter.desc.annual": "/سنة · للمكاتب العقارية الصغيرة",
+    "re.pricing.starter.cta": "ابدأ الآن",
+
+    "re.pricing.pro.tier": "🟣",
+    "re.pricing.pro.name": "Professional",
+    "re.pricing.pro.price.monthly": "7,999",
+    "re.pricing.pro.price.annual": "86,389",
+    "re.pricing.pro.desc.monthly": "/شهر · لشركات الوساطة المتوسطة",
+    "re.pricing.pro.desc.annual": "/سنة · لشركات الوساطة المتوسطة",
+    "re.pricing.pro.cta": "ابدأ الآن",
+
+    "re.pricing.enterprise.tier": "⚫",
+    "re.pricing.enterprise.name": "Enterprise",
+    "re.pricing.enterprise.price.monthly": "24,999",
+    "re.pricing.enterprise.price.annual": "269,989",
+    "re.pricing.enterprise.desc.monthly":
+      "/شهر · للمطورين العقاريين والشركات الكبرى",
+    "re.pricing.enterprise.desc.annual":
+      "/سنة · للمطورين العقاريين والشركات الكبرى",
+    "re.pricing.enterprise.cta": "تواصل معنا",
+
+    "re.faq.title": "أسئلة",
+    "re.faq.title_span": "شائعة",
+    "re.faq.q1": "كيف يفهم سندس احتياجات العميل العقارية؟",
+    "re.faq.a1":
+      "سندس مدرّب على آلاف المحادثات العقارية. يسأل أسئلة ذكية مثل: نوع العقار (شقة/فيلا/أرض)، الغرض (سكن/استثمار)، الميزانية، الموقع المفضل، وعدد الغرف. ثم يرسل ملخصًا كاملًا للوكيل.",
+    "re.faq.q2": "هل يمكنه إرسال تفاصيل العقارات للعميل؟",
+    "re.faq.a2":
+      "نعم! سندس يتكامل مع واتساب ويمكنه إرسال صور العقارات، المواقع على الخريطة، الأسعار، والمواصفات تلقائياً بناءً على اهتمام العميل.",
+    "re.faq.q3": "كيف يتعامل مع العملاء الجادين vs المستفسرين فقط؟",
+    "re.faq.a3":
+      "سندس يستخدم نظام تأهيل ذكي يصنف العملاء (Hot/Warm/Cold) بناءً على إجاباتهم. العملاء الجادين يتم تحويلهم فوراً أو حجز موعد لهم، بينما المستفسرين يتم متابعتهم لاحقاً.",
+    "re.faq.q4": "هل يعمل مع أنظمة CRM العقارية؟",
+    "re.faq.a4":
+      "نعم، سندس يتكامل مع أشهر أنظمة CRM العقارية مثل Zoho، HubSpot، وأنظمة إدارة العقارات المحلية. كل عميل جديد يُضاف تلقائياً مع كل بياناته.",
+    "re.faq.q5": "ماذا عن مكالمات الشكاوى أو الطوارئ؟",
+    "re.faq.a5":
+      "سندس يميز بين الاستفسارات العادية والحالات العاجلة. في حالات الطوارئ (تسريب مياه، عطل كهرباء)، يحوّل المكالمة فوراً للمسؤول مع تنبيه واتساب.",
+    "re.faq.q6": "كم يستغرق تفعيل الخدمة؟",
+    "re.faq.a6":
+      "التفعيل الأساسي خلال 24-48 ساعة. نخصص السيناريوهات حسب نوع عملك (بيع/تأجير/إدارة أملاك) ونربط مع أنظمتك الحالية.",
+
+    "re.cta.icon": "🏢",
+    "re.cta.title": "جاهز تكسب كل عميل",
+    "re.cta.title2": "عقاري محتمل؟",
+    "re.cta.subtitle":
+      "انضم لأكثر من 150 شركة عقارية سعودية تستخدم سندس لزيادة مبيعاتها",
+    "re.cta.button": "احجز عرضك التجريبي",
+    // ─── Technology (AR) ─────────────────────────────────────────────────────────
+    "tech.hero.badge": "دعم ذكي لشركات التقنية",
+    "tech.hero.title1": "قلّل تذاكر الدعم",
+    "tech.hero.title2": "70%",
+    "tech.hero.title3": "وارفع التحويل 40%",
+    "tech.hero.subtitle":
+      "سندس يحل استفسارات العملاء من قاعدة معرفتك، يساعد في Onboarding، ويقدم دعم تقني Level 1 - 24/7 بكل اللغات",
+    "tech.hero.proof":
+      "✓ +100 شركة تقنية · ✓ 500,000+ محادثة شهرياً · ✓ 24/7 بكل اللغات",
+    "tech.hero.cta": "احجز عرضك التجريبي",
+
+    "tech.stat.tickets": "تذاكر الدعم",
+    "tech.stat.conversion": "تحويل Trial",
+    "tech.stat.global": "دعم عالمي",
+    "tech.stat.conversations": "محادثة شهرياً",
+    "tech.stat.companies": "شركة تقنية",
+    "tech.stat.onboarding": "Onboarding",
+    "tech.stat.support": "الدعم",
+    "tech.stat.coverage": "التغطية",
+    "tech.stat.cost": "التكلفة",
+    "tech.stat.scale": "التوسع",
+    "tech.stat.vip": "VIP",
+    "tech.stat.response": "الاستجابة",
+    "tech.stat.rating": "التقييم",
+    "tech.stat.reviews": "المراجعات",
+    "tech.stat.resolution": "الحل",
+    "tech.stat.sales": "المبيعات",
+    "tech.stat.alerts": "التنبيهات",
+    "tech.stat.clarity": "الوضوح",
+    "tech.stat.instant": "فوري",
+    "tech.stat.under30": "< 30 ثانية",
+    "tech.stat.under1min": "< 1 دقيقة",
+
+    "tech.problems.title": "تحديات شركات",
+    "tech.problems.title2": "التقنية",
+    "tech.problems.solution": "سندس يحل كل هذا",
+
+    "tech.problem1.title": "تذاكر متكررة",
+    "tech.problem1.desc": "نفس الأسئلة مراراً تستهلك وقت الفريق",
+    "tech.problem2.title": "Onboarding بطيء",
+    "tech.problem2.desc": "عملاء جدد يضيعون = Trial لا يتحول",
+    "tech.problem3.title": "مناطق زمنية",
+    "tech.problem3.desc": "عملاء عالميين يحتاجون دعم 24/7",
+    "tech.problem4.title": "تكلفة الدعم",
+    "tech.problem4.desc": "فريق كبير للدعم = تكلفة عالية",
+
+    "tech.solution1.title": "-70% تذاكر",
+    "tech.solution1.desc": "إجابات فورية من قاعدة المعرفة",
+    "tech.solution2.title": "+40% تحويل",
+    "tech.solution2.desc": "Onboarding تفاعلي يرشد العميل",
+    "tech.solution3.title": "24/7 عالمي",
+    "tech.solution3.desc": "كل اللغات، كل المناطق الزمنية",
+    "tech.solution4.title": "-80% تكلفة",
+    "tech.solution4.desc": "دعم Enterprise بتكلفة Startup",
+
+    "tech.segments.title": "حلول لكل نوع",
+    "tech.segments.title2": "شركة تقنية",
+    "tech.segments.subtitle": "سندس يتكيف مع طبيعة عملك التقني",
+    "tech.segments.pain": "التحديات الحالية",
+    "tech.segments.solution": "مع سندس",
+    "tech.segments.useCases": "حالات الاستخدام",
+
+    "tech.segment.saas.name": "شركات SaaS",
+    "tech.segment.saas.desc": "برمجيات كخدمة واشتراكات",
+    "tech.segment.saas.pain1": "تذاكر دعم متكررة عن نفس المشاكل",
+    "tech.segment.saas.pain2": "Onboarding بطيء يقلل التحويل",
+    "tech.segment.saas.pain3": "دعم 24/7 متعدد اللغات r�كلف",
+    "tech.segment.saas.sol1": "حل 70% من التذاكر تلقائياً من قاعدة المعرفة",
+    "tech.segment.saas.sol2": "Onboarding تفاعلي يرفع التحويل 40%",
+    "tech.segment.saas.sol3": "دعم بكل اللغات بتكلفة ثابتة",
+    "tech.segment.saas.use1": "الدعم الفني",
+    "tech.segment.saas.use2": "Onboarding",
+    "tech.segment.saas.use3": "شرح المميزات",
+    "tech.segment.saas.use4": "الفواتير",
+    "tech.segment.saas.use5": "التجديد",
+
+    "tech.segment.startups.name": "الشركات الناشئة",
+    "tech.segment.startups.desc": "Startups وScale-ups",
+    "tech.segment.startups.pain1": "فريق صغير لا يكفي للدعم 24/7",
+    "tech.segment.startups.pain2": "العملاء من مناطق زمنية مختلفة",
+    "tech.segment.startups.pain3": "الميزانية محدودة للتوظيف",
+    "tech.segment.startups.sol1": "دعم على مستوى Enterprise بتكلفة Startup",
+    "tech.segment.startups.sol2": "تغطية كل المناطق الزمنية",
+    "tech.segment.startups.sol3": "تكلفة ثابتة تنمو معك",
+    "tech.segment.startups.use1": "دعم العملاء",
+    "tech.segment.startups.use2": "جمع Feedback",
+    "tech.segment.startups.use3": "تأهيل العملاء",
+    "tech.segment.startups.use4": "العروض التوضيحية",
+
+    "tech.segment.enterprise.name": "حلول المؤسسات",
+    "tech.segment.enterprise.desc": "Enterprise Software",
+    "tech.segment.enterprise.pain1": "عملاء VIP يتوقعون دعم فوري",
+    "tech.segment.enterprise.pain2": "تكاملات معقدة تحتاج متابعة",
+    "tech.segment.enterprise.pain3": "SLAs صارمة يصعب الالتزام بها",
+    "tech.segment.enterprise.sol1": "تعريف فوري لـ VIP ومعاملة خاصة",
+    "tech.segment.enterprise.sol2": "متابعة التكاملات والمشاريع",
+    "tech.segment.enterprise.sol3": "استجابة فورية تضمن SLA",
+    "tech.segment.enterprise.use1": "دعم VIP",
+    "tech.segment.enterprise.use2": "متابعة المشاريع",
+    "tech.segment.enterprise.use3": "التصعيد الذكي",
+    "tech.segment.enterprise.use4": "تقارير العملاء",
+
+    "tech.segment.apps.name": "تطبيقات الجوال",
+    "tech.segment.apps.desc": "iOS, Android, Cross-platform",
+    "tech.segment.apps.pain1": "تقييمات سلبية بسبب مشاكل غير محلولة",
+    "tech.segment.apps.pain2": "حجم كبير من استفسارات الاستخدام",
+    "tech.segment.apps.pain3": "صعوبة دعم إصدارات متعددة",
+    "tech.segment.apps.sol1": "رد سريع يحسّن التقييمات",
+    "tech.segment.apps.sol2": "إجابات فورية من Help Center",
+    "tech.segment.apps.sol3": "دعم مخصص لكل إصدار",
+    "tech.segment.apps.use1": "مشاكل التطبيق",
+    "tech.segment.apps.use2": "الاشتراكات",
+    "tech.segment.apps.use3": "استرجاع الحساب",
+    "tech.segment.apps.use4": "شرح المميزات",
+
+    "tech.segment.hosting.name": "الاستضافة والسحابة",
+    "tech.segment.hosting.desc": "Cloud, Hosting, Infrastructure",
+    "tech.segment.hosting.pain1": "مشاكل تقنية عاجلة 24/7",
+    "tech.segment.hosting.pain2": "استفسارات التسعير والخطط",
+    "tech.segment.hosting.pain3": "طلبات الترقية والتعديل",
+    "tech.segment.hosting.sol1": "دعم تقني أولي يحل 50% من المشاكل",
+    "tech.segment.hosting.sol2": "حاسبة أسعار ذكية",
+    "tech.segment.hosting.sol3": "ترقية وتعديل بالمحادثة",
+    "tech.segment.hosting.use1": "الدعم الفني",
+    "tech.segment.hosting.use2": "التسعير",
+    "tech.segment.hosting.use3": "الترقية",
+    "tech.segment.hosting.use4": "مشاكل DNS",
+    "tech.segment.hosting.use5": "النسخ الاحتياطي",
+
+    "tech.segment.security.name": "الأمن السيبراني",
+    "tech.segment.security.desc": "Security Solutions",
+    "tech.segment.security.pain1": "تنبيهات أمنية تحتاج استجابة فورية",
+    "tech.segment.security.pain2": "عملاء قلقون يحتاجون طمأنة",
+    "tech.segment.security.pain3": "شرح التقارير الأمنية معقد",
+    "tech.segment.security.sol1": "تصنيف التنبيهات وتصعيد العاجل",
+    "tech.segment.security.sol2": "طمأنة العملاء بمعلومات دقيقة",
+    "tech.segment.security.sol3": "شرح مبسط للتقارير والتوصيات",
+    "tech.segment.security.use1": "التنبيهات الأمنية",
+    "tech.segment.security.use2": "شرح التقارير",
+    "tech.segment.security.use3": "التوصيات",
+    "tech.segment.security.use4": "حالات الطوارئ",
+
+    "tech.feature.kb.title": "تكامل قاعدة المعرفة",
+    "tech.feature.kb.desc":
+      "سندس يتصل بـ Notion, Confluence, Help Center ويجيب من وثائقك مباشرة",
+    "tech.feature.kb.highlight": "Knowledge Base",
+    "tech.feature.onboarding.title": "Onboarding تفاعلي",
+    "tech.feature.onboarding.desc":
+      "يرشد العملاء الجدد خطوة بخطوة، يجيب أسئلتهم، ويضمن تفعيل ناجح",
+    "tech.feature.onboarding.highlight": "+40% تحويل",
+    "tech.feature.tickets.title": "تقليل تذاكر الدعم",
+    "tech.feature.tickets.desc":
+      "حل 70% من الاستفسارات فوراً = فريقك يركز على المشاكل الحقيقية",
+    "tech.feature.tickets.highlight": "-70% تذاكر",
+    "tech.feature.renewal.title": "تجديد الاشتراكات",
+    "tech.feature.renewal.desc":
+      "تذكير ذكي قبل انتهاء الاشتراك + عروض مخصصة = تقليل Churn",
+    "tech.feature.renewal.highlight": "-25% Churn",
+    "tech.feature.techsupport.title": "دعم تقني ذكي",
+    "tech.feature.techsupport.desc":
+      "خطوات استكشاف الأخطاء، جمع المعلومات التقنية، وتصعيد ذكي للفريق",
+    "tech.feature.techsupport.highlight": "L1 Support",
+    "tech.feature.global.title": "متعدد اللغات والمناطق",
+    "tech.feature.global.desc":
+      "دعم بكل اللغات الرئيسية، في كل المناطق الزمنية، بتكلفة واحدة",
+    "tech.feature.global.highlight": "24/7 Global",
+
+    "tech.integrations.with": "يتكامل مع",
+    "tech.integration.helpdesk": "Help Desk",
+    "tech.integration.crm": "CRM",
+    "tech.integration.knowledge": "Knowledge",
+    "tech.integration.communication": "Communication",
+    "tech.integration.billing": "Billing",
+    "tech.integration.dev": "Dev",
+
+    "tech.usecase.ticket.title": "🎫 حل تذكرة دعم",
+    "tech.usecase.ticket.msg1":
+      "مرحباً! دعم TechApp 🚀\nكيف أقدر أساعدك اليوم؟",
+    "tech.usecase.ticket.msg2": "التطبيق يعطيني خطأ لما أحاول أرفع ملف",
+    "tech.usecase.ticket.msg3":
+      "آسف على هذا الإزعاج! خلني أساعدك 🔧\n\nما نوع الملف اللي تحاول ترفعه؟ وما حجمه؟",
+    "tech.usecase.ticket.msg4": "PDF حجمه 15 ميجا",
+    "tech.usecase.ticket.msg5":
+      "وجدت المشكلة! 💡\n\nالحد الأقصى لحجم الملف في خطتك هو 10 ميجا.\n\nعندك خيارين:\n1️⃣ ضغط الملف إلى أقل من 10 ميجا\n2️⃣ ترقية لخطة Pro (حد 100 ميجا)\n\nتبي أساعدك في أي منهم؟",
+    "tech.usecase.ticket.msg6": "كم سعر الترقية؟",
+    "tech.usecase.ticket.msg7":
+      "خطة Pro:\n💰 99 ر.س/شهر (بدل 149)\n✅ رفع ملفات حتى 100 ميجا\n✅ مساحة تخزين 50 جيجا\n✅ دعم أولوية\n\nتبي أفعّلها لك؟ أقدر أضيفها لحسابك الآن 😊",
+
+    "tech.usecase.onboarding.title": "🎯 Onboarding عميل جديد",
+    "tech.usecase.onboarding.msg1":
+      "مرحباً بك في TechApp! 🎉\n\nأنا هنا أساعدك تبدأ بسرعة.\n\nإيش الهدف الرئيسي من استخدامك للتطبيق؟",
+    "tech.usecase.onboarding.msg2": "أبغى أنظم مشاريع فريقي",
+    "tech.usecase.onboarding.msg3":
+      "اختيار ممتاز! 👍\n\nخلني أرشدك للخطوات الأولى:\n\n1️⃣ أنشئ مشروعك الأول\n2️⃣ أضف أعضاء الفريق\n3️⃣ أنشئ أول مهمة\n\nتبي أبدأ معك الخطوة الأولى؟",
+    "tech.usecase.onboarding.msg4": "إيه",
+    "tech.usecase.onboarding.msg5":
+      "ممتاز! 🚀\n\nاضغط على 'مشروع جديد' في الزاوية العليا.\n\nسمّه مثلاً 'مشروع تجريبي'\n\nجاهز؟ أخبرني لما تنتهي 😊",
+    "tech.usecase.onboarding.msg6": "تم",
+    "tech.usecase.onboarding.msg7":
+      "رائع! 🎊\n\nالآن أضف أعضاء فريقك:\n1. اضغط على 'إعدادات المشروع'\n2. اختر 'أعضاء الفريق'\n3. أدخل بريدهم الإلكتروني\n\nنصيحة: يمكنك تحديد صلاحيات مختلفة لكل عضو 💡",
+
+    "tech.testimonial1.quote":
+      "كنا نستقبل 200 تذكرة يومياً. سندس يحل 70% منها تلقائياً الآن. فريق الدعم أصبح يركز على المشاكل المعقدة فقط.",
+    "tech.testimonial1.name": "م. أحمد الشهري",
+    "tech.testimonial1.role": "VP of Customer Success",
+    "tech.testimonial1.company": "منصة SaaS سعودية",
+    "tech.testimonial1.metric": "-70% تذاكر الدعم",
+
+    "tech.testimonial2.quote":
+      "نسبة تحويل Trial كانت 12%. بعد Onboarding سندس التفاعلي، ارتفعت إلى 22%. فرق كبير في الإيرادات!",
+    "tech.testimonial2.name": "أ. سارة القحطاني",
+    "tech.testimonial2.role": "Growth Manager",
+    "tech.testimonial2.company": "تطبيق Fintech",
+    "tech.testimonial2.metric": "+83% تحويل Trial",
+
+    "tech.testimonial3.quote":
+      "عملاؤنا من 20 دولة. كنا نحتاج فريق متعدد اللغات. سندس يخدمهم بـ 8 لغات 24/7 وتكلفته أقل من موظف واحد.",
+    "tech.testimonial3.name": "أ. فهد المالكي",
+    "tech.testimonial3.role": "CEO",
+    "tech.testimonial3.company": "شركة استضافة",
+    "tech.testimonial3.metric": "8 لغات بتكلفة موظف",
+
+    "tech.faq1.q": "كيف يتصل سندس بقاعدة المعرفة الخاصة بنا؟",
+    "tech.faq1.a":
+      "سندس يتكامل مباشرة مع Notion, Confluence, Zendesk, Intercom, GitBook, وأي Help Center عبر API. يقرأ مقالاتك ووثائقك ويجيب العملاء منها مباشرة. يتحدث تلقائياً عند تحديث المحتوى.",
+
+    "tech.faq2.q": "كيف يساعد في Onboarding العملاء الجدد؟",
+    "tech.faq2.a":
+      "سندس يرحب بالعميل الجديد، يسأله عن أهدافه، يرشده للخطوات الأولى، يجيب أسئلته فوراً، ويتابع معه حتى يصبح مستخدم نشط. يمكنه إرسال رسائل متابعة عبر واتساب أو البريد.",
+
+    "tech.faq3.q": "هل يستطيع التعامل مع المشاكل التقنية؟",
+    "tech.faq3.a":
+      "نعم! سندس مدرّب على سيناريوهات الدعم الفني: جمع معلومات النظام، خطوات استكشاف الأخطاء، فحص الـ Logs، وتصعيد ذكي للفريق مع كل التفاصيل. يحل 40-50% من المشاكل التقنية الشائعة تلقائياً.",
+
+    "tech.faq4.q": "كيف يتعامل مع العملاء VIP والـ Enterprise؟",
+    "tech.faq4.a":
+      "سندس يتعرف على عملاء VIP من رقم الهاتف أو البريد. يعاملهم بطريقة مميزة، يمكنه الوصول لبياناتهم الخاصة، وتحويلهم لمدير الحساب المخصص إذا لزم الأمر - مع context كامل عن المحادثة.",
+
+    "tech.faq5.q": "ما الأنظمة التي يتكامل معها؟",
+    "tech.faq5.a":
+      "سندس يتكامل مع: CRM (Salesforce, HubSpot, Pipedrive)، Help Desk (Zendesk, Freshdesk, Intercom)، Knowledge Base (Notion, Confluence)، Communication (Slack, Teams)، و Billing (Stripe, Paddle). نوفر Webhooks و API لأي تكامل مخصص.",
+
+    "tech.faq6.q": "كم يستغرق التفعيل؟",
+    "tech.faq6.a":
+      "التفعيل الأساسي (FAQ + Knowledge Base) خلال 3-5 أيام. التكاملات المتقدمة (CRM, Billing) تحتاج 1-2 أسبوع. نوفر فريق Customer Success يساعدك في الإعداد والتخصيص.",
+    // Dans la section arabe (ar)
+    "tech.usecases.title": "شاهد سندس",
+    "tech.usecases.title2": "أثناء العمل",
+    "tech.integrations.title": "يتكامل مع",
+    "tech.integrations.title2": "أدواتك المفضلة",
+    "tech.integrations.subtitle": "ربط مباشر مع أشهر أدوات الدعم والتطوير",
+    "tech.integrations.api": "API مفتوح",
+    "tech.integrations.api_desc": "للتكامل مع أي نظام آخر",
+    "tech.testimonials.title": "قصص نجاح",
+    "tech.testimonials.title2": "شركات التقنية",
+    "tech.faq.title": "أسئلة",
+    "tech.faq.title2": "شائعة",
+    "tech.cta.title1": "جاهز تقلّل تذاكر الدعم 70%",
+    "tech.cta.title2": "وترفع التحويل 40%؟",
+    "tech.cta.subtitle":
+      "انضم لأكثر من 100 شركة تقنية تستخدم سندس لتحسين تجربة العملاء",
+    "tech.cta.button": "احجز عرضك التجريبي",
+    "tech.features.title": "مميزات مصممة",
+    "tech.features.title2": "للتقنية",
+    // ─── Governance (AR) ─────────────────────────────────────────────────────
+    "gov.hero.badge": "حلول ذكية للقطاع الحكومي",
+    "gov.hero.title1": "خدمة المستفيد",
+    "gov.hero.title2": "24/7",
+    "gov.hero.title3": "بدون انتظار",
+    "gov.hero.subtitle":
+      "سندس يتعامل مع 85% من استفسارات المواطنين تلقائياً: متابعة المعاملات، حجز المواعيد، استقبال البلاغات - بأمان حكومي وتكامل مع نفاذ",
+    "gov.hero.proof":
+      "✓ +20 جهة حكومية · ✓ 5 مليون معاملة شهرياً · ✓ 85% أتمتة",
+    "gov.hero.cta": "احجز عرضك التجريبي",
+
+    "gov.badge.security": "معتمد أمنياً",
+    "gov.badge.servers": "خوادم محلية",
+    "gov.badge.compliance": "متوافق PDPL",
+
+    "gov.stat.automation": "أتمتة",
+    "gov.stat.service": "خدمة",
+    "gov.stat.satisfaction": "رضا",
+    "gov.stat.transactions": "معاملة حكومية شهرياً",
+    "gov.stat.entities": "جهة حكومية",
+    "gov.stat.availability": "التوفر",
+    "gov.stat.accuracy": "الدقة",
+    "gov.stat.reports": "البلاغات",
+    "gov.stat.tracking": "التتبع",
+    "gov.stat.resolution": "الحل",
+    "gov.stat.booking": "الحجز",
+    "gov.stat.inquiries": "الاستفسارات",
+    "gov.stat.noShow": "عدم الحضور",
+    "gov.stat.admissions": "القبول",
+    "gov.stat.support": "الدعم",
+    "gov.stat.clarity": "الوضوح",
+    "gov.stat.compliance": "الامتثال",
+    "gov.stat.billing": "الفواتير",
+    "gov.stat.requests": "الطلبات",
+    "gov.stat.outages": "الأعطال",
+    "gov.stat.instant": "فوري",
+    "gov.stat.automatic": "تلقائي",
+
+    "gov.journey.title": "رحلة المستفيد",
+    "gov.journey.title2": "المُحسّنة",
+    "gov.journey.subtitle": "كيف يحسّن سندس تجربة المواطن في ك؄ خطوة",
+    "gov.journey.step1.title": "التواصل",
+    "gov.journey.step1.desc": "المواطن يتصل أو يراسل عبر أي قناة",
+    "gov.journey.step1.traditional": "انتظ����ر 5-15 دقيقة",
+    "gov.journey.step1.sondos": "رد فوري < 3 ثوانٍ",
+    "gov.journey.step2.title": "التحقق",
+    "gov.journey.step2.desc": "التحقق من الهوية عبر نفاذ أو رمز OTP",
+    "gov.journey.step2.traditional": "سؤال وجواب طويل",
+    "gov.journey.step2.sondos": "تحقق آلي آمن",
+    "gov.journey.step3.title": "فهم الطلب",
+    "gov.journey.step3.desc": "تحديد نوع الخدمة المطلوبة",
+    "gov.journey.step3.traditional": "تحويل بين أقسام",
+    "gov.journey.step3.sondos": "فهم فوري وتوجيه صحيح",
+    "gov.journey.step4.title": "الخدمة",
+    "gov.journey.step4.desc": "تنفيذ الطلب أو تقديم المعلومة",
+    "gov.journey.step4.traditional": "إجراءات يدوية",
+    "gov.journey.step4.sondos": "تنفيذ آلي فوري",
+    "gov.journey.step5.title": "المتابعة",
+    "gov.journey.step5.desc": "تتبع حالة الطلب",
+    "gov.journey.step5.traditional": "اتصل واستفسر كل مرة",
+    "gov.journey.step5.sondos": "إشعارات استباقية",
+
+    "gov.segments.title": "حلول لكل",
+    "gov.segments.title2": "قطاع حكومي",
+    "gov.segments.subtitle": "سندس يتكيف مع طبيعة كل جهة",
+    "gov.segments.pain": "التحديات",
+    "gov.segments.solution": "مع سندس",
+    "gov.segments.useCases": "حالات الاستخدام",
+
+    "gov.segment.government.name": "الجهات الحكومية",
+    "gov.segment.government.desc": "وزارات، هيئات، مؤسسات عامة",
+    "gov.segment.government.pain1": "حجم ضخم من استفسارات المواطنين",
+    "gov.segment.government.pain2": "ضغط على مراكز الاتصال الحكومية",
+    "gov.segment.government.pain3": "تفاوت جودة الخدمة بين الموظفين",
+    "gov.segment.government.sol1": "أتمتة 80% من الاستفسارات الروتينية",
+    "gov.segment.government.sol2": "خدمة 24/7 بدون انتظار",
+    "gov.segment.government.sol3": "جودة موحدة ومعلومات دقيقة دائماً",
+    "gov.segment.government.use1": "الاستعلام عن الخدمات",
+    "gov.segment.government.use2": "حجز المواعيد",
+    "gov.segment.government.use3": "متابعة المعاملات",
+    "gov.segment.government.use4": "الشكاوى والبلاغات",
+
+    "gov.segment.municipalities.name": "البلديات والأمانات",
+    "gov.segment.municipalities.desc": "خدمات المدن والمناطق",
+    "gov.segment.municipalities.pain1": "بلاغات صيانة ونظافة كثيرة",
+    "gov.segment.municipalities.pain2": "استفسارات رخص البناء والمحلات",
+    "gov.segment.municipalities.pain3": "شكاوى المواطنين تحتاج متابعة",
+    "gov.segment.municipalities.sol1": "استقبال البلاغات وتصنيفها تلقائياً",
+    "gov.segment.municipalities.sol2": "معلومات فورية عن الإجراءات والمتطلبات",
+    "gov.segment.municipalities.sol3": "متابعة حالة الشكاوى والبلاغات",
+    "gov.segment.municipalities.use1": "بلاغات النظافة",
+    "gov.segment.municipalities.use2": "رخص البناء",
+    "gov.segment.municipalities.use3": "المخالفات",
+    "gov.segment.municipalities.use4": "الاستعلام عن الخدمات",
+
+    "gov.segment.healthcare.name": "القطاع الصحي الحكومي",
+    "gov.segment.healthcare.desc": "مستشفيات ومراكز صحية حكومية",
+    "gov.segment.healthcare.pain1": "حجز المواعيد يستهلك الموظفين",
+    "gov.segment.healthcare.pain2": "استفسارات عن الخدمات والتغطية",
+    "gov.segment.healthcare.pain3": "متابعة نتائج الفحوصات",
+    "gov.segment.healthcare.sol1": "حجز وإلغاء المواعيد تلقائياً",
+    "gov.segment.healthcare.sol2": "معلومات شاملة عن الخدمات المتاحة",
+    "gov.segment.healthcare.sol3": "إشعارات استباقية للمرضى",
+    "gov.segment.healthcare.use1": "حجز المواعيد",
+    "gov.segment.healthcare.use2": "نتائج الفحوصات",
+    "gov.segment.healthcare.use3": "الاستعلام عن الأطباء",
+    "gov.segment.healthcare.use4": "التأمين الصحي",
+
+    "gov.segment.education.name": "قطاع التعليم",
+    "gov.segment.education.desc": "جامعات، مدارس، تدريب",
+    "gov.segment.education.pain1": "استفسارات القبول والتسجيل",
+    "gov.segment.education.pain2": "أسئلة الطلاب عن الإجراءات",
+    "gov.segment.education.pain3": "دعم أولياء الأمور",
+    "gov.segment.education.sol1": "إجابات فورية عن شروط القبول",
+    "gov.segment.education.sol2": "إرشاد الطلاب للإجراءات الصحيحة",
+    "gov.segment.education.sol3": "قناة تواصل موحدة للأهالي",
+    "gov.segment.education.use1": "القبول والتسجيل",
+    "gov.segment.education.use2": "الجداول الدراسية",
+    "gov.segment.education.use3": "النتائج",
+    "gov.segment.education.use4": "الرسوم والمدفوعات",
+
+    "gov.segment.compliance.name": "الامتثال والرقابة",
+    "gov.segment.compliance.desc": "هيئات رقابية وتنظيمية",
+    "gov.segment.compliance.pain1": "استفسارات عن الأنظمة واللوائح",
+    "gov.segment.compliance.pain2": "طلبات التراخيص والتصاريح",
+    "gov.segment.compliance.pain3": "بلاغات المخالفات",
+    "gov.segment.compliance.sol1": "شرح مبسط للأنظمة والمتطلبات",
+    "gov.segment.compliance.sol2": "إرشاد خطوة بخطوة للتراخيص",
+    "gov.segment.compliance.sol3": "استقبال وتصنيف البلاغات",
+    "gov.segment.compliance.use1": "الأنظمة واللوائح",
+    "gov.segment.compliance.use2": "التراخيص",
+    "gov.segment.compliance.use3": "البلاغات",
+    "gov.segment.compliance.use4": "الاستعلام عن المخالفات",
+
+    "gov.segment.publicservices.name": "الخدمات العامة",
+    "gov.segment.publicservices.desc": "كهرباء، مياه، بريد",
+    "gov.segment.publicservices.pain1": "فواتير واستهلاك وشكاوى",
+    "gov.segment.publicservices.pain2": "طلبات التوصيل والقطع",
+    "gov.segment.publicservices.pain3": "بلاغات الأعطال العاجلة",
+    "gov.segment.publicservices.sol1": "استعلام فوري عن الفواتير والاستهلاك",
+    "gov.segment.publicservices.sol2": "طلبات الخدمة بالمحادثة",
+    "gov.segment.publicservices.sol3": "بلاغات الأعطال 24/7 مع تتبع",
+    "gov.segment.publicservices.use1": "الفواتير",
+    "gov.segment.publicservices.use2": "طلبات الخدمة",
+    "gov.segment.publicservices.use3": "بلاغات الأعطال",
+    "gov.segment.publicservices.use4": "تغيير البيانات",
+
+    "gov.feature.security.title": "أمان وخصوصية حكومية",
+    "gov.feature.security.desc":
+      "متوافق مع متطلبات الأمن السيبراني الوطني وحماية البيانات الشخصية (PDPL)",
+    "gov.feature.security.highlight": "معتمد",
+    "gov.feature.omnichannel.title": "متعدد القنوات",
+    "gov.feature.omnichannel.desc":
+      "هاتف، واتساب، موقع، تطبيق - قناة واحدة موحدة لخدمة المواطن",
+    "gov.feature.omnichannel.highlight": "Omnichannel",
+    "gov.feature.dashboard.title": "لوحة تحكم حكومية",
+    "gov.feature.dashboard.desc":
+      "تقارير أداء، رضا المٳتفيدين، أوقات الانتظار، وتحليلات متقدمة",
+    "gov.feature.dashboard.highlight": "Dashboard",
+    "gov.feature.routing.title": "تصنيف ذكي للطلبات",
+    "gov.feature.routing.desc":
+      "تحديد نوع الطلب، الأولوية، والقسم المختص تلقائياً",
+    "gov.feature.routing.highlight": "Smart Routing",
+    "gov.feature.integration.title": "تكامل مع الأنظمة الحكومية",
+    "gov.feature.integration.desc":
+      "ربط مع أبشر، نفاذ، توكلنا، والأنظمة الداخلية عبر API آمن",
+    "gov.feature.integration.highlight": "Integration",
+    "gov.feature.accessibility.title": "شامل وسهل الوصول",
+    "gov.feature.accessibility.desc":
+      "دعم ذوي الإعاقة، كبار السن، ومتعدد اللهجات واللغات",
+    "gov.feature.accessibility.highlight": "Accessibility",
+
+    "gov.integration.nafath": "نفاذ",
+    "gov.integration.absher": "أبشر",
+    "gov.integration.tawakkalna": "توكلنا",
+    "gov.integration.integration_center": "مركز التكامل",
+    "gov.integration.najiz": "ناجز",
+    "gov.integration.ejar": "إيجار",
+    "gov.integration.quwwa": "قوى",
+    "gov.integration.etimad": "اعتماد",
+    "gov.integration.type.identity": "هوية",
+    "gov.integration.type.services": "خدمات",
+    "gov.integration.type.app": "تطبيق",
+    "gov.integration.type.gov": "حكومي",
+    "gov.integration.type.justice": "عدل",
+    "gov.integration.type.housing": "إسكان",
+    "gov.integration.type.labor": "عمل",
+    "gov.integration.type.finance": "مالية",
+
+    "gov.usecases.title": "شاهد سندس",
+    "gov.usecases.title2": "أثناء العمل",
+    "gov.usecase.inquiry.title": "📋 استعلام عن معاملة",
+    "gov.usecase.inquiry.msg1":
+      "السلام عليكم! خدمة المستفيدين 🏛️\nكيف أقدر أخدمك اليوم؟",
+    "gov.usecase.inquiry.msg2": "أبغى أعرف وين وصلت معاملتي",
+    "gov.usecase.inquiry.msg3":
+      "بكل سرور! للاستعلام عن معاملتك، أحتاج:\n\n1️⃣ رقم المعاملة\nأو\n2️⃣ رقم الهوية للتحقق",
+    "gov.usecase.inquiry.msg4": "رقم المعاملة 1445-789456",
+    "gov.usecase.inquiry.msg5":
+      "تم العثور على معاملتك ✅\n\n📋 نوع المعاملة: طلب تصريح\n📍 الحالة: قيد المراجعة\n🏢 القسم: إدارة التراخيص\n📅 تاريخ الاستلام: 15 يناير\n⏱️ المتوقع: خلال 5 أيام عمل\n\nتبي أرسل لك إشعار لما تتحدث الحالة؟",
+    "gov.usecase.inquiry.msg6": "إيه",
+    "gov.usecase.inquiry.msg7":
+      "تم تفعيل الإشعارات ✅\n\nراح توصلك رسالة على جوالك المسجل (05XX XXX XX89) عند أي تحديث.\n\nتحتاج شي ثاني؟ 😊",
+
+    "gov.usecase.report.title": "🏙️ بلاغ بلدية",
+    "gov.usecase.report.msg1":
+      "أهلاً بك في أمانة المنطقة! 🏙️\nكيف أقدر أساعدك؟",
+    "gov.usecase.report.msg2": "فيه حفرة كبيرة في الشارع عندنا",
+    "gov.usecase.report.msg3":
+      "شكراً لبلاغك! 🙏\n\nخلني أسجل البلاغ. أحتاج بعض المعلومات:\n\n📍 إيش اسم الحي والشارع؟",
+    "gov.usecase.report.msg4": "حي النرجس، شارع الأمير محمد بن سعد",
+    "gov.usecase.report.msg5":
+      "تمام! الحفرة قريبة من أي معلم؟ (مسجد، مدرسة، محل معروف)",
+    "gov.usecase.report.msg6": "قريبة من مسجد النور",
+    "gov.usecase.report.msg7":
+      "ممتاز! تقدر ترسل صورة للحفرة على واتساب (05XXXXXXXX)؟\n\nهذا يساعد الفريق يقيّم الأولوية بشكل أفضل.\n\n📝 رقم البلاغ: BLD-2024-45678\n📍 الموقع: حي النرجس، شارع الأمير محمد بن سعد (قرب مسجد النور)\n🔧 النوع: صيانة طرق - حفرة\n⚡ الأولوية: عالية\n\nالفريق الفني سيتواصل معك قريباً. شكراً لمساهمتك في تحسين المدينة! 💜",
+
+    "gov.testimonials.title": "قصص نجاح",
+    "gov.testimonials.title2": "الجهات الحكومية",
+    "gov.testimonial1.quote":
+      "كنا نستقبل 3000 مكالمة يومياً عن حالة المعاملات. الآن سندس يجيب 85% منها فوراً. المواطن يحصل على المعلومة بدون انتظار.",
+    "gov.testimonial1.name": "أ. محمد العتيبي",
+    "gov.testimonial1.role": "مدير خدمات المستفيدين",
+    "gov.testimonial1.company": "جهة حكومية كبرى",
+    "gov.testimonial1.metric": "85% أتمتة",
+    "gov.testimonial2.quote":
+      "بلاغات النظافة والصيانة كانت تضيع أحياناً. الآن سندس يستقبلها، يصنفها، ويرسلها للفريق المختص مع إحداثيات الموقع.",
+    "gov.testimonial2.name": "م. سارة الغامدي",
+    "gov.testimonial2.role": "مديرة مركز البلاغات",
+    "gov.testimonial2.company": "أمانة منطقة الرياض",
+    "gov.testimonial2.metric": "100% تتبع البلاغات",
+    "gov.testimonial3.quote":
+      "رضا المراجعين ارتفع من 3.2 إلى 4.6 نجوم. السبب الرئيسي: لا انتظار + معلومات دقيقة + خدمة 24/7.",
+    "gov.testimonial3.name": "د. فهد المالكي",
+    "gov.testimonial3.role": "المشرف العام",
+    "gov.testimonial3.company": "مستشفى حكومي",
+    "gov.testimonial3.metric": "4.6⭐ رضا المستفيدين",
+
+    "gov.faq.title": "أسئلة",
+    "gov.faq.title2": "شائعة",
+    "gov.faq1.q": "هل سندس متوافق مع متطلبات الأمن السيبراني الحكومي؟",
+    "gov.faq1.a":
+      "نعم، سندس مصمم وفق أعلى معايير الأمان: شهادة الهيئة الوطنية للأمن السيبراني، تشفير AES-256، خوادم داخل المملكة، تحقق متعدد الطبقات، وسجلات مراجعة كاملة. متوافق مع PDPL ومتطلبات الحوكمة الرقمية.",
+    "gov.faq2.q": "كيف يتكامل مع الأنظمة الحكومية الموجودة؟",
+    "gov.faq2.a":
+      "سندس يتكامل عبر API آمن مع: نفاذ للتحقق من الهوية، أبشر للخدمات، توكلنا، ومركز التكامل الحكومي. كذلك يتكامل مع أنظمة إدارة المعاملات (DMS)، وأنظمة تخطيط الموارد (ERP) الحكومية.",
+    "gov.faq3.q": "هل يستطيع تنفيذ معاملات فعلية؟",
+    "gov.faq3.a":
+      "نعم، بعد التحقق من هوية المستفيد عبر نفاذ أو OTP، يمكن لسندس: حجز المواعيد، تحديث البيانات، تقديم الطلبات، ومتابعة المعاملات. كل الإجراءات تُسجَّل وتُراجَع.",
+    "gov.faq4.q": "كيف يتعامل مع الشكاوى والبلاغات؟",
+    "gov.faq4.a":
+      "سندس يستقبل الشكوى، يجمع التفاصيل (الموقع، الصور، الوصف)، يصنفها حسب النوع والأولوية، يفتح تذكرة في النظام، ويعطي المستفيد رقم متابعة. يمكن للمستفيد الاستعلام عن حالة بلاغه لاحقاً.",
+    "gov.faq5.q": "هل يدعم اللغة العربية واللهجات؟",
+    "gov.faq5.a":
+      "نعم، سندس يتحدث العربية الفصحى واللهجات السعودية بطلاقة (نجدية، حجازية، شرقية). كذلك يدعم الإنجليزية، الأوردو، والهندية لخدمة جميع المقيمين.",
+    "gov.faq6.q": "ما مدة ال��فعيل للجهات الحكومية؟",
+    "gov.faq6.a":
+      "التفعيل الأساسي (استفسارات عامة) خلال 2-3 أسابيع. التكاملات مع الأنظمة الحكومية تحتاج 4-8 أسابيع. نوفر فريق تنفيذ مخصص للجهات الحكومية مع دعم فني على مدار الساعة.",
+
+    "gov.cta.title1": "جاهز لتحسين خدمة المستفيدين",
+    "gov.cta.title2": "ورفع رضاهم؟",
+    "gov.cta.subtitle":
+      "انضم لأكثر من 20 جهة حكومية تستخدم سندس لخدمة المواطنين بشكل أفضل",
+    "gov.cta.button": "احجز عرضك التجريبي",
+    "gov.security.title": "أمان وحوكمة",
+    "gov.security.title2": "على مستوى حكومي",
+
+    "gov.security.item1.title": "تشفير AES-256",
+    "gov.security.item1.desc":
+      "كل البيانات مشفرة في النقل والتخزين بأعلى معايير التشفير",
+
+    "gov.security.item2.title": "خوادم داخل المملكة",
+    "gov.security.item2.desc":
+      "البيانات تبقى داخل السعودية، متوافق مع متطلبات السيادة الرقمية",
+
+    "gov.security.item3.title": "متوافق PDPL",
+    "gov.security.item3.desc": "متوافق مع نظام حماية البيانات الشخصية السعودي",
+
+    "gov.security.item4.title": "معتمد من NCA",
+    "gov.security.item4.desc":
+      "متوافق مع متطلبات الهيئة الوطنية للأمن السيبراني",
+
+    "gov.security.item5.title": "تحقق نفاذ",
+    "gov.security.item5.desc": "تكامل مع نفاذ للتحقق من هوية المستفيدين",
+
+    "gov.security.item6.title": "سجلات مراجعة",
+    "gov.security.item6.desc": "تسجيل كامل لكل العمليات للمراجعة والتدقيق",
+
+    "gov.features.title": "مميزات",
+    "gov.features.title2": "للقطاع الحكومي",
+
+    "gov.integrations.title": "تكامل مع",
+    "gov.integrations.title2": "الأنظمة الحكومية",
+    // ─── Insurance (AR) ────────────────────────────────────────────����ـ───────
+    "ins.hero.badge": "حلول ذكية لقطاع التأمين 🛡️",
+    "ins.hero.title1": "ارفع نسبة",
+    "ins.hero.title2": "التجديد 35%",
+    "ins.hero.title3": "وقلّل تكلفة الدعم 70%",
+    "ins.hero.subtitle":
+      "سندس يتعامل مع استفسارات العملاء، يستقبل البلاغات 24/7، ويذكّر بالتجديد تلقائياً - بينما فريقك يركز على الحالات المهمة",
+    "ins.hero.proof":
+      "✓ +35% نسبة التجديد · ✓ استقبال البلاغات 24/7 · ✓ 80% أتمتة الاستفسارات",
+    "ins.hero.cta": "احجز عرضك التجريبي",
+    "ins.hero.stat1.value": "+35%",
+    "ins.hero.stat1.label": "نسبة التجديد",
+    "ins.hero.stat2.value": "24/7",
+    "ins.hero.stat2.label": "استقبال البلاغات",
+    "ins.hero.stat3.value": "80%",
+    "ins.hero.stat3.label": "أتمتة الاستفسارات",
+
+    "ins.stat.calls": "مكالمة تأمينية شهرياً",
+    "ins.stat.companies": "شركة تأمين",
+    "ins.stat.renewal": "زيادة في التجديد",
+    "ins.stat.claims": "استقبال البلاغات",
+    "ins.stat.quotes": "عروض الأسعار",
+    "ins.stat.satisfaction": "الرضا",
+    "ins.stat.response": "وقت الرد",
+    "ins.stat.resolution": "الحل الفوري",
+    "ins.stat.assessment": "التقييم",
+    "ins.stat.retention": "الاحتفاظ",
+    "ins.stat.leads": "العملاء",
+    "ins.stat.conversion": "التحويل",
+    "ins.stat.nps": "التقييم",
+    "ins.stat.issuance": "الإصدار",
+    "ins.stat.emergency": "الطوارئ",
+    "ins.stat.languages": "اللغات",
+    "ins.stat.comparison": "المقارنة",
+    "ins.stat.portfolio": "المحفظة",
+    "ins.stat.efficiency": "الكفاءة",
+    "ins.stat.instant": "فوري",
+    "ins.stat.centralized": "مركزي",
+
+    "ins.journey.title": "تحسين كل مرحلة في",
+    "ins.journey.title2": "رحلة العميل",
+    "ins.journey.subtitle": "سندس يحسّن تجربة العميل في كل نقطة تواصل",
+    "ins.journey.traditional": "تقليدي",
+    "ins.journey.withSondos": "مع سندس",
+    "ins.journey.improvement": "التحسين",
+    "ins.journey.stage1": "الاستفسار",
+    "ins.journey.stage1.traditional": "انتظار 5+ دقائق للرد",
+    "ins.journey.stage1.sondos": "رد فوري في 3 ثوانٍ",
+    "ins.journey.stage1.improvement": "-99% وقت",
+    "ins.journey.stage2": "عرض السعر",
+    "ins.journey.stage2.traditional": "طلب معاودة الاتصال",
+    "ins.journey.stage2.sondos": "عرض سعر فوري",
+    "ins.journey.stage2.improvement": "فوري",
+    "ins.journey.stage3": "الإصدار",
+    "ins.journey.stage3.traditional": "إجراءات ورقية طويلة",
+    "ins.journey.stage3.sondos": "توجيه رقمي سلس",
+    "ins.journey.stage3.improvement": "-80% وقت",
+    "ins.journey.stage4": "البلاغ",
+    "ins.journey.stage4.traditional": "خارج ساعات العمل = انتظار",
+    "ins.journey.stage4.sondos": "24/7 استقبال فوري",
+    "ins.journey.stage4.improvement": "0 انتظار",
+    "ins.journey.stage5": "المتابعة",
+    "ins.journey.stage5.traditional": "اتصل واستفسر كل مرة",
+    "ins.journey.stage5.sondos": "تحديثات استباقية",
+    "ins.journey.stage5.improvement": "شفافية",
+    "ins.journey.stage6": "التجديد",
+    "ins.journey.stage6.traditional": "قد ينسى العميل",
+    "ins.journey.stage6.sondos": "تذكير ذكي + عرض",
+    "ins.journey.stage6.improvement": "+35%",
+
+    "ins.segments.title": "حلول لكل نوع",
+    "ins.segments.title2": "تأمين",
+    "ins.segments.pain": "التحديات",
+    "ins.segments.solution": "مع سندس",
+    "ins.segments.useCases": "حالات الاستخدام",
+
+    "ins.segment.auto.name": "تأمين السيارات",
+    "ins.segment.auto.desc": "تأمين شامل وضد الغير",
+    "ins.segment.auto.pain1": "استفسارات متكررة عن التغطية والأسعار",
+    "ins.segment.auto.pain2": "بلاغات الحوادث تحتاج استجابة فورية",
+    "ins.segment.auto.pain3": "تذكير العملاء بالتجديد يستهلك الفريق",
+    "ins.segment.auto.sol1": "عروض أسعار فورية حسب بيانات السيارة",
+    "ins.segment.auto.sol2": "استقبال بلاغات الحوادث 24/7 مع جمع التفاصيل",
+    "ins.segment.auto.sol3": "تذكيرات تلقائية قبل انتهاء الوثيقة",
+    "ins.segment.auto.use1": "عروض الأسعار",
+    "ins.segment.auto.use2": "بلاغات الحوادث",
+    "ins.segment.auto.use3": "تجديد الوثائق",
+    "ins.segment.auto.use4": "استفسارات التغطية",
+
+    "ins.segment.health.name": "التأمين الصحي",
+    "ins.segment.health.desc": "تأمين طبي للأفراد والشركات",
+    "ins.segment.health.pain1": "أسئلة كثيرة عن الشبكة الطبية والتغطية",
+    "ins.segment.health.pain2": "موافقات مسبقة تحتاج متابعة",
+    "ins.segment.health.pain3": "شكاوى تأخر الموافقات",
+    "ins.segment.health.sol1": "معلومات فورية عن المستشفيات والتغطية",
+    "ins.segment.health.sol2": "متابعة حالة الموافقات تلقائياً",
+    "ins.segment.health.sol3": "تصعيد الشكاوى العاجلة للمختصين",
+    "ins.segment.health.use1": "الشبكة الطبية",
+    "ins.segment.health.use2": "الموافقات المسبقة",
+    "ins.segment.health.use3": "حدود التغطية",
+    "ins.segment.health.use4": "إضافة تابعين",
+
+    "ins.segment.property.name": "تأمين الممتلكات",
+    "ins.segment.property.desc": "منازل، مباني، تجاري",
+    "ins.segment.property.pain1": "تقييم المخاطر يحتاج معلومات كثيرة",
+    "ins.segment.property.pain2": "بلاغات الأضرار تحتاج توثيق سريع",
+    "ins.segment.property.pain3": "تجديدات سنوية كثيرة",
+    "ins.segment.property.sol1": "جمع معلومات التقييم بمحادثة ذكية",
+    "ins.segment.property.sol2": "استقبال البلاغات مع الصور والتفاصيل",
+    "ins.segment.property.sol3": "حملات تجديد آلية ومتابعة",
+    "ins.segment.property.use1": "تقييم الممتلكات",
+    "ins.segment.property.use2": "بلاغات الأضرار",
+    "ins.segment.property.use3": "التجديد السنوي",
+    "ins.segment.property.use4": "تعديل التغطية",
+
+    "ins.segment.life.name": "تأمين الحياة",
+    "ins.segment.life.desc": "حماية وادخار",
+    "ins.segment.life.pain1": "منتجات معقدة تحتاج شرح مفصل",
+    "ins.segment.life.pain2": "عملاء محتملين يحتاجون متابعة طويلة",
+    "ins.segment.life.pain3": "استفسارات عن المستفيدين والقيمة",
+    "ins.segment.life.sol1": "شرح مبسط للمنتجات حسب احتياج العميل",
+    "ins.segment.life.sol2": "تأهيل ومتابعة العملاء المحتملين",
+    "ins.segment.life.sol3": "خدمة المستفيدين والورثة بحساسية",
+    "ins.segment.life.use1": "شرح المنتجات",
+    "ins.segment.life.use2": "تأهيل العملاء",
+    "ins.segment.life.use3": "خدمة المستفيدين",
+    "ins.segment.life.use4": "تعديل الوثائق",
+
+    "ins.segment.travel.name": "تأمين السفر",
+    "ins.segment.travel.desc": "سفر وطوارئ",
+    "ins.segment.travel.pain1": "طلبات عاجلة قبل السفر مباشرة",
+    "ins.segment.travel.pain2": "حالات طوارئ في الخارج",
+    "ins.segment.travel.pain3": "استفسارات التغطية الدولية",
+    "ins.segment.travel.sol1": "إصدار ف؈ري للوثائق 24/7",
+    "ins.segment.travel.sol2": "خط طوارئ يعمل بكل اللغات",
+    "ins.segment.travel.sol3": "معلومات واضحة عن التغطية في كل بلد",
+    "ins.segment.travel.use1": "إصدار الوثائق",
+    "ins.segment.travel.use2": "حالات الطوارئ",
+    "ins.segment.travel.use3": "تمديد التغطية",
+    "ins.segment.travel.use4": "المطالبات",
+
+    "ins.segment.broker.name": "وسطاء التأمين",
+    "ins.segment.broker.desc": "وساطة وتسويق",
+    "ins.segment.broker.pain1": "مقارنة عروض شركات متعددة",
+    "ins.segment.broker.pain2": "متابعة عملاء كثيرين",
+    "ins.segment.broker.pain3": "تجديدات من شركات مختلفة",
+    "ins.segment.broker.sol1": "عروض مقارنة من كل الشركات فوراً",
+    "ins.segment.broker.sol2": "إدارة محفظة العملاء بالكامل",
+    "ins.segment.broker.sol3": "تذكيرات موحدة لكل التجديدات",
+    "ins.segment.broker.use1": "مقارنة العروض",
+    "ins.segment.broker.use2": "إدارة المحفظة",
+    "ins.segment.broker.use3": "التجديدات",
+    "ins.segment.broker.use4": "خدمة العملاء",
+
+    "ins.feature.quotes.title": "عروض أسعار فورية",
+    "ins.feature.quotes.desc":
+      "العميل يذكر بيانات سيارته أو عمره ويحصل على عرض سعر تقريبي في ثوانٍ",
+    "ins.feature.quotes.highlight": "< 30 ثانية",
+    "ins.feature.claims.title": "استقبال البلاغات 24/7",
+    "ins.feature.claims.desc":
+      "حادث في منتصف الليل؟ سندس يستقبل البلاغ، يجمع التفاصيل، ويفتح المطالبة",
+    "ins.feature.claims.highlight": "لا انتظار",
+    "ins.feature.renewal.title": "تذكير التجديد الذكي",
+    "ins.feature.renewal.desc":
+      "اتصالات تلقائية قبل انتهاء الوثيقة - مع عرض خاص",
+    "ins.feature.renewal.highlight": "+35% تجديد",
+    "ins.feature.tracking.title": "متابعة المطالبات",
+    "ins.feature.tracking.desc":
+      "العميل يسأل عن مطالبته ويحصل على آخر التحديثات فوراً من النظام",
+    "ins.feature.tracking.highlight": "شفافية كاملة",
+    "ins.feature.leads.title": "تأهيل العملاء المحتملين",
+    "ins.feature.leads.desc":
+      "أسئلة ذكية تحدد احتياج العميل، ميزانيته، وجديته قبل التحويل للمبيعات",
+    "ins.feature.leads.highlight": "Lead Scoring",
+    "ins.feature.languages.title": "متعدد اللغات",
+    "ins.feature.languages.desc":
+      "عربي، إنجليزي، أوردو، فلبيني - سندس يتحدث لغة عميلك في السعودية",
+    "ins.feature.languages.highlight": "4+ لغات",
+
+    "ins.features.title": "مميزات مصممة",
+    "ins.features.title2": "لقطاع التأمين",
+
+    "ins.integration.najm": "نجم",
+    "ins.integration.sama": "ساما",
+    "ins.integration.elm": "علم",
+    "ins.integration.absher": "أبشر",
+    "ins.integration.type.accidents": "حوادث",
+    "ins.integration.type.regulatory": "تنظيمي",
+    "ins.integration.type.crm": "CRM",
+    "ins.integration.type.policy": "إدارة وثائق",
+    "ins.integration.type.claims": "مطالبات",
+    "ins.integration.type.communication": "تواصل",
+    "ins.integration.type.gov": "تكامل حكومي",
+    "ins.integration.type.verification": "تحقق",
+
+    "ins.integrations.title": "يتكامل مع",
+    "ins.integrations.title2": "أنظمة التأمين",
+    "ins.integrations.subtitle":
+      "تكامل سلس مع أشهر أنظمة التأمين والجهات التنظيمية",
+
+    "ins.usecases.title": "شاهد سندس",
+    "ins.usecases.title2": "أثناء العمل",
+    "ins.usecase.claim.title": "🚗 بلاغ حادث سيارة",
+    "ins.usecase.claim.msg1": "أهلاً! شركة الدرع للتأمين، كيف أقدر أساعدك؟",
+    "ins.usecase.claim.msg2": "صار لي حادث وأبغى أبلّغ",
+    "ins.usecase.claim.msg3":
+      "أتمنى سلامتك! 🙏 خلني أساعدك في البلاغ.\n\nأولاً: هل فيه إصابات لك أو للطرف الثاني؟",
+    "ins.usecase.claim.msg4": "لا الحمدلله ما فيه إصابات",
+    "ins.usecase.claim.msg5": "الحمدلله على السلامة.\n\nرقم وثيقتك التأمينية؟",
+    "ins.usecase.claim.msg6": "123456789",
+    "ins.usecase.claim.msg7": "تمام، أشوف وثيقتك سارية. 👍\n\nوين مكان الحادث؟",
+
+    "ins.usecase.renewal.title": "🔔 تذكير تجديد",
+    "ins.usecase.renewal.msg1":
+      "السلام عليكم أخ محمد! معاك سندس من شركة الأمان للتأمين.\n\nأذكرك إن تأمين سيارتك ينتهي بعد أسبوعين (15 مارس). 📅",
+    "ins.usecase.renewal.msg2": "إيه صحيح، كم التجديد؟",
+
+    "ins.usecase.renewal.msg4": "إيه جدد الشامل",
+    "ins.usecase.renewal.msg5":
+      "تم! ✅ أرسلت لك رابط الدفع على واتساب.\n\nبعد الدفع، وثيقتك الجديدة توصلك خلال دقائق. شكراً لثقتك فينا! 💜",
+
+    "ins.testimonials.title": "قصص نجاح",
+    "ins.testimonials.title2": "شركات التأمين",
+    "ins.testimonial1.quote":
+      "نسبة تجديد الوثائق كانت 68%. بعد تذكيرات سندس التلقائية ارتفعت إلى 89%. هذا يعني ملايين إضافية سنوياً.",
+    "ins.testimonial1.name": "أ. st�ts�الد الغامدي",
+    "ins.testimonial1.role": "مدير العمليات",
+    "ins.testimonial1.company": "شركة الدرع للتأمين",
+    "ins.testimonial1.metric": "+21% نسبة التجديد",
+    "ins.testimonial2.quote":
+      "كنا نحتاج 8 موظفين للرد على استفسارات التغطية والشبكة الطبية. الآن سندس يتعامل مع 85% منها بدقة عالية.",
+    "ins.testimonial2.name": "د. سارة المطيري",
+    "ins.testimonial2.role": "مديرة خدمة العملاء",
+    "ins.testimonial2.company": "التعاونية للتأمين الصحي",
+    "ins.testimonial2.metric": "85% أتمتة الاستفسارات",
+    "ins.testimonial3.quote":
+      "بلاغات الحوادث كانت كابوس خارج ساعات العمل. الآن سندس يستقبلها 24/7 ويجهز الملف كامل لفريقنا صباحاً.",
+    "ins.testimonial3.name": "أ. فهد العتيبي",
+    "ins.testimonial3.role": "مدير المطالبات",
+    "ins.testimonial3.company": "وقاية للتأمين",
+    "ins.testimonial3.metric": "24/7 استقبال بلاغات",
+
+    "ins.faq.title": "أسئلة",
+    "ins.faq.title2": "شائعة",
+    "ins.faq.subtitle": "كل شيء تحتاج معرفته قبل البدء",
+    "ins.faq1.q": "كيف يعطي سندس عروض أسعار؟",
+    "ins.faq1.a":
+      "سندس يسأل العميل عن البيانات المطلوبة (نوع السيارة، سنة الصنع، العمر، تاريخ المطالبات) ثم يستخدم API للاتصال بنظام التسعير الخاص بك ويعطي عرض سعر فوري. يمكن تخصيصه ليعطي نطاق سعري أو سعر دقيق حسب تفضيلكم.",
+    "ins.faq2.q": "هل يستطيع استقبال بلاغات الحوادث؟",
+    "ins.faq2.a":
+      "نعم! سندس يجمع كل التفاصيل: مكان الحادث، الأطراف المتورطة، الإصابات، الأضرار، ومعلومات الاتصال. يمكنه طلب صور عبر واتساب ويفتح المطالبة في نظامكم تلقائياً. الحالات العاجلة (إصابات خطيرة) يحولها فوراً لفريق الطوارئ.",
+    "ins.faq3.q": "كيف يتعامل مع استفسارات التغطية المعقدة؟",
+    "ins.faq3.a":
+      "سندس مدرّب على وثائقكم وشروط التغطية. يجيب على الأسئلة الشائعة بدقة. للحالات المعقدة أو الاستثناءات، يجمع تفاصيل الحالة ويحولها لمختص مع ملخص كامل. هدفنا حل 80% من الاستفسارات تلقائياً.",
+    "ins.faq4.q": "هل يتكامل مع أنظمة التأمين الموجودة؟",
+    "ins.faq4.a":
+      "نعم، سندس يتكامل مع أشهر أنظمة إدارة التأمين (Policy Administration Systems) وأنظمة المطالبات. كذلك يتكامل مع نجم، ونظام ساما، وأنظمة CRM. نوفر API مرن للتكامل مع أي نظام.",
+    "ins.faq5.q": "ماذا عن خصوصية بيانات العملاء؟",
+    "ins.faq5.a":
+      "أمان البيانات أولويتنا. نلتزم بمتطلبات البنك المركزي (ساما) ونظام حماية البيانات الشخصية (PDPL). كل البيانات مشفرة، والخوادم في السعودية، مع صلاحيات وصول محددة وسجلات مراجعة كاملة.",
+    "ins.faq6.q": "كم يستغرق التفعيل؟",
+    "ins.faq6.a":
+      "التفعيل الأساسي (استفسارات عامة) خلال أسبوع. التكاملات مع أنظمة التسعير والمطالبات تحتاج 2-4 أسابيع. نوفر فريق تنفيذ مخصص لضمان نجاح المشروع.",
+
+    "ins.cta.title1": "جاهز ترفع نسبة التجديد",
+    "ins.cta.title2": "وتقلّل تكلفة الدعم؟",
+    "ins.cta.subtitle":
+      "انضم لأكثر من 30 شركة تأمين تستخدم سندس لتحسين تجربة العملاء وزيادة الإيرادات",
+    "ins.cta.button": "احجز عرضك التجريبي",
+    "ins.cta.badge1": "تكامل مع نجم وساما",
+    "ins.cta.badge2": "متوافق مع PDPL",
+    "ins.cta.badge3": "تقارير تنظيمية",
+    // ─── E-commerce (AR) ─────────────────────────────────────────────────────
+    "ecom.hero.badge": "الحل الأمثل للتجارة الإلكترونية",
+    "ecom.hero.title1": "حوّل كل",
+    "ecom.hero.title2": "سلة متروكة",
+    "ecom.hero.title3": "إلى طلب مكتمل",
+    "ecom.hero.subtitle":
+      "سندس يرد على استفسارات العملاء، يتتبع الطلبات، يسترجع السلات المتروكة، ويدير الإرجاع - 24/7 بدون تدخل منك",
+    "ecom.hero.cta": "احجز عرضك التجريبي",
+    "ecom.hero.stat1.value": "+35%",
+    "ecom.hero.stat1.label": "استرجاع سلات",
+    "ecom.hero.stat2.value": "80%",
+    "ecom.hero.stat2.label": "أتمتة الدعم",
+    "ecom.hero.stat3.value": "5 ثوانٍ",
+    "ecom.hero.stat3.label": "وقت الرد",
+    "ecom.hero.badge1": "🔗 يتكامل مع سلة وزد",
+    "ecom.hero.badge2": "📦 ربط شركات الشحن",
+    "ecom.hero.badge3": "💳 دعم تابي وتمارا",
+
+    "ecom.problems.title": "تحديات التجارة الإلكترونية",
+    "ecom.problems.title2": "اليومية",
+    "ecom.problems.solution": "سندس يحل كل هذا تلقائياً",
+
+    "ecom.problem1.title": "70% سلات متروكة",
+    "ecom.problem1.desc": "عملاء يضيفون منتجات ولا يكملون الشراء",
+    "ecom.problem2.title": '"وين طلبي؟"',
+    "ecom.problem2.desc": "أكثر سؤال متكرر يستهلك وقت فريقك",
+    "ecom.problem3.title": "15% إرجاع",
+    "ecom.problem3.desc": "طلبات إرجاع تحتاج وقت ومتابعة",
+    "ecom.problem4.title": "تأخر الردود",
+    "ecom.problem4.desc": "عملاء غاضبين وتقييمات سلبية",
+
+    "ecom.solution1.title": "+35% استرجاع",
+    "ecom.solution1.desc": "متابعة آلية تحوّل السلات المتروكة لطلبات",
+    "ecom.solution2.title": "تتبع فوري",
+    "ecom.solution2.desc": "العميل يعرف مكان طلبه في ثوانٍ",
+    "ecom.solution3.title": "إرجاع سلس",
+    "ecom.solution3.desc": "طلبات الإرجاع تُدار بدون تدخل",
+    "ecom.solution4.title": "96% رضا",
+    "ecom.solution4.desc": "ردود فورية = عملاء سعيدين",
+
+    "ecom.stat.orders": "طلب تمت متابعته",
+    "ecom.stat.stores": "متجر إلكتروني",
+    "ecom.stat.recovery": "استرجاع سلات متروكة",
+    "ecom.stat.response": "متوسط وقت الرد",
+    "ecom.stat.under5sec": "< 5 ثوانٍ",
+    "ecom.stat.under1min": "< 1 دقيقة",
+    "ecom.stat.automatic": "تلقائي",
+    "ecom.stat.support": "تقليل الدعم",
+    "ecom.stat.satisfaction": "رضا العملاء",
+    "ecom.stat.rating": "تقييم البائع",
+    "ecom.stat.efficiency": "زيادة الكفاءة",
+    "ecom.stat.complaints": "تقليل الشكاوى",
+    "ecom.stat.tracking": "التتبع",
+    "ecom.stat.retention": "الاحتفاظ",
+    "ecom.stat.churn": "تقليل الانسحاب",
+    "ecom.stat.renewal": "التجديد",
+    "ecom.stat.ltv": "قيمة العميل",
+
+    "ecom.segments.title": "حلول لكل نوع",
+    "ecom.segments.title2": "تجارة إلكترونية",
+    "ecom.segments.without": "بدون سندس",
+    "ecom.segments.with": "مع سندس",
+
+    "ecom.segment.stores.name": "المتاجر الإلكترونية",
+    "ecom.segment.stores.desc": "سلة، زد، شوبيفاي، ووكومرس",
+    "ecom.segment.stores.pain1": "استفسارات متكررة عن الطلبات والشحن",
+    "ecom.segment.stores.pain2": "ضغط كبير على خدمة العملاء",
+    "ecom.segment.stores.pain3": "سلات متروكة بدون متابعة",
+    "ecom.segment.stores.sol1": "رد فوري على حالة الطلب والتتبع",
+    "ecom.segment.stores.sol2": "دعم آلي 24/7 بدون توظيف إضافي",
+    "ecom.segment.stores.sol3": "متابعة السلات المتروكة وإتمام البيع",
+
+    "ecom.segment.marketplace.name": "منصات البيع",
+    "ecom.segment.marketplace.desc": "أمازون، نون، جرير، إكسترا",
+    "ecom.segment.marketplace.pain1": "حجم هائل من استفسارات العملاء",
+    "ecom.segment.marketplace.pain2": "تأخر الردود يؤثر على التقييم",
+    "ecom.segment.marketplace.pain3": "صعوبة إدارة قنوات متعددة",
+    "ecom.segment.marketplace.sol1": "رد موحد على كل القنوات",
+    "ecom.segment.marketplace.sol2": "ردود فورية ترفع تقييم البائع",
+    "ecom.segment.marketplace.sol3": "لوحة تحكم مركزية لكل المنصات",
+
+    "ecom.segment.dropshipping.name": "دروبشيبينغ",
+    "ecom.segment.dropshipping.desc": "تجارة بدون مخزون",
+    "ecom.segment.dropshipping.pain1": "استفسارات كثيرة عن مدة التوصيل",
+    "ecom.segment.dropshipping.pain2": "شكاوى تأخير الشحن الدولي",
+    "ecom.segment.dropshipping.pain3": "عملاء يريدون تتبع مستمر",
+    "ecom.segment.dropshipping.sol1": "توقعات واضحة لمدة التوصيل",
+    "ecom.segment.dropshipping.sol2": "تحديثات استباقية للعميل",
+    "ecom.segment.dropshipping.sol3": "ردود مخصصة لكل مرحلة شحن",
+
+    "ecom.segment.subscriptions.name": "الاشتراكات",
+    "ecom.segment.subscriptions.desc": "صناديق شهرية، خدمات متكررة",
+    "ecom.segment.subscriptions.pain1": "استفسارات عن الإلغاء والتعديل",
+    "ecom.segment.subscriptions.pain2": "متابعة التجديدات",
+    "ecom.segment.subscriptions.pain3": "استرجاع المشتركين المنسحبين",
+    "ecom.segment.subscriptions.sol1": "إدارة الاشتراكات بالمحادثة",
+    "ecom.segment.subscriptions.sol2": "تذكيرات ذكية قبل التجديد",
+    "ecom.segment.subscriptions.sol3": "عروض استبقاء للمنسحبين",
+
+    "ecom.feature.tracking.title": "تتبع الطلبات",
+    "ecom.feature.tracking.desc":
+      "العميل يسأل 'وين طلبي؟' وسندس يرد بحالة الشحن والموقع فوراً من نظامك",
+    "ecom.feature.tracking.highlight": "ربط مباشر",
+    "ecom.feature.cart.title": "استرجاع السلات",
+    "ecom.feature.cart.desc":
+      "اتصال أو رسالة تلقائية للعملاء اللي تركوا سلاتهم مع عرض خاص لإتمام الشراء",
+    "ecom.feature.cart.highlight": "+35% استرجاع",
+    "ecom.feature.returns.title": "طلبات الاسترجاع",
+    "ecom.feature.returns.desc":
+      "استقبال طلبات الإرجاع والاستبدال، جمع المعلومات، وفتح التذكرة تلقائياً",
+    "ecom.feature.returns.highlight": "بدون انتظار",
+    "ecom.feature.faq.title": "الأسئلة الشائعة",
+    "ecom.feature.faq.desc":
+      "رد فوري على أسئلة المنتجات، الأسعار، التوصيل، وطرق الدفع",
+    "ecom.feature.faq.highlight": "90% حل فوري",
+    "ecom.feature.reviews.title": "جمع التقييمات",
+    "ecom.feature.reviews.desc":
+      "اتصال متابعة بعد التوصيل لجمع تقييم العميل وتحسين المنتجات",
+    "ecom.feature.reviews.highlight": "تقييمات أكثر",
+    "ecom.feature.upsell.title": "العروض والتوصيات",
+    "ecom.feature.upsell.desc":
+      "اقتراح منتجات مكملة وعروض مخصصة بناءً على سجل الشراء",
+    "ecom.feature.upsell.highlight": "Upselling ذكي",
+
+    "ecom.features.title": "مميزات مصممة",
+    "ecom.features.title2": "للتجارة الإلكترونية",
+
+    "ecom.integration.salla": "سلة",
+    "ecom.integration.zid": "زد",
+    "ecom.integration.aramex": "أرامكس",
+    "ecom.integration.smsa": "سمسا",
+    "ecom.integration.tabby": "تابي",
+    "ecom.integration.tamara": "تمارا",
+    "ecom.integration.type.platform": "منصة",
+    "ecom.integration.type.shipping": "شحن",
+    "ecom.integration.type.payment": "دفع",
+    "ecom.integration.type.communication": "تواصل",
+
+    "ecom.integrations.title": "يتكامل مع",
+    "ecom.integrations.title2": "منصتك المفضلة",
+    "ecom.integrations.subtitle":
+      "ربط مباشر مع أشهر منصات التجارة الإلكترونية وشركات الشحن",
+
+    "ecom.usecases.title": "شاهد سندس",
+    "ecom.usecases.title2": "أثناء العمل",
+    "ecom.usecase.tracking.title": "📍 استفسار عن طلب",
+    "ecom.usecase.tracking.msg1":
+      "أهلاً! متجر تكنو السعودية، كيف أقدر أساعدك؟ 👋",
+    "ecom.usecase.tracking.msg2": "وين طلبي رقم 45892؟",
+    "ecom.usecase.tracking.msg3":
+      "طلبك في الطريق! 🚚\n\nالحالة: خرج للتوصيل\nشركة الشحن: أرامكس\nرقم التتبع: 123456789\nالوصول المتوقع: اليوم قبل الساعة 6 مساءً",
+    "ecom.usecase.tracking.msg4": "تمام شكراً",
+    "ecom.usecase.tracking.msg5":
+      "العفو! راح توصلك رسالة لما يوصل المندوب. تحتاج شي ثاني؟ 😊",
+
+    "ecom.usecase.cart.title": "🛒 استرجاع سلة متروكة",
+    "ecom.usecase.cart.msg1":
+      "مرحبا! معاك متجر بوتيك لمسة 💜\n\nلاحظنا إنك أضفت منتجات لسلتك ولم تكمل الطلب. كل شي تمام؟",
+    "ecom.usecase.cart.msg2": "إيه بس حسيت الشحن غالي",
+    "ecom.usecase.cart.msg3":
+      "أفهمك! عندي خبر حلو 🎁\n\nلأنك عميل مميز، نقدر نعطيك شحن مجاني على هالطلب. تبي أرسلك رابط السلة؟",
+    "ecom.usecase.cart.msg4": "تمام أرسله",
+    "ecom.usecase.cart.msg5":
+      "تم! ✅ أرسلت الرابط على واتساب مع كود الشحن المجاني: FREE2024\n\nصلاحية الكود 24 ساعة. أي سؤال ثاني؟",
+
+    "ecom.testimonials.title": "قصص نجاح",
+    "ecom.testimonials.title2": "المتاجر",
+    "ecom.testimonial1.quote":
+      "كان عندنا 3 موظفين لخدمة العملاء. الآن سندس يرد على 80% من الاستفسارات وفريقنا يركز على الحالات المعقدة فقط.",
+    "ecom.testimonial1.name": "أ. محمد الدوسري",
+    "ecom.testimonial1.role": "مؤسس",
+    "ecom.testimonial1.company": "متجر تكنو السعودية",
+    "ecom.testimonial1.metric": "توفير 18,000 ر.س/شهر",
+    "ecom.testimonial2.quote":
+      "نسبة السلات المتروكة كانت 75%. بعد تفعيل متابعة سندس الآلية، استرجعنا 35% منها. هذا فرق كبير في الإيرادات!",
+    "ecom.testimonial2.name": "أ. نورة القحطاني",
+    "ecom.testimonial2.role": "مديرة التسويق",
+    "ecom.testimonial2.company": "بوتيك لمسة",
+    "ecom.testimonial2.metric": "+120,000 ر.س/شهر",
+    "ecom.testimonial3.quote":
+      "العملاء كانوا يشتكون من بطء الردود. الآن يحصلون على رد في ثوانٍ وتقييمنا في نون صار 4.9 نجوم.",
+    "ecom.testimonial3.name": "أ. فهد العمري",
+    "ecom.testimonial3.role": "صاحب متجر",
+    "ecom.testimonial3.company": "إلكترونيات الخليج",
+    "ecom.testimonial3.metric": "تقييم 4.9⭐",
+
+    "ecom.faq.title": "أسئلة",
+    "ecom.faq.title2": "شائعة",
+    "ecom.faq1.q": "كيف يعرف سندس حالة طلب العميل؟",
+    "ecom.faq1.a":
+      "سندس يتكامل مباشرة مع منصتك (سلة، زد، شوبيفاي، ووكومرس) وشركات الشحن (أرامكس، سمسا، DHL). عندما يسأل العميل عن طلبه، سندس يسحب المعلومات لحظياً ويرد بالحالة والموقع.",
+    "ecom.faq2.q": "كيف يتابع السلات المتروكة؟",
+    "ecom.faq2.a":
+      "عندما يترك عميل سلته، سندس ينتظر فترة محددة (ساعة مثلاً) ثم يتصل أو يرسل واتساب بعرض مخصص. 'لاحظنا إنك ما كملت طلبك، عندنا خصم 10% إذا أكملت الآن!'",
+    "ecom.faq3.q": "هل يقدر يتعامل مع طلبات الإرجاع؟",
+    "ecom.faq3.a":
+      "نعم! سندس يسأل عن سبب الإرجاع، يجمع صور المنتج إذا لزم، ويفتح تذكرة في نظامك. يمكنه أيضاً تقديم بدائل مثل الاستبدال أو رصيد متجر قبل الموافقة على الإرجاع.",
+    "ecom.faq4.q": "هل يتكامل مع منصتي الحالية؟",
+    "ecom.faq4.a":
+      "نعم، سندس يتكامل مع: سلة، زد، شوبيفاي، ووكومرس، ماجنتو، وأي منصة عبر API. كذلك يتكامل مع شركات الشحن، بوابات الدفع، وأنظمة CRM.",
+    "ecom.faq5.q": "ماذا عن الاستفسارات المعقدة؟",
+    "ecom.faq5.a":
+      "سندس ذكي في تحديد الحالات اللي تحتاج تدخل بشري (شكوى حادة، طلب تعويض كبير). يحوّل المكالمة للموظف مع ملخص كامل للمحادثة والسجل الشرائي للعميل.",
+    "ecom.faq6.q": "كم يستغرق الربط مع متجري؟",
+    "ecom.faq6.a":
+      "الربط الأساسي مع سلة وزد يتم خلال ساعات. المنصات الأخرى تحتاج 1-3 أيام. نوفر دعم فني كامل خلال عملية الربط.",
+
+    "ecom.cta.title1": "جاهز تسترجع 35%",
+    "ecom.cta.title2": "من سلاتك المتروكة؟",
+    "ecom.cta.subtitle":
+      "انضم لأكثر من 200 متجر إلكتروني يستخدمون سندس لزيادة مبيعاتهم",
+    "ecom.cta.button": "احجز عرضك التجريبي",
+    "ecom.cta.badge1": "يتكامل مع سلة وزد",
+    "ecom.cta.badge2": "ربط شركات الشحن",
+    "ecom.cta.badge3": "دعم تابي وتمارا",
+    // ─── Hero (AR) ─────────────────────────────────────────────────────
+    "hero.chip.tag": "جديد",
+    "hero.chip.text": "نظام V3 · 33+ خطوة أتمتة · يعمل الآن في الإنتاج",
+    "hero.title.line1": "بنية تحتية",
+    "hero.title.line2": "للذكاء الاصطناعي",
+    "hero.title.line3": "بدون توقف",
+    "hero.subtitle":
+      "لا نبيع برمجيات جاهزة. نهندس أنظمة ذكاء اصطناعي مخصصة تُنجز عمليات كاملة — مكالمات، بيانات، قرارات، متابعة — آلياً ودقيقاً على مدار الساعة.",
+    "hero.cta.primary": "ابدأ مشروعك",
+    "hero.cta.secondary": "تصفح البنية التقنية",
+    "hero.stat1.value": "+50",
+    "hero.stat1.label": "مشروع تم تسليمه",
+    "hero.stat2.value": "90%",
+    "hero.stat2.label": "نسبة الأتمتة",
+    "hero.stat3.value": "24/7",
+    "hero.stat3.label": "وقت التشغيل",
+    "hero.stat4.value": "-70%",
+    "hero.stat4.label": "تخفيض التكاليف",
+
+    // ─── Services (AR) ─────────────────────────────────────────────────
+    "services.tag": "ما نبنيه",
+    "services.title.line1": "حلول",
+    "services.title.line2": "مُهندَسة",
+    "services.title.line3": "من الصفر",
+    "services.desc":
+      "لا قوالب. لا تسويات. كل نظام نبنيه يُصمَّم لعملياتك تحديداً — بعد فهم عميق للسياق التجاري والتقني.",
+    "services.item1.title": "وكلاء مكالمات صوتية بالعربية السعودية",
+    "services.item1.desc":
+      "ذكاء اصطناعي يرد، يحجز، يتابع — باللهجة السعودية الطبيعية. لا ينتظر، لا ينام، لا يخطئ.",
+    "services.item2.title": "أتمتة العمليات من البداية للنهاية",
+    "services.item2.desc":
+      "نربط جميع أدواتك في pipeline واحد متكامل — يعمل 24/7 بدون إشراف أو تدخل.",
+    "services.item3.title": "روبوتات واتساب وقنوات التواصل",
+    "services.item3.desc":
+      "تجربة عميل موحَّدة عبر واتساب وإنستغرام وماسنجر — ردود فورية وسياقية.",
+    "services.item4.title": "لوحات بيانات حية وتقارير آلية",
+    "services.item4.desc":
+      "قرارات مبنية على أرقام حقيقية في الوقت الفعلي — لا تقارير متأخرة، لا بيانات مفقودة.",
+    "services.item5.title": "تكامل API مع أنظمتك الحالية",
+    "services.item5.desc":
+      "نوصّل الذكاء الاصطناعي بـ CRM وERP وأي نظام مخصص — بدون هجرة، بدون توقف.",
+
+    // ─── Proof (AR) ───────────────────────────────────────────────────
+    "proof.tag": "النتائج الفعلية",
+    "proof.title.line1": "أرقام",
+    "proof.title.line2": "لا تحتاج",
+    "proof.title.line3": "تعليقاً",
+    "proof.desc":
+      "هذه نتائج حقيقية من مشاريع أنجزناها. لا توقعات. لا تقديرات. أرقام قابلة للتحقق.",
+    "proof.stat1.label": "متوسط توفير التكاليف",
+    "proof.stat1.value": "70%",
+    "proof.stat1.desc": "متوسط انخفاض تكاليف التشغيل خلال 90 يوماً.",
+    "proof.stat1.strong": "تكلفة موظف واحد → نظام يخدم مئات العملاء.",
+    "proof.stat2.label": "المهام المؤتمتة",
+    "proof.stat2.value": "90%",
+    "proof.stat2.desc": "من المهام التشغيلية المتكررة تُنجز آلياً.",
+    "proof.stat2.strong": "ردود، جدولة، تقارير، متابعة — كلها تعمل وحدها.",
+    "proof.stat3.label": "تحسين الاستجابة",
+    "proof.stat3.value": "3×",
+    "proof.stat3.desc": "أسرع في الاستجابة مقارنة بالفرق البشرية.",
+    "proof.stat3.strong": "كل استفسار يُعالَج في ثوانٍ.",
+    "proof.story1.tag": "الرعاية الصحية · الرياض",
+    "proof.story1.value": "-73%",
+    "proof.story1.title": "تكاليف الاستقبال والحجز",
+    "proof.story1.desc":
+      "وكيل مكالمات يرد على المرضى ويحجز المواعيد ويرسل التذكيرات.",
+    "proof.story1.quote":
+      '"النظام يرد أسرع مني ولا يتعب. المرضى ما يعرفوا الفرق."',
+    "proof.story1.who": "مدير العيادة",
+    "proof.story2.tag": "العقارات · جدة",
+    "proof.story2.value": "×4",
+    "proof.story2.title": "العملاء المتابَعون أسبوعياً",
+    "proof.story2.desc": "آلية المتابعة — من أول اتصال حتى إغلاق الصفقة.",
+    "proof.story2.quote": '"قبل كنا نضيع 60% من وقتنا في التنسيق. الحين: صفر."',
+    "proof.story2.who": "مدير المبيعات",
+    "proof.story3.tag": "العمليات · الدمام",
+    "proof.story3.value": "33+",
+    "proof.story3.title": "خطوة أتمتة في نظام واحد",
+    "proof.story3.desc":
+      "من استقبال المكالمة حتى المتابعة — كل شيء آلي بدون لمسة بشرية.",
+    "proof.story3.quote": '"أول مرة أشعر إن شركتي تشتغل وأنا نايم حرفياً."',
+    "proof.story3.who": "المؤسس",
+
+    // ─── Workflow (AR) ────────────────────────────────────────────────
+    "workflow.tag": "نظام حقيقي · إنتاج فعلي",
+    "workflow.title.line1": "البنية الداخلية",
+    "workflow.title.line2": "لنظام",
+    "workflow.title.line3": "يعمل الآن",
+    "workflow.desc":
+      "هذا ليس demo. هذا workflow فعلي من أحد عملائنا — 33+ خطوة، صفر تدخل بشري.",
+    "workflow.terminal.title": "sondos.ai / workflow-v3 / production",
+    "workflow.terminal.live": "مباشر · يعمل الآن",
+    "workflow.step1.name": "انتهاء المكالمة",
+    "workflow.step1.type": "trigger · Vapi Voice Platform",
+    "workflow.step1.status": "✓ نشط",
+    "workflow.step2.name": "إدراج صف → Sheets",
+    "workflow.step2.type": "action · تسجيل بيانات المكالمة",
+    "workflow.step2.status": "✓ نشط",
+    "workflow.step3.name": "البحث عن صفوف → Sheets",
+    "workflow.step3.type": "action · البحث عن سجل العميل",
+    "workflow.step3.status": "✓ نشط",
+    "workflow.step4.name": "تفرع · منطق شرطي",
+    "workflow.step4.type": "router · تحليل الحالة وتوجيه المسار",
+    "workflow.step4.status": "⟳ توجيه",
+    "workflow.branch": "تفرع مسار",
+    "workflow.pathA": "// المسار أ · عميل جديد",
+    "workflow.pathA.action1": "إرسال رسالة → Slack",
+    "workflow.pathA.action2": "طلب HTTP → API",
+    "workflow.pathA.action3": "تأخير حتى",
+    "workflow.pathA.action4": "إجراء مكالمة → Vapi",
+    "workflow.pathB": "// المسار ب · عميل عائد",
+    "workflow.pathB.action1": "تفرع → تدقيق فرعي",
+    "workflow.pathB.action2": "إرسال رسالة → Slack",
+    "workflow.pathB.action3": "طلب HTTP",
+    "workflow.pathB.action4": "تأخير ذكي",
+    "workflow.stat1.value": "33+",
+    "workflow.stat1.label": "خطوة أتمتة",
+    "workflow.stat2.value": "0",
+    "workflow.stat2.label": "لمسة بشرية",
+    "workflow.stat3.value": "<2ث",
+    "workflow.stat3.label": "وقت الاستجابة",
+    "workflow.stat4.value": "99.9%",
+    "workflow.stat4.label": "وقت التشغيل",
+
+    // ─── Stack (AR) ────────────────────────────────────────────────────
+    "stack.tag": "البنية التقنية",
+    "stack.title.line1": "نختار الأفضل",
+    "stack.title.line2": "لكل مهمة",
+    "stack.desc":
+      "لا نلتزم بأداة واحدة. نختار النموذج والمنصة الأنسب لكل حالة استخدام.",
+    "stack.card1.cat": "نماذج الذكاء الاصطناعي",
+    "stack.card1.title": "أذكى نماذج العالم",
+    "stack.card1.desc": "نختار بين النماذج بحسب السرعة والدقة والتكلفة.",
+    "stack.card2.cat": "الأتمتة",
+    "stack.card2.title": "أتمتة بلا سقف",
+    "stack.card2.desc":
+      "نبني workflows تربط عشرات الأدوات — قابلة للتوسع، مستقرة تحت الضغط.",
+    "stack.card3.cat": "الصوتيات",
+    "stack.card3.title": "صوت لا يُعرَف من البشر",
+    "stack.card3.desc":
+      "مكالمات عربية بجودة بشرية حقيقية — تفهم اللهجة السعودية.",
+
+    // ─── Testimonials (AR) ────────────────────────────────────────────
+    "testimonials.tag": "آراء العملاء",
+    "testimonials.title.line1": "ما يقوله",
+    "testimonials.title.line2": "من جرّبنا",
+    "testimonials.sectors": "قطاعات_نخدمها",
+    "testimonial1.quote":
+      "أول شركة ذكاء اصطناعي تقدر تثبت لي الأرقام قبل ما أوقّع. وبعد الإطلاق جاءت الأرقام أحسن من المتوقع.",
+    "testimonial1.name": "رنا الدوسري",
+    "testimonial1.role": "مدير تنفيذي · شركة تجزئة",
+    "testimonial1.badge": "تجزئة",
+    "testimonial2.quote":
+      "الفريق يفهم الأعمال مو بس التقنية. جلسة واحدة كافية يفهموا كيف نشتغل ويبنوا النظام الصح.",
+    "testimonial2.name": "فيصل الشمري",
+    "testimonial2.role": "مؤسس · شركة عقارية",
+    "testimonial2.badge": "عقارات",
+    "testimonial3.quote":
+      "وفّرنا أكثر من 40 ساعة أسبوعياً من العمل اليدوي. الفريق صار يركّز على ما يهم فعلاً.",
+    "testimonial3.name": "عمر الحربي",
+    "testimonial3.role": "مدير عمليات · شركة لوجستية",
+    "testimonial3.badge": "لوجستيات",
+    "testimonial4.quote":
+      "النظام يرد على المرضى بلهجة سعودية طبيعية. 73% انخفاض في تكاليف الاستقبال.",
+    "testimonial4.name": "خالد المطيري",
+    "testimonial4.role": "مدير عمليات · منشأة صحية",
+    "testimonial4.badge": "الرعاية الصحية",
+
+    // ─── Sectors (AR) ─────────────────────────────────────────────────
+    "sector.healthcare": "الرعاية الصحية",
+    "sector.realestate": "العقارات",
+    "sector.retail": "التجزئة",
+    "sector.logistics": "اللوجستيات",
+    "sector.education": "التعليم",
+    "sector.banking": "البنوك",
+    "sector.hospitality": "الضيافة",
+    "sector.government": "الحكومة",
+
+    // ─── CTA (AR) ─────────────────────────────────────────────────────
+    "cta.label": "ابدأ اليوم",
+    "cta.title.line1": "عملك يستحق",
+    "cta.title.line2": "أكثر من ذلك",
+    "cta.subtitle": "نحلل عملياتك و نبني roadmap بالتفصيل الهندسي",
+    "cta.button1": "ابدأ مشروعك",
+    "agents.phone_required": "الرجاء إدخال رقم الهاتف",
+    "agents.phone_invalid": "رقم غير صحيح — مثال: +966 5X XXX XXXX",
+    "agents.phone_label": "رقم الهاتف",
+    "agents.phone_placeholder": "+966 5X XXX XXXX",
+  },
+};
+
+const lists: Record<Language, Record<string, string[]>> = {
+  en: {
+    "demo.industries": [
+      "Healthcare",
+      "Call Centers",
+      "Real Estate",
+      "Technology",
+      "Government",
+      "Insurance",
+      "E-Commerce",
+      "Education",
+      "Tourism",
+      "Transportation & Logistics",
+    ],
+    "re.pricing.starter.features": [
+      "24/7 auto-reply to all inquiries",
+      "Instant reception without waiting",
+      "Transfer to agent when needed",
+      "2 property types",
+      "1 sales scenario",
+      "Record customer data in CRM",
+      "Appointment confirmation via WhatsApp + SMS",
+      "24-hour reminder",
+      "Web Widget for website",
+      "1,000 AI minutes/month",
+      "500 AI messages",
+    ],
+    "re.pricing.pro.features": [
+      "All Starter features",
+      "5 property types",
+      "5 sales scenarios",
+      "Double visit reminder",
+      "Post-visit follow-up",
+      "Customer satisfaction survey",
+      "Voice reminder campaigns",
+      "3,000 AI minutes/month",
+      "2,000 AI messages",
+      "3 simultaneous calls",
+    ],
+    "re.pricing.enterprise.features": [
+      "All Professional features",
+      "Unlimited property types",
+      "Unlimited sales scenarios",
+      "Voice marketing campaigns",
+      "Tele-Sales",
+      "Upselling for premium units",
+      "Advanced conversion reports",
+      "15,000 AI minutes/month",
+      "7,000 AI messages",
+      "10 simultaneous calls",
+    ],
+  },
+  ar: {
+    "demo.industries": [
+      "القطاع الصحي",
+      "مراكز الاتصال",
+      "العقارات",
+      "التكنولوجيا",
+      "الحكومة",
+      "التأمين",
+      "التجارة الإلكترونية",
+      "قطاع التعليم",
+      "القطاع السياحي",
+      "قطاع النقل واللوجستيك",
+    ],
+    "re.pricing.starter.features": [
+      "رد آلي 24/7 على جميع الاستفسارات",
+      "استقبال فوري بدون انتظار",
+      "تحويل للوسيط عند الحاجة",
+      "2 أنواع عقارات",
+      "سيناريو بيع واحد",
+      "تسجيل بيانات العملاء في CRM",
+      "تأكيد زيارة عبر واتساب + SMS",
+      "تذكير قبل 24 ساعة",
+      "Web Widget للموقع",
+      "1,000 دقيقة AI شهريًا",
+      "500 رسالة AI",
+    ],
+    "re.pricing.pro.features": [
+      "كل مزايا Starter",
+      "5 أنواع عقارات",
+      "5 سيناريوهات بيع",
+      "تذكير مزدوج للزيارة",
+      "متابعة بعد الزيارة",
+      "استبيان رضا العملاء",
+      "حملات تذكير صوتية",
+      "3,000 دقيقة AI شهريًا",
+      "2,000 رسالة AI",
+      "3 مكالمات متزامنة",
+    ],
+    "re.pricing.enterprise.features": [
+      "كل مزايا Professional",
+      "أنواع عقارات غير محدودة",
+      "سيناريوهات بيع غير محدودة",
+      "حملات تسويقية صوتية",
+      "Tele-Sales",
+      "Upselling للوحدات الأعلى",
+      "تقارير تحويل متقدمة للإدارة",
+      "15,000 دقيقة AI شهريًا",
+      "7,000 رسالة AI",
+      "10 مكالمات متزامنة",
+    ],
   },
 };
 
@@ -690,7 +4915,17 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.setAttribute("lang", newLang);
   };
 
-  const t = (key: string): string => translations[lang][key] || key;
+  const t = (key: string, vars?: Record<string, string | number>): string => {
+    let value = translations[lang][key] ?? key;
+    if (vars) {
+      Object.entries(vars).forEach(([k, v]) => {
+        value = value.replace(`{${k}}`, String(v));
+      });
+    }
+    return value;
+  };
+
+  const tList = (key: string): string[] => lists[lang][key] ?? [];
 
   useEffect(() => {
     document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
@@ -698,7 +4933,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, [lang]);
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
+    <LanguageContext.Provider value={{ lang, setLang, t, tList }}>
       {children}
     </LanguageContext.Provider>
   );

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 import "../index.css";
 
 const SondosGovernance = () => {
+  const { t, lang } = useLanguage();
   const [activeSegment, setActiveSegment] = useState(0);
   const [activeFAQ, setActiveFAQ] = useState(null);
   const [statsVisible, setStatsVisible] = useState(false);
@@ -37,140 +39,156 @@ const SondosGovernance = () => {
   const segments = [
     {
       id: "government",
-      name: "الجهات الحكومية",
+      name: t("gov.segment.government.name"),
       icon: "🏛️",
-      description: "وزارات، هيئات، مؤسسات عامة",
+      description: t("gov.segment.government.desc"),
       painPoints: [
-        "حجم ضخم من استفسارات المواطنين",
-        "ضغط على مراكز الاتصال الحكومية",
-        "تفاوت جودة الخدمة بين الموظفين",
+        t("gov.segment.government.pain1"),
+        t("gov.segment.government.pain2"),
+        t("gov.segment.government.pain3"),
       ],
       solutions: [
-        "أتمتة 80% من الاستفسارات الروتينية",
-        "خدمة 24/7 بدون انتظار",
-        "جودة موحدة ومعلومات دقيقة دائماً",
+        t("gov.segment.government.sol1"),
+        t("gov.segment.government.sol2"),
+        t("gov.segment.government.sol3"),
       ],
       stats: { automation: "80%", availability: "24/7", accuracy: "99.5%" },
       useCases: [
-        "الاستعلام عن الخدمات",
-        "حجز المواعيد",
-        "متابعة المعاملات",
-        "الشكاوى والبلاغات",
+        t("gov.segment.government.use1"),
+        t("gov.segment.government.use2"),
+        t("gov.segment.government.use3"),
+        t("gov.segment.government.use4"),
       ],
     },
     {
       id: "municipalities",
-      name: "البلديات والأمانات",
+      name: t("gov.segment.municipalities.name"),
       icon: "🏙️",
-      description: "خدمات المدن والمناطق",
+      description: t("gov.segment.municipalities.desc"),
       painPoints: [
-        "بلاغات صيانة ونظافة كثيرة",
-        "استفسارات رخص البناء والمحلات",
-        "شكاوى المواطنين تحتاج متابعة",
+        t("gov.segment.municipalities.pain1"),
+        t("gov.segment.municipalities.pain2"),
+        t("gov.segment.municipalities.pain3"),
       ],
       solutions: [
-        "استقبال البلاغات وتصنيفها تلقائياً",
-        "معلومات فورية عن الإجراءات والمتطلبات",
-        "متابعة حالة الشكاوى والبلاغات",
+        t("gov.segment.municipalities.sol1"),
+        t("gov.segment.municipalities.sol2"),
+        t("gov.segment.municipalities.sol3"),
       ],
-      stats: { reports: "فوري", tracking: "تلقائي", resolution: "+40%" },
+      stats: {
+        reports: t("gov.stat.instant"),
+        tracking: t("gov.stat.automatic"),
+        resolution: "+40%",
+      },
       useCases: [
-        "بلاغات النظافة",
-        "رخص البناء",
-        "المخالفات",
-        "الاستعلام عن الخدمات",
+        t("gov.segment.municipalities.use1"),
+        t("gov.segment.municipalities.use2"),
+        t("gov.segment.municipalities.use3"),
+        t("gov.segment.municipalities.use4"),
       ],
     },
     {
       id: "healthcare",
-      name: "القطاع الصحي الحكومي",
+      name: t("gov.segment.healthcare.name"),
       icon: "🏥",
-      description: "مستشفيات ومراكز صحية حكومية",
+      description: t("gov.segment.healthcare.desc"),
       painPoints: [
-        "حجز المواعيد يستهلك الموظفين",
-        "استفسارات عن الخدمات والتغطية",
-        "متابعة نتائج الفحوصات",
+        t("gov.segment.healthcare.pain1"),
+        t("gov.segment.healthcare.pain2"),
+        t("gov.segment.healthcare.pain3"),
       ],
       solutions: [
-        "حجز وإلغاء المواعيد تلقائياً",
-        "معلومات شاملة عن الخدمات المتاحة",
-        "إشعارات استباقية للمرضى",
+        t("gov.segment.healthcare.sol1"),
+        t("gov.segment.healthcare.sol2"),
+        t("gov.segment.healthcare.sol3"),
       ],
-      stats: { booking: "آلي", inquiries: "-70%", noShow: "-35%" },
+      stats: {
+        booking: t("gov.stat.automatic"),
+        inquiries: "-70%",
+        noShow: "-35%",
+      },
       useCases: [
-        "حجز المواعيد",
-        "نتائج الفحوصات",
-        "الاستعلام عن الأطباء",
-        "التأمين الصحي",
+        t("gov.segment.healthcare.use1"),
+        t("gov.segment.healthcare.use2"),
+        t("gov.segment.healthcare.use3"),
+        t("gov.segment.healthcare.use4"),
       ],
     },
     {
       id: "education",
-      name: "قطاع التعليم",
+      name: t("gov.segment.education.name"),
       icon: "🎓",
-      description: "جامعات، مدارس، تدريب",
+      description: t("gov.segment.education.desc"),
       painPoints: [
-        "استفسارات القبول والتسجيل",
-        "أسئلة الطلاب عن الإجراءات",
-        "دعم أولياء الأمور",
+        t("gov.segment.education.pain1"),
+        t("gov.segment.education.pain2"),
+        t("gov.segment.education.pain3"),
       ],
       solutions: [
-        "إجابات فورية عن شروط القبول",
-        "إرشاد الطلاب للإجراءات الصحيحة",
-        "قناة تواصل موحدة للأهالي",
+        t("gov.segment.education.sol1"),
+        t("gov.segment.education.sol2"),
+        t("gov.segment.education.sol3"),
       ],
       stats: { admissions: "+50%", support: "24/7", satisfaction: "92%" },
       useCases: [
-        "القبول والتسجيل",
-        "الجداول الدراسية",
-        "النتائج",
-        "الرسوم والمدفوعات",
+        t("gov.segment.education.use1"),
+        t("gov.segment.education.use2"),
+        t("gov.segment.education.use3"),
+        t("gov.segment.education.use4"),
       ],
     },
     {
       id: "compliance",
-      name: "الامتثال والرقابة",
+      name: t("gov.segment.compliance.name"),
       icon: "📋",
-      description: "هيئات رقابية وتنظيمية",
+      description: t("gov.segment.compliance.desc"),
       painPoints: [
-        "استفسارات عن الأنظمة واللوائح",
-        "طلبات التراخيص والتصاريح",
-        "بلاغات المخالفات",
+        t("gov.segment.compliance.pain1"),
+        t("gov.segment.compliance.pain2"),
+        t("gov.segment.compliance.pain3"),
       ],
       solutions: [
-        "شرح مبسط للأنظمة والمتطلبات",
-        "إرشاد خطوة بخطوة للتراخيص",
-        "استقبال وتصنيف البلاغات",
+        t("gov.segment.compliance.sol1"),
+        t("gov.segment.compliance.sol2"),
+        t("gov.segment.compliance.sol3"),
       ],
-      stats: { clarity: "100%", compliance: "+45%", reports: "فوري" },
+      stats: {
+        clarity: "100%",
+        compliance: "+45%",
+        reports: t("gov.stat.instant"),
+      },
       useCases: [
-        "الأنظمة واللوائح",
-        "التراخيص",
-        "البلاغات",
-        "الاستعلام عن المخالفات",
+        t("gov.segment.compliance.use1"),
+        t("gov.segment.compliance.use2"),
+        t("gov.segment.compliance.use3"),
+        t("gov.segment.compliance.use4"),
       ],
     },
     {
       id: "publicservices",
-      name: "الخدمات العامة",
+      name: t("gov.segment.publicservices.name"),
       icon: "🛎️",
-      description: "كهرباء، مياه، بريد",
+      description: t("gov.segment.publicservices.desc"),
       painPoints: [
-        "فواتير واستهلاك وشكاوى",
-        "طلبات التوصيل والقطع",
-        "بلاغات الأعطال العاجلة",
+        t("gov.segment.publicservices.pain1"),
+        t("gov.segment.publicservices.pain2"),
+        t("gov.segment.publicservices.pain3"),
       ],
       solutions: [
-        "استعلام فوري عن الفواتير والاستهلاك",
-        "طلبات الخدمة بالمحادثة",
-        "بلاغات الأعطال 24/7 مع تتبع",
+        t("gov.segment.publicservices.sol1"),
+        t("gov.segment.publicservices.sol2"),
+        t("gov.segment.publicservices.sol3"),
       ],
-      stats: { billing: "فوري", requests: "آلي", outages: "24/7" },
+      stats: {
+        billing: t("gov.stat.instant"),
+        requests: t("gov.stat.automatic"),
+        outages: "24/7",
+      },
       useCases: [
-        "الفواتير",
-        "طلبات الخدمة",
-        "بلاغات الأعطال",
-        "تغيير البيانات",
+        t("gov.segment.publicservices.use1"),
+        t("gov.segment.publicservices.use2"),
+        t("gov.segment.publicservices.use3"),
+        t("gov.segment.publicservices.use4"),
       ],
     },
   ];
@@ -178,211 +196,194 @@ const SondosGovernance = () => {
   const features = [
     {
       icon: "🔐",
-      title: "أمان وخصوصية حكومية",
-      description:
-        "متوافق مع متطلبات الأمن السيبراني الوطني وحماية البيانات الشخصية (PDPL)",
-      highlight: "معتمد",
+      title: t("gov.feature.security.title"),
+      description: t("gov.feature.security.desc"),
+      highlight: t("gov.feature.security.highlight"),
     },
     {
       icon: "🌐",
-      title: "متعدد القنوات",
-      description: "هاتف، واتساب، موقع، تطبيق - قناة واحدة موحدة لخدمة المواطن",
-      highlight: "Omnichannel",
+      title: t("gov.feature.omnichannel.title"),
+      description: t("gov.feature.omnichannel.desc"),
+      highlight: t("gov.feature.omnichannel.highlight"),
     },
     {
       icon: "📊",
-      title: "لوحة تحكم حكومية",
-      description:
-        "تقارير أداء، رضا المستفيدين، أوقات الانتظار، وتحليلات متقدمة",
-      highlight: "Dashboard",
+      title: t("gov.feature.dashboard.title"),
+      description: t("gov.feature.dashboard.desc"),
+      highlight: t("gov.feature.dashboard.highlight"),
     },
     {
       icon: "🎯",
-      title: "تصنيف ذكي للطلبات",
-      description: "تحديد نوع الطلب، الأولوية، والقسم المختص تلقائياً",
-      highlight: "Smart Routing",
+      title: t("gov.feature.routing.title"),
+      description: t("gov.feature.routing.desc"),
+      highlight: t("gov.feature.routing.highlight"),
     },
     {
       icon: "📱",
-      title: "تكامل مع الأنظمة الحكومية",
-      description: "ربط مع أبشر، نفاذ، توكلنا، والأنظمة الداخلية عبر API آمن",
-      highlight: "Integration",
+      title: t("gov.feature.integration.title"),
+      description: t("gov.feature.integration.desc"),
+      highlight: t("gov.feature.integration.highlight"),
     },
     {
       icon: "♿",
-      title: "شامل وسهل الوصول",
-      description: "دعم ذوي الإعاقة، كبار السن، ومتعدد اللهجات واللغات",
-      highlight: "Accessibility",
+      title: t("gov.feature.accessibility.title"),
+      description: t("gov.feature.accessibility.desc"),
+      highlight: t("gov.feature.accessibility.highlight"),
     },
   ];
 
   const testimonials = [
     {
-      quote:
-        "كنا نستقبل 3000 مكالمة يومياً عن حالة المعاملات. الآن سندس يجيب 85% منها فوراً. المواطن يحصل على المعلومة بدون انتظار.",
-      name: "أ. محمد العتيبي",
-      role: "مدير خدمات المستفيدين",
-      company: "جهة حكومية كبرى",
+      quote: t("gov.testimonial1.quote"),
+      name: t("gov.testimonial1.name"),
+      role: t("gov.testimonial1.role"),
+      company: t("gov.testimonial1.company"),
       image: "👨‍💼",
-      metric: "85% أتمتة",
+      metric: t("gov.testimonial1.metric"),
     },
     {
-      quote:
-        "بلاغات النظافة والصيانة كانت تضيع أحياناً. الآن سندس يستقبلها، يصنفها، ويرسلها للفريق المختص مع إحداثيات الموقع.",
-      name: "م. سارة الغامدي",
-      role: "مديرة مركز البلاغات",
-      company: "أمانة منطقة الرياض",
+      quote: t("gov.testimonial2.quote"),
+      name: t("gov.testimonial2.name"),
+      role: t("gov.testimonial2.role"),
+      company: t("gov.testimonial2.company"),
       image: "👩‍💼",
-      metric: "100% تتبع البلاغات",
+      metric: t("gov.testimonial2.metric"),
     },
     {
-      quote:
-        "رضا المراجعين ارتفع من 3.2 إلى 4.6 نجوم. السبب الرئيسي: لا انتظار + معلومات دقيقة + خدمة 24/7.",
-      name: "د. فهد المالكي",
-      role: "المشرف العام",
-      company: "مستشفى حكومي",
+      quote: t("gov.testimonial3.quote"),
+      name: t("gov.testimonial3.name"),
+      role: t("gov.testimonial3.role"),
+      company: t("gov.testimonial3.company"),
       image: "👨‍⚕️",
-      metric: "4.6⭐ رضا المستفيدين",
+      metric: t("gov.testimonial3.metric"),
     },
   ];
 
   const faqs = [
-    {
-      q: "هل سندس متوافق مع متطلبات الأمن السيبراني الحكومي؟",
-      a: "نعم، سندس مصمم وفق أعلى معايير الأمان: شهادة الهيئة الوطنية للأمن السيبراني، تشفير AES-256، خوادم داخل المملكة، تحقق متعدد الطبقات، وسجلات مراجعة كاملة. متوافق مع PDPL ومتطلبات الحوكمة الرقمية.",
-    },
-    {
-      q: "كيف يتكامل مع الأنظمة الحكومية الموجودة؟",
-      a: "سندس يتكامل عبر API آمن مع: نفاذ للتحقق من الهوية، أبشر للخدمات، توكلنا، ومركز التكامل الحكومي. كذلك يتكامل مع أنظمة إدارة المعاملات (DMS)، وأنظمة تخطيط الموارد (ERP) الحكومية.",
-    },
-    {
-      q: "هل يستطيع تنفيذ معاملات فعلية؟",
-      a: "نعم، بعد التحقق من هوية المستفيد عبر نفاذ أو OTP، يمكن لسندس: حجز المواعيد، تحديث البيانات، تقديم الطلبات، ومتابعة المعاملات. كل الإجراءات تُسجَّل وتُراجَع.",
-    },
-    {
-      q: "كيف يتعامل مع الشكاوى والبلاغات؟",
-      a: "سندس يستقبل الشكوى، يجمع التفاصيل (الموقع، الصور، الوصف)، يصنفها حسب النوع والأولوية، يفتح تذكرة في النظام، ويعطي المستفيد رقم متابعة. يمكن للمستفيد الاستعلام عن حالة بلاغه لاحقاً.",
-    },
-    {
-      q: "هل يدعم اللغة العربية واللهجات؟",
-      a: "نعم، سندس يتحدث العربية الفصحى واللهجات السعودية بطلاقة (نجدية، حجازية، شرقية). كذلك يدعم الإنجليزية، الأوردو، والهندية لخدمة جميع المقيمين.",
-    },
-    {
-      q: "ما مدة التفعيل للجهات الحكومية؟",
-      a: "التفعيل الأساسي (استفسارات عامة) خلال 2-3 أسابيع. التكاملات مع الأنظمة الحكومية تحتاج 4-8 أسابيع. نوفر فريق تنفيذ مخصص للجهات الحكومية مع دعم فني على مدار الساعة.",
-    },
+    { q: t("gov.faq1.q"), a: t("gov.faq1.a") },
+    { q: t("gov.faq2.q"), a: t("gov.faq2.a") },
+    { q: t("gov.faq3.q"), a: t("gov.faq3.a") },
+    { q: t("gov.faq4.q"), a: t("gov.faq4.a") },
+    { q: t("gov.faq5.q"), a: t("gov.faq5.a") },
+    { q: t("gov.faq6.q"), a: t("gov.faq6.a") },
   ];
 
   const stats = [
-    { value: "5M+", label: "معاملة حكومية شهرياً", icon: "📋" },
-    { value: "20+", label: "جهة حكومية", icon: "🏛️" },
-    { value: "85%", label: "نسبة الأتمتة", icon: "🤖" },
-    { value: "4.6⭐", label: "رضا المستفيدين", icon: "😊" },
+    { value: "5M+", label: t("gov.stat.transactions"), icon: "📋" },
+    { value: "20+", label: t("gov.stat.entities"), icon: "🏛️" },
+    { value: "85%", label: t("gov.stat.automation"), icon: "🤖" },
+    { value: "4.6⭐", label: t("gov.stat.satisfaction"), icon: "😊" },
   ];
 
   const governmentIntegrations = [
-    { name: "نفاذ", icon: "🔐", type: "هوية" },
-    { name: "أبشر", icon: "🆔", type: "خدمات" },
-    { name: "توكلنا", icon: "📱", type: "تطبيق" },
-    { name: "مركز التكامل", icon: "🔗", type: "حكومي" },
-    { name: "ناجز", icon: "⚖️", type: "عدل" },
-    { name: "إيجار", icon: "🏠", type: "إسكان" },
-    { name: "قوى", icon: "👷", type: "عمل" },
-    { name: "منصة اعتماد", icon: "💰", type: "مالية" },
+    {
+      name: t("gov.integration.nafath"),
+      icon: "🔐",
+      type: t("gov.integration.type.identity"),
+    },
+    {
+      name: t("gov.integration.absher"),
+      icon: "🆔",
+      type: t("gov.integration.type.services"),
+    },
+    {
+      name: t("gov.integration.tawakkalna"),
+      icon: "📱",
+      type: t("gov.integration.type.app"),
+    },
+    {
+      name: t("gov.integration.integration_center"),
+      icon: "🔗",
+      type: t("gov.integration.type.gov"),
+    },
+    {
+      name: t("gov.integration.najiz"),
+      icon: "⚖️",
+      type: t("gov.integration.type.justice"),
+    },
+    {
+      name: t("gov.integration.ejar"),
+      icon: "🏠",
+      type: t("gov.integration.type.housing"),
+    },
+    {
+      name: t("gov.integration.quwwa"),
+      icon: "👷",
+      type: t("gov.integration.type.labor"),
+    },
+    {
+      name: t("gov.integration.etimad"),
+      icon: "💰",
+      type: t("gov.integration.type.finance"),
+    },
   ];
 
   const citizenJourney = [
     {
       step: 1,
-      title: "التواصل",
+      title: t("gov.journey.step1.title"),
       icon: "📞",
-      description: "المواطن يتصل أو يراسل عبر أي قناة",
-      traditional: "انتظار 5-15 دقيقة",
-      withSondos: "رد فوري < 3 ثوانٍ",
+      description: t("gov.journey.step1.desc"),
+      traditional: t("gov.journey.step1.traditional"),
+      withSondos: t("gov.journey.step1.sondos"),
     },
     {
       step: 2,
-      title: "التحقق",
+      title: t("gov.journey.step2.title"),
       icon: "🔐",
-      description: "التحقق من الهوية عبر نفاذ أو OTP",
-      traditional: "سؤال وجواب طويل",
-      withSondos: "تحقق آلي آمن",
+      description: t("gov.journey.step2.desc"),
+      traditional: t("gov.journey.step2.traditional"),
+      withSondos: t("gov.journey.step2.sondos"),
     },
     {
       step: 3,
-      title: "فهم الطلب",
+      title: t("gov.journey.step3.title"),
       icon: "🎯",
-      description: "تحديد نوع الخدمة المطلوبة",
-      traditional: "تحويل بين أقسام",
-      withSondos: "فهم فوري وتوجيه صحيح",
+      description: t("gov.journey.step3.desc"),
+      traditional: t("gov.journey.step3.traditional"),
+      withSondos: t("gov.journey.step3.sondos"),
     },
     {
       step: 4,
-      title: "الخدمة",
+      title: t("gov.journey.step4.title"),
       icon: "✅",
-      description: "تنفيذ الطلب أو تقديم المعلومة",
-      traditional: "إجراءات يدوية",
-      withSondos: "تنفيذ آلي فوري",
+      description: t("gov.journey.step4.desc"),
+      traditional: t("gov.journey.step4.traditional"),
+      withSondos: t("gov.journey.step4.sondos"),
     },
     {
       step: 5,
-      title: "المتابعة",
+      title: t("gov.journey.step5.title"),
       icon: "📊",
-      description: "تتبع حالة الطلب",
-      traditional: "اتصل واستفسر كل مرة",
-      withSondos: "إشعارات استباقية",
+      description: t("gov.journey.step5.desc"),
+      traditional: t("gov.journey.step5.traditional"),
+      withSondos: t("gov.journey.step5.sondos"),
     },
   ];
 
   const useCaseDemo = [
     {
-      title: "📋 استعلام عن معاملة",
+      title: t("gov.usecase.inquiry.title"),
       conversation: [
-        {
-          role: "ai",
-          text: "السلام عليكم! خدمة المستفيدين 🏛️\nكيف أقدر أخدمك اليوم؟",
-        },
-        { role: "user", text: "أبغى أعرف وين وصلت معاملتي" },
-        {
-          role: "ai",
-          text: "بكل سرور! للاستعلام عن معاملتك، أحتاج:\n\n1️⃣ رقم المعاملة\nأو\n2️⃣ رقم الهوية للتحقق",
-        },
-        { role: "user", text: "رقم المعاملة 1445-789456" },
-        {
-          role: "ai",
-          text: "تم العثور على معاملتك ✅\n\n📋 نوع المعاملة: طلب تصريح\n📍 الحالة: قيد المراجعة\n🏢 القسم: إدارة التراخيص\n📅 تاريخ الاستلام: 15 يناير\n⏱️ المتوقع: خلال 5 أيام عمل\n\nتبي أرسل لك إشعار لما تتحدث الحالة؟",
-        },
-        { role: "user", text: "إيه" },
-        {
-          role: "ai",
-          text: "تم تفعيل الإشعارات ✅\n\nراح توصلك رسالة على جوالك المسجل (05XX XXX XX89) عند أي تحديث.\n\nتحتاج شي ثاني؟ 😊",
-        },
+        { role: "ai", text: t("gov.usecase.inquiry.msg1") },
+        { role: "user", text: t("gov.usecase.inquiry.msg2") },
+        { role: "ai", text: t("gov.usecase.inquiry.msg3") },
+        { role: "user", text: t("gov.usecase.inquiry.msg4") },
+        { role: "ai", text: t("gov.usecase.inquiry.msg5") },
+        { role: "user", text: t("gov.usecase.inquiry.msg6") },
+        { role: "ai", text: t("gov.usecase.inquiry.msg7") },
       ],
     },
     {
-      title: "🏙️ بلاغ بلدية",
+      title: t("gov.usecase.report.title"),
       conversation: [
-        { role: "ai", text: "أهلاً بك في أمانة المنطقة! 🏙️\nكيف أقدر أساعدك؟" },
-        { role: "user", text: "فيه حفرة كبيرة في الشارع عندنا" },
-        {
-          role: "ai",
-          text: "شكراً لبلاغك! 🙏\n\nخلني أسجل البلاغ. أحتاج بعض المعلومات:\n\n📍 إيش اسم الحي والشارع؟",
-        },
-        { role: "user", text: "حي النرجس، شارع الأمير محمد بن سعد" },
-        {
-          role: "ai",
-          text: "تمام! الحفرة قريبة من أي معلم؟ (مسجد، مدرسة، محل معروف)",
-        },
-        { role: "user", text: "قريبة من مسجد النور" },
-        {
-          role: "ai",
-          text: "ممتاز! تقدر ترسل صورة للحفرة على واتساب (05XXXXXXXX)؟\n\nهذا يساعد الفريق يقيّم الأولوية بشكل أفضل.",
-        },
-        { role: "user", text: "أرسلتها" },
-        {
-          role: "ai",
-          text: "تم استلام الصورة ✅\n\n📝 رقم البلاغ: BLD-2024-45678\n📍 الموقع: حي النرجس، شارع الأمير محمد بن سعد (قرب مسجد النور)\n🔧 النوع: صيانة طرق - حفرة\n⚡ الأولوية: عالية\n\nالفريق الفني سيتواصل معك قريباً. شكراً لمساهمتك في تحسين المدينة! 💜",
-        },
+        { role: "ai", text: t("gov.usecase.report.msg1") },
+        { role: "user", text: t("gov.usecase.report.msg2") },
+        { role: "ai", text: t("gov.usecase.report.msg3") },
+        { role: "user", text: t("gov.usecase.report.msg4") },
+        { role: "ai", text: t("gov.usecase.report.msg5") },
+        { role: "user", text: t("gov.usecase.report.msg6") },
+        { role: "ai", text: t("gov.usecase.report.msg7") },
       ],
     },
   ];
@@ -417,30 +418,32 @@ const SondosGovernance = () => {
 
   const roiResults = calculateROI();
 
-  const statKeyLabel = (key: string) =>
-    ({
-      automation: "الأتمتة",
-      availability: "التوفر",
-      accuracy: "الدقة",
-      reports: "البلاغات",
-      tracking: "التتبع",
-      resolution: "الحل",
-      booking: "الحجز",
-      inquiries: "الاستفسارات",
-      noShow: "عدم الحضور",
-      admissions: "القبول",
-      support: "الدعم",
-      satisfaction: "الرضا",
-      clarity: "الوضوح",
-      compliance: "الامتثال",
-      billing: "الفواتير",
-      requests: "الطلبات",
-      outages: "الأعطال",
-    })[key] ?? key;
+  const statKeyLabel = (key: string) => {
+    const labels: Record<string, string> = {
+      automation: t("gov.stat.automation"),
+      availability: t("gov.stat.availability"),
+      accuracy: t("gov.stat.accuracy"),
+      reports: t("gov.stat.reports"),
+      tracking: t("gov.stat.tracking"),
+      resolution: t("gov.stat.resolution"),
+      booking: t("gov.stat.booking"),
+      inquiries: t("gov.stat.inquiries"),
+      noShow: t("gov.stat.noShow"),
+      admissions: t("gov.stat.admissions"),
+      support: t("gov.stat.support"),
+      satisfaction: t("gov.stat.satisfaction"),
+      clarity: t("gov.stat.clarity"),
+      compliance: t("gov.stat.compliance"),
+      billing: t("gov.stat.billing"),
+      requests: t("gov.stat.requests"),
+      outages: t("gov.stat.outages"),
+    };
+    return labels[key] ?? key;
+  };
 
   return (
     <div
-      dir="rtl"
+      dir={lang === "ar" ? "rtl" : "ltr"}
       className="min-h-screen font-arabic bg-[var(--bg)] text-[var(--t1)]"
     >
       {/* ==================== HERO ==================== */}
@@ -487,31 +490,29 @@ const SondosGovernance = () => {
         <div className="relative z-10 max-w-[820px] mx-auto">
           <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
-            حلول ذكية للقطاع الحكومي
+            {t("gov.hero.badge")}
           </div>
 
           <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 animate-fade-up animation-delay-100">
-            خدمة المستفيد <span className="text-[#9d4edd]">24/7</span>
+            {t("gov.hero.title1")}{" "}
+            <span className="text-[#9d4edd]">{t("gov.hero.title2")}</span>
             <br />
-            بدون انتظار
+            {t("gov.hero.title3")}
           </h1>
 
           <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[var(--t1)] max-w-[580px] mx-auto leading-relaxed mb-4 animate-fade-up animation-delay-150">
-            سندس يتعامل مع 85% من استفسارات المواطنين تلقائياً: متابعة
-            المعاملات، حجز المواعيد، استقبال البلاغات - بأمان حكومي وتكامل مع
-            نفاذ
+            {t("gov.hero.subtitle")}
           </p>
 
           <p className="text-[clamp(14px,1.6vw,17px)] text-[var(--t2)] max-w-[680px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
-            ✓ +20 جهة حكومية &nbsp;·&nbsp; ✓ 5 مليون معاملة شهرياً &nbsp;·&nbsp;
-            ✓ 85% أتمتة
+            {t("gov.hero.proof")}
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-10 animate-fade-up animation-delay-300">
             {[
-              { value: "85%", label: "أتمتة", icon: "🤖" },
-              { value: "24/7", label: "خدمة", icon: "⏰" },
-              { value: "4.6⭐", label: "رضا", icon: "😊" },
+              { value: "85%", label: t("gov.stat.automation"), icon: "🤖" },
+              { value: "24/7", label: t("gov.stat.service"), icon: "⏰" },
+              { value: "4.6⭐", label: t("gov.stat.satisfaction"), icon: "😊" },
             ].map((stat, i) => (
               <div
                 key={i}
@@ -531,21 +532,23 @@ const SondosGovernance = () => {
               href="/demo"
               className="inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
             >
-              احجز عرضك التجريبي
+              {t("gov.hero.cta")}
             </a>
           </div>
 
           <div className="flex flex-wrap justify-center gap-3 animate-fade-up animation-delay-300">
-            {["🔐 معتمد أمنياً", "🇸🇦 خوادم محلية", "📋 متوافق PDPL"].map(
-              (badge, i) => (
-                <span
-                  key={i}
-                  className="px-3 py-1 rounded-full text-xs font-medium bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]"
-                >
-                  {badge}
-                </span>
-              ),
-            )}
+            {[
+              t("gov.badge.security"),
+              t("gov.badge.servers"),
+              t("gov.badge.compliance"),
+            ].map((badge, i) => (
+              <span
+                key={i}
+                className="px-3 py-1 rounded-full text-xs font-medium bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]"
+              >
+                {badge}
+              </span>
+            ))}
           </div>
         </div>
       </section>
@@ -576,11 +579,10 @@ const SondosGovernance = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              رحلة المستفيد <span className="text-[#9d4edd]">المُحسّنة</span>
+              {t("gov.journey.title")}{" "}
+              <span className="text-[#9d4edd]">{t("gov.journey.title2")}</span>
             </h2>
-            <p className="text-[var(--t2)]">
-              كيف يحسّن سندس تجربة المواطن في كل خطوة
-            </p>
+            <p className="text-[var(--t2)]">{t("gov.journey.subtitle")}</p>
           </div>
           <div className="grid md:grid-cols-5 gap-4">
             {citizenJourney.map((step, idx) => (
@@ -613,14 +615,15 @@ const SondosGovernance = () => {
       </section>
 
       {/* ==================== SEGMENTS ==================== */}
-      <section id="الحلول" className="py-24 px-6 bg-[var(--bg2)]">
+      <section id="solutions" className="py-24 px-6 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              حلول لكل <span className="text-[#9d4edd]">قطاع حكومي</span>
+              {t("gov.segments.title")}{" "}
+              <span className="text-[#9d4edd]">{t("gov.segments.title2")}</span>
             </h2>
             <p className="text-[var(--t2)] text-lg">
-              سندس يتكيف مع طبيعة كل جهة
+              {t("gov.segments.subtitle")}
             </p>
           </div>
 
@@ -649,7 +652,9 @@ const SondosGovernance = () => {
               <div className="p-8 sm:p-10 bg-[rgba(239,68,68,0.05)] border-b md:border-b-0 md:border-l border-[rgba(90,24,154,0.08)]">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">😫</span>
-                  <h3 className="text-xl font-bold text-red-400">التحديات</h3>
+                  <h3 className="text-xl font-bold text-red-400">
+                    {t("gov.segments.pain")}
+                  </h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].painPoints.map((point, i) => (
@@ -663,7 +668,9 @@ const SondosGovernance = () => {
               <div className="p-8 sm:p-10 bg-[rgba(90,24,154,0.04)]">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">🎉</span>
-                  <h3 className="text-xl font-bold text-[#9d4edd]">مع سندس</h3>
+                  <h3 className="text-xl font-bold text-[#9d4edd]">
+                    {t("gov.segments.solution")}
+                  </h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].solutions.map((solution, i) => (
@@ -679,7 +686,7 @@ const SondosGovernance = () => {
               <div className="flex flex-wrap items-center justify-between gap-6">
                 <div>
                   <div className="text-sm font-medium mb-2 text-[var(--t2)]">
-                    حالات الاستخدام:
+                    {t("gov.segments.useCases")}:
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {segments[activeSegment].useCases.map((useCase, i) => (
@@ -713,45 +720,45 @@ const SondosGovernance = () => {
       </section>
 
       {/* ==================== SECURITY ==================== */}
-      <section id="الأمان" className="py-24 px-6">
+      <section id="security" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              أمان وحوكمة{" "}
-              <span className="text-[#9d4edd]">على مستوى حكومي</span>
+              {t("gov.security.title")}{" "}
+              <span className="text-[#9d4edd]">{t("gov.security.title2")}</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 icon: "🔐",
-                title: "تشفير AES-256",
-                desc: "كل البيانات مشفرة في النقل والتخزين بأعلى معايير التشفير",
+                title: t("gov.security.item1.title"),
+                desc: t("gov.security.item1.desc"),
               },
               {
                 icon: "🇸🇦",
-                title: "خوادم داخل المملكة",
-                desc: "البيانات تبقى داخل السعودية، متوافق مع متطلبات السيادة الرقمية",
+                title: t("gov.security.item2.title"),
+                desc: t("gov.security.item2.desc"),
               },
               {
                 icon: "📋",
-                title: "متوافق PDPL",
-                desc: "متوافق مع نظام حماية البيانات الشخصية السعودي",
+                title: t("gov.security.item3.title"),
+                desc: t("gov.security.item3.desc"),
               },
               {
                 icon: "🛡️",
-                title: "معتمد من NCA",
-                desc: "متوافق مع متطلبات الهيئة الوطنية للأمن السيبراني",
+                title: t("gov.security.item4.title"),
+                desc: t("gov.security.item4.desc"),
               },
               {
                 icon: "👤",
-                title: "تحقق نفاذ",
-                desc: "تكامل مع نفاذ للتحقق من هوية المستفيدين",
+                title: t("gov.security.item5.title"),
+                desc: t("gov.security.item5.desc"),
               },
               {
                 icon: "📊",
-                title: "سجلات مراجعة",
-                desc: "تسجيل كامل لكل العمليات للمراجعة والتدقيق",
+                title: t("gov.security.item6.title"),
+                desc: t("gov.security.item6.desc"),
               },
             ].map((item, idx) => (
               <div
@@ -770,11 +777,12 @@ const SondosGovernance = () => {
       </section>
 
       {/* ==================== FEATURES ==================== */}
-      <section id="المميزات" className="py-24 px-6 bg-[var(--bg2)]">
+      <section id="features" className="py-24 px-6 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              مميزات <span className="text-[#9d4edd]">للقطاع الحكومي</span>
+              {t("gov.features.title")}{" "}
+              <span className="text-[#9d4edd]">{t("gov.features.title2")}</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -802,11 +810,14 @@ const SondosGovernance = () => {
       </section>
 
       {/* ==================== INTEGRATIONS ==================== */}
-      <section id="التكاملات" className="py-24 px-6">
+      <section id="integrations" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              تكامل مع <span className="text-[#9d4edd]">الأنظمة الحكومية</span>
+              {t("gov.integrations.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("gov.integrations.title2")}
+              </span>
             </h2>
           </div>
           <div className="flex flex-wrap justify-center gap-4">
@@ -831,7 +842,8 @@ const SondosGovernance = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              شاهد سندس <span className="text-[#9d4edd]">أثناء العمل</span>
+              {t("gov.usecases.title")}{" "}
+              <span className="text-[#9d4edd]">{t("gov.usecases.title2")}</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
@@ -864,146 +876,15 @@ const SondosGovernance = () => {
         </div>
       </section>
 
-      {/* ==================== ROI CALCULATOR ==================== 
-      <section id="roi" className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-[13px] font-medium mb-3 text-[#9d4edd]">
-              🧮 حاسبة مبنية على بيانات حقيقية
-            </p>
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight">
-              احسب <span className="text-[#9d4edd]">الوفورات المتوقعة</span>
-            </h2>
-          </div>
-
-          <div className="rounded-3xl p-8 sm:p-10 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.08)]">
-            <div className="grid md:grid-cols-2 gap-6 mb-10">
-              {[
-                {
-                  label: "المكالمات/الطلبات اليومية",
-                  key: "dailyCalls",
-                  min: 100,
-                  max: 5000,
-                  step: 100,
-                  suffix: "",
-                },
-                {
-                  label: "عدد موظفي خدمة المستفيدين",
-                  key: "employees",
-                  min: 10,
-                  max: 200,
-                  step: 1,
-                  suffix: " موظف",
-                },
-                {
-                  label: "متوسط الراتب الشهري (ر.س)",
-                  key: "avgSalary",
-                  min: 5000,
-                  max: 15000,
-                  step: 500,
-                  suffix: " ر.س",
-                },
-                {
-                  label: "رضا المستفيدين الحالي (%)",
-                  key: "citizenSatisfaction",
-                  min: 40,
-                  max: 85,
-                  step: 1,
-                  suffix: "%",
-                },
-              ].map(({ label, key, min, max, step, suffix }) => (
-                <div key={key}>
-                  <div className="flex justify-between mb-2">
-                    <label className="text-sm text-[var(--t2)]">{label}</label>
-                    <span className="font-bold text-[var(--t1)]">
-                      {(roiInputs as any)[key].toLocaleString()}
-                      {suffix}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min={min}
-                    max={max}
-                    step={step}
-                    value={(roiInputs as any)[key]}
-                    onChange={(e) =>
-                      setRoiInputs({
-                        ...roiInputs,
-                        [key]: parseInt(e.target.value),
-                      })
-                    }
-                    className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                    style={{ background: "rgba(90,24,154,0.12)" }}
-                  />
-                  <div className="text-center mt-2 font-bold text-[#9d4edd]">
-                    {(roiInputs as any)[key].toLocaleString()}
-                    {suffix}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="grid md:grid-cols-4 gap-4 mb-6">
-              <div className="p-6 rounded-2xl text-center bg-[rgba(239,68,68,0.07)] border border-[rgba(239,68,68,0.2)]">
-                <div className="text-sm mb-2 text-red-400">التكلفة الحالية</div>
-                <div className="text-2xl font-bold text-red-500">
-                  {roiResults.currentMonthlyCost.toLocaleString()} ر.س
-                </div>
-                <div className="text-xs text-[var(--t3)]">شهرياً</div>
-              </div>
-              <div className="p-6 rounded-2xl text-center bg-[rgba(16,185,129,0.07)] border border-[rgba(16,185,129,0.2)]">
-                <div className="text-sm mb-2 text-emerald-600">مع سندس</div>
-                <div className="text-2xl font-bold text-emerald-600">
-                  {roiResults.newTotalCost.toLocaleString()} ر.س
-                </div>
-                <div className="text-xs text-[var(--t3)]">شهرياً</div>
-              </div>
-              <div className="p-6 rounded-2xl text-center bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.15)]">
-                <div className="text-sm mb-2 text-[#9d4edd]">
-                  رضا المستفيدين الجديد
-                </div>
-                <div className="text-2xl font-bold text-[#9d4edd]">
-                  {roiResults.newSatisfaction}%
-                </div>
-                <div className="text-xs text-[var(--t3)]">
-                  +{roiResults.newSatisfaction - roiInputs.citizenSatisfaction}%
-                </div>
-              </div>
-              <div className="p-6 rounded-2xl text-center bg-[rgba(16,185,129,0.07)] border border-[rgba(16,185,129,0.2)]">
-                <div className="text-sm mb-2 text-emerald-600">
-                  طلبات تُخدم آلياً
-                </div>
-                <div className="text-2xl font-bold text-emerald-600">
-                  {roiResults.automatedCalls.toLocaleString()}
-                </div>
-                <div className="text-xs text-[var(--t3)]">شهرياً</div>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex flex-wrap justify-center items-center gap-4 px-8 py-4 rounded-2xl gradient-bg">
-                <span className="text-white text-lg">
-                  الوفورات السنوية المتوقعة:
-                </span>
-                <span className="text-white text-4xl font-bold">
-                  {roiResults.annualSavings.toLocaleString()} ر.س
-                </span>
-                <span className="text-white/80 text-sm">
-                  مع تحسين رضا المستفيدين من {roiInputs.citizenSatisfaction}%
-                  إلى {roiResults.newSatisfaction}%
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* ==================== TESTIMONIALS ==================== */}
       <section className="py-24 px-6 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              قصص نجاح <span className="text-[#9d4edd]">الجهات الحكومية</span>
+              {t("gov.testimonials.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("gov.testimonials.title2")}
+              </span>
             </h2>
           </div>
           <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.1)] relative">
@@ -1057,7 +938,8 @@ const SondosGovernance = () => {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              أسئلة <span className="text-[#9d4edd]">شائعة</span>
+              {t("gov.faq.title")}{" "}
+              <span className="text-[#9d4edd]">{t("gov.faq.title2")}</span>
             </h2>
           </div>
           <div className="space-y-4">
@@ -1094,25 +976,25 @@ const SondosGovernance = () => {
         <div className="max-w-4xl mx-auto text-center">
           <div className="text-6xl mb-6">🏛️</div>
           <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-white">
-            جاهز لتحسين خدمة المستفيدين
+            {t("gov.cta.title1")}
             <br />
-            ورفع رضاهم؟
+            {t("gov.cta.title2")}
           </h2>
           <p className="text-white/80 text-xl mb-10 max-w-2xl mx-auto">
-            انضم لأكثر من 20 جهة حكومية تستخدم سندس لخدمة المواطنين بشكل أفضل
+            {t("gov.cta.subtitle")}
           </p>
           <div className="flex justify-center mb-12">
             <a
               href="/demo"
               className="inline-flex items-center gap-2 px-10 py-5 bg-[rgba(255,255,255,0.95)] rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:bg-white text-[#5a189a] shimmer"
             >
-              احجز عرضك التجريبي
+              {t("gov.cta.button")}
             </a>
           </div>
           <div className="flex flex-wrap justify-center gap-6 text-white/70 text-sm">
-            <span>🔐 معتمد NCA</span>
-            <span>🇸🇦 خوادم محلية</span>
-            <span>📋 متوافق PDPL</span>
+            <span>🔐 {t("gov.badge.security")}</span>
+            <span>🇸🇦 {t("gov.badge.servers")}</span>
+            <span>📋 {t("gov.badge.compliance")}</span>
           </div>
         </div>
       </section>
