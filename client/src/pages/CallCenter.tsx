@@ -689,7 +689,7 @@ const SondosCallCenter = () => {
         </div>
       </section>
 
-      {/* ==================== COMPARISON ==================== */}
+      {/* ==================== COMPARISON ==================== 
       <section id="comparison" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -769,7 +769,7 @@ const SondosCallCenter = () => {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
 
       {/* ==================== FEATURES ==================== */}
       <section id="features" className="py-24 px-6 bg-[var(--bg2)]">
@@ -950,7 +950,6 @@ const SondosCallCenter = () => {
             </Link>
           </div>
           <div className="flex flex-wrap justify-center gap-6 text-white/70 text-sm">
-            <span>{t("cc.cta.badge1")}</span>
             <span>{t("cc.cta.badge2")}</span>
             <span>{t("cc.cta.badge3")}</span>
           </div>

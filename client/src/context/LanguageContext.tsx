@@ -12,7 +12,7 @@ interface LanguageContextType {
 const translations: Record<Language, Record<string, string>> = {
   en: {
     // ─── Nav ─────────────────────────────────────────────────────────────────
-    "nav.product": "Product",
+    "nav.product": "Home",
     "nav.pricing": "Pricing",
     "nav.for_business": "For Business",
     "nav.for_developers": "For Developers",
@@ -32,12 +32,11 @@ const translations: Record<Language, Record<string, string>> = {
       "Build, deploy, and manage next-generation AI voice agents that sound human, execute tasks, and scale effortlessly.",
     "hero.cta_demo": "Try Our Live Demo",
     "hero.cta_sales": "Contact Sales",
-    "hero.title_new":
-      "Smart Calls With Human Voice — Serving Your Customers 24/7",
+    "hero.title_new": "Sondos AI Platform",
     "hero.subtitle_new":
-      "Your smart voice agent books appointments, follows up with customers, and manages your calls — in Arabic and Saudi dialect.",
+      "An Integrated AI Solution for Customer Service Operations",
     "hero.desc":
-      "Sondos AI is the Saudi integrated platform for automating phone calls with AI.",
+      "Sondos AI is a comprehensive Saudi platform designed to automate phone calls and manage customer experience using artificial intelligence.",
     "hero.stat1_val": "50,000+",
     "hero.stat1_label": "Calls Processed",
     "hero.stat2_val": "100+",
@@ -2619,7 +2618,7 @@ const translations: Record<Language, Record<string, string>> = {
     "integrations.title": "تواصل مع أدواتك",
     "integrations.desc": "تكامل سلس مع الأدوات التي تستخدمها بالفعل.",
 
-    // ─── FAQ ─────────────────────────────────────── ��─────────────────────────
+    // ─── FAQ ────.��────────────────────────────────── ��─────────────────────────
     "faq.label": "أسئلة شائعة",
     "faq.title": "الأسئلة الشائعة",
     "faq.q1": "كيف يتعامل سندس AI مع اللغات المتعددة؟",
@@ -2729,7 +2728,7 @@ const translations: Record<Language, Record<string, string>> = {
     "agents.connecting": "جارٍ الاتصال…",
     "agents.please_wait": "يرجى الانتظار لحظة",
     "agents.in_call": "في المحادثة",
-    "agents.end_call": "اضغط لإنهاء المكالمة",
+    "agents.end_call": "اضغط لإن����اء المكالمة",
     "agents.coming_soon": "المساعد قادم قريباً…",
     "agents.saudi": "تحدث بالسعودية",
     "agents.emirati": "تحدث بالإماراتية",
@@ -2842,7 +2841,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hc.integration.crm.desc": "إدارة العملاء",
     "hc.integration.payments.desc": "دفعات وتأمين",
     "hc.security.title": "🔒 أمان على مستوى المؤسسات",
-    "hc.security.subtitle": "حماية بيانات المرضى أ.�لويتنا القصوى",
+    "hc.security.subtitle": "حماية بيانات المرa�ى�.�ويتنا القصوى",
     "hc.security.f1.title": "تشفير من طرف لطرف",
     "hc.security.f1.desc": "جميع المكالمات والبيانات مشفرة بمعيار AES-256",
     "hc.security.f2.title": "استضافة محلية",
@@ -2964,7 +2963,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hc.facility.lab.license": "وزارة الصحة – ترخيص مختبر طبي",
 
     "hc.facility.pharmacy.name": "الصيدلية",
-    "hc.facility.pharmacy.official": "صيدلية مجتمعية مرخصة",
+    "hc.facility.pharmacy.official": "صيدلية مجتu�عية مرخصة",
     "hc.facility.pharmacy.pain": "استفسارات توفر الأدوية تشغل موظفي اn�صيدلية",
     "hc.facility.pharmacy.solution":
       "إجابات فورية على استفسارات المخزون والاستلام عبر الذكاء الاصطناعي",
@@ -3219,7 +3218,7 @@ const translations: Record<Language, Record<string, string>> = {
     "cc.feat2.highlight": "∞ مكالمة",
     "cc.feat3.title": "تأهيل ذكي",
     "cc.feat3.desc":
-      "أسئلة مخصصة تحدد جدية العميل، احتياجاته، وأولويته قبل التحويل للفريق",
+      "أسئلة مخصصة .�حدد جدية العميل، احتياجاته، وأولويته قبل التحويل للفريق",
     "cc.feat3.highlight": "Lead Scoring",
     "cc.feat4.title": "تحويل سلس",
     "cc.feat4.desc":
@@ -3347,7 +3346,7 @@ const translations: Record<Language, Record<string, string>> = {
     "re.stats.stat3.value": "45%",
     "re.stats.stat3.label": "زيادة في العملاء المؤهلين",
     "re.stats.stat3.icon": "📈",
-    "re.stats.stat4.value": "3 ثوانٍ",
+    "re.stats.stat4.value": "3 v�وانٍ",
     "re.stats.stat4.label": "متوسط وقت الرد",
     "re.stats.stat4.icon": "⚡",
 
@@ -3479,7 +3478,7 @@ const translations: Record<Language, Record<string, string>> = {
     "re.test1.company": "شركة الغامدي العقارية",
     "re.test1.metric": "+40% في الصفقات",
     "re.test2.quote":
-      "وفرنا راتب موظفين اثنين والآن العملاء يحصلون على رد أسرع وأكثر احترافية. ROI إيجابي من الشهر الأول.",
+      "وفرنا راتب موظفين اث�ؽ�ين والآن العملاء يحصلون على رد أسرع وأكثر احترافية. ROI إيجابي من الشهر الأول.",
     "re.test2.name": "أ. سارة المطيري",
     "re.test2.role": "مديرة المبيعات",
     "re.test2.company": "دار الإعمار للتطوير",
@@ -3608,7 +3607,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     "tech.segments.title": "حلول لكل نوع",
     "tech.segments.title2": "شركة تقنية",
-    "tech.segments.subtitle": "سندس يتكيف مع طبيعة عملك التقني",
+    "tech.segments.subtitle": "سندس يتكيف مع طبيعة عملك ال٪قني",
     "tech.segments.pain": "التحديات الحالية",
     "tech.segments.solution": "مع سندس",
     "tech.segments.useCases": "حالات الاستخدام",
@@ -3734,7 +3733,7 @@ const translations: Record<Language, Record<string, string>> = {
       "آسف على هذا الإزعاج! خلني أساعدك 🔧\n\nما نوع الملف اللي تحاول ترفعه؟ وما حجمه؟",
     "tech.usecase.ticket.msg4": "PDF حجمه 15 ميجا",
     "tech.usecase.ticket.msg5":
-      "وجدت المشكلة! 💡\n\nالحد الأقصى لحجم الملف في خطتك هو 10 ميجا.\n\nعندك خيارين:\n1️⃣ ضغط الملف إلى أقل من 10 ميجا\n2️⃣ ترقية لخطة Pro (حد 100 ميجا)\n\nتبي أساعدك في أي منهم؟",
+      "وجدت المشكلة! 💡\n\nالحد الأقصى لحجم الملف في خطتك هو 10 ميجا.\n\nعندك خي��ري �:\n1️⃣ ضغط الملف إلى أقل من 10 ميجا\n2️⃣ ترقية لخطة Pro (حد 100 ميجا)\n\nتبي أساعدك في أي منهم؟",
     "tech.usecase.ticket.msg6": "كم سعر الترقية؟",
     "tech.usecase.ticket.msg7":
       "خطة Pro:\n💰 99 ر.س/شهر (بدل 149)\n✅ رفع ملفات حتى 100 ميجا\n✅ مساحة تخزين 50 جيجا\n✅ دعم أولوية\n\nتبي أفعّلها لك؟ أقدر أضيفها لحسابك الآن 😊",
@@ -3843,7 +3842,7 @@ const translations: Record<Language, Record<string, string>> = {
     "gov.stat.booking": "الحجز",
     "gov.stat.inquiries": "الاستفسارات",
     "gov.stat.noShow": "عدم الحضور",
-    "gov.stat.admissions": "القبول",
+    "gov.stat.admissions": "��لقبول",
     "gov.stat.support": "الدعم",
     "gov.stat.clarity": "الوضوح",
     "gov.stat.compliance": "الامتثال",
@@ -3964,7 +3963,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     "gov.feature.security.title": "أمان وخصوصية حكومية",
     "gov.feature.security.desc":
-      "متوافق مع متطلبات الأمن السيبراني الوطني وحماية البيانات الشخصية (PDPL)",
+      "متوافق مع م��طلبات الأمن السيبراني الوطني وحماية البيانات ٧لشخصية (PDPL)",
     "gov.feature.security.highlight": "معتمد",
     "gov.feature.omnichannel.title": "متعدد القنوات",
     "gov.feature.omnichannel.desc":
@@ -4066,11 +4065,11 @@ const translations: Record<Language, Record<string, string>> = {
       "نعم، بعد التحقق من هوية المستفيد عبر نفاذ أو OTP، يمكن لسندس: حجز المواعيد، تحديث البيانات، تقديم الطلبات، ومتابعة المعاملات. كل الإجراءات تُسجَّل وتُراجَع.",
     "gov.faq4.q": "كيف يتعامل مع الشكاوى والبلاغات؟",
     "gov.faq4.a":
-      "سندس يستقبل الشكوى، يجمع التفاصيل (الموقع، الصور، الوصف)، يصنفها حسب النوع والأولوية، يفتح تذكرة في النظام، ويعطي المستفيد رقم متابعة. يمكن للمستفيد الاستعلام عن حالة بلاغه لاحقاً.",
+      "سندس يستقبل الشكوى، يجمع التفاصيل (الموقع، الصور، الوصف)، يصنفها حسب النوع والأولوية، يفتح تذكرة في ال��ظام، ويعطي المستفيد رقم متابعة. يمكن للمست؁يد الاستعلام عن حالة بلاغه لاحقاً.",
     "gov.faq5.q": "هل يدعم اللغة العربية واللهجات؟",
     "gov.faq5.a":
       "نعم، سندس يتحدث العربية الفصحى واللهجات السعودية بطلاقة (نجدية، حجازية، شرقية). كذلك يدعم الإنجليزية، الأوردو، والهندية لخدمة جميع المقيمين.",
-    "gov.faq6.q": "ما مدة ال��فعيل للجهات الحكومية؟",
+    "gov.faq6.q": "ما مدة التفعيل للجهات الحكومية؟",
     "gov.faq6.a":
       "التفعيل الأساسي (استفسارات عامة) خلال 2-3 أسابيع. التكاملات مع الأنظمة الحكومية تحتاج 4-8 أسابيع. نوفر فريق تنفيذ مخصص للجهات الحكومية مع دعم فني على مدار الساعة.",
 
@@ -4200,8 +4199,8 @@ const translations: Record<Language, Record<string, string>> = {
     "ins.segment.health.name": "التأمين الصحي",
     "ins.segment.health.desc": "تأمين طبي للأفراد والشركات",
     "ins.segment.health.pain1": "أسئلة كثيرة عن الشبكة الطبية والتغطية",
-    "ins.segment.health.pain2": "موافقات مسبقة تحتاج متابعة",
-    "ins.segment.health.pain3": "شكاوى تأخر الموافقات",
+    "ins.segment.health.pain2": "موافقات مسبقة تحتاج  �تابعة",
+    "ins.segment.health.pain3": "شكاوى تأخر الموافقا��",
     "ins.segment.health.sol1": "معلومات فورية عن المستشفيات والتغطية",
     "ins.segment.health.sol2": "متابعة حالة الموافقات تلقائياً",
     "ins.segment.health.sol3": "تصعيد الشكاوى العاجلة للمختصين",
@@ -4326,14 +4325,13 @@ const translations: Record<Language, Record<string, string>> = {
     "ins.usecase.renewal.msg2": "إيه صحيح، كم التجديد؟",
 
     "ins.usecase.renewal.msg4": "إيه جدد الشامل",
-    "ins.usecase.renewal.msg5":
-      "تم! ✅ أرسلت لك رابط الدفع على واتساب.\n\nبعد الدفع، وثيقتك الجديدة توصلك خلال دقائق. شكراً لثقتك فينا! 💜",
+    "ins.usecase.renewal.msg5": "تم! أرسل لك رابط الدفع على واتساب",
 
     "ins.testimonials.title": "قصص نجاح",
     "ins.testimonials.title2": "شركات التأمين",
     "ins.testimonial1.quote":
       "نسبة تجديد الوثائق كانت 68%. بعد تذكيرات سندس التلقائية ارتفعت إلى 89%. هذا يعني ملايين إضافية سنوياً.",
-    "ins.testimonial1.name": "أ. st�ts�الد الغامدي",
+    "ins.testimonial1.name": "وليد الغامدي",
     "ins.testimonial1.role": "مدير العمليات",
     "ins.testimonial1.company": "شركة الدرع للتأمين",
     "ins.testimonial1.metric": "+21% نسبة التجديد",
@@ -4666,7 +4664,7 @@ const translations: Record<Language, Record<string, string>> = {
     "proof.story1.who": "مدير العيادة",
     "proof.story2.tag": "العقارات · جدة",
     "proof.story2.value": "×4",
-    "proof.story2.title": "العملاء المتابَعون أسبوعياً",
+    "proof.story2.title": "العملاء المتابَعون أ �بوعياً",
     "proof.story2.desc": "آلية المتابعة — من أول اتصال حتى إغلاق الصفقة.",
     "proof.story2.quote": '"قبل كنا نضيع 60% من وقتنا في التنسيق. الحين: صفر."',
     "proof.story2.who": "مدير المبيعات",

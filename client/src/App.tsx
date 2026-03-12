@@ -32,7 +32,7 @@ import Legal from "@/pages/Legal";
 import CarDealership from "@/pages/CarDealership";
 import DebtCollection from "@/pages/DebtCollection";
 import Partner from "@/pages/Partner";
-import SavingsCalculator from "@/sections/SavingsCalculator";
+
 import IntegrationsPage from "@/pages/IntegrationsPage";
 import Demo from "@/pages/Demo";
 import Technology from "@/pages/Technology";
@@ -45,7 +45,7 @@ function HomePage() {
       <LogoCarousel />
       <ScaleBanner />
       <WhatIs />
-      <SavingsCalculator />
+
       <Testimonials />
       <TalksLikePeople />
       <Highlights />

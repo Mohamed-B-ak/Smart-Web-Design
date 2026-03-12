@@ -184,7 +184,6 @@ export default function Healthcare() {
   const certifications = useMemo(
     () => [
       { name: "PDPL", icon: "🇸🇦", descKey: "hc.cert.pdpl.desc" },
-      { name: "HIPAA", icon: "🛡️", descKey: "hc.cert.hipaa.desc" },
       { name: "AES-256", icon: "🔐", descKey: "hc.cert.aes.desc" },
       { name: "Audit Logs", icon: "🧾", descKey: "hc.cert.audit.desc" },
     ],
@@ -654,7 +653,7 @@ export default function Healthcare() {
               <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
                 {t("hc.security.title")}
               </h2>
-              <p className="mb-8 text-[#4a3a62]">{t("hc.security.subtitle")}</p>
+
               <ul className="space-y-4">
                 {securityFeatures.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
