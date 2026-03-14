@@ -147,7 +147,7 @@ const translations: Record<Language, Record<string, string>> = {
     "highlights.h4_desc":
       "First-call resolution powered by intelligent automation",
 
-    // ─── Features ───────────────────────────────at�─────────────────────────────
+    // ─── Features ───────────────────────────────at�──────────────────ud�──────────
     "features.label": "Features",
     "features.title": "Everything You Need",
     "features.f1": "Intelligent Call Routing",
@@ -1353,7 +1353,7 @@ const translations: Record<Language, Record<string, string>> = {
       "Sorry for the inconvenience! Let me help 🔧\n\nWhat file type are you trying to upload? And what's the size?",
     "tech.usecase.ticket.msg4": "PDF, 15MB",
     "tech.usecase.ticket.msg5":
-      "Found the issue! 💡\n\nThe max file size in your plan is 10MB.\n\nYou have 2 options:\n1️⃣ Compress the file to under 10MB\n2️⃣ Upgrade to Pro plan (100MB limit)\n\nWant help with either?",
+      "Found the issue! 💡\n\nThe max file size in your plan is 10MB.\n\nYou have 2 options:\n1️⃣ Compress the file to under 10MB\n2️ �� Upgrade to Pro plan (100MB limit)\n\nWant help with either?",
     "tech.usecase.ticket.msg6": "How much is the upgrade?",
     "tech.usecase.ticket.msg7":
       "Pro plan:\n💰 99 SAR/month (was 149)\n✅ Upload files up to 100MB\n✅ 50GB storage\n✅ Priority support\n\nWant me to activate it? I can add it to your account now 😊",
@@ -2503,7 +2503,7 @@ const translations: Record<Language, Record<string, string>> = {
     "whatis.f1_title": "محادثات طبيعية",
     "whatis.f1_desc": "وكلاء ذكاء اصطناعي يفهمون السياق ويستجيبون كالبشر",
     "whatis.f2_title": "توجيه ذكي",
-    "whatis.f2_desc": "توجيه مكالمات ذكي بناءً على نية العميل واحتياجه",
+    "whatis.f2_desc": "توجيه مكالمات ذكي بناءً على ني�� العميل واحتياجه",
     "whatis.f3_title": "تحليلات فورية",
     "whatis.f3_desc": "لوحات معلومات حية مع رؤى قابلة للتنفيذ ومقاييس الأداء",
     "whatis.f4_title": "وكلاء ذكيون",
@@ -2841,7 +2841,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hc.integration.crm.desc": "إدارة العملاء",
     "hc.integration.payments.desc": "دفعات وتأمين",
     "hc.security.title": "🔒 أمان على مستوى المؤسسات",
-    "hc.security.subtitle": "حماية بيانات المرa�ى�.�ويتنا القصوى",
+    "hc.security.subtitle": "حماية بيانات المرaى�.�ويتنا القصوى",
     "hc.security.f1.title": "تشفير من طرف لطرف",
     "hc.security.f1.desc": "جميع المكالمات والبيانات مشفرة بمعيار AES-256",
     "hc.security.f2.title": "استضافة محلية",
@@ -3084,7 +3084,7 @@ const translations: Record<Language, Record<string, string>> = {
     "cc.seg.inbound.sol1": "رد فوري بدون انتظار - 0 ثانية",
     "cc.seg.inbound.sol2": "تكلفة ثابتة بغض النظر عن الحجم",
     "cc.seg.inbound.sol3": "جودة موحدة 100% في كل مكالمة",
-    "cc.seg.inbound.stat.waitTime": "0 ثانية",
+    "cc.seg.inbound.stat.waitTime": "0 ثان��ة",
     "cc.seg.inbound.stat.cost": "-70%",
     "cc.seg.inbound.stat.quality": "100%",
     "cc.seg.outbound.name": "المكالمات الصادرة",
@@ -3733,7 +3733,7 @@ const translations: Record<Language, Record<string, string>> = {
       "آسف على هذا الإزعاج! خلني أساعدك 🔧\n\nما نوع الملف اللي تحاول ترفعه؟ وما حجمه؟",
     "tech.usecase.ticket.msg4": "PDF حجمه 15 ميجا",
     "tech.usecase.ticket.msg5":
-      "وجدت المشكلة! 💡\n\nالحد الأقصى لحجم الملف في خطتك هو 10 ميجا.\n\nعندك خي��ري �:\n1️⃣ ضغط الملف إلى أقل من 10 ميجا\n2️⃣ ترقية لخطة Pro (حد 100 ميجا)\n\nتبي أساعدك في أي منهم؟",
+      "وجدت المشكلة! 💡\n\nالحد الأقصى لحجم الملف في خطتك هو 10 ميجا.\n\nعندك خي��ري �:\n1️⃣ ضغط الملف ��لى أقل من 10 ميجا\n2️⃣ ترقية لخطة Pro (حد 100 ميجا)\n\nتبي أساعدك في أي منهم؟",
     "tech.usecase.ticket.msg6": "كم سعر الترقية؟",
     "tech.usecase.ticket.msg7":
       "خطة Pro:\n💰 99 ر.س/شهر (بدل 149)\n✅ رفع ملفات حتى 100 ميجا\n✅ مساحة تخزين 50 جيجا\n✅ دعم أولوية\n\nتبي أفعّلها لك؟ أقدر أضيفها لحسابك الآن 😊",
@@ -4325,7 +4325,7 @@ const translations: Record<Language, Record<string, string>> = {
     "ins.usecase.renewal.msg2": "إيه صحيح، كم التجديد؟",
 
     "ins.usecase.renewal.msg4": "إيه جدد الشامل",
-    "ins.usecase.renewal.msg5": "تم! أرسل لك رابط الدفع على واتساب",
+    "ins.usecase.renewal.msg5": "تم! أرسل لك رابط الد.�ع على واتساب",
 
     "ins.testimonials.title": "قصص نجاح",
     "ins.testimonials.title2": "شركات التأمين",
