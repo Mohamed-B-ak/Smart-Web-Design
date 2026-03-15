@@ -68,12 +68,12 @@ export default function Footer() {
 
           {/* Email */}
           <a
-            href="mailto:info@sondos-ai.online"
+            href="mailto:info@sondos-ai.com"
             className="flex items-center gap-2 transition duration-300 hover:opacity-70"
             style={{ color: brandColor }}
           >
             <Mail className="w-5 h-5" />
-            <span dir="ltr">info@sondos-ai.online</span>
+            <span dir="ltr">info@sondos-ai.com</span>
           </a>
         </div>
       </div>
