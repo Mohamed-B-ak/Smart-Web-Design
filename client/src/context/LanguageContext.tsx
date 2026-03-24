@@ -2503,7 +2503,7 @@ const translations: Record<Language, Record<string, string>> = {
     "whatis.f1_title": "محادثات طبيعية",
     "whatis.f1_desc": "وكلاء ذكاء اصطناعي يفهمون السياق ويستجيبون كالبشر",
     "whatis.f2_title": "توجيه ذكي",
-    "whatis.f2_desc": "توجيه مكالمات ذكي بناءً على ني�� العميل واحتياجه",
+    "whatis.f2_desc": "  توجيه المكالمات بذكاء بناءً على نية العميل واحتياجاته",
     "whatis.f3_title": "تحليلات فورية",
     "whatis.f3_desc": "لوحات معلومات حية مع رؤى قابلة للتنفيذ ومقاييس الأداء",
     "whatis.f4_title": "وكلاء ذكيون",
@@ -2524,8 +2524,8 @@ const translations: Record<Language, Record<string, string>> = {
     "demo.start": "ابدأ مكالمة تجريبية",
     "demo.agent": "الوكيل الذكي",
     "demo.speaking": "يتحدث...",
-    "demo.title1": "احجز عرضك التجريبي",
-    "demo.subtitle": "املأ النموذج وسيتواصل معك فريقنا خلال 24 ساعة",
+    "demo.title1": "احجز عرضك التجريبي مجانًا",
+    "demo.subtitle": "املأ النموذج وسيتواصل معك فريقنا ",
     "demo.full_name": "الاسم الكامل *",
     "demo.full_name_placeholder": "اكتب اسمك",
     "demo.email": "البريد الإلكتروني *",
@@ -2540,7 +2540,7 @@ const translations: Record<Language, Record<string, string>> = {
     "demo.questions_placeholder": "اكتب سؤالك أو أي تفاصيل إضافية...",
     "demo.submit": "إرسال الطلب 🚀",
     "demo.loading": "⏳ جاري الإرسال...",
-    "demo.success": "تم إرسال طلبك بنجاح!",
+    "demo.success": "سوف يتواصل معك الفريق خلال دقيقتين تم إرسال طلبك بنجاح ",
     "demo.error": "❌ حدث خطأ. حاول مجدداً.",
     "demo.phone_digits_remaining": "يتبقى {n} أرقام",
 
@@ -4797,6 +4797,7 @@ const lists: Record<Language, Record<string, string[]>> = {
       "Education",
       "Tourism",
       "Transportation & Logistics",
+      "Other Sector"
     ],
     "re.pricing.starter.features": [
       "24/7 auto-reply to all inquiries",
@@ -4848,6 +4849,8 @@ const lists: Record<Language, Record<string, string[]>> = {
       "قطاع التعليم",
       "القطاع السياحي",
       "قطاع النقل واللوجستيك",
+      "قطاع آخر",
+
     ],
     "re.pricing.starter.features": [
       "رد آلي 24/7 على جميع الاستفسارات",
