@@ -1,12 +1,9 @@
 import { useLanguage } from "@/context/LanguageContext";
-import { Phone, ArrowRight, ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowLeft, Sparkles } from "lucide-react";
 import AnimatedBackground from "./AnimatedBackground";
-import { useState } from "react";
-import AgentsModal from "@/components/AgentsModal";
 
 export default function Hero() {
   const { lang, t } = useLanguage();
-  const [openAgents, setOpenAgents] = useState(false);
 
   return (
     <section
@@ -72,20 +69,9 @@ export default function Hero() {
 
         {/* BUTTONS */}
         <div className="flex items-center justify-center gap-3.5 mb-12 flex-wrap animate-fade-up animation-delay-300">
-          {/* BOUTON VIOLET → POPUP AGENTS */}
-          <button
-            onClick={() => setOpenAgents(true)}
-            className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
-            data-testid="button-hero-try"
-          >
-            <Phone className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-            {t("hero.cta_try")}
-          </button>
-
-          {/* BOUTON PAGE FORMULAIRE */}
           <a
             href="/demo"
-            className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-[#1a0a2e] border border-[rgba(90,24,154,0.15)] rounded-full hover:bg-[rgba(90,24,154,0.05)] hover:border-[rgba(90,24,154,0.3)] transition-all duration-300 backdrop-blur-sm"
+            className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white rounded-full bg-gradient-to-r from-[#5a189a] to-[#9d4edd] hover:opacity-90 transition-all duration-300 shadow-lg"
             data-testid="button-hero-book"
           >
             {t("hero.cta_book")}
@@ -155,9 +141,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      {/* MODAL AGENTS */}
-      <AgentsModal open={openAgents} onClose={() => setOpenAgents(false)} />
     </section>
   );
 }
