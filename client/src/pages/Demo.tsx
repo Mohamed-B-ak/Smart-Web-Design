@@ -1,9 +1,10 @@
+
 import AnimatedBackground from "@/sections/AnimatedBackground";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useRef, useEffect } from "react";
 
 const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbyTTA4r2iPpv9jRKF521S4mn9eIPd-JvNFt6dgY-BjO63pM2h6akBuWwHxYFTJ5dyV3Vg/exec";
+  "https://script.google.com/macros/s/AKfycbxmEkbxb6szal4KVAnrEnRq7-jUq9BkdrPLsSvN3tJnBzeTNRyn-B4V4Rpjx5_Yxjn5gA/exec";
 
 const TOTAL_PHONE_DIGITS = 9;
 
@@ -47,7 +48,20 @@ export default function Demo() {
     setStatus("loading");
 
     try {
-      const params = new URLSearchParams(formData as any).toString();
+      // 🔥 NORMALISATION NUMERO SAOUDIEN
+      let phone = formData.phone;
+
+      // si user tape 966 au début → on enlève
+      if (phone.startsWith("966")) {
+        phone = phone.slice(3);
+      }
+
+      const formattedData = {
+        ...formData,
+        phone: `+966${phone}`,
+      };
+
+      const params = new URLSearchParams(formattedData as any).toString();
 
       await fetch(`${APPS_SCRIPT_URL}?${params}`, {
         method: "GET",
@@ -55,7 +69,6 @@ export default function Demo() {
 
       setStatus("success");
 
-      // reset form
       setFormData({
         name: "",
         email: "",
@@ -81,7 +94,6 @@ export default function Demo() {
 
       <div className="relative z-10 w-full max-w-xl bg-white/80 backdrop-blur-xl border border-[rgba(90,24,154,0.15)] rounded-3xl shadow-[0_40px_80px_rgba(0,0,0,0.08)] p-8">
 
-        {/* ✅ Titre caché après succès */}
         {status !== "success" && (
           <>
             <h1 className="text-3xl font-bold text-center mb-2">
@@ -167,22 +179,29 @@ export default function Demo() {
             {/* Phone */}
             <div>
               <label className="block text-sm mb-1">{t("demo.phone")}</label>
-              <input
-                ref={phoneRef}
-                type="tel"
-                name="phone"
-                required
-                value={formData.phone}
-                onChange={(e) => {
-                  const val = e.target.value
-                    .replace(/\D/g, "")
-                    .slice(0, TOTAL_PHONE_DIGITS);
-                  setFormData({ ...formData, phone: val });
-                }}
-                pattern={`\\d{${TOTAL_PHONE_DIGITS}}`}
-                placeholder={t("demo.phone_placeholder")}
-                className="w-full border border-[#e5def5] rounded-xl px-4 py-3 outline-none focus:border-[#5a189a]"
-              />
+
+              <div className="flex">
+                <span className="px-3 py-3 border border-r-0 rounded-l-xl bg-gray-100">
+                  +966
+                </span>
+
+                <input
+                  ref={phoneRef}
+                  type="tel"
+                  name="phone"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => {
+                    const val = e.target.value
+                      .replace(/\D/g, "")
+                      .slice(0, TOTAL_PHONE_DIGITS);
+                    setFormData({ ...formData, phone: val });
+                  }}
+                  pattern={`\\d{${TOTAL_PHONE_DIGITS}}`}
+                  placeholder="5XXXXXXXX"
+                  className="w-full border border-[#e5def5] rounded-r-xl px-4 py-3 outline-none focus:border-[#5a189a]"
+                />
+              </div>
             </div>
 
             {/* Industry */}
@@ -237,3 +256,4 @@ export default function Demo() {
     </section>
   );
 }
+ 
