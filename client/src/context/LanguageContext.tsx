@@ -2540,7 +2540,7 @@ const translations: Record<Language, Record<string, string>> = {
     "demo.questions_placeholder": "اكتب سؤالك أو أي تفاصيل إضافية...",
     "demo.submit": "إرسال الطلب 🚀",
     "demo.loading": "⏳ جاري الإرسال...",
-    "demo.success": "سوف يتواصل معك الفريق خلال دقيقتين تم إرسال طلبك بنجاح ",
+    "demo.success": "سوف يتواصل معك وكيلونا الصوتي خلال دقيقتين، تم إرسال طلبك بنجاح",
     "demo.error": "❌ حدث خطأ. حاول مجدداً.",
     "demo.phone_digits_remaining": "يتبقى {n} أرقام",
 
@@ -3218,7 +3218,7 @@ const translations: Record<Language, Record<string, string>> = {
     "cc.feat2.highlight": "∞ مكالمة",
     "cc.feat3.title": "تأهيل ذكي",
     "cc.feat3.desc":
-      "أسئلة مخصصة .�حدد جدية العميل، احتياجاته، وأولويته قبل التحويل للفريق",
+    "أسئلة مخصصة تحدد جدية العميل، احتياجاته، وأولوياته قبل تحويله إلى الفريق المختص",
     "cc.feat3.highlight": "Lead Scoring",
     "cc.feat4.title": "تحويل سلس",
     "cc.feat4.desc":
@@ -3226,7 +3226,7 @@ const translations: Record<Language, Record<string, string>> = {
     "cc.feat4.highlight": "Warm Transfer",
     "cc.feat5.title": "تحليلات متقدمة",
     "cc.feat5.desc":
-      "لوحة تحكم شاملة: أسباب الاتصال، م��دل الحل، رضا العملاء، وتوقعات الذروة",
+    "لوحة تحكم شاملة: أسباب الاتصال، معدل الحل، رضا العملاء، وتوقعات الذروة.",
     "cc.feat5.highlight": "Real-time",
     "cc.feat6.title": "متعدد اللغات",
     "cc.feat6.desc": "عربي فصيح، لهجات سعودية، إنجليزي - سندس يتحدث لغة عميلك",
@@ -3334,7 +3334,7 @@ const translations: Record<Language, Record<string, string>> = {
     "re.sol3.title": "تأهيل ذكي",
     "re.sol3.desc": "أسئلة ذكية تحدد العملاء الجادين فوراً",
     "re.sol4.icon": "🚀",
-    "re.sol4.title": "ر�� فوري",
+    "re.sol4.title": "رد فوري",
     "re.sol4.desc": "العميل يحصل على معلومات قبل المنافسين",
 
     "re.stats.stat1.value": "+200K",
@@ -3346,7 +3346,7 @@ const translations: Record<Language, Record<string, string>> = {
     "re.stats.stat3.value": "45%",
     "re.stats.stat3.label": "زيادة في العملاء المؤهلين",
     "re.stats.stat3.icon": "📈",
-    "re.stats.stat4.value": "3 v�وانٍ",
+    "re.stats.stat4.value": "3 ثوانٍ",
     "re.stats.stat4.label": "متوسط وقت الرد",
     "re.stats.stat4.icon": "⚡",
 
@@ -3478,7 +3478,7 @@ const translations: Record<Language, Record<string, string>> = {
     "re.test1.company": "شركة الغامدي العقارية",
     "re.test1.metric": "+40% في الصفقات",
     "re.test2.quote":
-      "وفرنا راتب موظفين اث�ؽ�ين والآن العملاء يحصلون على رد أسرع وأكثر احترافية. ROI إيجابي من الشهر الأول.",
+    "وفّرنا تكلفة رواتب موظفين اثنين، وأصبح العملاء يحصلون على رد أسرع وأكثر احترافية. مع تحقيق عائد استثماري (ROI) إيجابي منذ الشهر الأول",
     "re.test2.name": "أ. سارة المطيري",
     "re.test2.role": "مديرة المبيعات",
     "re.test2.company": "دار الإعمار للتطوير",
@@ -3616,7 +3616,7 @@ const translations: Record<Language, Record<string, string>> = {
     "tech.segment.saas.desc": "برمجيات كخدمة واشتراكات",
     "tech.segment.saas.pain1": "تذاكر دعم متكررة عن نفس المشاكل",
     "tech.segment.saas.pain2": "Onboarding بطيء يقلل التحويل",
-    "tech.segment.saas.pain3": "دعم 24/7 متعدد اللغات r�كلف",
+    "tech.segment.saas.pain3": "دعم 24/7 متعدد اللغات بتكلفة أقل",
     "tech.segment.saas.sol1": "حل 70% من التذاكر تلقائياً من قاعدة المعرفة",
     "tech.segment.saas.sol2": "Onboarding تفاعلي يرفع التحويل 40%",
     "tech.segment.saas.sol3": "دعم بكل اللغات بتكلفة ثابتة",
@@ -3733,7 +3733,7 @@ const translations: Record<Language, Record<string, string>> = {
       "آسف على هذا الإزعاج! خلني أساعدك 🔧\n\nما نوع الملف اللي تحاول ترفعه؟ وما حجمه؟",
     "tech.usecase.ticket.msg4": "PDF حجمه 15 ميجا",
     "tech.usecase.ticket.msg5":
-      "وجدت المشكلة! 💡\n\nالحد الأقصى لحجم الملف في خطتك هو 10 ميجا.\n\nعندك خي��ري �:\n1️⃣ ضغط الملف ��لى أقل من 10 ميجا\n2️⃣ ترقية لخطة Pro (حد 100 ميجا)\n\nتبي أساعدك في أي منهم؟",
+      "وجدت المشكلة! 💡\n\nالحد الأقصى لحجم الملف في خطتك هو 10 ميجا.\n\nعندك خيارين\n1️⃣ ضغط الملف ��لى أقل من 10 ميجا\n2️⃣ ترقية لخطة Pro (حد 100 ميجا)\n\nتبي أساعدك في أي منهم؟",
     "tech.usecase.ticket.msg6": "كم سعر الترقية؟",
     "tech.usecase.ticket.msg7":
       "خطة Pro:\n💰 99 ر.س/شهر (بدل 149)\n✅ رفع ملفات حتى 100 ميجا\n✅ مساحة تخزين 50 جيجا\n✅ دعم أولوية\n\nتبي أفعّلها لك؟ أقدر أضيفها لحسابك الآن 😊",
@@ -4199,8 +4199,8 @@ const translations: Record<Language, Record<string, string>> = {
     "ins.segment.health.name": "التأمين الصحي",
     "ins.segment.health.desc": "تأمين طبي للأفراد والشركات",
     "ins.segment.health.pain1": "أسئلة كثيرة عن الشبكة الطبية والتغطية",
-    "ins.segment.health.pain2": "موافقات مسبقة تحتاج  �تابعة",
-    "ins.segment.health.pain3": "شكاوى تأخر الموافقا��",
+    "ins.segment.health.pain2": "موافقات مسبقة تحتاج متابعة.",
+    "ins.segment.health.pain3": "شكاوى تأخر الموافقات.",
     "ins.segment.health.sol1": "معلومات فورية عن المستشفيات والتغطية",
     "ins.segment.health.sol2": "متابعة حالة الموافقات تلقائياً",
     "ins.segment.health.sol3": "تصعيد الشكاوى العاجلة للمختصين",
