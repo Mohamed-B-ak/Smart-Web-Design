@@ -7,11 +7,10 @@ export default {
     extend: {
       borderRadius: {
         lg: ".5625rem", /* 9px */
-        md: ".375rem", /* 6px */
+        md: ".375rem",  /* 6px */
         sm: ".1875rem", /* 3px */
       },
       colors: {
-        // Flat / base colors (regular buttons)
         background: "hsl(var(--background) / <alpha-value>)",
         foreground: "hsl(var(--foreground) / <alpha-value>)",
         border: "hsl(var(--border) / <alpha-value>)",
@@ -73,7 +72,7 @@ export default {
         "sidebar-accent": {
           DEFAULT: "hsl(var(--sidebar-accent) / <alpha-value>)",
           foreground: "hsl(var(--sidebar-accent-foreground) / <alpha-value>)",
-          border: "var(--sidebar-accent-border)"
+          border: "var(--sidebar-accent-border)",
         },
         status: {
           online: "rgb(34 197 94)",
@@ -83,8 +82,10 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["'Plus Jakarta Sans'", "sans-serif"],
-        display: ["'Outfit'", "sans-serif"],
+        // ✅ Almarai pour les titres (font-display)
+        display: ["'Almarai'", "sans-serif"],
+        // ✅ DIN Next LT Arabic pour le texte normal (font-sans)
+        sans: ["'DINNextLTArabic'", "sans-serif"],
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
       },

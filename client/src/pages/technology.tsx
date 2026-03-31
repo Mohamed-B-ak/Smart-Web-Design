@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-
-// ==================== SONDOS AI - TECH & SOFTWARE LANDING PAGE ====================
-// Silicon Valley Grade | Violet Theme | Arabic RTL
+import { useLanguage } from "@/context/LanguageContext";
+import "../index.css";
 
 const SondosTech = () => {
+  const { t, lang } = useLanguage();
   const [activeSegment, setActiveSegment] = useState(0);
   const [activeFAQ, setActiveFAQ] = useState(null);
   const [statsVisible, setStatsVisible] = useState(false);
@@ -36,160 +36,157 @@ const SondosTech = () => {
     return () => observer.disconnect();
   }, []);
 
-  const colors = {
-    primary: "#5B4E9F",
-    primaryLight: "#6B5BB3",
-    accent: "#7C6FBF",
-    bgLight: "#EDE9F9",
-    bgLighter: "#F7F5FC",
-    textDark: "#2D2654",
-    textMuted: "#6B6B8D",
-    white: "#FFFFFF",
-    success: "#10B981",
-    warning: "#F59E0B",
-    danger: "#EF4444",
-    tech: "#8B5CF6",
-  };
-
   const segments = [
     {
       id: "saas",
-      name: "شركات SaaS",
+      name: t("tech.segment.saas.name"),
       icon: "☁️",
-      description: "برمجيات كخدمة واشتراكات",
+      description: t("tech.segment.saas.desc"),
       painPoints: [
-        "تذاكر دعم متكررة عن نفس المشاكل",
-        "Onboarding بطيء يقلل التحويل",
-        "دعم 24/7 متعدد اللغات مكلف",
+        t("tech.segment.saas.pain1"),
+        t("tech.segment.saas.pain2"),
+        t("tech.segment.saas.pain3"),
       ],
       solutions: [
-        "حل 70% من التذاكر تلقائياً من قاعدة المعرفة",
-        "Onboarding تفاعلي يرفع التحويل 40%",
-        "دعم بكل اللغات بتكلفة ثابتة",
+        t("tech.segment.saas.sol1"),
+        t("tech.segment.saas.sol2"),
+        t("tech.segment.saas.sol3"),
       ],
       stats: { tickets: "-70%", onboarding: "+40%", support: "24/7" },
       useCases: [
-        "الدعم الفني",
-        "Onboarding",
-        "شرح المميزات",
-        "الفواتير",
-        "التجديد",
+        t("tech.segment.saas.use1"),
+        t("tech.segment.saas.use2"),
+        t("tech.segment.saas.use3"),
+        t("tech.segment.saas.use4"),
+        t("tech.segment.saas.use5"),
       ],
     },
     {
       id: "startups",
-      name: "الشركات الناشئة",
+      name: t("tech.segment.startups.name"),
       icon: "🚀",
-      description: "Startups وScale-ups",
+      description: t("tech.segment.startups.desc"),
       painPoints: [
-        "فريق صغير لا يكفي للدعم 24/7",
-        "العملاء من مناطق زمنية مختلفة",
-        "الميزانية محدودة للتوظيف",
+        t("tech.segment.startups.pain1"),
+        t("tech.segment.startups.pain2"),
+        t("tech.segment.startups.pain3"),
       ],
       solutions: [
-        "دعم على مستوى Enterprise بتكلفة Startup",
-        "تغطية كل المناطق الزمنية",
-        "تكلفة ثابتة تنمو معك",
+        t("tech.segment.startups.sol1"),
+        t("tech.segment.startups.sol2"),
+        t("tech.segment.startups.sol3"),
       ],
       stats: { coverage: "24/7", cost: "-80%", scale: "∞" },
       useCases: [
-        "دعم العملاء",
-        "جمع Feedback",
-        "تأهيل العملاء",
-        "العروض التوضيحية",
+        t("tech.segment.startups.use1"),
+        t("tech.segment.startups.use2"),
+        t("tech.segment.startups.use3"),
+        t("tech.segment.startups.use4"),
       ],
     },
     {
       id: "enterprise",
-      name: "حلول المؤسسات",
+      name: t("tech.segment.enterprise.name"),
       icon: "🏢",
-      description: "Enterprise Software",
+      description: t("tech.segment.enterprise.desc"),
       painPoints: [
-        "عملاء VIP يتوقعون دعم فوري",
-        "تكاملات معقدة تحتاج متابعة",
-        "SLAs صارمة يصعب الالتزام بها",
+        t("tech.segment.enterprise.pain1"),
+        t("tech.segment.enterprise.pain2"),
+        t("tech.segment.enterprise.pain3"),
       ],
       solutions: [
-        "تعريف فوري لـ VIP ومعاملة خاصة",
-        "متابعة التكاملات والمشاريع",
-        "استجابة فورية تضمن SLA",
+        t("tech.segment.enterprise.sol1"),
+        t("tech.segment.enterprise.sol2"),
+        t("tech.segment.enterprise.sol3"),
       ],
-      stats: { vip: "فوري", sla: "99.9%", response: "< 30 ثانية" },
+      stats: {
+        vip: t("tech.stat.instant"),
+        sla: "99.9%",
+        response: t("tech.stat.under30"),
+      },
       useCases: [
-        "دعم VIP",
-        "متابعة المشاريع",
-        "التصعيد الذكي",
-        "تقارير العملاء",
+        t("tech.segment.enterprise.use1"),
+        t("tech.segment.enterprise.use2"),
+        t("tech.segment.enterprise.use3"),
+        t("tech.segment.enterprise.use4"),
       ],
     },
     {
       id: "apps",
-      name: "تطبيقات الجوال",
+      name: t("tech.segment.apps.name"),
       icon: "📱",
-      description: "iOS, Android, Cross-platform",
+      description: t("tech.segment.apps.desc"),
       painPoints: [
-        "تقييمات سلبية بسبب مشاكل غير محلولة",
-        "حجم كبير من استفسارات الاستخدام",
-        "صعوبة دعم إصدارات متعددة",
+        t("tech.segment.apps.pain1"),
+        t("tech.segment.apps.pain2"),
+        t("tech.segment.apps.pain3"),
       ],
       solutions: [
-        "رد سريع يحسّن التقييمات",
-        "إجابات فورية من Help Center",
-        "دعم مخصص لكل إصدار",
+        t("tech.segment.apps.sol1"),
+        t("tech.segment.apps.sol2"),
+        t("tech.segment.apps.sol3"),
       ],
-      stats: { rating: "+0.8⭐", reviews: "+150%", response: "فوري" },
+      stats: {
+        rating: "+0.8⭐",
+        reviews: "+150%",
+        response: t("tech.stat.instant"),
+      },
       useCases: [
-        "مشاكل التطبيق",
-        "الاشتراكات",
-        "استرجاع الحساب",
-        "شرح المميزات",
+        t("tech.segment.apps.use1"),
+        t("tech.segment.apps.use2"),
+        t("tech.segment.apps.use3"),
+        t("tech.segment.apps.use4"),
       ],
     },
     {
       id: "hosting",
-      name: "الاستضافة والسحابة",
+      name: t("tech.segment.hosting.name"),
       icon: "🖥️",
-      description: "Cloud, Hosting, Infrastructure",
+      description: t("tech.segment.hosting.desc"),
       painPoints: [
-        "مشاكل تقنية عاجلة 24/7",
-        "استفسارات التسعير والخطط",
-        "طلبات الترقية والتعديل",
+        t("tech.segment.hosting.pain1"),
+        t("tech.segment.hosting.pain2"),
+        t("tech.segment.hosting.pain3"),
       ],
       solutions: [
-        "دعم تقني أولي يحل 50% من المشاكل",
-        "حاسبة أسعار ذكية",
-        "ترقية وتعديل بالمحادثة",
+        t("tech.segment.hosting.sol1"),
+        t("tech.segment.hosting.sol2"),
+        t("tech.segment.hosting.sol3"),
       ],
       stats: { uptime: "99.9%", resolution: "-50%", sales: "+35%" },
       useCases: [
-        "الدعم الفني",
-        "التسعير",
-        "الترقية",
-        "مشاكل DNS",
-        "النسخ الاحتياطي",
+        t("tech.segment.hosting.use1"),
+        t("tech.segment.hosting.use2"),
+        t("tech.segment.hosting.use3"),
+        t("tech.segment.hosting.use4"),
+        t("tech.segment.hosting.use5"),
       ],
     },
     {
       id: "security",
-      name: "الأمن السيبراني",
+      name: t("tech.segment.security.name"),
       icon: "🔐",
-      description: "Security Solutions",
+      description: t("tech.segment.security.desc"),
       painPoints: [
-        "تنبيهات أمنية تحتاج استجابة فورية",
-        "عملاء قلقون يحتاجون طمأنة",
-        "شرح التقارير الأمنية معقد",
+        t("tech.segment.security.pain1"),
+        t("tech.segment.security.pain2"),
+        t("tech.segment.security.pain3"),
       ],
       solutions: [
-        "تصنيف التنبيهات وتصعيد العاجل",
-        "طمأنة العملاء بمعلومات دقيقة",
-        "شرح مبسط للتقارير والتوصيات",
+        t("tech.segment.security.sol1"),
+        t("tech.segment.security.sol2"),
+        t("tech.segment.security.sol3"),
       ],
-      stats: { alerts: "فوري", response: "< 1 دقيقة", clarity: "100%" },
+      stats: {
+        alerts: t("tech.stat.instant"),
+        response: t("tech.stat.under1min"),
+        clarity: "100%",
+      },
       useCases: [
-        "التنبيهات الأمنية",
-        "شرح التقارير",
-        "التوصيات",
-        "حالات الطوارئ",
+        t("tech.segment.security.use1"),
+        t("tech.segment.security.use2"),
+        t("tech.segment.security.use3"),
+        t("tech.segment.security.use4"),
       ],
     },
   ];
@@ -197,199 +194,121 @@ const SondosTech = () => {
   const features = [
     {
       icon: "📚",
-      title: "تكامل قاعدة المعرفة",
-      description:
-        "سندس يتصل بـ Notion, Confluence, Help Center ويجيب من وثائقك مباشرة",
-      highlight: "Knowledge Base",
+      title: t("tech.feature.kb.title"),
+      description: t("tech.feature.kb.desc"),
+      highlight: t("tech.feature.kb.highlight"),
     },
     {
       icon: "🎯",
-      title: "Onboarding تفاعلي",
-      description:
-        "يرشد العملاء الجدد خطوة بخطوة، يجيب أسئلتهم، ويضمن تفعيل ناجح",
-      highlight: "+40% تحويل",
+      title: t("tech.feature.onboarding.title"),
+      description: t("tech.feature.onboarding.desc"),
+      highlight: t("tech.feature.onboarding.highlight"),
     },
     {
       icon: "🎫",
-      title: "تقليل تذاكر الدعم",
-      description:
-        "حل 70% من الاستفسارات فوراً = فريقك يركز على المشاكل الحقيقية",
-      highlight: "-70% تذاكر",
+      title: t("tech.feature.tickets.title"),
+      description: t("tech.feature.tickets.desc"),
+      highlight: t("tech.feature.tickets.highlight"),
     },
     {
       icon: "🔄",
-      title: "تجديد الاشتراكات",
-      description: "تذكير ذكي قبل انتهاء الاشتراك + عروض مخصصة = تقليل Churn",
-      highlight: "-25% Churn",
+      title: t("tech.feature.renewal.title"),
+      description: t("tech.feature.renewal.desc"),
+      highlight: t("tech.feature.renewal.highlight"),
     },
     {
       icon: "💻",
-      title: "دعم تقني ذكي",
-      description:
-        "خطوات استكشاف الأخطاء، جمع المعلومات التقنية، وتصعيد ذكي للفريق",
-      highlight: "L1 Support",
+      title: t("tech.feature.techsupport.title"),
+      description: t("tech.feature.techsupport.desc"),
+      highlight: t("tech.feature.techsupport.highlight"),
     },
     {
       icon: "🌍",
-      title: "متعدد اللغات والمناطق",
-      description:
-        "دعم بكل اللغات الرئيسية، في كل المناطق الزمنية، بتكلفة واحدة",
-      highlight: "24/7 Global",
+      title: t("tech.feature.global.title"),
+      description: t("tech.feature.global.desc"),
+      highlight: t("tech.feature.global.highlight"),
     },
   ];
 
   const testimonials = [
     {
-      quote:
-        "كنا نستقبل 200 تذكرة يومياً. سندس يحل 70% منها تلقائياً الآن. فريق الدعم أصبح يركز على المشاكل المعقدة فقط.",
-      name: "م. أحمد الشهري",
-      role: "VP of Customer Success",
-      company: "منصة SaaS سعودية",
+      quote: t("tech.testimonial1.quote"),
+      name: t("tech.testimonial1.name"),
+      role: t("tech.testimonial1.role"),
+      company: t("tech.testimonial1.company"),
       image: "👨‍💻",
-      metric: "-70% تذاكر الدعم",
+      metric: t("tech.testimonial1.metric"),
     },
     {
-      quote:
-        "نسبة تحويل Trial كانت 12%. بعد Onboarding سندس التفاعلي، ارتفعت إلى 22%. فرق كبير في الإيرادات!",
-      name: "أ. سارة القحطاني",
-      role: "Growth Manager",
-      company: "تطبيق Fintech",
+      quote: t("tech.testimonial2.quote"),
+      name: t("tech.testimonial2.name"),
+      role: t("tech.testimonial2.role"),
+      company: t("tech.testimonial2.company"),
       image: "👩‍💼",
-      metric: "+83% تحويل Trial",
+      metric: t("tech.testimonial2.metric"),
     },
     {
-      quote:
-        "عملاؤنا من 20 دولة. كنا نحتاج فريق متعدد اللغات. سندس يخدمهم بـ 8 لغات 24/7 وتكلفته أقل من موظف واحد.",
-      name: "أ. فهد المالكي",
-      role: "CEO",
-      company: "شركة استضافة",
+      quote: t("tech.testimonial3.quote"),
+      name: t("tech.testimonial3.name"),
+      role: t("tech.testimonial3.role"),
+      company: t("tech.testimonial3.company"),
       image: "🧔",
-      metric: "8 لغات بتكلفة موظف",
+      metric: t("tech.testimonial3.metric"),
     },
   ];
 
   const faqs = [
-    {
-      q: "كيف يتصل سندس بقاعدة المعرفة الخاصة بنا؟",
-      a: "سندس يتكامل مباشرة مع Notion, Confluence, Zendesk, Intercom, GitBook, وأي Help Center عبر API. يقرأ مقالاتك ووثائقك ويجيب العملاء منها مباشرة. يتحدث تلقائياً عند تحديث المحتوى.",
-    },
-    {
-      q: "كيف يساعد في Onboarding العملاء الجدد؟",
-      a: "سندس يرحب بالعميل الجديد، يسأله عن أهدافه، يرشده للخطوات الأولى، يجيب أسئلته فوراً، ويتابع معه حتى يصبح مستخدم نشط. يمكنه إرسال رسائل متابعة عبر واتساب أو البريد.",
-    },
-    {
-      q: "هل يستطيع التعامل مع المشاكل التقنية؟",
-      a: "نعم! سندس مدرّب على سيناريوهات الدعم الفني: جمع معلومات النظام، خطوات استكشاف الأخطاء، فحص الـ Logs، وتصعيد ذكي للفريق مع كل التفاصيل. يحل 40-50% من المشاكل التقنية الشائعة تلقائياً.",
-    },
-    {
-      q: "كيف يتعامل مع العملاء VIP والـ Enterprise؟",
-      a: "سندس يتعرف على عملاء VIP من رقم الهاتف أو البريد. يعاملهم بطريقة مميزة، يمكنه الوصول لبياناتهم الخاصة، وتحويلهم لمدير الحساب المخصص إذا لزم الأمر - مع context كامل عن المحادثة.",
-    },
-    {
-      q: "ما الأنظمة التي يتكامل معها؟",
-      a: "سندس يتكامل مع: CRM (Salesforce, HubSpot, Pipedrive)، Help Desk (Zendesk, Freshdesk, Intercom)، Knowledge Base (Notion, Confluence)، Communication (Slack, Teams)، و Billing (Stripe, Paddle). نوفر Webhooks و API لأي تكامل مخصص.",
-    },
-    {
-      q: "كم يستغرق التفعيل؟",
-      a: "التفعيل الأساسي (FAQ + Knowledge Base) خلال 3-5 أيام. التكاملات المتقدمة (CRM, Billing) تحتاج 1-2 أسبوع. نوفر فريق Customer Success يساعدك في الإعداد والتخصيص.",
-    },
+    { q: t("tech.faq1.q"), a: t("tech.faq1.a") },
+    { q: t("tech.faq2.q"), a: t("tech.faq2.a") },
+    { q: t("tech.faq3.q"), a: t("tech.faq3.a") },
+    { q: t("tech.faq4.q"), a: t("tech.faq4.a") },
+    { q: t("tech.faq5.q"), a: t("tech.faq5.a") },
+    { q: t("tech.faq6.q"), a: t("tech.faq6.a") },
   ];
 
   const stats = [
-    { value: "500K+", label: "محادثة دعم شهرياً", icon: "💬" },
-    { value: "100+", label: "شركة تقنية", icon: "🏢" },
-    { value: "-70%", label: "تقليل تذاكر الدعم", icon: "🎫" },
-    { value: "+40%", label: "تحويل Onboarding", icon: "🎯" },
+    { value: "500K+", label: t("tech.stat.conversations"), icon: "💬" },
+    { value: "100+", label: t("tech.stat.companies"), icon: "🏢" },
+    { value: "-70%", label: t("tech.stat.tickets"), icon: "🎫" },
+    { value: "+40%", label: t("tech.stat.conversion"), icon: "🎯" },
   ];
 
   const techStack = [
-    { name: "Zendesk", icon: "🎫", type: "Help Desk" },
-    { name: "Intercom", icon: "💬", type: "Help Desk" },
-    { name: "Freshdesk", icon: "🎧", type: "Help Desk" },
-    { name: "Salesforce", icon: "☁️", type: "CRM" },
-    { name: "HubSpot", icon: "🧡", type: "CRM" },
-    { name: "Notion", icon: "📝", type: "Knowledge" },
-    { name: "Confluence", icon: "📚", type: "Knowledge" },
-    { name: "Slack", icon: "💼", type: "Communication" },
-    { name: "Stripe", icon: "💳", type: "Billing" },
-    { name: "GitHub", icon: "🐙", type: "Dev" },
-  ];
-
-  const supportTiers = [
-    {
-      tier: "L0",
-      name: "Self-Service",
-      percentage: 40,
-      description: "FAQ، Knowledge Base، إجابات فورية",
-      color: colors.success,
-    },
-    {
-      tier: "L1",
-      name: "AI Support",
-      percentage: 30,
-      description: "استكشاف أخطاء، جمع معلومات، حلول موجهة",
-      color: colors.primary,
-    },
-    {
-      tier: "L2",
-      name: "Human Support",
-      percentage: 20,
-      description: "مشاكل معقدة تحتاج خبرة بشرية",
-      color: colors.warning,
-    },
-    {
-      tier: "L3",
-      name: "Escalation",
-      percentage: 10,
-      description: "مشاكل حرجة، Engineering، VIP",
-      color: colors.danger,
-    },
+    { name: "Zendesk", icon: "🎫", type: t("tech.integration.helpdesk") },
+    { name: "Intercom", icon: "💬", type: t("tech.integration.helpdesk") },
+    { name: "Freshdesk", icon: "🎧", type: t("tech.integration.helpdesk") },
+    { name: "Salesforce", icon: "☁️", type: t("tech.integration.crm") },
+    { name: "HubSpot", icon: "🧡", type: t("tech.integration.crm") },
+    { name: "Notion", icon: "📝", type: t("tech.integration.knowledge") },
+    { name: "Confluence", icon: "📚", type: t("tech.integration.knowledge") },
+    { name: "Slack", icon: "💼", type: t("tech.integration.communication") },
+    { name: "Stripe", icon: "💳", type: t("tech.integration.billing") },
+    { name: "GitHub", icon: "🐙", type: t("tech.integration.dev") },
   ];
 
   const useCaseDemo = [
     {
-      title: "🎫 حل تذكرة دعم",
+      title: t("tech.usecase.ticket.title"),
       conversation: [
-        { role: "ai", text: "مرحباً! دعم TechApp 🚀\nكيف أقدر أساعدك اليوم؟" },
-        { role: "user", text: "التطبيق يعطيني خطأ لما أحاول أرفع ملف" },
-        {
-          role: "ai",
-          text: "آسف على هذا الإزعاج! خلني أساعدك 🔧\n\nما نوع الملف اللي تحاول ترفعه؟ وما حجمه؟",
-        },
-        { role: "user", text: "PDF حجمه 15 ميجا" },
-        {
-          role: "ai",
-          text: "وجدت المشكلة! 💡\n\nالحد الأقصى لحجم الملف في خطتك هو 10 ميجا.\n\nعندك خيارين:\n1️⃣ ضغط الملف إلى أقل من 10 ميجا\n2️⃣ ترقية لخطة Pro (حد 100 ميجا)\n\nتبي أساعدك في أي منهم؟",
-        },
-        { role: "user", text: "كم سعر الترقية؟" },
-        {
-          role: "ai",
-          text: "خطة Pro:\n💰 99 ر.س/شهر (بدل 149)\n✅ رفع ملفات حتى 100 ميجا\n✅ مساحة تخزين 50 جيجا\n✅ دعم أولوية\n\nتبي أفعّلها لك؟ أقدر أضيفها لحسابك الآن 😊",
-        },
+        { role: "ai", text: t("tech.usecase.ticket.msg1") },
+        { role: "user", text: t("tech.usecase.ticket.msg2") },
+        { role: "ai", text: t("tech.usecase.ticket.msg3") },
+        { role: "user", text: t("tech.usecase.ticket.msg4") },
+        { role: "ai", text: t("tech.usecase.ticket.msg5") },
+        { role: "user", text: t("tech.usecase.ticket.msg6") },
+        { role: "ai", text: t("tech.usecase.ticket.msg7") },
       ],
     },
     {
-      title: "🎯 Onboarding عميل جديد",
+      title: t("tech.usecase.onboarding.title"),
       conversation: [
-        {
-          role: "ai",
-          text: "مرحباً بك في TechApp! 🎉\n\nأنا هنا أساعدك تبدأ بسرعة.\n\nإيش الهدف الرئيسي من استخدامك للتطبيق؟",
-        },
-        { role: "user", text: "أبغى أنظم مشاريع فريقي" },
-        {
-          role: "ai",
-          text: "اختيار ممتاز! 👍\n\nخلني أرشدك للخطوات الأولى:\n\n1️⃣ أنشئ مشروعك الأول\n2️⃣ أضف أعضاء الفريق\n3️⃣ أنشئ أول مهمة\n\nتبي أبدأ معك الخطوة الأولى؟",
-        },
-        { role: "user", text: "إيه" },
-        {
-          role: "ai",
-          text: 'ممتاز! 🚀\n\nاضغط على "مشروع جديد" في الزاوية العليا.\n\nسمّه مثلاً "مشروع تجريبي"\n\nجاهز؟ أخبرني لما تنتهي 😊',
-        },
-        { role: "user", text: "تم" },
-        {
-          role: "ai",
-          text: 'رائع! 🎊\n\nالآن أضف أعضاء فريقك:\n1. اضغط على "إعدادات المشروع"\n2. اختر "أعضاء الفريق"\n3. أدخل بريدهم الإلكتروني\n\nنصيحة: يمكنك تحديد صلاحيات مختلفة لكل عضو 💡',
-        },
+        { role: "ai", text: t("tech.usecase.onboarding.msg1") },
+        { role: "user", text: t("tech.usecase.onboarding.msg2") },
+        { role: "ai", text: t("tech.usecase.onboarding.msg3") },
+        { role: "user", text: t("tech.usecase.onboarding.msg4") },
+        { role: "ai", text: t("tech.usecase.onboarding.msg5") },
+        { role: "user", text: t("tech.usecase.onboarding.msg6") },
+        { role: "ai", text: t("tech.usecase.onboarding.msg7") },
       ],
     },
   ];
@@ -428,295 +347,245 @@ const SondosTech = () => {
 
   const roiResults = calculateROI();
 
+  const statKeyLabel = (key: string) => {
+    const labels: Record<string, string> = {
+      tickets: t("tech.stat.tickets"),
+      onboarding: t("tech.stat.onboarding"),
+      support: t("tech.stat.support"),
+      coverage: t("tech.stat.coverage"),
+      cost: t("tech.stat.cost"),
+      scale: t("tech.stat.scale"),
+      vip: t("tech.stat.vip"),
+      sla: "SLA",
+      response: t("tech.stat.response"),
+      rating: t("tech.stat.rating"),
+      reviews: t("tech.stat.reviews"),
+      uptime: "Uptime",
+      resolution: t("tech.stat.resolution"),
+      sales: t("tech.stat.sales"),
+      alerts: t("tech.stat.alerts"),
+      clarity: t("tech.stat.clarity"),
+    };
+    return labels[key] ?? key;
+  };
+
   return (
-    <div className="min-h-screen bg-white font-sans" dir="rtl">
+    <div
+      dir={lang === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen font-arabic bg-[var(--bg)] text-[var(--t1)]"
+    >
       {/* ==================== HERO SECTION ==================== */}
-      <section
-        className="relative pt-24 pb-20 overflow-hidden"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="absolute inset-0 overflow-hidden">
-          <div
-            className="absolute top-20 right-10 w-72 h-72 rounded-full blur-3xl opacity-40"
-            style={{ background: colors.bgLight }}
-          ></div>
-          <div
-            className="absolute bottom-20 left-10 w-96 h-96 rounded-full blur-3xl opacity-30"
-            style={{ background: colors.accent }}
-          ></div>
-        </div>
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden">
+        {/* gradient glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(90,24,154,0.15) 0%, transparent 70%)",
+          }}
+        />
+        {/* grid */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(90,24,154,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(90,24,154,.04) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+            maskImage:
+              "radial-gradient(ellipse at center, black 20%, transparent 65%)",
+          }}
+        />
+        {/* blobs */}
+        <div
+          className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20 float-gentle"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(90,24,154,0.3), transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute top-40 right-[15%] w-24 h-24 rounded-full opacity-15 float-slow"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(157,78,221,0.3), transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute bottom-32 left-[20%] w-20 h-20 rounded-full opacity-10 float-gentle"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(123,44,191,0.4), transparent 70%)",
+          }}
+        />
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col items-center min-h-[70vh] justify-center">
-            <div className="text-center w-full">
-              <div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8"
-                style={{
-                  background: colors.white,
-                  color: colors.primary,
-                  boxShadow: "0 2px 12px rgba(91, 78, 159, 0.15)",
-                }}
-              >
-                <span className="text-lg">💻</span>
-                <span>دعم ذكي لشركات التقنية</span>
-              </div>
-
-              <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
-                style={{ color: colors.textDark }}
-              >
-                قلّل تذاكر الدعم
-                <span
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  {" "}
-                  70%{" "}
-                </span>
-                <br />
-                وارفع التحويل 40%
-              </h1>
-
-              <p
-                className="text-lg sm:text-xl mb-10 leading-relaxed max-w-2xl mx-auto"
-                style={{ color: colors.textMuted }}
-              >
-                سندس يحل استفسارات العملاء من قاعدة معرفتك، يساعد في Onboarding،
-                ويقدم دعم تقني Level 1 - 24/7 بكل اللغات
-              </p>
-
-              <div className="flex flex-wrap justify-center gap-4 mb-10">
-                {[
-                  { value: "-70%", label: "تذاكر الدعم", icon: "🎫" },
-                  { value: "+40%", label: "تحويل Trial", icon: "🎯" },
-                  { value: "24/7", label: "دعم عالمي", icon: "🌍" },
-                ].map((stat, i) => (
-                  <div
-                    key={i}
-                    className="px-5 py-4 rounded-2xl text-center"
-                    style={{
-                      background: "white",
-                      boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-                    }}
-                  >
-                    <div className="text-2xl mb-1">{stat.icon}</div>
-                    <div
-                      className="text-xl font-bold"
-                      style={{ color: colors.primary }}
-                    >
-                      {stat.value}
-                    </div>
-                    <div
-                      className="text-xs"
-                      style={{ color: colors.textMuted }}
-                    >
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  className="px-8 py-4 rounded-2xl font-semibold text-lg text-white shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                    boxShadow: `0 10px 40px ${colors.primary}40`,
-                  }}
-                >
-                  ابدأ مجاناً - 14 يوم
-                </button>
-                <button
-                  className="px-8 py-4 rounded-2xl font-semibold border-2 flex items-center justify-center gap-3 transition-all duration-300 hover:shadow-lg hover:bg-white"
-                  style={{
-                    borderColor: colors.primary,
-                    color: colors.primary,
-                    background: "rgba(255,255,255,0.8)",
-                  }}
-                >
-                  <span className="text-xl">📖</span>
-                  <span>اقرأ التوثيق</span>
-                </button>
-              </div>
-
-              <div className="mt-10 flex flex-wrap justify-center gap-3">
-                <span className="text-sm" style={{ color: colors.textMuted }}>
-                  يتكامل مع:
-                </span>
-                {["Zendesk", "Intercom", "Notion", "Slack"].map((tool, i) => (
-                  <span
-                    key={i}
-                    className="px-3 py-1 rounded-full text-xs font-medium"
-                    style={{
-                      background: colors.bgLight,
-                      color: colors.primary,
-                    }}
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
+        <div className="relative z-10 max-w-[820px] mx-auto">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
+            {t("tech.hero.badge")}
           </div>
-        </div>
 
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            viewBox="0 0 1440 100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            className="w-full h-16"
-          >
-            <path
-              d="M0 100L60 90C120 80 240 60 360 55C480 50 600 60 720 65C840 70 960 70 1080 65C1200 60 1320 50 1380 45L1440 40V100H1380C1320 100 1200 100 1080 100C960 100 840 100 720 100C600 100 480 100 360 100C240 100 120 100 60 100H0Z"
-              fill="white"
-            />
-          </svg>
+          {/* Headline */}
+          <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto animate-fade-up animation-delay-100">
+            {t("tech.hero.title1")}{" "}
+            <span className="text-[#9d4edd]">{t("tech.hero.title2")}</span>
+            <br />
+            {t("tech.hero.title3")}
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[var(--t1)] max-w-[580px] mx-auto leading-relaxed mb-4 animate-fade-up animation-delay-150">
+            {t("tech.hero.subtitle")}
+          </p>
+
+          {/* Social proof */}
+          <p className="text-[clamp(14px,1.6vw,17px)] text-[var(--t2)] max-w-[680px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
+            {t("tech.hero.proof")}
+          </p>
+
+          {/* Stats row */}
+          <div className="flex flex-wrap justify-center gap-4 mb-10 animate-fade-up animation-delay-300">
+            {[
+              { value: "-70%", label: t("tech.stat.tickets"), icon: "🎫" },
+              { value: "+40%", label: t("tech.stat.conversion"), icon: "🎯" },
+              { value: "24/7", label: t("tech.stat.global"), icon: "🌍" },
+            ].map((stat, i) => (
+              <div
+                key={i}
+                className="px-5 py-4 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all hover:shadow-xl hover:-translate-y-1"
+              >
+                <div className="text-2xl mb-1">{stat.icon}</div>
+                <div className="text-xl font-bold text-[#9d4edd]">
+                  {stat.value}
+                </div>
+                <div className="text-xs text-[var(--t3)]">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="flex items-center justify-center gap-3.5 mb-10 flex-wrap animate-fade-up animation-delay-300">
+            <a
+              href="/demo"
+              className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
+            >
+              {t("tech.hero.cta")}
+            </a>
+          </div>
+
+          {/* Integrations hint */}
+          <div className="flex flex-wrap justify-center items-center gap-3 animate-fade-up animation-delay-300">
+            <span className="text-sm text-[var(--t2)]">
+              {t("tech.integrations.with")}:
+            </span>
+            {["Zendesk", "Intercom", "Notion", "Slack"].map((tool, i) => (
+              <span
+                key={i}
+                className="px-3 py-1 rounded-full text-xs font-medium bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]"
+              >
+                {tool}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ==================== PROBLEMS & SOLUTIONS ==================== */}
-      <section className="py-20 bg-white">
+      {/* ==================== PROBLEMS SECTION ==================== */}
+      <section className="py-20 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              تحديات شركات
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                التقنية
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              {t("tech.problems.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.problems.title2")}
               </span>
             </h2>
           </div>
 
+          {/* Problems */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {[
               {
                 icon: "🎫",
-                title: "تذاكر متكررة",
-                desc: "نفس الأسئلة مراراً تستهلك وقت الفريق",
-                color: colors.danger,
+                title: t("tech.problem1.title"),
+                desc: t("tech.problem1.desc"),
               },
               {
                 icon: "🐌",
-                title: "Onboarding بطيء",
-                desc: "عملاء جدد يضيعون = Trial لا يتحول",
-                color: colors.warning,
+                title: t("tech.problem2.title"),
+                desc: t("tech.problem2.desc"),
               },
               {
                 icon: "🌍",
-                title: "مناطق زمنية",
-                desc: "عملاء عالميين يحتاجون دعم 24/7",
-                color: colors.accent,
+                title: t("tech.problem3.title"),
+                desc: t("tech.problem3.desc"),
               },
               {
                 icon: "💸",
-                title: "تكلفة الدعم",
-                desc: "فريق كبير للدعم = تكلفة عالية",
-                color: colors.primary,
+                title: t("tech.problem4.title"),
+                desc: t("tech.problem4.desc"),
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl border-2 border-dashed text-center transition-all hover:shadow-lg"
-                style={{ borderColor: item.color + "40" }}
+                className="p-6 rounded-2xl text-center transition-all hover:shadow-lg bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(239,68,68,0.2)] hover:border-[rgba(239,68,68,0.35)]"
               >
-                <div
-                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl"
-                  style={{ background: item.color + "15" }}
-                >
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl bg-[rgba(239,68,68,0.07)]">
                   {item.icon}
                 </div>
-                <h3
-                  className="font-bold mb-2"
-                  style={{ color: colors.textDark }}
-                >
+                <h3 className="font-bold mb-2 text-[var(--t1)]">
                   {item.title}
                 </h3>
-                <p className="text-sm" style={{ color: colors.textMuted }}>
-                  {item.desc}
-                </p>
+                <p className="text-sm text-[var(--t2)]">{item.desc}</p>
               </div>
             ))}
           </div>
 
           <div className="text-center my-12">
-            <div
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl"
-              style={{ background: colors.bgLight }}
-            >
+            <div className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.15)]">
               <span className="text-2xl">⬇️</span>
-              <span className="font-bold" style={{ color: colors.primary }}>
-                سندس يحل كل هذا
+              <span className="font-bold text-[#9d4edd]">
+                {t("tech.problems.solution")}
               </span>
               <span className="text-2xl">⬇️</span>
             </div>
           </div>
 
+          {/* Solutions */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 icon: "🤖",
-                title: "-70% تذاكر",
-                desc: "إجابات فورية من قاعدة المعرفة",
-                color: colors.success,
+                title: t("tech.solution1.title"),
+                desc: t("tech.solution1.desc"),
               },
               {
                 icon: "🎯",
-                title: "+40% تحويل",
-                desc: "Onboarding تفاعلي يرشد العميل",
-                color: colors.primary,
+                title: t("tech.solution2.title"),
+                desc: t("tech.solution2.desc"),
               },
               {
                 icon: "🌐",
-                title: "24/7 عالمي",
-                desc: "كل اللغات، كل المناطق الزمنية",
-                color: colors.accent,
+                title: t("tech.solution3.title"),
+                desc: t("tech.solution3.desc"),
               },
               {
                 icon: "💰",
-                title: "-80% تكلفة",
-                desc: "دعم Enterprise بتكلفة Startup",
-                color: colors.warning,
+                title: t("tech.solution4.title"),
+                desc: t("tech.solution4.desc"),
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl text-center transition-all hover:shadow-xl hover:-translate-y-1"
-                style={{
-                  background: item.color + "10",
-                  border: `2px solid ${item.color}30`,
-                }}
+                className="p-6 rounded-2xl text-center transition-all hover:shadow-xl hover:-translate-y-1 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.2)]"
               >
-                <div
-                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl text-white"
-                  style={{ background: item.color }}
-                >
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl text-white gradient-bg">
                   {item.icon}
                 </div>
-                <h3
-                  className="font-bold mb-2"
-                  style={{ color: colors.textDark }}
-                >
+                <h3 className="font-bold mb-2 text-[var(--t1)]">
                   {item.title}
                 </h3>
-                <p className="text-sm" style={{ color: colors.textMuted }}>
-                  {item.desc}
-                </p>
+                <p className="text-sm text-[var(--t2)]">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -724,34 +593,18 @@ const SondosTech = () => {
       </section>
 
       {/* ==================== STATS SECTION ==================== */}
-      <section
-        id="stats-section"
-        className="py-16"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="stats-section" className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, idx) => (
               <div key={idx} className="text-center group">
-                <div
-                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl transition-transform group-hover:scale-110"
-                  style={{
-                    background: "white",
-                    boxShadow: "0 4px 14px rgba(0,0,0,0.05)",
-                  }}
-                >
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_4px_14px_rgba(0,0,0,0.05)] transition-transform group-hover:scale-110">
                   {stat.icon}
                 </div>
-                <div
-                  className="text-3xl sm:text-4xl font-bold mb-2"
-                  style={{ color: colors.primary }}
-                >
-                  {statsVisible ? stat.value : "0"}
+                <div className="text-3xl sm:text-4xl font-bold mb-2 text-[#9d4edd]">
+                  {statsVisible ? stat.value : "—"}
                 </div>
-                <div
-                  className="text-sm font-medium"
-                  style={{ color: colors.textMuted }}
-                >
+                <div className="text-sm font-medium text-[var(--t2)]">
                   {stat.label}
                 </div>
               </div>
@@ -761,120 +614,88 @@ const SondosTech = () => {
       </section>
 
       {/* ==================== SEGMENTS SECTION ==================== */}
-      <section id="الحلول" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="solutions" className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              حلول لكل نوع
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                شركة تقنية
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              {t("tech.segments.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.segments.title2")}
               </span>
             </h2>
+            <p className="text-[var(--t2)] text-lg">
+              {t("tech.segments.subtitle")}
+            </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {segments.map((segment, idx) => (
-              <button
-                key={segment.id}
-                onClick={() => setActiveSegment(idx)}
-                className="px-4 py-3 rounded-xl flex items-center gap-2 font-semibold transition-all duration-300 text-sm"
-                style={{
-                  background:
-                    activeSegment === idx
-                      ? `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`
-                      : "white",
-                  color: activeSegment === idx ? "white" : colors.textDark,
-                  boxShadow:
-                    activeSegment === idx
-                      ? `0 8px 24px ${colors.primary}40`
-                      : "0 2px 12px rgba(0,0,0,0.06)",
-                }}
-              >
-                <span className="text-xl">{segment.icon}</span>
-                <span className="hidden sm:inline">{segment.name}</span>
-              </button>
-            ))}
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {segments.map((segment, idx) => {
+              const isActive = activeSegment === idx;
+              return (
+                <button
+                  key={segment.id}
+                  onClick={() => setActiveSegment(idx)}
+                  className={`px-5 py-2.5 rounded-full flex items-center gap-2 text-[13px] font-medium transition-all duration-300 border backdrop-blur-sm ${
+                    isActive
+                      ? "gradient-bg glow text-white border-[rgba(90,24,154,0.4)]"
+                      : "bg-[rgba(90,24,154,0.04)] border-[rgba(90,24,154,0.12)] text-[var(--t2)] hover:border-[rgba(90,24,154,0.25)]"
+                  }`}
+                >
+                  <span className="text-2xl">{segment.icon}</span>
+                  <span>{segment.name}</span>
+                </button>
+              );
+            })}
           </div>
 
-          <div
-            className="rounded-3xl overflow-hidden shadow-2xl"
-            style={{ boxShadow: `0 20px 60px ${colors.primary}15` }}
-          >
+          <div className="rounded-3xl overflow-hidden border border-[rgba(90,24,154,0.15)] shadow-[0_20px_60px_rgba(90,24,154,0.12)]">
             <div className="grid md:grid-cols-2">
-              <div className="p-8 sm:p-10" style={{ background: "#FEF2F2" }}>
+              {/* pain */}
+              <div className="p-8 sm:p-10 bg-[rgba(239,68,68,0.05)] border-b md:border-b-0 md:border-l border-[rgba(90,24,154,0.08)]">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">😫</span>
-                  <h3
-                    className="text-xl font-bold"
-                    style={{ color: "#991B1B" }}
-                  >
-                    التحديات
+                  <h3 className="text-xl font-bold text-red-400">
+                    {t("tech.segments.pain")}
                   </h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].painPoints.map((point, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="text-red-500 mt-1">✗</span>
-                      <span style={{ color: "#7F1D1D" }}>{point}</span>
+                      <span className="text-red-400 mt-1">✗</span>
+                      <span className="text-[var(--t2)]">{point}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div
-                className="p-8 sm:p-10"
-                style={{ background: colors.bgLight }}
-              >
+              {/* solution */}
+              <div className="p-8 sm:p-10 bg-[rgba(90,24,154,0.04)]">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">🎉</span>
-                  <h3
-                    className="text-xl font-bold"
-                    style={{ color: colors.primary }}
-                  >
-                    مع سندس
+                  <h3 className="text-xl font-bold text-[#9d4edd]">
+                    {t("tech.segments.solution")}
                   </h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].solutions.map((solution, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span style={{ color: colors.success }}>✓</span>
-                      <span style={{ color: colors.textDark }}>{solution}</span>
+                      <span className="text-[#9d4edd]">✓</span>
+                      <span className="text-[var(--t1)]">{solution}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            <div
-              className="p-6 bg-white border-t"
-              style={{ borderColor: colors.bgLight }}
-            >
+            <div className="p-6 bg-[var(--bg)] border-t border-[rgba(90,24,154,0.08)]">
               <div className="flex flex-wrap items-center justify-between gap-6">
                 <div>
-                  <div
-                    className="text-sm font-medium mb-2"
-                    style={{ color: colors.textMuted }}
-                  >
-                    حالات الاستخدام:
+                  <div className="text-sm font-medium mb-2 text-[var(--t2)]">
+                    {t("tech.segments.useCases")}:
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {segments[activeSegment].useCases.map((useCase, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 rounded-full text-sm"
-                        style={{
-                          background: colors.bgLight,
-                          color: colors.primary,
-                        }}
+                        className="px-3 py-1 rounded-full text-sm bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]"
                       >
                         {useCase}
                       </span>
@@ -885,49 +706,11 @@ const SondosTech = () => {
                   {Object.entries(segments[activeSegment].stats).map(
                     ([key, value], i) => (
                       <div key={i} className="text-center">
-                        <div
-                          className="text-2xl font-bold"
-                          style={{ color: colors.primary }}
-                        >
+                        <div className="text-2xl font-bold text-[#9d4edd]">
                           {value}
                         </div>
-                        <div
-                          className="text-xs"
-                          style={{ color: colors.textMuted }}
-                        >
-                          {key === "tickets"
-                            ? "التذاكر"
-                            : key === "onboarding"
-                              ? "Onboarding"
-                              : key === "support"
-                                ? "الدعم"
-                                : key === "coverage"
-                                  ? "التغطية"
-                                  : key === "cost"
-                                    ? "التكلفة"
-                                    : key === "scale"
-                                      ? "التوسع"
-                                      : key === "vip"
-                                        ? "VIP"
-                                        : key === "sla"
-                                          ? "SLA"
-                                          : key === "response"
-                                            ? "الاستجابة"
-                                            : key === "rating"
-                                              ? "التقييم"
-                                              : key === "reviews"
-                                                ? "المراجعات"
-                                                : key === "uptime"
-                                                  ? "Uptime"
-                                                  : key === "resolution"
-                                                    ? "الحل"
-                                                    : key === "sales"
-                                                      ? "المبيعات"
-                                                      : key === "alerts"
-                                                        ? "التنبيهات"
-                                                        : key === "clarity"
-                                                          ? "الوضوح"
-                                                          : key}
+                        <div className="text-sm text-[var(--t3)]">
+                          {statKeyLabel(key)}
                         </div>
                       </div>
                     ),
@@ -940,28 +723,13 @@ const SondosTech = () => {
       </section>
 
       {/* ==================== FEATURES SECTION ==================== */}
-      <section
-        id="المميزات"
-        className="py-24"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="features" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              مميزات مصممة
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                للتقنية
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              {t("tech.features.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.features.title2")}
               </span>
             </h2>
           </div>
@@ -969,35 +737,20 @@ const SondosTech = () => {
             {features.map((feature, idx) => (
               <div
                 key={idx}
-                className="group p-8 rounded-3xl bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                className="group p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-[rgba(90,24,154,0.3)] ai-glow"
               >
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: colors.bgLight }}
-                >
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 bg-[rgba(90,24,154,0.06)] transition-transform duration-300 group-hover:scale-110">
                   {feature.icon}
                 </div>
-                <h3
-                  className="text-xl font-bold mb-3"
-                  style={{ color: colors.textDark }}
-                >
+                <h3 className="text-xl font-bold mb-3 text-[var(--t1)]">
                   {feature.title}
                 </h3>
-                <p
-                  className="text-sm mb-5 leading-relaxed"
-                  style={{ color: colors.textMuted }}
-                >
+                <p className="text-sm mb-5 leading-relaxed text-[var(--t2)]">
                   {feature.description}
                 </p>
-                <div
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold"
-                  style={{
-                    background: `${colors.primary}15`,
-                    color: colors.primary,
-                  }}
-                >
+                <span className="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]">
                   {feature.highlight}
-                </div>
+                </span>
               </div>
             ))}
           </div>
@@ -1005,24 +758,13 @@ const SondosTech = () => {
       </section>
 
       {/* ==================== USE CASES ==================== */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="usecases" className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              شاهد سندس
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                n�ثناء العمل
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              {t("tech.usecases.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.usecases.title2")}
               </span>
             </h2>
           </div>
@@ -1030,26 +772,21 @@ const SondosTech = () => {
             {useCaseDemo.map((useCase, idx) => (
               <div
                 key={idx}
-                className="rounded-3xl overflow-hidden shadow-xl"
-                style={{ background: colors.bgLighter }}
+                className="rounded-3xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_0_40px_rgba(90,24,154,0.08)]"
               >
-                <div
-                  className="px-6 py-4 font-bold flex items-center gap-2"
-                  style={{ background: colors.bgLight, color: colors.textDark }}
-                >
+                <div className="px-6 py-4 font-bold bg-[rgba(90,24,154,0.06)] text-[var(--t1)] border-b border-[rgba(90,24,154,0.08)]">
                   {useCase.title}
                 </div>
                 <div className="p-6 space-y-4 max-h-[450px] overflow-y-auto">
                   {useCase.conversation.map((msg, i) => (
                     <div
                       key={i}
-                      className={`p-4 rounded-2xl text-sm ${msg.role === "ai" ? "rounded-tr-md max-w-[85%] mr-auto" : "rounded-tl-md max-w-[75%] ml-auto"}`}
-                      style={{
-                        background:
-                          msg.role === "ai" ? "white" : colors.primary,
-                        color: msg.role === "ai" ? colors.textDark : "white",
-                        whiteSpace: "pre-line",
-                      }}
+                      className={`p-4 rounded-2xl text-sm ${
+                        msg.role === "ai"
+                          ? "rounded-tr-md max-w-[85%] mr-auto bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.1)] text-[var(--t1)]"
+                          : "rounded-tl-md max-w-[75%] ml-auto gradient-bg text-white"
+                      }`}
+                      style={{ whiteSpace: "pre-line" }}
                     >
                       {msg.text}
                     </div>
@@ -1062,397 +799,81 @@ const SondosTech = () => {
       </section>
 
       {/* ==================== INTEGRATIONS ==================== */}
-      <section
-        id="التكاملات"
-        className="py-24"
-        style={{ background: colors.bgLighter }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section id="integrations" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              يتكامل مع
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                أدواتك المفضلة
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              {t("tech.integrations.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.integrations.title2")}
               </span>
             </h2>
-            <p style={{ color: colors.textMuted }}>
-              ربط مباشر مع أشهر أدوات الدعم والتطوير
+            <p className="text-[var(--t2)]">
+              {t("tech.integrations.subtitle")}
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             {techStack.map((tool, idx) => (
               <div
                 key={idx}
-                className="px-6 py-4 rounded-2xl bg-white border-2 text-center transition-all hover:shadow-xl hover:-translate-y-1"
-                style={{ borderColor: colors.bgLight }}
+                className="px-6 py-4 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
                 <div className="text-3xl mb-2">{tool.icon}</div>
-                <div
-                  className="font-semibold"
-                  style={{ color: colors.textDark }}
-                >
+                <div className="font-semibold text-[var(--t1)]">
                   {tool.name}
                 </div>
-                <div
-                  className="text-xs mt-1"
-                  style={{ color: colors.textMuted }}
-                >
+                <div className="text-xs mt-1 px-2 py-0.5 rounded-full inline-block bg-[rgba(90,24,154,0.08)] text-[#9d4edd]">
                   {tool.type}
                 </div>
               </div>
             ))}
           </div>
           <div className="mt-12 text-center">
-            <div
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-xl"
-              style={{
-                background: "white",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-              }}
-            >
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
               <span className="text-2xl">🔌</span>
-              <span style={{ color: colors.textDark }}>
-                <strong>API مفتوح</strong> للتكامل مع أي نظام آخر
+              <span className="text-[var(--t1)]">
+                <strong>{t("tech.integrations.api")}</strong>{" "}
+                {t("tech.integrations.api_desc")}
               </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ==================== ROI CALCULATOR ==================== */}
-      <section className="py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              احسب
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                عائد الاستثمار
-              </span>
-            </h2>
-            <p style={{ color: colors.textMuted }}>
-              اكتشف كم يمكنك توفيره وكسبه مع سندس
-            </p>
-          </div>
-
-          <div
-            className="rounded-3xl p-8 sm:p-10 shadow-xl"
-            style={{ background: colors.bgLighter }}
-          >
-            <div className="grid md:grid-cols-2 gap-8 mb-10">
-              <div>
-                <label
-                  className="block text-sm font-medium mb-3"
-                  style={{ color: colors.textDark }}
-                >
-                  تذاكر الدعم الشهرية
-                </label>
-                <input
-                  type="range"
-                  min="100"
-                  max="10000"
-                  step="100"
-                  value={roiInputs.monthlyTickets}
-                  onChange={(e) =>
-                    setRoiInputs({
-                      ...roiInputs,
-                      monthlyTickets: parseInt(e.target.value),
-                    })
-                  }
-                  className="w-full h-3 rounded-full appearance-none cursor-pointer"
-                  style={{
-                    background: `linear-gradient(90deg, ${colors.primary} ${roiInputs.monthlyTickets / 100}%, ${colors.bgLight} ${roiInputs.monthlyTickets / 100}%)`,
-                  }}
-                />
-                <div
-                  className="text-center mt-2 text-2xl font-bold"
-                  style={{ color: colors.primary }}
-                >
-                  {roiInputs.monthlyTickets.toLocaleString()} تذكرة
-                </div>
-              </div>
-              <div>
-                <label
-                  className="block text-sm font-medium mb-3"
-                  style={{ color: colors.textDark }}
-                >
-                  فريق الدعم (عدد الموظفين)
-                </label>
-                <input
-                  type="range"
-                  min="2"
-                  max="30"
-                  value={roiInputs.supportAgents}
-                  onChange={(e) =>
-                    setRoiInputs({
-                      ...roiInputs,
-                      supportAgents: parseInt(e.target.value),
-                    })
-                  }
-                  className="w-full h-3 rounded-full appearance-none cursor-pointer"
-                  style={{
-                    background: `linear-gradient(90deg, ${colors.primary} ${(roiInputs.supportAgents - 2) * 3.5}%, ${colors.bgLight} ${(roiInputs.supportAgents - 2) * 3.5}%)`,
-                  }}
-                />
-                <div
-                  className="text-center mt-2 text-2xl font-bold"
-                  style={{ color: colors.primary }}
-                >
-                  {roiInputs.supportAgents} موظف
-                </div>
-              </div>
-              <div>
-                <label
-                  className="block text-sm font-medium mb-3"
-                  style={{ color: colors.textDark }}
-                >
-                  Free Trials الشهرية
-                </label>
-                <input
-                  type="range"
-                  min="50"
-                  max="2000"
-                  step="50"
-                  value={roiInputs.monthlyTrials}
-                  onChange={(e) =>
-                    setRoiInputs({
-                      ...roiInputs,
-                      monthlyTrials: parseInt(e.target.value),
-                    })
-                  }
-                  className="w-full h-3 rounded-full appearance-none cursor-pointer"
-                  style={{
-                    background: `linear-gradient(90deg, ${colors.primary} ${roiInputs.monthlyTrials / 20}%, ${colors.bgLight} ${roiInputs.monthlyTrials / 20}%)`,
-                  }}
-                />
-                <div
-                  className="text-center mt-2 text-2xl font-bold"
-                  style={{ color: colors.primary }}
-                >
-                  {roiInputs.monthlyTrials} Trial
-                </div>
-              </div>
-              <div>
-                <label
-                  className="block text-sm font-medium mb-3"
-                  style={{ color: colors.textDark }}
-                >
-                  نسبة التحويل الحالية
-                </label>
-                <input
-                  type="range"
-                  min="5"
-                  max="30"
-                  value={roiInputs.trialConversion}
-                  onChange={(e) =>
-                    setRoiInputs({
-                      ...roiInputs,
-                      trialConversion: parseInt(e.target.value),
-                    })
-                  }
-                  className="w-full h-3 rounded-full appearance-none cursor-pointer"
-                  style={{
-                    background: `linear-gradient(90deg, ${colors.primary} ${(roiInputs.trialConversion - 5) * 4}%, ${colors.bgLight} ${(roiInputs.trialConversion - 5) * 4}%)`,
-                  }}
-                />
-                <div
-                  className="text-center mt-2 text-2xl font-bold"
-                  style={{ color: colors.primary }}
-                >
-                  {roiInputs.trialConversion}%
-                </div>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl mb-6 bg-white">
-              <div className="grid md:grid-cols-4 gap-4 text-center">
-                <div
-                  className="p-4 rounded-xl"
-                  style={{ background: colors.bgLighter }}
-                >
-                  <div
-                    className="text-xs mb-1"
-                    style={{ color: colors.textMuted }}
-                  >
-                    توفير تكلفة الدعم
-                  </div>
-                  <div
-                    className="text-xl font-bold"
-                    style={{ color: colors.success }}
-                  >
-                    {roiResults.supportSavings.toLocaleString()} ر.س
-                  </div>
-                  <div className="text-xs" style={{ color: colors.textMuted }}>
-                    -{roiResults.agentsReduced} موظف
-                  </div>
-                </div>
-                <div
-                  className="p-4 rounded-xl"
-                  style={{ background: colors.bgLighter }}
-                >
-                  <div
-                    className="text-xs mb-1"
-                    style={{ color: colors.textMuted }}
-                  >
-                    زيادة إيرادات التحويل
-                  </div>
-                  <div
-                    className="text-xl font-bold"
-                    style={{ color: colors.primary }}
-                  >
-                    +{roiResults.conversionGain.toLocaleString()} ر.س
-                  </div>
-                  <div className="text-xs" style={{ color: colors.textMuted }}>
-                    {roiResults.newConversion}% تحويل جديد
-                  </div>
-                </div>
-                <div
-                  className="p-4 rounded-xl"
-                  style={{ background: colors.bgLighter }}
-                >
-                  <div
-                    className="text-xs mb-1"
-                    style={{ color: colors.textMuted }}
-                  >
-                    تكلفة سندس
-                  </div>
-                  <div
-                    className="text-xl font-bold"
-                    style={{ color: colors.accent }}
-                  >
-                    {roiResults.sondosCost.toLocaleString()} ر.س
-                  </div>
-                  <div className="text-xs" style={{ color: colors.textMuted }}>
-                    شهرياً
-                  </div>
-                </div>
-                <div
-                  className="p-4 rounded-xl"
-                  style={{ background: colors.bgLighter }}
-                >
-                  <div
-                    className="text-xs mb-1"
-                    style={{ color: colors.textMuted }}
-                  >
-                    تذاكر تُحل تلقائياً
-                  </div>
-                  <div
-                    className="text-xl font-bold"
-                    style={{ color: colors.success }}
-                  >
-                    {roiResults.ticketsAutomated.toLocaleString()}
-                  </div>
-                  <div className="text-xs" style={{ color: colors.textMuted }}>
-                    70% من التذاكر
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="p-6 rounded-2xl text-center"
-              style={{
-                background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-              }}
-            >
-              <div className="text-white/80 mb-2">صافي العائد الشهري</div>
-              <div className="text-white text-5xl font-bold mb-2">
-                +{roiResults.netGain.toLocaleString()} ر.س
-              </div>
-              <div className="text-white/80 text-sm">
-                ROI: {roiResults.roi}%
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ==================== TESTIMONIALS ==================== */}
-      <section className="py-24" style={{ background: colors.bgLighter }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              قصص نجاح
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                شركات التقنية
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              {t("tech.testimonials.title")}{" "}
+              <span className="text-[#9d4edd]">
+                {t("tech.testimonials.title2")}
               </span>
             </h2>
           </div>
-          <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl shadow-2xl relative bg-white">
-            <div
-              className="absolute top-6 right-8 text-8xl font-serif opacity-10"
-              style={{ color: colors.primary }}
-            >
+          <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.1)] relative">
+            <div className="absolute top-6 right-8 text-8xl font-serif opacity-10 text-[#5a189a]">
               "
             </div>
-            <p
-              className="text-xl sm:text-2xl leading-relaxed mb-8"
-              style={{ color: colors.textDark }}
-            >
+            <p className="text-xl sm:text-2xl leading-relaxed mb-8 text-[var(--t1)]">
               {testimonials[currentTestimonial].quote}
             </p>
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-lg"
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  }}
-                >
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl gradient-bg shadow-lg">
                   {testimonials[currentTestimonial].image}
                 </div>
                 <div>
-                  <div
-                    className="font-bold text-lg"
-                    style={{ color: colors.textDark }}
-                  >
+                  <div className="font-bold text-lg text-[var(--t1)]">
                     {testimonials[currentTestimonial].name}
                   </div>
-                  <div className="text-sm" style={{ color: colors.textMuted }}>
-                    {testimonials[currentTestimonial].role} •{" "}
+                  <div className="text-sm text-[var(--t2)]">
+                    {testimonials[currentTestimonial].role} ·{" "}
                     {testimonials[currentTestimonial].company}
                   </div>
                 </div>
               </div>
-              <div
-                className="px-4 py-2 rounded-xl font-bold"
-                style={{
-                  background: colors.success + "20",
-                  color: colors.success,
-                }}
-              >
+              <div className="px-4 py-2 rounded-xl font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.2)]">
                 {testimonials[currentTestimonial].metric}
               </div>
             </div>
@@ -1465,323 +886,76 @@ const SondosTech = () => {
                   style={{
                     background:
                       currentTestimonial === idx
-                        ? `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`
-                        : colors.primary + "30",
+                        ? "linear-gradient(135deg,#5a189a,#9d4edd)"
+                        : "rgba(90,24,154,0.2)",
                     width: currentTestimonial === idx ? "32px" : "12px",
                   }}
-                ></button>
+                />
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ==================== PRICING ==================== */}
-      <section id="الأسعار" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              أسعار
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                مرنة للتقنية
-              </span>
-            </h2>
-            <p style={{ color: colors.textMuted }}>
-              ابدأ مجاناً وادفع حسب النمو
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div
-              className="p-8 rounded-3xl bg-white border-2 transition-all hover:shadow-xl"
-              style={{ borderColor: colors.bgLight }}
-            >
-              <div
-                className="text-sm font-bold mb-3"
-                style={{ color: colors.primary }}
-              >
-                Startup
-              </div>
-              <div className="mb-2">
-                <span
-                  className="text-5xl font-bold"
-                  style={{ color: colors.textDark }}
-                >
-                  مجاناً
-                </span>
-              </div>
-              <p className="text-sm mb-8" style={{ color: colors.textMuted }}>
-                للبداية والتجربة
-              </p>
-              <ul className="space-y-4 mb-8">
-                {[
-                  "حتى 100 محادثة/شهر",
-                  "قاعدة معرفة واحدة",
-                  "لغة واحدة",
-                  "دعم بالبريد",
-                  "تقارير أساسية",
-                ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm"
-                    style={{ color: colors.textMuted }}
-                  >
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs"
-                      style={{
-                        background: colors.bgLight,
-                        color: colors.primary,
-                      }}
-                    >
-                      ✓
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <button
-                className="w-full py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
-                style={{ borderColor: colors.primary, color: colors.primary }}
-              >
-                ابدأ مجاناً
-              </button>
-            </div>
-
-            <div
-              className="p-8 rounded-3xl relative shadow-2xl scale-105"
-              style={{
-                background: `linear-gradient(180deg, ${colors.bgLight}, white)`,
-                border: `2px solid ${colors.primary}`,
-                boxShadow: `0 20px 60px ${colors.primary}30`,
-              }}
-            >
-              <div
-                className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-2 rounded-full text-xs font-bold text-white"
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                }}
-              >
-                الأكثر شعبية ⭐
-              </div>
-              <div
-                className="text-sm font-bold mb-3 mt-2"
-                style={{ color: colors.primary }}
-              >
-                Growth
-              </div>
-              <div className="mb-2">
-                <span
-                  className="text-5xl font-bold"
-                  style={{ color: colors.textDark }}
-                >
-                  8,000
-                </span>
-                <span style={{ color: colors.textMuted }} className="mr-1">
-                  {" "}
-                  ر.س/شهر
-                </span>
-              </div>
-              <p className="text-sm mb-8" style={{ color: colors.textMuted }}>
-                للشركات النامية
-              </p>
-              <ul className="space-y-4 mb-8">
-                {[
-                  "حتى 1,000 محادثة/شهر",
-                  "قواعد معرفة متعددة",
-                  "5 لغات",
-                  "تكامل Zendesk/Intercom",
-                  "تحليلات متقدمة",
-                  "دعم أولوية",
-                ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm"
-                    style={{ color: colors.textMuted }}
-                  >
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white"
-                      style={{ background: colors.primary }}
-                    >
-                      ✓
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <button
-                className="w-full py-4 rounded-2xl font-semibold text-white transition-all hover:shadow-xl"
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  boxShadow: `0 8px 24px ${colors.primary}40`,
-                }}
-              >
-                ابدأ الآن
-              </button>
-            </div>
-
-            <div
-              className="p-8 rounded-3xl bg-white border-2 transition-all hover:shadow-xl"
-              style={{ borderColor: colors.bgLight }}
-            >
-              <div
-                className="text-sm font-bold mb-3"
-                style={{ color: colors.accent }}
-              >
-                Scale
-              </div>
-              <div className="mb-2">
-                <span
-                  className="text-5xl font-bold"
-                  style={{ color: colors.textDark }}
-                >
-                  مخصص
-                </span>
-              </div>
-              <p className="text-sm mb-8" style={{ color: colors.textMuted }}>
-                للشركات الكبيرة
-              </p>
-              <ul className="space-y-4 mb-8">
-                {[
-                  "محادثات غير محدودة",
-                  "كل مميزات Growth",
-                  "مدير نجاح مخصص",
-                  "SLA مضمون",
-                  "تكاملات مخصصة",
-                  "On-premise متاح",
-                ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm"
-                    style={{ color: colors.textMuted }}
-                  >
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center text-xs"
-                      style={{
-                        background: colors.bgLight,
-                        color: colors.accent,
-                      }}
-                    >
-                      ✓
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <button
-                className="w-full py-4 rounded-2xl font-semibold border-2 transition-all hover:shadow-lg"
-                style={{ borderColor: colors.accent, color: colors.accent }}
-              >
-                تواصل معنا
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ==================== FAQ ==================== */}
-      <section className="py-24" style={{ background: colors.bgLighter }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+      <section className="py-24 px-6 bg-[var(--bg2)]">
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ color: colors.textDark }}
-            >
-              أسئلة
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {" "}
-                شائعة
-              </span>
+            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
+              {t("tech.faq.title")}{" "}
+              <span className="text-[#9d4edd]">{t("tech.faq.title2")}</span>
             </h2>
           </div>
           <div className="space-y-4">
-            {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-lg bg-white"
-              >
-                <button
-                  onClick={() => setActiveFAQ(activeFAQ === idx ? null : idx)}
-                  className="w-full p-6 flex items-center justify-between text-right"
+            {faqs.map((faq, idx) => {
+              const open = activeFAQ === idx;
+              return (
+                <div
+                  key={idx}
+                  className="rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300"
                 >
-                  <span
-                    className="font-semibold text-lg"
-                    style={{ color: colors.textDark }}
+                  <button
+                    className="w-full flex items-center justify-between px-6 py-5 text-right font-semibold text-[var(--t1)]"
+                    onClick={() => setActiveFAQ(open ? null : idx)}
                   >
                     {faq.q}
-                  </span>
-                  <span
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 mr-4"
-                    style={{
-                      background:
-                        activeFAQ === idx ? colors.primary : colors.bgLight,
-                      color: activeFAQ === idx ? "white" : colors.primary,
-                      transform:
-                        activeFAQ === idx ? "rotate(180deg)" : "rotate(0deg)",
-                    }}
-                  >
-                    ▼
-                  </span>
-                </button>
-                {activeFAQ === idx && (
-                  <div
-                    className="px-6 pb-6 text-sm leading-relaxed"
-                    style={{ color: colors.textMuted }}
-                  >
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            ))}
+                    <span className="text-xl ml-4 flex-shrink-0 text-[#9d4edd]">
+                      {open ? "−" : "+"}
+                    </span>
+                  </button>
+                  {open && (
+                    <div className="px-6 pb-5 text-sm leading-relaxed text-[var(--t2)]">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* ==================== FINAL CTA ==================== */}
-      <section
-        className="py-24"
-        style={{
-          background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-        }}
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <section className="py-24 px-6 gradient-bg">
+        <div className="max-w-4xl mx-auto text-center">
           <div className="text-6xl mb-6">💻</div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
-            جاهز تقلّل تذاكر الدعم 70%
+          <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-white">
+            {t("tech.cta.title1")}
             <br />
-            وترفع التحويل 40%؟
+            {t("tech.cta.title2")}
           </h2>
           <p className="text-white/80 text-xl mb-10 max-w-2xl mx-auto">
-            انضم لأكثر من 100 شركة تقنية تستخدم سندس لتحسين تجربة العملاء
+            {t("tech.cta.subtitle")}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              className="px-10 py-5 bg-white rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1"
-              style={{ color: colors.primary }}
+          <div className="flex justify-center mb-12">
+            <a
+              href="/demo"
+              className="inline-flex items-center gap-2 px-10 py-5 bg-[rgba(255,255,255,0.95)] rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:bg-white text-[#5a189a] shimmer"
             >
-              ابدأ مجاناً - 14 يوم
-            </button>
-            <button className="px-10 py-5 border-2 border-white/50 text-white rounded-2xl font-semibold hover:bg-white/10 transition-all">
-              احجز Demo
-            </button>
+              {t("tech.cta.button")}
+            </a>
           </div>
-          <div className="flex flex-wrap justify-center gap-4 mt-12 text-white/70 text-sm">
+          <div className="flex flex-wrap justify-center gap-4 text-white/70 text-sm">
             <span>🔗 Zendesk</span>
             <span>💬 Intercom</span>
             <span>📝 Notion</span>
