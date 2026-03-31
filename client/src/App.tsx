@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { Switch, Route, useLocation } from "wouter";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -32,20 +33,29 @@ import Legal from "@/pages/Legal";
 import CarDealership from "@/pages/CarDealership";
 import DebtCollection from "@/pages/DebtCollection";
 import Partner from "@/pages/Partner";
+import Technology from "@/pages/technology";
 
 import IntegrationsPage from "@/pages/IntegrationsPage";
 import Demo from "@/pages/Demo";
-import Technology from "@/pages/Technology";
+
 import Governance from "@/pages/Governance";
 
 function HomePage() {
   return (
     <main>
+      <Helmet>
+        <title>Sondos AI – Automatisation intelligente</title>
+        <meta
+          name="description"
+          content="Automatisez vos appels et votre service client avec Sondos AI."
+        />
+      </Helmet>
+
       <Hero />
       <LogoCarousel />
       <ScaleBanner />
       <WhatIs />
-
+      <Demo />
       <Testimonials />
       <TalksLikePeople />
       <Highlights />
@@ -53,9 +63,11 @@ function HomePage() {
       <QA />
       <Omnichannel />
       <Telephony />
+      
       <Integrations />
       <FAQ />
       <CTABanner />
+      
     </main>
   );
 }

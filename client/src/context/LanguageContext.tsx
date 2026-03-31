@@ -2812,7 +2812,7 @@ const translations: Record<Language, Record<string, string>> = {
       "نظام استقبال صوتي بالذكاء الاصطناعي يرد على مرضاك 24/7 بلهجة سعودية طبيعية ويحجز المواعيد تلقائياً",
     "hc.hero.stats":
       "✓ +150 منشأة صحية · ✓ +500,000 مكالمة شهرياً · ✓ 97% دقة التعرف",
-    "hc.hero.cta": "جرّب الآن",
+    "hc.hero.cta": "احجز عرضك التجريبي",
     "hc.problem.title": "المشكلة",
     "hc.problem.1": "✗ 40% من المكالمات لا يُرد عليها",
     "hc.problem.2": "✗ 25% من المرضى لا يحضرون مواعيدهم",
@@ -2964,7 +2964,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     "hc.facility.pharmacy.name": "الصيدلية",
     "hc.facility.pharmacy.official": "صيدلية مجتu�عية مرخصة",
-    "hc.facility.pharmacy.pain": "استفسارات توفر الأدوية تشغل موظفي اn�صيدلية",
+    "hc.facility.pharmacy.pain": "⚠️ استفسارات توفر الأدوية تشغل موظفي الصيدلية.",
     "hc.facility.pharmacy.solution":
       "إجابات فورية على استفسارات المخزون والاستلام عبر الذكاء الاصطناعي",
     "hc.facility.pharmacy.license": "هيئة الغذاء والدواء – ترخيص صيدلية",
@@ -3733,7 +3733,7 @@ const translations: Record<Language, Record<string, string>> = {
       "آسف على هذا الإزعاج! خلني أساعدك 🔧\n\nما نوع الملف اللي تحاول ترفعه؟ وما حجمه؟",
     "tech.usecase.ticket.msg4": "PDF حجمه 15 ميجا",
     "tech.usecase.ticket.msg5":
-      "وجدت المشكلة! 💡\n\nالحد الأقصى لحجم الملف في خطتك هو 10 ميجا.\n\nعندك خيارين\n1️⃣ ضغط الملف ��لى أقل من 10 ميجا\n2️⃣ ترقية لخطة Pro (حد 100 ميجا)\n\nتبي أساعدك في أي منهم؟",
+      "وجدت المشكلة! 💡\n\nالحد الأقصى لحجم الملف في خطتك هو 10 ميجا.\n\nعندك خيارين\n1️⃣ ضغط الملف إلى أقل من 10 ميجابايت \n2️⃣ ترقية لخطة Pro (حد 100 ميجا)\n\nتبي أساعدك في أي منهم؟",
     "tech.usecase.ticket.msg6": "كم سعر الترقية؟",
     "tech.usecase.ticket.msg7":
       "خطة Pro:\n💰 99 ر.س/شهر (بدل 149)\n✅ رفع ملفات حتى 100 ميجا\n✅ مساحة تخزين 50 جيجا\n✅ دعم أولوية\n\nتبي أفعّلها لك؟ أقدر أضيفها لحسابك الآن 😊",
@@ -4325,7 +4325,7 @@ const translations: Record<Language, Record<string, string>> = {
     "ins.usecase.renewal.msg2": "إيه صحيح، كم التجديد؟",
 
     "ins.usecase.renewal.msg4": "إيه جدد الشامل",
-    "ins.usecase.renewal.msg5": "تم! أرسل لك رابط الد.�ع على واتساب",
+    "ins.usecase.renewal.msg5": "تم! أرسل لك رابط الدعم على واتساب.",
 
     "ins.testimonials.title": "قصص نجاح",
     "ins.testimonials.title2": "شركات التأمين",
