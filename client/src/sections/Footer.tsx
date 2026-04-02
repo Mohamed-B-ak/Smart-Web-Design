@@ -1,11 +1,11 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { Mail, Twitter, Linkedin, Phone } from "lucide-react";
-import logoImg from "@assets/LOGO-SONDoS_AI-Photoroom_1770977931329.png";
+import logoImg from "@assets/LOGO-yosr.png";
 
 export default function Footer() {
   const { lang, t } = useLanguage();
 
-  const brandColor = "#5a189a"; // ⚠️ Mets ici la vraie couleur exacte de ton logo si différente
+  const brandColor = "#5a189a";
 
   return (
     <footer
@@ -42,7 +42,7 @@ export default function Footer() {
             Twitter
           </a>
 
-          {/* LinkedIn officiel de Sondos */}
+          {/* LinkedIn */}
           <a
             href="https://linkedin.com/company/sondos-ai"
             target="_blank"
@@ -79,8 +79,15 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="mt-12 text-center text-sm text-gray-500">
-        © {new Date().getFullYear()} Sondos AI. All rights reserved.
+      <div className="mt-12 text-center text-sm text-gray-500 flex flex-col items-center gap-2">
+        <div>© {new Date().getFullYear()} Sondos AI. All rights reserved.</div>
+        <a
+          href="/policy"
+          className="hover:opacity-70 transition duration-300 font-medium"
+          style={{ color: brandColor }}
+        >
+          {lang === "ar" ? "سياسة الخصوصية" : "Privacy Policy"}
+        </a>
       </div>
     </footer>
   );

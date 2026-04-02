@@ -39,12 +39,13 @@ import IntegrationsPage from "@/pages/IntegrationsPage";
 import Demo from "@/pages/Demo";
 
 import Governance from "@/pages/Governance";
+import Policy from "@/pages/Policy";
 
 function HomePage() {
   return (
     <main>
       <Helmet>
-        <title>Sondos AI – Automatisation intelligente</title>
+        <title>Sondos AI </title>
         <meta
           name="description"
           content="Automatisez vos appels et votre service client avec Sondos AI."
@@ -55,7 +56,7 @@ function HomePage() {
       <LogoCarousel />
       <ScaleBanner />
       <WhatIs />
-      <Demo />
+      
       <Testimonials />
       <TalksLikePeople />
       <Highlights />
@@ -159,6 +160,7 @@ function AppContent() {
         <Route path="/legal" component={Legal} />
         <Route path="/car-dealership" component={CarDealership} />
         <Route path="/debt-collection" component={DebtCollection} />
+        <Route path="/policy" component={Policy} />
         <Route path="/blog">{() => <BlogListPage />}</Route>
         <Route path="/blog/:slug">
           {(params) => <BlogPostPage slug={params.slug} />}

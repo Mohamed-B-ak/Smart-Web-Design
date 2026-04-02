@@ -4,7 +4,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import logoImg from "@assets/logo_smart_(1)_1770814555470.jpg";
 
-import t_l_chargement__8_ from "@assets/téléchargement (8).png";
+import t_l_chargement__8_ from "@assets/LOGO-yosr.png";
 
 const industryLinks = [
   { en: "Healthcare", ar: "القطاع الصحي", href: "/healthcare" },
