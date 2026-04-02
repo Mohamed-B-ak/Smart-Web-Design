@@ -698,7 +698,7 @@ export default function SondosPrivacyPolicy() {
         <div className="contact-card">
           <h3>سندس للذكاء الاصطناعي — الخصوصية وحماية البيانات</h3>
           <p>
-            📩 البريد الإلكتروني: <a href="mailto:privacy@sondos-ai.com">privacy@sondos-ai.com</a><br />
+            📩 البريد الإلكتروني: <a href="mailto:info@sondos-ai.com">privacy@sondos-ai.com</a><br />
             🌐 الموقع: <a href="https://sondos-ai.com">sondos-ai.com</a><br />
             📍 المقر: المملكة العربية السعودية
           </p>
