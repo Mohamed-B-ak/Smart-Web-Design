@@ -40,6 +40,9 @@ import Demo from "@/pages/Demo";
 
 import Governance from "@/pages/Governance";
 import Policy from "@/pages/Policy";
+import Real from "@/pages/Real";
+
+
 
 function HomePage() {
   return (
@@ -161,6 +164,8 @@ function AppContent() {
         <Route path="/car-dealership" component={CarDealership} />
         <Route path="/debt-collection" component={DebtCollection} />
         <Route path="/policy" component={Policy} />
+        <Route path="/Realstate" component={Real} />
+      
         <Route path="/blog">{() => <BlogListPage />}</Route>
         <Route path="/blog/:slug">
           {(params) => <BlogPostPage slug={params.slug} />}
