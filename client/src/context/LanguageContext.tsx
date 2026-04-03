@@ -2444,6 +2444,117 @@ const translations: Record<Language, Record<string, string>> = {
     "agents.phone_invalid": "Invalid number — example: +966 5X XXX XXXX",
     "agents.phone_label": "Phone number",
     "agents.phone_placeholder": "+966 5X XXX XXXX",
+     // ─── Privacy Policy ──────────────────────────────────────────────
+   "pp.title": "Privacy Policy",
+   "pp.subtitle": "Sondos AI · Kingdom of Saudi Arabia",
+  "pp.date": "Last Updated: April 2026",
+
+      "pp.intro.line1": "Your data is not just information…",
+      "pp.intro.highlight": "it represents your business, your customers, and your reputation.",
+      "pp.intro.desc": "At **Sondos AI**, we treat privacy as the foundation of trust we build with our clients. We design our systems to:",
+      "pp.intro.list1": "Protect your data and maintain its confidentiality",
+      "pp.intro.list2": "Safeguard your customers' privacy and operations",
+      "pp.intro.list3": "Ensure responsible and ethical use of AI",
+
+      "pp.disclaimer": "**Note:** This Policy applies to sondos-ai.com and its services. The Company reserves the right to modify it at any time. Continued use of the Service constitutes acceptance of the latest published version.",
+
+      "pp.toc_title": "Policy Contents",
+
+      "pp.sec1.title": "About Us",
+      "pp.sec1.p1": "Sondos AI (\"the Company\", \"we\", \"us\") is a technology company headquartered in the Kingdom of Saudi Arabia, specialising in AI-powered voice automation solutions.",
+      "pp.sec1.p2": "This Policy applies to **sondos-ai.com** and related services. The Company complies with Saudi Arabia's Personal Data Protection Law (PDPL) to the extent applicable.",
+
+      "pp.sec2.title": "Data We Collect",
+      "pp.sec2.p1": "We collect only what we need:",
+      "pp.sec2.list1_title": "Identification Data",
+      "pp.sec2.list1": "Name, email, phone number, job title",
+      "pp.sec2.list2_title": "Usage Data",
+      "pp.sec2.list2": "IP addresses, device and browser type, usage patterns",
+      "pp.sec2.list3_title": "Conversation Data",
+      "pp.sec2.list3": "Call recordings or transcripts where applicable",
+      "pp.sec2.list4_title": "Payment Data",
+      "pp.sec2.list4": "Processed via certified providers — card details not stored",
+      "pp.sec2.list5_title": "Communication Data",
+      "pp.sec2.list5": "Messages and enquiries sent to us",
+      "pp.sec2.note": "Data collected may vary depending on the service and agreement in place.",
+
+      "pp.sec3.title": "Use of Data",
+      "pp.sec3.p1": "Personal data is used for legitimate purposes including:",
+      "pp.sec3.list1": "Operating the platform and delivering agreed services",
+      "pp.sec3.list2": "Managing accounts and contractual relationships",
+      "pp.sec3.list3": "Improving service quality and AI model performance",
+      "pp.sec3.list4": "Responding to technical support requests",
+      "pp.sec3.list5": "Sending necessary operational notifications",
+      "pp.sec3.list6": "Fulfilling applicable legal and regulatory obligations",
+      "pp.sec3.list7": "Marketing communications where prior consent has been obtained",
+      "pp.sec3.note": "Data is not used for fully automated decisions with direct legal effect without human review.",
+
+      "pp.sec4.title": "Call Data",
+      "pp.sec4.p1": "Given the nature of our voice services, call data is handled under the following framework:",
+      "pp.sec4.badge": "🔒 Call Data Protocol",
+      "pp.sec4.list1": "Calls are recorded based on settings enabled in the client account or per the agreement",
+      "pp.sec4.list2": "Call data is used primarily to deliver and improve the service",
+      "pp.sec4.list3": "Clients may manage recording settings within available permissions",
+      "pp.sec4.list4": "Call data is not shared externally except as set out in this Policy",
+      "pp.sec4.note_strong": "Privacy Commitment:",
+      "pp.sec4.note": "Recording and retention settings are governed by each client's service agreement and may vary accordingly.",
+
+      "pp.sec5.title": "Data Sharing",
+      "pp.sec5.p1": "**We do not sell your data.** We may share it only with:",
+      "pp.sec5.list1_title": "Service Providers",
+      "pp.sec5.list1": "Supporting technology partners bound by confidentiality",
+      "pp.sec5.list2_title": "Legal Requirements",
+      "pp.sec5.list2": "In response to formal requests from competent authorities",
+      "pp.sec5.list3_title": "Rights Protection",
+      "pp.sec5.list3": "To defend the Company's legitimate interests",
+      "pp.sec5.list4_title": "Restructuring",
+      "pp.sec5.list4": "In merger/acquisition events, with reasonable notice to users",
+      "pp.sec5.note": "The Company makes reasonable efforts to ensure service providers maintain appropriate data protection standards.",
+
+      "pp.sec6.title": "Data Retention",
+      "pp.sec6.p1": "We retain data for as long as necessary, taking into account:",
+      "pp.sec6.list1": "Applicable Saudi laws and regulations",
+      "pp.sec6.list2": "The nature of the service and user agreement terms",
+      "pp.sec6.list3": "Legitimate operational or financial record-keeping needs",
+      "pp.sec6.note": "Retention periods may vary by data type and applicable legal framework.",
+
+      "pp.sec7.title": "Your Rights",
+      "pp.sec7.p1": "Subject to Saudi Arabia's PDPL, the following rights may be available to you:",
+      "pp.sec7.list1_title": "Access",
+      "pp.sec7.list1": "Request a copy of your personal data",
+      "pp.sec7.list2_title": "Rectification",
+      "pp.sec7.list2": "Correct inaccurate or incomplete data",
+      "pp.sec7.list3_title": "Erasure",
+      "pp.sec7.list3": "Request deletion in legally specified cases",
+      "pp.sec7.list4_title": "Objection",
+      "pp.sec7.list4": "Object to processing for direct marketing",
+      "pp.sec7.list5_title": "Withdrawal of Consent",
+      "pp.sec7.list5": "At any time, without retroactive effect",
+      "pp.sec7.note": "📩 To exercise your rights: **privacy@sondos-ai.com** — We will endeavour to respond within a reasonable timeframe.",
+
+      "pp.sec8.title": "Security",
+      "pp.sec8.p1": "The Company takes reasonable steps to protect personal data through appropriate technical and organisational measures. No method of transmission over the internet can be guaranteed entirely secure. If you suspect a security incident, please notify us promptly.",
+
+      "pp.sec9.title": "Cookies",
+      "pp.sec9.p1": "The website uses cookies for operational, analytical, and marketing purposes. You may adjust cookie settings through your browser; however, disabling certain cookies may affect your experience.",
+
+      "pp.sec10.title": "Third-Party Links",
+      "pp.sec10.p1": "The website may contain links to external sites not governed by this Policy. The Company bears no responsibility for their privacy practices and recommends reviewing their policies.",
+
+      "pp.sec11.title": "Policy Changes",
+      "pp.sec11.p1": "The Company reserves the right to modify this Policy at any time and will endeavour to highlight material changes on the website. It is the user's responsibility to review this page periodically.",
+
+      "pp.sec12.title": "Contact",
+      "pp.sec12.p1": "For any enquiry relating to this Policy or your personal data:",
+
+      "pp.contact.title": "Sondos AI — Privacy & Data Protection",
+      "pp.contact.email_label": "Email",
+      "pp.contact.website_label": "Website",
+      "pp.contact.location_label": "Headquarters",
+      "pp.contact.location": "Kingdom of Saudi Arabia",
+
+      "pp.closing.line1": "We don't just protect data…",
+      "pp.closing.line2": "we protect the trust your business is built on.",
   },
 
   ar: {
@@ -4716,8 +4827,10 @@ const translations: Record<Language, Record<string, string>> = {
     "workflow.stat3.label": "وقت الاستجابة",
     "workflow.stat4.value": "99.9%",
     "workflow.stat4.label": "وقت التشغيل",
+   
 
     // ─── Stack (AR) ────────────────────────────────────────────────────
+    
     "stack.tag": "البنية التقنية",
     "stack.title.line1": "نختار الأفضل",
     "stack.title.line2": "لكل مهمة",
@@ -4770,6 +4883,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sector.banking": "البنوك",
     "sector.hospitality": "الضيافة",
     "sector.government": "الحكومة",
+     
 
     // ─── CTA (AR) ─────────────────────────────────────────────────────
     "cta.label": "ابدأ اليوم",
@@ -4781,6 +4895,118 @@ const translations: Record<Language, Record<string, string>> = {
     "agents.phone_invalid": "رقم غير صحيح — مثال: +966 5X XXX XXXX",
     "agents.phone_label": "رقم الهاتف",
     "agents.phone_placeholder": "+966 5X XXX XXXX",
+    // ─── سياسة الخصوصية ──────────────────────────────────────────────
+        // ─── سياسة الخصوصية ──────────────────────────────────────────────
+"pp.title": "سياسة الخصوصية",
+"pp.subtitle": "سندس للذكاء الاصطناعي · المملكة العربية السعودية",
+"pp.date": "آخر تحديث: أبريل 2026",
+
+"pp.intro.line1": "بياناتك ليست مجرد معلومات…",
+"pp.intro.highlight": "بل تمثل عملك، عملاءك، وسمعتك.",
+"pp.intro.desc": "في **Sondos AI**، نتعامل مع الخصوصية كأساس للثقة التي نبنيها مع عملائنا. نصمم أنظمتنا بحيث:",
+"pp.intro.list1": "تحمي بياناتك وتحافظ على سريتها",
+"pp.intro.list2": "تصون خصوصية عملائك وعملياتك",
+"pp.intro.list3": "تضمن استخداماً مسؤولاً وأخلاقياً للذكاء الاصطناعي",
+
+"pp.disclaimer": "**ملاحظة:** تُطبَّق هذه السياسة على موقع sondos-ai.com وخدماته. تحتفظ الشركة بحق تعديلها في أي وقت. استمرار استخدامك للخدمة يُعدّ قبولاً لأحدث نسخة منشورة.",
+
+"pp.toc_title": "محتويات السياسة",
+
+"pp.sec1.title": "نبذة عنا",
+"pp.sec1.p1": "سندس للذكاء الاصطناعي (\"Sondos AI\"، \"الشركة\"، \"نحن\") شركة تقنية مقرها المملكة العربية السعودية، متخصصة في حلول الأتمتة الصوتية المدعومة بالذكاء الاصطناعي.",
+"pp.sec1.p2": "تسري هذه السياسة على موقعنا **sondos-ai.com** وجميع خدماتنا المرتبطة. تلتزم الشركة بالامتثال لنظام حماية البيانات الشخصية السعودي (PDPL) بالقدر المنطبق على نشاطها.",
+
+"pp.sec2.title": "البيانات التي نجمعها",
+"pp.sec2.p1": "نجمع البيانات التالية **فقط عند الحاجة**:",
+"pp.sec2.list1_title": "بيانات تعريفية",
+"pp.sec2.list1": "الاسم، البريد الإلكتروني، رقم الهاتف، المسمى الوظيفي",
+"pp.sec2.list2_title": "بيانات استخدام",
+"pp.sec2.list2": "عناوين IP، نوع الجهاز والمتصفح، أنماط الاستخدام",
+"pp.sec2.list3_title": "بيانات المحادثات",
+"pp.sec2.list3": "تسجيلات أو نصوص مكالمات عند الاقتضاء",
+"pp.sec2.list4_title": "بيانات الدفع",
+"pp.sec2.list4": "تُعالَج عبر مزودين معتمدين — لا نخزّن بيانات البطاقة",
+"pp.sec2.list5_title": "بيانات التواصل",
+"pp.sec2.list5": "رسائل واستفسارات مُرسَلة إلينا",
+"pp.sec2.note": "قد تختلف البيانات المجمعة بحسب طبيعة الخدمة المستخدمة والاتفاقية المبرمة مع الشركة.",
+
+"pp.sec3.title": "استخدام البيانات",
+"pp.sec3.p1": "تُستخدم البيانات الشخصية لأغراض مشروعة تشمل:",
+"pp.sec3.list1": "تشغيل المنصة وتقديم الخدمات المتفق عليها",
+"pp.sec3.list2": "إدارة الحسابات والعلاقات التعاقدية",
+"pp.sec3.list3": "تحسين جودة الخدمة ونماذج الذكاء الاصطناعي",
+"pp.sec3.list4": "الرد على طلبات الدعم الفني",
+"pp.sec3.list5": "إرسال إشعارات تشغيلية ضرورية",
+"pp.sec3.list6": "الوفاء بالالتزامات القانونية والتنظيمية السارية",
+"pp.sec3.list7": "أغراض تسويقية عند الحصول على موافقة مسبقة",
+"pp.sec3.note": "لا تُستخدم البيانات في اتخاذ قرارات آلية ذات أثر قانوني مباشر دون مراجعة بشرية.",
+
+"pp.sec4.title": "بيانات المكالمات",
+"pp.sec4.p1": "نظراً لطبيعة خدماتنا الصوتية، نُولي بيانات المكالمات أعلى مستويات الحماية:",
+"pp.sec4.badge": "🔒 بروتوكول المكالمات",
+"pp.sec4.list1": "تُسجَّل المكالمات بناءً على الإعدادات المفعّلة في حساب العميل أو بموجب الاتفاقية",
+"pp.sec4.list2": "تُستخدم بيانات المكالمات بصورة رئيسية لتقديم الخدمة وتحسين أدائها",
+"pp.sec4.list3": "يمكن للعميل إدارة إعدادات التسجيل وفق الصلاحيات المتاحة",
+"pp.sec4.list4": "لا تُشارَك بيانات المكالمات مع أطراف خارجية إلا في الحالات المنصوص عليها",
+"pp.sec4.note_strong": "ضمان الخصوصية:",
+"pp.sec4.note": "تخضع إعدادات التسجيل والاحتفاظ للشروط الواردة في اتفاقية الخدمة الخاصة بكل عميل.",
+
+"pp.sec5.title": "مشاركة البيانات",
+"pp.sec5.p1": "**لا نبيع بياناتك.** قد نشاركها فقط مع:",
+"pp.sec5.list1_title": "مزودو خدمات",
+"pp.sec5.list1": "جهات تقنية مساندة ملتزمة بالسرية",
+"pp.sec5.list2_title": "متطلبات قانونية",
+"pp.sec5.list2": "استجابةً لطلبات رسمية من جهات حكومية مختصة",
+"pp.sec5.list3_title": "حماية الحقوق",
+"pp.sec5.list3": "عند الضرورة للدفاع عن حقوق الشركة",
+"pp.sec5.list4_title": "إعادة هيكلة",
+"pp.sec5.list4": "في حال الاندماج أو الاستحواذ مع إبلاغ المستخدمين",
+"pp.sec5.note": "تبذل الشركة جهوداً معقولة للتحقق من التزام مزودي الخدمات بمعايير حماية البيانات.",
+
+"pp.sec6.title": "الاحتفاظ بالبيانات",
+"pp.sec6.p1": "نحتفظ بالبيانات للمدة اللازمة لتحقيق الأغراض المذكورة، مع مراعاة:",
+"pp.sec6.list1": "متطلبات الأنظمة والتشريعات السعودية السارية",
+"pp.sec6.list2": "طبيعة الخدمة المقدمة وشروط اتفاقية المستخدم",
+"pp.sec6.list3": "الحاجة المشروعة للاحتفاظ بسجلات تشغيلية أو مالية",
+"pp.sec6.note": "قد تتفاوت مدد الاحتفاظ بحسب نوع البيانات والإطار القانوني المنطبق.",
+
+"pp.sec7.title": "حقوقك",
+"pp.sec7.p1": "وفق نظام PDPL السعودي، قد تتوفر لك الحقوق التالية:",
+"pp.sec7.list1_title": "الوصول",
+"pp.sec7.list1": "طلب نسخة من بياناتك الشخصية",
+"pp.sec7.list2_title": "التصحيح",
+"pp.sec7.list2": "تصحيح بيانات غير دقيقة أو ناقصة",
+"pp.sec7.list3_title": "الحذف",
+"pp.sec7.list3": "طلب مسح البيانات في الحالات المنصوص عليها",
+"pp.sec7.list4_title": "الاعتراض",
+"pp.sec7.list4": "على معالجة بياناتك لأغراض التسويق المباشر",
+"pp.sec7.list5_title": "سحب الموافقة",
+"pp.sec7.list5": "في أي وقت دون أثر رجعي على المعالجة السابقة",
+"pp.sec7.note": "📩 للممارسة حقوقك: **privacy@sondos-ai.com** — سنسعى للرد خلال مدة معقولة.",
+
+"pp.sec8.title": "الأمن",
+"pp.sec8.p1": "تبذل الشركة جهوداً معقولة لحماية البيانات من الوصول غير المصرح به أو الفقدان، من خلال تدابير تقنية وتنظيمية مناسبة. لا يمكن ضمان أمن المعلومات بصورة مطلقة عبر الإنترنت. في حال الاشتباه بأي حادثة أمنية، يُرجى إبلاغنا فوراً.",
+
+"pp.sec9.title": "ملفات تعريف الارتباط",
+"pp.sec9.p1": "يستخدم الموقع ملفات تعريف الارتباط لأغراض تشغيلية وتحليلية وتسويقية. يمكنك ضبط إعداداتها من متصفحك في أي وقت، مع العلم أن تعطيل بعضها قد يؤثر على تجربة الاستخدام.",
+
+"pp.sec10.title": "الروابط الخارجية",
+"pp.sec10.p1": "قد يحتوي الموقع على روابط لمواقع خارجية لا تخضع لهذه السياسة. لا تتحمل الشركة أي مسؤولية عن ممارسات الخصوصية الخاصة بتلك المواقع.",
+
+"pp.sec11.title": "تعديل السياسة",
+"pp.sec11.p1": "تحتفظ الشركة بحق تعديل هذه السياسة في أي وقت، وستسعى إلى الإشارة إلى التغييرات الجوهرية على الموقع. يُعدّ الاطلاع الدوري مسؤولية المستخدم.",
+
+"pp.sec12.title": "التواصل معنا",
+"pp.sec12.p1": "لأي استفسار يتعلق بهذه السياسة أو ببياناتك الشخصية:",
+
+"pp.contact.title": "سندس للذكاء الاصطناعي — الخصوصية وحماية البيانات",
+"pp.contact.email_label": "البريد الإلكتروني",
+"pp.contact.website_label": "الموقع",
+"pp.contact.location_label": "المقر",
+"pp.contact.location": "المملكة العربية السعودية",
+
+"pp.closing.line1": "نحن لا نحمي البيانات فقط…",
+"pp.closing.line2": "نحمي الثقة التي بنيت عليها أعمالك.",            
   },
 };
 
