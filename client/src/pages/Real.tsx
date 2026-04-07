@@ -646,15 +646,9 @@ export default function SondosLanding() {
                   <label htmlFor="fInd">القطاع</label>
                   <select id="fInd" name="industry" required>
                     <option value="">— اختر القطاع —</option>
-                    <option value="القطاع الصحي">القطاع الصحي</option>
+                    
                     <option value="القطاع العقاري">القطاع العقاري</option>
-                    <option value="القطاع الحكومي">القطاع الحكومي</option>
-                    <option value="تجارة إلكترونية">تجارة إلكترونية</option>
-                    <option value="قطاع التأمين">قطاع التأمين</option>
-                    <option value="قطاع التعليم">قطاع التعليم</option>
-                    <option value="القطاع السياحي">القطاع السياحي</option>
-                    <option value="قطاع النقل واللوجستيات">قطاع النقل واللوجستيات</option>
-                    <option value="قطاع آخر">قطاع آخر</option>
+                   
                   </select>
                 </div>
                 <div className="ff"><label htmlFor="fQ">أسئلة أو ملاحظات <span style={{ color: "var(--t3)", fontWeight: 400 }}>(اختياري)</span></label><textarea id="fQ" name="questions" placeholder="هل عندك سؤال معين أو تحدٍ تواجهه؟" rows={4} /></div>
