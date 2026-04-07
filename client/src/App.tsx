@@ -44,6 +44,7 @@ import Real from "@/pages/Real";
 
 
 
+
 function HomePage() {
   return (
     <main>
@@ -165,6 +166,8 @@ function AppContent() {
         <Route path="/debt-collection" component={DebtCollection} />
         <Route path="/policy" component={Policy} />
         <Route path="/Realstate" component={Real} />
+     
+
       
         <Route path="/blog">{() => <BlogListPage />}</Route>
         <Route path="/blog/:slug">

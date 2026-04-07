@@ -63,7 +63,7 @@ export default function Footer() {
             style={{ color: brandColor }}
           >
             <Phone className="w-5 h-5" />
-            <span dir="ltr">+966 11 520 5416</span>
+            <span dir="ltr">+966 11 510 2700</span>
           </a>
 
           {/* Email */}
