@@ -12,8 +12,14 @@ type ComparisonTab = {
   savingsKey?: string;
 };
 
+/* ── shared colour tokens ───────────────────── */
+const PURPLE = "#672D92";
+const PURPLE_RGB = "103,45,146";
+const purpleBg = (a: number) => `rgba(${PURPLE_RGB},${a})`;
+const purpleBorder = (a: number) => `rgba(${PURPLE_RGB},${a})`;
+
 const SondosCallCenter = () => {
-  const { t, lang } = useLanguage(); // AJOUT: ajout de lang
+  const { t, lang } = useLanguage();
 
   const [activeSegment, setActiveSegment] = useState(0);
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
@@ -283,153 +289,55 @@ const SondosCallCenter = () => {
       cost: {
         titleKey: "cc.comparison.cost.title",
         traditional: [
-          {
-            itemKey: "cc.comparison.cost.trad1.item",
-            valueKey: "cc.comparison.cost.trad1.value",
-          },
-          {
-            itemKey: "cc.comparison.cost.trad2.item",
-            valueKey: "cc.comparison.cost.trad2.value",
-          },
-          {
-            itemKey: "cc.comparison.cost.trad3.item",
-            valueKey: "cc.comparison.cost.trad3.value",
-          },
-          {
-            itemKey: "cc.comparison.cost.trad4.item",
-            valueKey: "cc.comparison.cost.trad4.value",
-          },
-          {
-            itemKey: "cc.comparison.cost.trad5.item",
-            valueKey: "cc.comparison.cost.trad5.value",
-          },
-          {
-            itemKey: "cc.comparison.cost.trad6.item",
-            valueKey: "cc.comparison.cost.trad6.value",
-            highlight: true,
-          },
+          { itemKey: "cc.comparison.cost.trad1.item", valueKey: "cc.comparison.cost.trad1.value" },
+          { itemKey: "cc.comparison.cost.trad2.item", valueKey: "cc.comparison.cost.trad2.value" },
+          { itemKey: "cc.comparison.cost.trad3.item", valueKey: "cc.comparison.cost.trad3.value" },
+          { itemKey: "cc.comparison.cost.trad4.item", valueKey: "cc.comparison.cost.trad4.value" },
+          { itemKey: "cc.comparison.cost.trad5.item", valueKey: "cc.comparison.cost.trad5.value" },
+          { itemKey: "cc.comparison.cost.trad6.item", valueKey: "cc.comparison.cost.trad6.value", highlight: true },
         ],
         sondos: [
-          {
-            itemKey: "cc.comparison.cost.son1.item",
-            valueKey: "cc.comparison.cost.son1.value",
-          },
-          {
-            itemKey: "cc.comparison.cost.son2.item",
-            valueKey: "cc.comparison.cost.son2.value",
-          },
-          {
-            itemKey: "cc.comparison.cost.son3.item",
-            valueKey: "cc.comparison.cost.son3.value",
-          },
-          {
-            itemKey: "cc.comparison.cost.son4.item",
-            valueKey: "cc.comparison.cost.son4.value",
-          },
-          {
-            itemKey: "cc.comparison.cost.son5.item",
-            valueKey: "cc.comparison.cost.son5.value",
-          },
-          {
-            itemKey: "cc.comparison.cost.son6.item",
-            valueKey: "cc.comparison.cost.son6.value",
-            highlight: true,
-          },
+          { itemKey: "cc.comparison.cost.son1.item", valueKey: "cc.comparison.cost.son1.value" },
+          { itemKey: "cc.comparison.cost.son2.item", valueKey: "cc.comparison.cost.son2.value" },
+          { itemKey: "cc.comparison.cost.son3.item", valueKey: "cc.comparison.cost.son3.value" },
+          { itemKey: "cc.comparison.cost.son4.item", valueKey: "cc.comparison.cost.son4.value" },
+          { itemKey: "cc.comparison.cost.son5.item", valueKey: "cc.comparison.cost.son5.value" },
+          { itemKey: "cc.comparison.cost.son6.item", valueKey: "cc.comparison.cost.son6.value", highlight: true },
         ],
         savingsKey: "cc.comparison.cost.savings",
       },
       quality: {
         titleKey: "cc.comparison.quality.title",
         traditional: [
-          {
-            itemKey: "cc.comparison.quality.trad1.item",
-            valueKey: "cc.comparison.quality.trad1.value",
-          },
-          {
-            itemKey: "cc.comparison.quality.trad2.item",
-            valueKey: "cc.comparison.quality.trad2.value",
-          },
-          {
-            itemKey: "cc.comparison.quality.trad3.item",
-            valueKey: "cc.comparison.quality.trad3.value",
-          },
-          {
-            itemKey: "cc.comparison.quality.trad4.item",
-            valueKey: "cc.comparison.quality.trad4.value",
-          },
-          {
-            itemKey: "cc.comparison.quality.trad5.item",
-            valueKey: "cc.comparison.quality.trad5.value",
-          },
+          { itemKey: "cc.comparison.quality.trad1.item", valueKey: "cc.comparison.quality.trad1.value" },
+          { itemKey: "cc.comparison.quality.trad2.item", valueKey: "cc.comparison.quality.trad2.value" },
+          { itemKey: "cc.comparison.quality.trad3.item", valueKey: "cc.comparison.quality.trad3.value" },
+          { itemKey: "cc.comparison.quality.trad4.item", valueKey: "cc.comparison.quality.trad4.value" },
+          { itemKey: "cc.comparison.quality.trad5.item", valueKey: "cc.comparison.quality.trad5.value" },
         ],
         sondos: [
-          {
-            itemKey: "cc.comparison.quality.son1.item",
-            valueKey: "cc.comparison.quality.son1.value",
-          },
-          {
-            itemKey: "cc.comparison.quality.son2.item",
-            valueKey: "cc.comparison.quality.son2.value",
-          },
-          {
-            itemKey: "cc.comparison.quality.son3.item",
-            valueKey: "cc.comparison.quality.son3.value",
-          },
-          {
-            itemKey: "cc.comparison.quality.son4.item",
-            valueKey: "cc.comparison.quality.son4.value",
-          },
-          {
-            itemKey: "cc.comparison.quality.son5.item",
-            valueKey: "cc.comparison.quality.son5.value",
-          },
+          { itemKey: "cc.comparison.quality.son1.item", valueKey: "cc.comparison.quality.son1.value" },
+          { itemKey: "cc.comparison.quality.son2.item", valueKey: "cc.comparison.quality.son2.value" },
+          { itemKey: "cc.comparison.quality.son3.item", valueKey: "cc.comparison.quality.son3.value" },
+          { itemKey: "cc.comparison.quality.son4.item", valueKey: "cc.comparison.quality.son4.value" },
+          { itemKey: "cc.comparison.quality.son5.item", valueKey: "cc.comparison.quality.son5.value" },
         ],
       },
       scale: {
         titleKey: "cc.comparison.scale.title",
         traditional: [
-          {
-            itemKey: "cc.comparison.scale.trad1.item",
-            valueKey: "cc.comparison.scale.trad1.value",
-          },
-          {
-            itemKey: "cc.comparison.scale.trad2.item",
-            valueKey: "cc.comparison.scale.trad2.value",
-          },
-          {
-            itemKey: "cc.comparison.scale.trad3.item",
-            valueKey: "cc.comparison.scale.trad3.value",
-          },
-          {
-            itemKey: "cc.comparison.scale.trad4.item",
-            valueKey: "cc.comparison.scale.trad4.value",
-          },
-          {
-            itemKey: "cc.comparison.scale.trad5.item",
-            valueKey: "cc.comparison.scale.trad5.value",
-          },
+          { itemKey: "cc.comparison.scale.trad1.item", valueKey: "cc.comparison.scale.trad1.value" },
+          { itemKey: "cc.comparison.scale.trad2.item", valueKey: "cc.comparison.scale.trad2.value" },
+          { itemKey: "cc.comparison.scale.trad3.item", valueKey: "cc.comparison.scale.trad3.value" },
+          { itemKey: "cc.comparison.scale.trad4.item", valueKey: "cc.comparison.scale.trad4.value" },
+          { itemKey: "cc.comparison.scale.trad5.item", valueKey: "cc.comparison.scale.trad5.value" },
         ],
         sondos: [
-          {
-            itemKey: "cc.comparison.scale.son1.item",
-            valueKey: "cc.comparison.scale.son1.value",
-          },
-          {
-            itemKey: "cc.comparison.scale.son2.item",
-            valueKey: "cc.comparison.scale.son2.value",
-          },
-          {
-            itemKey: "cc.comparison.scale.son3.item",
-            valueKey: "cc.comparison.scale.son3.value",
-          },
-          {
-            itemKey: "cc.comparison.scale.son4.item",
-            valueKey: "cc.comparison.scale.son4.value",
-          },
-          {
-            itemKey: "cc.comparison.scale.son5.item",
-            valueKey: "cc.comparison.scale.son5.value",
-          },
+          { itemKey: "cc.comparison.scale.son1.item", valueKey: "cc.comparison.scale.son1.value" },
+          { itemKey: "cc.comparison.scale.son2.item", valueKey: "cc.comparison.scale.son2.value" },
+          { itemKey: "cc.comparison.scale.son3.item", valueKey: "cc.comparison.scale.son3.value" },
+          { itemKey: "cc.comparison.scale.son4.item", valueKey: "cc.comparison.scale.son4.value" },
+          { itemKey: "cc.comparison.scale.son5.item", valueKey: "cc.comparison.scale.son5.value" },
         ],
       },
     }),
@@ -438,11 +346,7 @@ const SondosCallCenter = () => {
 
   const integrations = useMemo(
     () => [
-      {
-        name: "Genesys",
-        icon: "☁️",
-        typeKey: "cc.integration.type.callcenter",
-      },
+      { name: "Genesys", icon: "☁️", typeKey: "cc.integration.type.callcenter" },
       { name: "Avaya", icon: "📞", typeKey: "cc.integration.type.callcenter" },
       { name: "Cisco", icon: "🔗", typeKey: "cc.integration.type.callcenter" },
       { name: "Five9", icon: "5️⃣", typeKey: "cc.integration.type.callcenter" },
@@ -451,11 +355,7 @@ const SondosCallCenter = () => {
       { name: "Zendesk", icon: "🎫", typeKey: "cc.integration.type.tickets" },
       { name: "Freshdesk", icon: "🎧", typeKey: "cc.integration.type.tickets" },
       { name: "WhatsApp", icon: "💬", typeKey: "cc.integration.type.comms" },
-      {
-        name: "Microsoft Teams",
-        icon: "👥",
-        typeKey: "cc.integration.type.comms",
-      },
+      { name: "Microsoft Teams", icon: "👥", typeKey: "cc.integration.type.comms" },
     ],
     [],
   );
@@ -517,25 +417,27 @@ const SondosCallCenter = () => {
 
   const statKeyLabel = (key: string) => t(`cc.stat_label.${key}`) ?? key;
 
+  /* ── gradient used inline ──────────────────── */
+  const purpleGradient = `linear-gradient(135deg, ${PURPLE}, #7f47ac)`;
+
   return (
     <div
-      dir={lang === "ar" ? "rtl" : "ltr"} // CORRECTION: direction dynamique
-      className="min-h-screen font-arabic bg-[var(--bg)] text-[var(--t1)]"
+      dir={lang === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen bg-[var(--bg)] text-[var(--t1)]"
+      style={{ fontFamily: "'din-next-lt-arabic-b4fd9f01e2', sans-serif" }}
     >
       {/* ==================== HERO ==================== */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(90,24,154,0.15) 0%, transparent 70%)",
+            background: `radial-gradient(ellipse 80% 60% at 50% 0%, ${purpleBg(0.15)} 0%, transparent 70%)`,
           }}
         />
         <div
           className="absolute inset-0 z-[1] pointer-events-none"
           style={{
-            backgroundImage:
-              "linear-gradient(rgba(90,24,154,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(90,24,154,.04) 1px, transparent 1px)",
+            backgroundImage: `linear-gradient(${purpleBg(0.04)} 1px, transparent 1px), linear-gradient(90deg, ${purpleBg(0.04)} 1px, transparent 1px)`,
             backgroundSize: "60px 60px",
             maskImage:
               "radial-gradient(ellipse at center, black 20%, transparent 65%)",
@@ -544,34 +446,43 @@ const SondosCallCenter = () => {
         <div
           className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20 float-gentle"
           style={{
-            background:
-              "radial-gradient(circle, rgba(90,24,154,0.3), transparent 70%)",
+            background: `radial-gradient(circle, ${purpleBg(0.3)}, transparent 70%)`,
           }}
         />
         <div
           className="absolute top-40 right-[15%] w-24 h-24 rounded-full opacity-15 float-slow"
           style={{
-            background:
-              "radial-gradient(circle, rgba(157,78,221,0.3), transparent 70%)",
+            background: `radial-gradient(circle, ${purpleBg(0.3)}, transparent 70%)`,
           }}
         />
         <div
           className="absolute bottom-32 left-[20%] w-20 h-20 rounded-full opacity-10 float-gentle"
           style={{
-            background:
-              "radial-gradient(circle, rgba(123,44,191,0.4), transparent 70%)",
+            background: `radial-gradient(circle, ${purpleBg(0.4)}, transparent 70%)`,
           }}
         />
 
         <div className="relative z-10 max-w-[820px] mx-auto">
-          <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
+          <div
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[13px] font-medium mb-7 animate-fade-up backdrop-blur-sm"
+            style={{
+              background: purpleBg(0.08),
+              border: `1px solid ${purpleBorder(0.2)}`,
+              color: PURPLE,
+            }}
+          >
+            <span
+              className="w-2 h-2 rounded-full"
+              style={{ background: "#00d68f" }}
+            />
             {t("cc.hero.badge")}
           </div>
 
-          <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto animate-fade-up animation-delay-100">
-            {t("cc.hero.title1")}{" "}
-            <span className="text-[#9d4edd]">{t("cc.hero.title2")}</span> <br />
+          <h1
+            className="text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto animate-fade-up animation-delay-100"
+            style={{ color: PURPLE }}
+          >
+            {t("cc.hero.title1")} {t("cc.hero.title2")} <br />
             {t("cc.hero.title3")}
           </h1>
 
@@ -587,10 +498,14 @@ const SondosCallCenter = () => {
             {heroStats.map((stat, i) => (
               <div
                 key={i}
-                className="px-5 py-4 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all hover:shadow-xl hover:-translate-y-1"
+                className="px-5 py-4 rounded-2xl text-center backdrop-blur-xl border shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all hover:shadow-xl hover:-translate-y-1"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.15),
+                }}
               >
                 <div className="text-2xl mb-1">{stat.icon}</div>
-                <div className="text-xl font-bold text-[#9d4edd]">
+                <div className="text-xl font-bold" style={{ color: PURPLE }}>
                   {t(stat.valueKey)}
                 </div>
                 <div className="text-xs text-[var(--t3)]">
@@ -603,7 +518,17 @@ const SondosCallCenter = () => {
           <div className="flex items-center justify-center gap-3.5 mb-12 flex-wrap animate-fade-up animation-delay-300">
             <Link
               to="/demo"
-              className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
+              className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white rounded-full hover:-translate-y-1 transition-all duration-300"
+              style={{
+                background: purpleGradient,
+                boxShadow: `0 4px 20px ${purpleBg(0.35)}`,
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.boxShadow = `0 12px 40px ${purpleBg(0.45)}`;
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 20px ${purpleBg(0.35)}`;
+              }}
             >
               {t("cc.hero.cta")}
             </Link>
@@ -615,9 +540,8 @@ const SondosCallCenter = () => {
       <section className="py-20 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("cc.problems.title1")}{" "}
-              <span className="text-[#9d4edd]">{t("cc.problems.title2")}</span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("cc.problems.title1")} {t("cc.problems.title2")}
             </h2>
           </div>
 
@@ -625,9 +549,24 @@ const SondosCallCenter = () => {
             {problems.map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl text-center transition-all hover:shadow-lg bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(239,68,68,0.2)] hover:border-[rgba(239,68,68,0.35)]"
+                className="p-6 rounded-2xl text-center transition-all hover:shadow-lg backdrop-blur-xl border"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: "rgba(239,68,68,0.2)",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor =
+                    "rgba(239,68,68,0.35)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor =
+                    "rgba(239,68,68,0.2)";
+                }}
               >
-                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl bg-[rgba(239,68,68,0.07)]">
+                <div
+                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl"
+                  style={{ background: "rgba(239,68,68,0.07)" }}
+                >
                   {item.icon}
                 </div>
                 <h3 className="font-bold mb-2 text-[var(--t1)]">
@@ -639,9 +578,15 @@ const SondosCallCenter = () => {
           </div>
 
           <div className="text-center my-12">
-            <div className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.15)]">
+            <div
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl border"
+              style={{
+                background: purpleBg(0.06),
+                borderColor: purpleBorder(0.15),
+              }}
+            >
               <span className="text-2xl">⬇️</span>
-              <span className="font-bold text-[#9d4edd]">
+              <span className="font-bold" style={{ color: PURPLE }}>
                 {t("cc.problems.bridge")}
               </span>
               <span className="text-2xl">⬇️</span>
@@ -652,9 +597,16 @@ const SondosCallCenter = () => {
             {solutions.map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl text-center transition-all hover:shadow-xl hover:-translate-y-1 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.2)]"
+                className="p-6 rounded-2xl text-center transition-all hover:shadow-xl hover:-translate-y-1 backdrop-blur-xl border"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.2),
+                }}
               >
-                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl text-white gradient-bg">
+                <div
+                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl text-white shadow-lg"
+                  style={{ background: purpleGradient }}
+                >
                   {item.icon}
                 </div>
                 <h3 className="font-bold mb-2 text-[var(--t1)]">
@@ -673,12 +625,20 @@ const SondosCallCenter = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, idx) => (
               <div key={idx} className="text-center group">
-                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_4px_14px_rgba(0,0,0,0.05)] transition-transform group-hover:scale-110">
+                <div
+                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl backdrop-blur-xl border shadow-[0_4px_14px_rgba(0,0,0,0.05)] transition-transform group-hover:scale-110"
+                  style={{
+                    background: "rgba(255,255,255,0.85)",
+                    borderColor: purpleBorder(0.1),
+                  }}
+                >
                   {stat.icon}
                 </div>
-                <div className="text-3xl sm:text-4xl font-bold mb-2 text-[#9d4edd]">
-                  {statsVisible ? t(stat.valueKey) : "—"}{" "}
-                  {/* CORRECTION: utiliser la clé de traduction */}
+                <div
+                  className="text-3xl sm:text-4xl font-bold mb-2"
+                  style={{ color: PURPLE }}
+                >
+                  {statsVisible ? t(stat.valueKey) : "—"}
                 </div>
                 <div className="text-sm font-medium text-[var(--t2)]">
                   {t(stat.labelKey)}
@@ -689,104 +649,39 @@ const SondosCallCenter = () => {
         </div>
       </section>
 
-      {/* ==================== COMPARISON ==================== 
-      <section id="comparison" className="py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("cc.comparison.title1")}{" "}
-              <span className="text-[#9d4edd]">
-                {t("cc.comparison.title2")}
-              </span>
-            </h2>
-          </div>
-
-          <div className="flex justify-center gap-3 mb-10">
-            {comparisonTabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveComparison(tab.id as any)}
-                className={`px-5 py-2.5 rounded-full text-[13px] font-medium transition-all duration-300 border backdrop-blur-sm ${activeComparison === tab.id ? "gradient-bg glow text-white border-[rgba(90,24,154,0.4)]" : "bg-[rgba(90,24,154,0.04)] border-[rgba(90,24,154,0.12)] text-[var(--t2)] hover:border-[rgba(90,24,154,0.25)]"}`}
-              >
-                {t(tab.labelKey)}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(239,68,68,0.2)]">
-              <div className="p-4 text-center bg-[rgba(239,68,68,0.07)] border-b border-[rgba(239,68,68,0.15)]">
-                <span className="text-2xl mr-2">🏢</span>
-                <span className="font-bold text-red-400">
-                  {t("cc.comparison.traditional.header")}
-                </span>
-              </div>
-              <div className="p-6 space-y-3">
-                {comparisonData[activeComparison].traditional.map((row, i) => (
-                  <div
-                    key={i}
-                    className={`flex justify-between items-center p-3 rounded-lg text-sm ${row.highlight ? "font-bold bg-[rgba(239,68,68,0.08)] text-red-500" : "bg-[rgba(90,24,154,0.03)] text-[var(--t1)]"}`}
-                  >
-                    <span>{t(row.itemKey)}</span>
-                    <span>{t(row.valueKey)}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.3)] shadow-[0_0_40px_rgba(90,24,154,0.1)]">
-              <div className="p-4 text-center gradient-bg border-b border-[rgba(90,24,154,0.15)]">
-                <span className="text-2xl mr-2">🚀</span>
-                <span className="font-bold text-white">
-                  {t("cc.comparison.sondos.header")}
-                </span>
-              </div>
-              <div className="p-6 space-y-3">
-                {comparisonData[activeComparison].sondos.map((row, i) => (
-                  <div
-                    key={i}
-                    className={`flex justify-between items-center p-3 rounded-lg text-sm ${row.highlight ? "font-bold bg-[rgba(16,185,129,0.08)] text-emerald-600" : "bg-[rgba(90,24,154,0.03)] text-[var(--t1)]"}`}
-                  >
-                    <span>{t(row.itemKey)}</span>
-                    <span>{t(row.valueKey)}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {activeComparison === "cost" && comparisonData.cost.savingsKey && (
-            <div className="mt-8 p-6 rounded-2xl text-center gradient-bg glow">
-              <div className="text-white/80 text-sm mb-1">
-                {t("cc.comparison.monthly_savings")}
-              </div>
-              <div className="text-white text-4xl font-bold">
-                {t(comparisonData.cost.savingsKey!)}
-              </div>
-              <div className="text-white/80 text-sm mt-1">
-                {t("cc.comparison.annual")}
-              </div>
-            </div>
-          )}
-        </div>
-      </section> */}
-
       {/* ==================== FEATURES ==================== */}
       <section id="features" className="py-24 px-6 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("cc.features.title1")}{" "}
-              <span className="text-[#9d4edd]">{t("cc.features.title2")}</span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("cc.features.title1")} {t("cc.features.title2")}
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feat, idx) => (
               <div
                 key={idx}
-                className="group p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-[rgba(90,24,154,0.3)] ai-glow"
+                className="group p-8 rounded-3xl backdrop-blur-xl border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.1),
+                  boxShadow: "none",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = purpleBorder(0.3);
+                  el.style.boxShadow = `0 0 40px ${purpleBg(0.1)}`;
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = purpleBorder(0.1);
+                  el.style.boxShadow = "none";
+                }}
               >
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 bg-[rgba(90,24,154,0.06)] transition-transform duration-300 group-hover:scale-110">
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 transition-transform duration-300 group-hover:scale-110"
+                  style={{ background: purpleBg(0.06) }}
+                >
                   {feat.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-[var(--t1)]">
@@ -795,7 +690,14 @@ const SondosCallCenter = () => {
                 <p className="text-sm mb-5 leading-relaxed text-[var(--t2)]">
                   {t(feat.descKey)}
                 </p>
-                <span className="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]">
+                <span
+                  className="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold border"
+                  style={{
+                    background: purpleBg(0.08),
+                    color: PURPLE,
+                    borderColor: purpleBorder(0.15),
+                  }}
+                >
                   {t(feat.highlightKey)}
                 </span>
               </div>
@@ -808,24 +710,39 @@ const SondosCallCenter = () => {
       <section className="py-24 px-6 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("cc.integrations.title1")}{" "}
-              <span className="text-[#9d4edd]">
-                {t("cc.integrations.title2")}
-              </span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("cc.integrations.title1")} {t("cc.integrations.title2")}
             </h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {integrations.map((int, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl flex flex-col items-center gap-3 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                className="p-6 rounded-2xl flex flex-col items-center gap-3 backdrop-blur-xl border transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.1),
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor =
+                    purpleBorder(0.25);
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor =
+                    purpleBorder(0.1);
+                }}
               >
                 <span className="text-3xl">{int.icon}</span>
                 <span className="font-semibold text-[var(--t1)]">
                   {int.name}
                 </span>
-                <span className="text-xs px-2 py-1 rounded-full bg-[rgba(90,24,154,0.08)] text-[#9d4edd]">
+                <span
+                  className="text-xs px-2 py-1 rounded-full"
+                  style={{
+                    background: purpleBg(0.08),
+                    color: PURPLE,
+                  }}
+                >
                   {t(int.typeKey)}
                 </span>
               </div>
@@ -838,23 +755,33 @@ const SondosCallCenter = () => {
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("cc.testimonials.title1")}{" "}
-              <span className="text-[#9d4edd]">
-                {t("cc.testimonials.title2")}
-              </span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("cc.testimonials.title1")} {t("cc.testimonials.title2")}
             </h2>
           </div>
-          <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.1)] relative">
-            <div className="absolute top-6 right-8 text-8xl font-serif opacity-10 text-[#5a189a]">
-              "
+          <div
+            className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl backdrop-blur-xl border relative"
+            style={{
+              background: "rgba(255,255,255,0.85)",
+              borderColor: purpleBorder(0.15),
+              boxShadow: `0 0 60px ${purpleBg(0.1)}`,
+            }}
+          >
+            <div
+              className="absolute top-6 right-8 text-8xl font-serif opacity-10"
+              style={{ color: PURPLE }}
+            >
+              &ldquo;
             </div>
             <p className="text-xl sm:text-2xl leading-relaxed mb-8 text-[var(--t1)]">
               {t(testimonials[currentTestimonial].quoteKey)}
             </p>
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl gradient-bg shadow-lg">
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl text-white shadow-lg"
+                  style={{ background: purpleGradient }}
+                >
                   {testimonials[currentTestimonial].image}
                 </div>
                 <div>
@@ -867,7 +794,14 @@ const SondosCallCenter = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 py-2 rounded-xl font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.2)]">
+              <div
+                className="px-4 py-2 rounded-xl font-bold border"
+                style={{
+                  background: purpleBg(0.08),
+                  color: PURPLE,
+                  borderColor: purpleBorder(0.2),
+                }}
+              >
                 {t(testimonials[currentTestimonial].metricKey)}
               </div>
             </div>
@@ -880,8 +814,8 @@ const SondosCallCenter = () => {
                   style={{
                     background:
                       currentTestimonial === idx
-                        ? "linear-gradient(135deg,#5a189a,#9d4edd)"
-                        : "rgba(90,24,154,0.2)",
+                        ? purpleGradient
+                        : purpleBg(0.2),
                     width: currentTestimonial === idx ? "32px" : "12px",
                   }}
                 />
@@ -895,9 +829,8 @@ const SondosCallCenter = () => {
       <section className="py-24 px-6 bg-[var(--bg2)]">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("cc.faq.title1")}{" "}
-              <span className="text-[#9d4edd]">{t("cc.faq.title2")}</span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("cc.faq.title1")} {t("cc.faq.title2")}
             </h2>
           </div>
           <div className="space-y-4">
@@ -906,14 +839,21 @@ const SondosCallCenter = () => {
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300"
+                  className="rounded-2xl overflow-hidden backdrop-blur-xl border transition-all duration-300"
+                  style={{
+                    background: "rgba(255,255,255,0.85)",
+                    borderColor: open ? purpleBorder(0.25) : purpleBorder(0.1),
+                  }}
                 >
                   <button
                     className="w-full flex items-center justify-between px-6 py-5 text-right font-semibold text-[var(--t1)]"
                     onClick={() => setActiveFAQ(open ? null : idx)}
                   >
                     {t(faq.qKey)}
-                    <span className="text-xl ml-4 flex-shrink-0 text-[#9d4edd]">
+                    <span
+                      className="text-xl ml-4 flex-shrink-0"
+                      style={{ color: PURPLE }}
+                    >
                       {open ? "−" : "+"}
                     </span>
                   </button>
@@ -930,10 +870,13 @@ const SondosCallCenter = () => {
       </section>
 
       {/* ==================== FINAL CTA ==================== */}
-      <section className="py-24 px-6 gradient-bg">
+      <section
+        className="py-24 px-6"
+        style={{ background: purpleGradient }}
+      >
         <div className="max-w-4xl mx-auto text-center">
           <div className="text-6xl mb-6">📞</div>
-          <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-white">
+          <h2 className="text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-white">
             {t("cc.cta.title1")}
             <br />
             {t("cc.cta.title2")}
@@ -944,7 +887,18 @@ const SondosCallCenter = () => {
           <div className="flex justify-center mb-12">
             <Link
               to="/demo"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-[rgba(255,255,255,0.95)] rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:bg-white text-[#5a189a] shimmer"
+              className="inline-flex items-center gap-2 px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1"
+              style={{
+                background: "rgba(255,255,255,0.95)",
+                color: PURPLE,
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = "#fff";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background =
+                  "rgba(255,255,255,0.95)";
+              }}
             >
               {t("cc.cta.button")}
             </Link>

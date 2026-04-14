@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import "../index.css";
 
+/* ── shared colour tokens ───────────────────── */
+const PURPLE = "#672D92";
+const PURPLE_RGB = "103,45,146";
+const purpleBg = (a: number) => `rgba(${PURPLE_RGB},${a})`;
+const purpleBorder = (a: number) => `rgba(${PURPLE_RGB},${a})`;
+const purpleGradient = `linear-gradient(135deg, ${PURPLE}, #7f47ac)`;
+
 const SondosEcommerce = () => {
   const { t, lang } = useLanguage();
   const [activeSegment, setActiveSegment] = useState(0);
@@ -9,7 +16,6 @@ const SondosEcommerce = () => {
   const [statsVisible, setStatsVisible] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
-  // ROI Calculator State
   const [roiInputs, setRoiInputs] = useState({
     dailyOrders: 150,
     supportCalls: 80,
@@ -18,7 +24,33 @@ const SondosEcommerce = () => {
     returnRate: 15,
   });
 
-  // Auto-rotate testimonials
+  const testimonials = [
+    {
+      quote: t("ecom.testimonial1.quote"),
+      name: t("ecom.testimonial1.name"),
+      role: t("ecom.testimonial1.role"),
+      company: t("ecom.testimonial1.company"),
+      image: "👨‍💻",
+      metric: t("ecom.testimonial1.metric"),
+    },
+    {
+      quote: t("ecom.testimonial2.quote"),
+      name: t("ecom.testimonial2.name"),
+      role: t("ecom.testimonial2.role"),
+      company: t("ecom.testimonial2.company"),
+      image: "👩‍💼",
+      metric: t("ecom.testimonial2.metric"),
+    },
+    {
+      quote: t("ecom.testimonial3.quote"),
+      name: t("ecom.testimonial3.name"),
+      role: t("ecom.testimonial3.role"),
+      company: t("ecom.testimonial3.company"),
+      image: "🧔",
+      metric: t("ecom.testimonial3.metric"),
+    },
+  ];
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
@@ -26,7 +58,6 @@ const SondosEcommerce = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Animate stats on scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -39,7 +70,6 @@ const SondosEcommerce = () => {
     return () => observer.disconnect();
   }, []);
 
-  // ==================== E-COMMERCE DATA ====================
   const segments = [
     {
       id: "stores",
@@ -158,33 +188,6 @@ const SondosEcommerce = () => {
     },
   ];
 
-  const testimonials = [
-    {
-      quote: t("ecom.testimonial1.quote"),
-      name: t("ecom.testimonial1.name"),
-      role: t("ecom.testimonial1.role"),
-      company: t("ecom.testimonial1.company"),
-      image: "👨‍💻",
-      metric: t("ecom.testimonial1.metric"),
-    },
-    {
-      quote: t("ecom.testimonial2.quote"),
-      name: t("ecom.testimonial2.name"),
-      role: t("ecom.testimonial2.role"),
-      company: t("ecom.testimonial2.company"),
-      image: "👩‍💼",
-      metric: t("ecom.testimonial2.metric"),
-    },
-    {
-      quote: t("ecom.testimonial3.quote"),
-      name: t("ecom.testimonial3.name"),
-      role: t("ecom.testimonial3.role"),
-      company: t("ecom.testimonial3.company"),
-      image: "🧔",
-      metric: t("ecom.testimonial3.metric"),
-    },
-  ];
-
   const faqs = [
     { q: t("ecom.faq1.q"), a: t("ecom.faq1.a") },
     { q: t("ecom.faq2.q"), a: t("ecom.faq2.a") },
@@ -294,23 +297,21 @@ const SondosEcommerce = () => {
   return (
     <div
       dir={lang === "ar" ? "rtl" : "ltr"}
-      className="min-h-screen font-arabic bg-[var(--bg)] text-[var(--t1)]"
+      className="min-h-screen bg-[var(--bg)] text-[var(--t1)]"
+      style={{ fontFamily: "'din-next-lt-arabic-b4fd9f01e2', sans-serif" }}
     >
       {/* ==================== HERO SECTION ==================== */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden">
-        {/* Background Decorations */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(90,24,154,0.15) 0%, transparent 70%)",
+            background: `radial-gradient(ellipse 80% 60% at 50% 0%, ${purpleBg(0.15)} 0%, transparent 70%)`,
           }}
         />
         <div
           className="absolute inset-0 z-[1] pointer-events-none"
           style={{
-            backgroundImage:
-              "linear-gradient(rgba(90,24,154,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(90,24,154,.04) 1px, transparent 1px)",
+            backgroundImage: `linear-gradient(${purpleBg(0.04)} 1px, transparent 1px), linear-gradient(90deg, ${purpleBg(0.04)} 1px, transparent 1px)`,
             backgroundSize: "60px 60px",
             maskImage:
               "radial-gradient(ellipse at center, black 20%, transparent 65%)",
@@ -319,46 +320,50 @@ const SondosEcommerce = () => {
         <div
           className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20 float-gentle"
           style={{
-            background:
-              "radial-gradient(circle, rgba(90,24,154,0.3), transparent 70%)",
+            background: `radial-gradient(circle, ${purpleBg(0.3)}, transparent 70%)`,
           }}
         />
         <div
           className="absolute top-40 right-[15%] w-24 h-24 rounded-full opacity-15 float-slow"
           style={{
-            background:
-              "radial-gradient(circle, rgba(157,78,221,0.3), transparent 70%)",
+            background: `radial-gradient(circle, ${purpleBg(0.3)}, transparent 70%)`,
           }}
         />
         <div
           className="absolute bottom-32 left-[20%] w-20 h-20 rounded-full opacity-10 float-gentle"
           style={{
-            background:
-              "radial-gradient(circle, rgba(123,44,191,0.4), transparent 70%)",
+            background: `radial-gradient(circle, ${purpleBg(0.4)}, transparent 70%)`,
           }}
         />
 
         <div className="relative z-10 max-w-[820px] mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
+          <div
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[13px] font-medium mb-7 backdrop-blur-sm"
+            style={{
+              background: purpleBg(0.08),
+              border: `1px solid ${purpleBorder(0.2)}`,  // ✅ FIX 1
+              color: PURPLE,
+            }}
+          >
             <span className="text-lg">🛒</span>
             <span>{t("ecom.hero.badge")}</span>
           </div>
 
-          {/* Headline */}
-          <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 animate-fade-up animation-delay-100">
-            {t("ecom.hero.title1")}{" "}
-            <span className="text-[#9d4edd]">{t("ecom.hero.title2")}</span>
+          <h1
+            className="text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6"
+            style={{ color: PURPLE }}
+          >
+            {t("ecom.hero.title1")} {t("ecom.hero.title2")}
             <br />
             {t("ecom.hero.title3")}
           </h1>
 
-          <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[var(--t1)] max-w-[580px] mx-auto leading-relaxed mb-4 animate-fade-up animation-delay-150">
+          <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[var(--t1)] max-w-[580px] mx-auto leading-relaxed mb-4">
             {t("ecom.hero.subtitle")}
           </p>
 
           {/* Stats */}
-          <div className="flex flex-wrap justify-center gap-4 mb-10 animate-fade-up animation-delay-300">
+          <div className="flex flex-wrap justify-center gap-4 mb-10">
             {[
               {
                 value: t("ecom.hero.stat1.value"),
@@ -378,10 +383,14 @@ const SondosEcommerce = () => {
             ].map((stat, i) => (
               <div
                 key={i}
-                className="px-5 py-4 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all hover:shadow-xl hover:-translate-y-1"
+                className="px-5 py-4 rounded-2xl text-center backdrop-blur-xl border shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all hover:shadow-xl hover:-translate-y-1"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.15),
+                }}
               >
                 <div className="text-2xl mb-1">{stat.icon}</div>
-                <div className="text-xl font-bold text-[#9d4edd]">
+                <div className="text-xl font-bold" style={{ color: PURPLE }}>
                   {stat.value}
                 </div>
                 <div className="text-xs text-[var(--t3)]">{stat.label}</div>
@@ -390,16 +399,26 @@ const SondosEcommerce = () => {
           </div>
 
           {/* CTA */}
-          <div className="flex items-center justify-center gap-3.5 mb-10 flex-wrap animate-fade-up animation-delay-300">
+          <div className="flex items-center justify-center gap-3.5 mb-10 flex-wrap">
             <a
               href="/demo"
-              className="inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white gradient-bg glow rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300 shimmer"
+              className="inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white rounded-full hover:-translate-y-1 transition-all duration-300"
+              style={{
+                background: purpleGradient,
+                boxShadow: `0 4px 20px ${purpleBg(0.35)}`,
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.boxShadow = `0 12px 40px ${purpleBg(0.45)}`;
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 20px ${purpleBg(0.35)}`;
+              }}
             >
               {t("ecom.hero.cta")}
             </a>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3 animate-fade-up animation-delay-300">
+          <div className="flex flex-wrap justify-center gap-3">
             {[
               t("ecom.hero.badge1"),
               t("ecom.hero.badge2"),
@@ -407,7 +426,12 @@ const SondosEcommerce = () => {
             ].map((badge, i) => (
               <span
                 key={i}
-                className="px-3 py-1 rounded-full text-xs font-medium bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]"
+                className="px-3 py-1 rounded-full text-xs font-medium border"
+                style={{
+                  background: purpleBg(0.08),
+                  color: PURPLE,
+                  borderColor: purpleBorder(0.15),
+                }}
               >
                 {badge}
               </span>
@@ -420,11 +444,8 @@ const SondosEcommerce = () => {
       <section className="py-20 bg-[var(--bg)]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("ecom.problems.title")}{" "}
-              <span className="text-[#9d4edd]">
-                {t("ecom.problems.title2")}
-              </span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ecom.problems.title")} {t("ecom.problems.title2")}
             </h2>
           </div>
 
@@ -453,9 +474,22 @@ const SondosEcommerce = () => {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(239,68,68,0.2)] hover:border-[rgba(239,68,68,0.35)] transition-all hover:shadow-lg"
+                className="p-6 rounded-2xl text-center transition-all hover:shadow-lg backdrop-blur-xl border"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: "rgba(239,68,68,0.2)",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(239,68,68,0.35)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(239,68,68,0.2)";
+                }}
               >
-                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl bg-[rgba(239,68,68,0.08)]">
+                <div
+                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl"
+                  style={{ background: "rgba(239,68,68,0.08)" }}
+                >
                   {item.icon}
                 </div>
                 <h3 className="font-bold mb-2 text-[var(--t1)]">
@@ -468,9 +502,15 @@ const SondosEcommerce = () => {
 
           {/* Solution Arrow */}
           <div className="text-center my-12">
-            <div className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.15)]">
+            <div
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl border"
+              style={{
+                background: purpleBg(0.06),
+                borderColor: purpleBorder(0.15),
+              }}
+            >
               <span className="text-2xl">⬇️</span>
-              <span className="font-bold text-[#9d4edd]">
+              <span className="font-bold" style={{ color: PURPLE }}>
                 {t("ecom.problems.solution")}
               </span>
               <span className="text-2xl">⬇️</span>
@@ -503,9 +543,22 @@ const SondosEcommerce = () => {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all hover:shadow-xl hover:-translate-y-1"
+                className="p-6 rounded-2xl text-center transition-all hover:shadow-xl hover:-translate-y-1 backdrop-blur-xl border"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.1),
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = purpleBorder(0.25);
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = purpleBorder(0.1);
+                }}
               >
-                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl gradient-bg">
+                <div
+                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl text-white shadow-lg"
+                  style={{ background: purpleGradient }}
+                >
                   {item.icon}
                 </div>
                 <h3 className="font-bold mb-2 text-[var(--t1)]">
@@ -524,10 +577,19 @@ const SondosEcommerce = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, idx) => (
               <div key={idx} className="text-center group">
-                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_4px_14px_rgba(0,0,0,0.05)] transition-transform group-hover:scale-110">
+                <div
+                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl backdrop-blur-xl border shadow-[0_4px_14px_rgba(0,0,0,0.05)] transition-transform group-hover:scale-110"
+                  style={{
+                    background: "rgba(255,255,255,0.85)",
+                    borderColor: purpleBorder(0.1),
+                  }}
+                >
                   {stat.icon}
                 </div>
-                <div className="text-3xl sm:text-4xl font-bold mb-2 text-[#9d4edd]">
+                <div
+                  className="text-3xl sm:text-4xl font-bold mb-2"
+                  style={{ color: PURPLE }}
+                >
                   {statsVisible ? stat.value : "—"}
                 </div>
                 <div className="text-sm font-medium text-[var(--t2)]">
@@ -543,11 +605,8 @@ const SondosEcommerce = () => {
       <section id="solutions" className="py-24 px-6 bg-[var(--bg)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("ecom.segments.title")}{" "}
-              <span className="text-[#9d4edd]">
-                {t("ecom.segments.title2")}
-              </span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ecom.segments.title")} {t("ecom.segments.title2")}
             </h2>
           </div>
 
@@ -559,11 +618,17 @@ const SondosEcommerce = () => {
                 <button
                   key={segment.id}
                   onClick={() => setActiveSegment(idx)}
-                  className={`px-5 py-2.5 rounded-full flex items-center gap-2 text-[13px] font-medium transition-all duration-300 border backdrop-blur-sm ${
-                    isActive
-                      ? "gradient-bg glow text-white border-[rgba(90,24,154,0.4)]"
-                      : "bg-[rgba(90,24,154,0.04)] border-[rgba(90,24,154,0.12)] text-[var(--t2)] hover:border-[rgba(90,24,154,0.25)]"
-                  }`}
+                  className="px-5 py-2.5 rounded-full flex items-center gap-2 text-[13px] font-medium transition-all duration-300 border backdrop-blur-sm"
+                  style={{
+                    background: isActive ? purpleGradient : purpleBg(0.04),
+                    color: isActive ? "#fff" : "var(--t2)",
+                    borderColor: isActive
+                      ? purpleBorder(0.4)
+                      : purpleBorder(0.12),
+                    boxShadow: isActive
+                      ? `0 4px 20px ${purpleBg(0.3)}`
+                      : "none",
+                  }}
                 >
                   <span className="text-xl">{segment.icon}</span>
                   <span className="hidden sm:inline">{segment.name}</span>
@@ -573,10 +638,22 @@ const SondosEcommerce = () => {
           </div>
 
           {/* Active Segment Details */}
-          <div className="rounded-3xl overflow-hidden border border-[rgba(90,24,154,0.15)] shadow-[0_20px_60px_rgba(90,24,154,0.12)]">
+          <div
+            className="rounded-3xl overflow-hidden border"
+            style={{
+              borderColor: purpleBorder(0.15),
+              boxShadow: `0 20px 60px ${purpleBg(0.12)}`,  // ✅ FIX 2
+            }}
+          >
             <div className="grid md:grid-cols-2">
               {/* Pain Points */}
-              <div className="p-8 sm:p-10 bg-[rgba(239,68,68,0.05)] border-b md:border-b-0 md:border-l border-[rgba(90,24,154,0.08)]">
+              <div
+                className="p-8 sm:p-10 border-b md:border-b-0 md:border-l"
+                style={{
+                  background: "rgba(239,68,68,0.05)",
+                  borderColor: purpleBorder(0.08),
+                }}
+              >
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">😫</span>
                   <h3 className="text-xl font-bold text-red-400">
@@ -594,17 +671,17 @@ const SondosEcommerce = () => {
               </div>
 
               {/* Solutions */}
-              <div className="p-8 sm:p-10 bg-[rgba(90,24,154,0.04)]">
+              <div className="p-8 sm:p-10" style={{ background: purpleBg(0.04) }}>
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">🎉</span>
-                  <h3 className="text-xl font-bold text-[#9d4edd]">
+                  <h3 className="text-xl font-bold" style={{ color: PURPLE }}>
                     {t("ecom.segments.with")}
                   </h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].solutions.map((solution, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="text-[#9d4edd]">✓</span>
+                      <span style={{ color: PURPLE }}>✓</span>
                       <span className="text-[var(--t1)]">{solution}</span>
                     </li>
                   ))}
@@ -613,12 +690,18 @@ const SondosEcommerce = () => {
             </div>
 
             {/* Results Stats */}
-            <div className="p-6 bg-[var(--bg)] border-t border-[rgba(90,24,154,0.08)]">
+            <div
+              className="p-6 bg-[var(--bg)] border-t"
+              style={{ borderColor: purpleBorder(0.08) }}
+            >
               <div className="flex flex-wrap justify-center gap-8">
                 {Object.entries(segments[activeSegment].stats).map(
                   ([key, value], i) => (
                     <div key={i} className="text-center">
-                      <div className="text-2xl font-bold text-[#9d4edd]">
+                      <div
+                        className="text-2xl font-bold"
+                        style={{ color: PURPLE }}
+                      >
                         {value}
                       </div>
                       <div className="text-sm text-[var(--t3)]">
@@ -637,11 +720,8 @@ const SondosEcommerce = () => {
       <section id="features" className="py-24 px-6 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("ecom.features.title")}{" "}
-              <span className="text-[#9d4edd]">
-                {t("ecom.features.title2")}
-              </span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ecom.features.title")} {t("ecom.features.title2")}
             </h2>
           </div>
 
@@ -649,9 +729,27 @@ const SondosEcommerce = () => {
             {features.map((feature, idx) => (
               <div
                 key={idx}
-                className="group p-8 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-[rgba(90,24,154,0.3)] ai-glow"
+                className="group p-8 rounded-3xl backdrop-blur-xl border transition-all duration-300 hover:-translate-y-2"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.1),
+                  boxShadow: "none",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = purpleBorder(0.3);
+                  el.style.boxShadow = `0 0 40px ${purpleBg(0.1)}`;
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = purpleBorder(0.1);
+                  el.style.boxShadow = "none";
+                }}
               >
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 bg-[rgba(90,24,154,0.06)] transition-transform duration-300 group-hover:scale-110">
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 transition-transform duration-300 group-hover:scale-110"
+                  style={{ background: purpleBg(0.06) }}
+                >
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-[var(--t1)]">
@@ -660,7 +758,14 @@ const SondosEcommerce = () => {
                 <p className="text-sm mb-5 leading-relaxed text-[var(--t2)]">
                   {feature.description}
                 </p>
-                <span className="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.15)]">
+                <span
+                  className="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold border"
+                  style={{
+                    background: purpleBg(0.08),
+                    color: PURPLE,
+                    borderColor: purpleBorder(0.15),
+                  }}
+                >
                   {feature.highlight}
                 </span>
               </div>
@@ -670,14 +775,11 @@ const SondosEcommerce = () => {
       </section>
 
       {/* ==================== INTEGRATIONS ==================== */}
-      <section id="integrations" className="py-24 px-6 bg-[var(--bg)]">
+      <section className="py-24 px-6 bg-[var(--bg)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("ecom.integrations.title")}{" "}
-              <span className="text-[#9d4edd]">
-                {t("ecom.integrations.title2")}
-              </span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ecom.integrations.title")} {t("ecom.integrations.title2")}
             </h2>
             <p className="text-[var(--t2)]">
               {t("ecom.integrations.subtitle")}
@@ -688,11 +790,27 @@ const SondosEcommerce = () => {
             {integrations.map((int, idx) => (
               <div
                 key={idx}
-                className="px-8 py-6 rounded-2xl text-center bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                className="px-8 py-6 rounded-2xl text-center backdrop-blur-xl border transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.1),
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = purpleBorder(0.25);
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = purpleBorder(0.1);
+                }}
               >
                 <div className="text-4xl mb-3">{int.icon}</div>
-                <div className="font-bold text-[var(--t1)]">{int.name}</div>
-                <div className="text-xs mt-1 px-2 py-0.5 rounded-full inline-block bg-[rgba(90,24,154,0.08)] text-[#9d4edd]">
+                <div className="font-semibold text-[var(--t1)]">{int.name}</div>
+                <div
+                  className="text-xs mt-1 px-2 py-0.5 rounded-full inline-block"
+                  style={{
+                    background: purpleBg(0.08),
+                    color: PURPLE,
+                  }}
+                >
                   {int.type}
                 </div>
               </div>
@@ -705,11 +823,8 @@ const SondosEcommerce = () => {
       <section className="py-24 px-6 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("ecom.usecases.title")}{" "}
-              <span className="text-[#9d4edd]">
-                {t("ecom.usecases.title2")}
-              </span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ecom.usecases.title")} {t("ecom.usecases.title2")}
             </h2>
           </div>
 
@@ -717,21 +832,47 @@ const SondosEcommerce = () => {
             {useCases.map((useCase, idx) => (
               <div
                 key={idx}
-                className="rounded-3xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] shadow-[0_0_40px_rgba(90,24,154,0.08)]"
+                className="rounded-3xl overflow-hidden backdrop-blur-xl border"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.1),
+                  boxShadow: `0 0 40px ${purpleBg(0.08)}`,
+                }}
               >
-                <div className="px-6 py-4 font-bold bg-[rgba(90,24,154,0.06)] text-[var(--t1)] border-b border-[rgba(90,24,154,0.08)]">
+                <div
+                  className="px-6 py-4 font-bold text-[var(--t1)] border-b"
+                  style={{
+                    background: purpleBg(0.06),
+                    borderColor: purpleBorder(0.08),
+                  }}
+                >
                   {useCase.title}
                 </div>
                 <div className="p-6 space-y-4 max-h-96 overflow-y-auto">
                   {useCase.conversation.map((msg, i) => (
                     <div
                       key={i}
-                      className={`p-4 rounded-2xl text-sm ${
+                      className="p-4 rounded-2xl text-sm"
+                      style={
                         msg.role === "ai"
-                          ? "rounded-tr-md max-w-[85%] mr-auto bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.1)] text-[var(--t1)]"
-                          : "rounded-tl-md max-w-[75%] ml-auto gradient-bg text-white"
-                      }`}
-                      style={{ whiteSpace: "pre-line" }}
+                          ? {
+                              borderRadius: "1rem 1rem 1rem 1rem 0.25rem",
+                              maxWidth: "85%",
+                              marginLeft: "auto",
+                              marginRight: 0,
+                              background: purpleBg(0.06),
+                              border: `1px solid ${purpleBorder(0.1)}`,
+                              color: "var(--t1)",
+                            }
+                          : {
+                              borderRadius: "1rem 1rem 0.25rem 1rem",
+                              maxWidth: "75%",
+                              marginLeft: 0,
+                              marginRight: "auto",
+                              background: purpleGradient,
+                              color: "#fff",
+                            }
+                      }
                     >
                       {msg.text}
                     </div>
@@ -747,17 +888,24 @@ const SondosEcommerce = () => {
       <section className="py-24 px-6 bg-[var(--bg2)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("ecom.testimonials.title")}{" "}
-              <span className="text-[#9d4edd]">
-                {t("ecom.testimonials.title2")}
-              </span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ecom.testimonials.title")} {t("ecom.testimonials.title2")}
             </h2>
           </div>
 
-          <div className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.15)] shadow-[0_0_60px_rgba(90,24,154,0.1)] relative">
-            <div className="absolute top-6 right-8 text-8xl font-serif opacity-10 text-[#5a189a]">
-              "
+          <div
+            className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl backdrop-blur-xl border relative"
+            style={{
+              background: "rgba(255,255,255,0.85)",
+              borderColor: purpleBorder(0.15),
+              boxShadow: `0 0 60px ${purpleBg(0.1)}`,
+            }}
+          >
+            <div
+              className="absolute top-6 right-8 text-8xl font-serif opacity-10"
+              style={{ color: PURPLE }}
+            >
+              &ldquo;
             </div>
 
             <p className="text-xl sm:text-2xl leading-relaxed mb-8 text-[var(--t1)]">
@@ -766,7 +914,10 @@ const SondosEcommerce = () => {
 
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl gradient-bg shadow-lg">
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl text-white shadow-lg"
+                  style={{ background: purpleGradient }}
+                >
                   {testimonials[currentTestimonial].image}
                 </div>
                 <div>
@@ -779,12 +930,17 @@ const SondosEcommerce = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 py-2 rounded-xl font-bold bg-[rgba(90,24,154,0.08)] text-[#9d4edd] border border-[rgba(90,24,154,0.2)]">
+              <div
+                className="px-4 py-2 rounded-xl font-bold border"
+                style={{
+                  background: purpleBg(0.08),
+                  color: PURPLE,
+                  borderColor: purpleBorder(0.2),
+                }}
+              >
                 {testimonials[currentTestimonial].metric}
               </div>
             </div>
-
-            {/* Dots */}
             <div className="flex justify-center gap-3 mt-10">
               {testimonials.map((_, idx) => (
                 <button
@@ -794,8 +950,8 @@ const SondosEcommerce = () => {
                   style={{
                     background:
                       currentTestimonial === idx
-                        ? "linear-gradient(135deg,#5a189a,#9d4edd)"
-                        : "rgba(90,24,154,0.2)",
+                        ? purpleGradient
+                        : purpleBg(0.2),
                     width: currentTestimonial === idx ? "32px" : "12px",
                   }}
                 />
@@ -809,9 +965,8 @@ const SondosEcommerce = () => {
       <section className="py-24 px-6 bg-[var(--bg)]">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4">
-              {t("ecom.faq.title")}{" "}
-              <span className="text-[#9d4edd]">{t("ecom.faq.title2")}</span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ecom.faq.title")} {t("ecom.faq.title2")}
             </h2>
           </div>
 
@@ -821,14 +976,23 @@ const SondosEcommerce = () => {
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)] hover:border-[rgba(90,24,154,0.25)] transition-all duration-300"
+                  className="rounded-2xl overflow-hidden backdrop-blur-xl border transition-all duration-300"
+                  style={{
+                    background: "rgba(255,255,255,0.85)",
+                    borderColor: open
+                      ? purpleBorder(0.25)
+                      : purpleBorder(0.1),
+                  }}
                 >
                   <button
-                    className="w-full flex items-center justify-between px-6 py-5 text-right font-semibold text-[var(--t1)]"
+                    className="w-full flex items-start justify-between px-6 py-5 text-right font-semibold text-[var(--t1)]"
                     onClick={() => setActiveFAQ(open ? null : idx)}
                   >
-                    {faq.q}
-                    <span className="text-xl ml-4 flex-shrink-0 text-[#9d4edd]">
+                    <span className="flex-1 leading-relaxed">{faq.q}</span>
+                    <span
+                      className="text-xl ml-4 flex-shrink-0 mt-0.5"
+                      style={{ color: PURPLE }}
+                    >
                       {open ? "−" : "+"}
                     </span>
                   </button>
@@ -838,17 +1002,17 @@ const SondosEcommerce = () => {
                     </div>
                   )}
                 </div>
-              );
+              );  // ✅ FIX 3
             })}
           </div>
         </div>
       </section>
 
       {/* ==================== FINAL CTA ==================== */}
-      <section className="py-24 px-6 gradient-bg">
+      <section className="py-24 px-6" style={{ background: purpleGradient }}>
         <div className="max-w-4xl mx-auto text-center">
           <div className="text-6xl mb-6">🛒</div>
-          <h2 className="font-['Instrument_Sans',sans-serif] text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-white">
+          <h2 className="text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-white">
             {t("ecom.cta.title1")}
             <br />
             {t("ecom.cta.title2")}
@@ -860,14 +1024,24 @@ const SondosEcommerce = () => {
           <div className="flex justify-center mb-12">
             <a
               href="/demo"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-[rgba(255,255,255,0.95)] rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:bg-white text-[#5a189a] shimmer"
+              className="inline-flex items-center gap-2 px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1"
+              style={{
+                background: "rgba(255,255,255,0.95)",
+                color: PURPLE,
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background = "#fff";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background =
+                  "rgba(255,255,255,0.95)";
+              }}
             >
               {t("ecom.cta.button")}
             </a>
           </div>
 
-          {/* Trust badges */}
-          <div className="flex flex-wrap justify-center gap-6 text-white/70 text-sm">
+          <div className="flex flex-wrap justify-center gap-6 mt-12 text-white/70 text-sm">
             <span>🔗 {t("ecom.cta.badge1")}</span>
             <span>📦 {t("ecom.cta.badge2")}</span>
             <span>💳 {t("ecom.cta.badge3")}</span>

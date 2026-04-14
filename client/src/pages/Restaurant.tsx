@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import "../index.css";
 
+/* ── shared colour tokens ───────────────────── */
+const PURPLE = "#672D92";
+const PURPLE_RGB = "103,45,146";
+const purpleBg = (a: number) => `rgba(${PURPLE_RGB},${a})`;
+const purpleBorder = (a: number) => `rgba(${PURPLE_RGB},${a})`;
+const purpleGradient = `linear-gradient(135deg, ${PURPLE}, #7f47ac)`;
+
 const SondosInsurance = () => {
   const { t, lang } = useLanguage();
   const [activeSegment, setActiveSegment] = useState(0);
@@ -414,11 +421,7 @@ const SondosInsurance = () => {
   const roiResults = calculateROI();
 
   const pageBg = "bg-[var(--bg,#f7f5fc)] text-[var(--t1,#1a0a2e)]";
-  const sectionSoft = "bg-[var(--bg2,rgba(90,24,154,0.03))]";
-  const card =
-    "bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border border-[rgba(90,24,154,0.1)]";
-  const muted = "text-[#4a3a62]";
-  const headingFont = "font-['Instrument_Sans',sans-serif]";
+  const sectionSoft = "bg-[var(--bg2,rgba(103,45,146,0.03))]";
 
   const statKeyLabel = (key: string) => {
     const map: Record<string, string> = {
@@ -446,62 +449,68 @@ const SondosInsurance = () => {
   return (
     <div
       dir={lang === "ar" ? "rtl" : "ltr"}
-      className={`min-h-screen font-sans ${pageBg}`}
+      className={`min-h-screen ${pageBg}`}
+      style={{ fontFamily: "'din-next-lt-arabic-b4fd9f01e2', sans-serif" }}
     >
       {/* ==================== HERO SECTION ==================== */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden">
-        {/* Background effects from healthcare */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(90,24,154,0.15) 0%, transparent 70%)",
+            background: `radial-gradient(ellipse 80% 60% at 50% 0%, ${purpleBg(0.15)} 0%, transparent 70%)`,
           }}
         />
         <div
           className="absolute inset-0 z-[1] pointer-events-none"
           style={{
-            backgroundImage:
-              "linear-gradient(rgba(90,24,154,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(90,24,154,.04) 1px, transparent 1px)",
+            backgroundImage: `linear-gradient(${purpleBg(0.04)} 1px, transparent 1px), linear-gradient(90deg, ${purpleBg(0.04)} 1px, transparent 1px)`,
             backgroundSize: "60px 60px",
             maskImage:
               "radial-gradient(ellipse at center, black 20%, transparent 65%)",
           }}
         />
         <div
-          className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20"
+          className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20 float-gentle"
           style={{
-            background:
-              "radial-gradient(circle, rgba(90,24,154,0.3), transparent 70%)",
+            background: `radial-gradient(circle, ${purpleBg(0.3)}, transparent 70%)`,
           }}
         />
         <div
-          className="absolute top-40 right-[15%] w-24 h-24 rounded-full opacity-15"
+          className="absolute top-40 right-[15%] w-24 h-24 rounded-full opacity-15 float-slow"
           style={{
-            background:
-              "radial-gradient(circle, rgba(157,78,221,0.3), transparent 70%)",
+            background: `radial-gradient(circle, ${purpleBg(0.3)}, transparent 70%)`,
           }}
         />
         <div
-          className="absolute bottom-32 left-[20%] w-20 h-20 rounded-full opacity-10"
+          className="absolute bottom-32 left-[20%] w-20 h-20 rounded-full opacity-10 float-gentle"
           style={{
-            background:
-              "radial-gradient(circle, rgba(123,44,191,0.4), transparent 70%)",
+            background: `radial-gradient(circle, ${purpleBg(0.4)}, transparent 70%)`,
           }}
         />
 
         <div className="relative z-10 max-w-[820px] mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
+          <div
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[13px] font-medium mb-7 backdrop-blur-sm"
+            style={{
+              background: purpleBg(0.08),
+              border: `1px solid ${purpleBorder(0.2)}`,
+              color: PURPLE,
+            }}
+          >
+            <span
+              className="w-2 h-2 rounded-full"
+              style={{ background: "#00d68f" }}
+            />
             {t("ins.hero.badge")}
           </div>
 
+          {/* Headline - TOUT en violet */}
           <h1
-            className={`${headingFont} text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto`}
+            className="text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto"
+            style={{ color: PURPLE }}
           >
-            {t("ins.hero.title1")}{" "}
-            <span className="text-[#9d4edd]">{t("ins.hero.title2")}</span>
+            {t("ins.hero.title1")} {t("ins.hero.title2")}
             <br />
             {t("ins.hero.title3")}
           </h1>
@@ -535,12 +544,14 @@ const SondosInsurance = () => {
             ].map((stat, i) => (
               <div
                 key={i}
-                className={`px-5 py-4 rounded-2xl text-center ${card} shadow-sm`}
+                className="px-5 py-4 rounded-2xl text-center backdrop-blur-xl border shadow-sm"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.15),
+                }}
               >
                 <div className="text-2xl mb-1">{stat.icon}</div>
-                <div
-                  className={`${headingFont} text-xl font-bold text-[#9d4edd]`}
-                >
+                <div className="text-xl font-bold" style={{ color: PURPLE }}>
                   {stat.value}
                 </div>
                 <div className="text-xs text-[#8878a0]">{stat.label}</div>
@@ -551,9 +562,16 @@ const SondosInsurance = () => {
           <div className="flex justify-center">
             <a href="/demo">
               <button
-                className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white rounded-full hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300"
+                className="inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white rounded-full hover:-translate-y-1 transition-all duration-300"
                 style={{
-                  background: "linear-gradient(135deg, #5a189a, #7b2fff)",
+                  background: purpleGradient,
+                  boxShadow: `0 4px 20px ${purpleBg(0.35)}`,
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 12px 40px ${purpleBg(0.45)}`;
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 4px 20px ${purpleBg(0.35)}`;
                 }}
               >
                 {t("ins.hero.cta")}
@@ -569,11 +587,15 @@ const SondosInsurance = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, idx) => (
               <div key={idx} className="text-center group">
-                <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl transition-transform group-hover:scale-110 bg-[rgba(90,24,154,0.08)]">
+                <div
+                  className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl transition-transform group-hover:scale-110"
+                  style={{ background: purpleBg(0.08) }}
+                >
                   {stat.icon}
                 </div>
                 <div
-                  className={`${headingFont} text-3xl sm:text-4xl font-bold mb-2 text-[#9d4edd]`}
+                  className="text-3xl sm:text-4xl font-bold mb-2"
+                  style={{ color: PURPLE }}
                 >
                   {statsVisible ? stat.value : "0"}
                 </div>
@@ -590,24 +612,34 @@ const SondosInsurance = () => {
       <section id="journey" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
-            >
-              {t("ins.journey.title")}{" "}
-              <span className="text-[#9d4edd]">{t("ins.journey.title2")}</span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ins.journey.title")} {t("ins.journey.title2")}
             </h2>
-            <p className={muted}>{t("ins.journey.subtitle")}</p>
+            <p className="text-[#4a3a62]">{t("ins.journey.subtitle")}</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {insuranceJourney.map((stage, idx) => (
               <div
                 key={idx}
-                className={`p-6 rounded-2xl ${card} hover:border-[rgba(90,24,154,0.25)] hover:shadow-[0_0_30px_rgba(90,24,154,0.08)] transition-all duration-300`}
+                className="p-6 rounded-2xl backdrop-blur-xl border transition-all duration-300"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.1),
+                  boxShadow: "none",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = purpleBorder(0.25);
+                  el.style.boxShadow = `0 0 30px ${purpleBg(0.08)}`;
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = purpleBorder(0.1);
+                  el.style.boxShadow = "none";
+                }}
               >
                 <div className="text-4xl mb-4">{stage.icon}</div>
-                <h3
-                  className={`${headingFont} font-bold text-lg mb-4 text-[#1a0a2e]`}
-                >
+                <h3 className="font-bold text-lg mb-4 text-[#1a0a2e]">
                   {stage.stage}
                 </h3>
                 <div className="space-y-3">
@@ -628,11 +660,14 @@ const SondosInsurance = () => {
                   <div
                     className="p-3 rounded-xl"
                     style={{
-                      background: "rgba(90,24,154,0.06)",
-                      border: "1px solid rgba(90,24,154,0.15)",
+                      background: purpleBg(0.06),
+                      border: `1px solid ${purpleBorder(0.15)}`,
                     }}
                   >
-                    <div className="text-xs font-medium mb-1 text-[#9d4edd]">
+                    <div
+                      className="text-xs font-medium mb-1"
+                      style={{ color: PURPLE }}
+                    >
                       ✓ {t("ins.journey.withSondos")}
                     </div>
                     <div className="text-sm text-[#1a0a2e]">{stage.sondos}</div>
@@ -654,11 +689,8 @@ const SondosInsurance = () => {
       <section id="solutions" className={`py-24 px-6 ${sectionSoft}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
-            >
-              {t("ins.segments.title")}{" "}
-              <span className="text-[#9d4edd]">{t("ins.segments.title2")}</span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ins.segments.title")} {t("ins.segments.title2")}
             </h2>
           </div>
 
@@ -670,11 +702,19 @@ const SondosInsurance = () => {
                 <button
                   key={segment.id}
                   onClick={() => setActiveSegment(idx)}
-                  className={`px-5 py-2.5 rounded-full flex items-center gap-2 text-[13px] font-medium transition-all duration-300 border backdrop-blur-sm ${
-                    isActive
-                      ? "bg-[rgba(90,24,154,0.15)] border-[rgba(90,24,154,0.4)] text-[#9d4edd]"
-                      : "bg-[rgba(90,24,154,0.04)] border-[rgba(90,24,154,0.12)] text-[#4a3a62] hover:border-[rgba(90,24,154,0.25)]"
-                  }`}
+                  className="px-5 py-2.5 rounded-full flex items-center gap-2 text-[13px] font-medium transition-all duration-300 border backdrop-blur-sm"
+                  style={{
+                    background: isActive
+                      ? purpleGradient
+                      : purpleBg(0.04),
+                    color: isActive ? "#fff" : "#4a3a62",
+                    borderColor: isActive
+                      ? purpleBorder(0.4)
+                      : purpleBorder(0.12),
+                    boxShadow: isActive
+                      ? `0 4px 20px ${purpleBg(0.3)}`
+                      : "none",
+                  }}
                 >
                   <span className="text-xl">{segment.icon}</span>
                   <span className="hidden sm:inline">{segment.name}</span>
@@ -683,20 +723,24 @@ const SondosInsurance = () => {
             })}
           </div>
 
-          <div className="rounded-3xl overflow-hidden shadow-[0_0_60px_rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.15)]">
+          <div
+            className="rounded-3xl overflow-hidden border"
+            style={{
+              borderColor: purpleBorder(0.15),
+              boxShadow: `0 0 60px ${purpleBg(0.08)}`,
+            }}
+          >
             <div className="grid md:grid-cols-2">
               <div
-                className="p-8 sm:p-10"
+                className="p-8 sm:p-10 border-b md:border-b-0 md:border-l"
                 style={{
                   background: "rgba(239,68,68,0.06)",
-                  borderBottom: "1px solid rgba(239,68,68,0.1)",
+                  borderColor: purpleBorder(0.1),
                 }}
               >
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">😫</span>
-                  <h3
-                    className={`${headingFont} text-xl font-bold text-red-400`}
-                  >
+                  <h3 className="text-xl font-bold text-red-400">
                     {t("ins.segments.pain")}
                   </h3>
                 </div>
@@ -709,29 +753,30 @@ const SondosInsurance = () => {
                   ))}
                 </ul>
               </div>
-              <div
-                className="p-8 sm:p-10"
-                style={{ background: "rgba(90,24,154,0.06)" }}
-              >
+              <div className="p-8 sm:p-10" style={{ background: purpleBg(0.06) }}>
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">🎉</span>
-                  <h3
-                    className={`${headingFont} text-xl font-bold text-[#9d4edd]`}
-                  >
+                  <h3 className="text-xl font-bold" style={{ color: PURPLE }}>
                     {t("ins.segments.solution")}
                   </h3>
                 </div>
                 <ul className="space-y-4">
                   {segments[activeSegment].solutions.map((solution, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="text-[#10B981]">✓</span>
+                      <span style={{ color: PURPLE }}>✓</span>
                       <span className="text-[#1a0a2e]">{solution}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            <div className="p-6 bg-[rgba(255,255,255,0.85)] backdrop-blur-xl border-t border-[rgba(90,24,154,0.1)]">
+            <div
+              className="p-6 backdrop-blur-xl border-t"
+              style={{
+                background: "rgba(255,255,255,0.85)",
+                borderColor: purpleBorder(0.1),
+              }}
+            >
               <div className="flex flex-wrap items-center justify-between gap-6">
                 <div>
                   <div className="text-sm font-medium mb-2 text-[#8878a0]">
@@ -741,7 +786,12 @@ const SondosInsurance = () => {
                     {segments[activeSegment].useCases.map((useCase, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 rounded-full text-sm bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.15)] text-[#9d4edd]"
+                        className="px-3 py-1 rounded-full text-sm border"
+                        style={{
+                          background: purpleBg(0.08),
+                          color: PURPLE,
+                          borderColor: purpleBorder(0.15),
+                        }}
                       >
                         {useCase}
                       </span>
@@ -753,7 +803,8 @@ const SondosInsurance = () => {
                     ([key, value], i) => (
                       <div key={i} className="text-center">
                         <div
-                          className={`${headingFont} text-2xl font-bold text-[#9d4edd]`}
+                          className="text-2xl font-bold"
+                          style={{ color: PURPLE }}
                         >
                           {value}
                         </div>
@@ -774,33 +825,53 @@ const SondosInsurance = () => {
       <section id="features" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
-            >
-              {t("ins.features.title")}{" "}
-              <span className="text-[#9d4edd]">{t("ins.features.title2")}</span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ins.features.title")} {t("ins.features.title2")}
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, idx) => (
               <div
                 key={idx}
-                className={`group p-8 rounded-3xl ${card} transition-all duration-300 hover:border-[rgba(90,24,154,0.3)] hover:shadow-[0_0_40px_rgba(90,24,154,0.1)] hover:-translate-y-2`}
+                className="group p-8 rounded-3xl backdrop-blur-xl border transition-all duration-300 hover:-translate-y-2"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.1),
+                  boxShadow: "none",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = purpleBorder(0.3);
+                  el.style.boxShadow = `0 0 40px ${purpleBg(0.1)}`;
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = purpleBorder(0.1);
+                  el.style.boxShadow = "none";
+                }}
               >
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 transition-transform duration-300 group-hover:scale-110 bg-[rgba(90,24,154,0.08)]">
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 transition-transform duration-300 group-hover:scale-110"
+                  style={{ background: purpleBg(0.08) }}
+                >
                   {feature.icon}
                 </div>
-                <h3
-                  className={`${headingFont} text-xl font-bold mb-3 text-[#1a0a2e]`}
-                >
+                <h3 className="text-xl font-bold mb-3 text-[#1a0a2e]">
                   {feature.title}
                 </h3>
                 <p className="text-sm mb-5 leading-relaxed text-[#4a3a62]">
                   {feature.description}
                 </p>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.15)] text-[#9d4edd]">
+                <span
+                  className="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold border"
+                  style={{
+                    background: purpleBg(0.08),
+                    color: PURPLE,
+                    borderColor: purpleBorder(0.15),
+                  }}
+                >
                   {feature.highlight}
-                </div>
+                </span>
               </div>
             ))}
           </div>
@@ -811,39 +882,57 @@ const SondosInsurance = () => {
       <section className={`py-24 px-6 ${sectionSoft}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
-            >
-              {t("ins.usecases.title")}{" "}
-              <span className="text-[#9d4edd]">{t("ins.usecases.title2")}</span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ins.usecases.title")} {t("ins.usecases.title2")}
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             {useCases.map((useCase, idx) => (
               <div
                 key={idx}
-                className={`rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.12)]`}
+                className="rounded-3xl overflow-hidden border"
+                style={{
+                  borderColor: purpleBorder(0.12),
+                  boxShadow: `0 0 40px ${purpleBg(0.08)}`,
+                }}
               >
-                <div className="px-6 py-4 font-bold flex items-center gap-2 bg-[rgba(90,24,154,0.08)] text-[#1a0a2e] border-b border-[rgba(90,24,154,0.1)]">
+                <div
+                  className="px-6 py-4 font-bold flex items-center gap-2 text-[#1a0a2e] border-b"
+                  style={{
+                    background: purpleBg(0.06),
+                    borderColor: purpleBorder(0.1),
+                  }}
+                >
                   {useCase.title}
                 </div>
-                <div className="p-6 space-y-4 max-h-96 overflow-y-auto bg-[rgba(255,255,255,0.85)] backdrop-blur-xl">
+                <div
+                  className="p-6 space-y-4 max-h-96 overflow-y-auto backdrop-blur-xl"
+                  style={{ background: "rgba(255,255,255,0.85)" }}
+                >
                   {useCase.conversation.map((msg, i) => (
                     <div
                       key={i}
-                      className={`p-4 rounded-2xl text-sm ${
+                      className="p-4 rounded-2xl text-sm"
+                      style={
                         msg.role === "ai"
-                          ? "rounded-tr-md max-w-[85%] mr-auto border border-[rgba(90,24,154,0.1)]"
-                          : "rounded-tl-md max-w-[75%] ml-auto"
-                      }`}
-                      style={{
-                        background:
-                          msg.role === "ai"
-                            ? "rgba(255,255,255,0.9)"
-                            : "linear-gradient(135deg, #5a189a, #7b2fff)",
-                        color: msg.role === "ai" ? "#1a0a2e" : "white",
-                        whiteSpace: "pre-line",
-                      }}
+                          ? {
+                              borderRadius: "1rem 1rem 1rem 0.25rem",
+                              maxWidth: "85%",
+                              marginLeft: "auto",
+                              marginRight: 0,
+                              background: "rgba(255,255,255,0.9)",
+                              border: `1px solid ${purpleBorder(0.1)}`,
+                              color: "#1a0a2e",
+                            }
+                          : {
+                              borderRadius: "1rem 1rem 0.25rem 1rem",
+                              maxWidth: "75%",
+                              marginLeft: 0,
+                              marginRight: "auto",
+                              background: purpleGradient,
+                              color: "#fff",
+                            }
+                      }
                     >
                       {msg.text}
                     </div>
@@ -858,13 +947,8 @@ const SondosInsurance = () => {
       {/* ==================== INTEGRATIONS ==================== */}
       <section className={`py-24 px-6 ${sectionSoft}`}>
         <div className="max-w-7xl mx-auto text-center">
-          <h2
-            className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
-          >
-            {t("ins.integrations.title")}{" "}
-            <span className="text-[#9d4edd]">
-              {t("ins.integrations.title2")}
-            </span>
+          <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+            {t("ins.integrations.title")} {t("ins.integrations.title2")}
           </h2>
           <p className="mb-12 text-[#4a3a62]">
             {t("ins.integrations.subtitle")}
@@ -873,11 +957,31 @@ const SondosInsurance = () => {
             {integrations.map((int, idx) => (
               <div
                 key={idx}
-                className={`p-6 rounded-2xl flex flex-col items-center gap-3 min-w-[140px] ${card} hover:border-[rgba(90,24,154,0.25)] transition-all duration-300 hover:-translate-y-1`}
+                className="p-6 rounded-2xl flex flex-col items-center gap-3 min-w-[140px] backdrop-blur-xl border transition-all duration-300 hover:-translate-y-1"
+                style={{
+                  background: "rgba(255,255,255,0.85)",
+                  borderColor: purpleBorder(0.1),
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor =
+                    purpleBorder(0.25);
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor =
+                    purpleBorder(0.1);
+                }}
               >
                 <span className="text-3xl">{int.icon}</span>
                 <span className="font-semibold text-[#1a0a2e]">{int.name}</span>
-                <span className="text-xs text-[#8878a0]">{int.type}</span>
+                <span
+                  className="text-xs px-2 py-0.5 rounded-full inline-block"
+                  style={{
+                    background: purpleBg(0.08),
+                    color: PURPLE,
+                  }}
+                >
+                  {int.type}
+                </span>
               </div>
             ))}
           </div>
@@ -888,20 +992,23 @@ const SondosInsurance = () => {
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
-            >
-              {t("ins.testimonials.title")}{" "}
-              <span className="text-[#9d4edd]">
-                {t("ins.testimonials.title2")}
-              </span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ins.testimonials.title")} {t("ins.testimonials.title2")}
             </h2>
           </div>
           <div
-            className={`max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl shadow-[0_0_60px_rgba(90,24,154,0.1)] relative ${card}`}
+            className="max-w-4xl mx-auto p-10 sm:p-14 rounded-3xl backdrop-blur-xl border relative"
+            style={{
+              background: "rgba(255,255,255,0.85)",
+              borderColor: purpleBorder(0.15),
+              boxShadow: `0 0 60px ${purpleBg(0.1)}`,
+            }}
           >
-            <div className="absolute top-6 right-8 text-8xl font-serif opacity-10 text-[#9d4edd]">
-              "
+            <div
+              className="absolute top-6 right-8 text-8xl font-serif opacity-10"
+              style={{ color: PURPLE }}
+            >
+              &ldquo;
             </div>
             <p className="text-xl sm:text-2xl leading-relaxed mb-8 text-[#1a0a2e]">
               {testimonials[currentTestimonial].quote}
@@ -909,17 +1016,13 @@ const SondosInsurance = () => {
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
                 <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-lg"
-                  style={{
-                    background: "linear-gradient(135deg, #5a189a, #7b2fff)",
-                  }}
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl text-white shadow-lg"
+                  style={{ background: purpleGradient }}
                 >
                   {testimonials[currentTestimonial].image}
                 </div>
                 <div>
-                  <div
-                    className={`${headingFont} font-bold text-lg text-[#1a0a2e]`}
-                  >
+                  <div className="font-bold text-lg text-[#1a0a2e]">
                     {testimonials[currentTestimonial].name}
                   </div>
                   <div className="text-sm text-[#8878a0]">
@@ -944,8 +1047,8 @@ const SondosInsurance = () => {
                   style={{
                     background:
                       currentTestimonial === idx
-                        ? "linear-gradient(135deg, #5a189a, #7b2fff)"
-                        : "rgba(90,24,154,0.2)",
+                        ? purpleGradient
+                        : purpleBg(0.2),
                     width: currentTestimonial === idx ? "32px" : "12px",
                   }}
                 />
@@ -959,11 +1062,8 @@ const SondosInsurance = () => {
       <section className={`py-24 px-6 ${sectionSoft}`}>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
-            <h2
-              className={`${headingFont} text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#1a0a2e]`}
-            >
-              {t("ins.faq.title")}{" "}
-              <span className="text-[#9d4edd]">{t("ins.faq.title2")}</span>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold leading-[1.08] tracking-tight mb-4 text-[#0a0a0a]">
+              {t("ins.faq.title")} {t("ins.faq.title2")}
             </h2>
             <p className="text-[#4a3a62]">{t("ins.faq.subtitle")}</p>
           </div>
@@ -973,14 +1073,23 @@ const SondosInsurance = () => {
               return (
                 <div
                   key={idx}
-                  className={`rounded-2xl overflow-hidden ${card} hover:border-[rgba(90,24,154,0.25)] transition-all duration-300`}
+                  className="rounded-2xl overflow-hidden backdrop-blur-xl border transition-all duration-300"
+                  style={{
+                    background: "rgba(255,255,255,0.85)",
+                    borderColor: open
+                      ? purpleBorder(0.25)
+                      : purpleBorder(0.1),
+                  }}
                 >
                   <button
-                    className="w-full flex items-center justify-between px-6 py-5 text-right font-semibold text-[#1a0a2e]"
+                    className="w-full flex items-start justify-between px-6 py-5 text-right font-semibold text-[#1a0a2e]"
                     onClick={() => setActiveFAQ(open ? null : idx)}
                   >
-                    {faq.q}
-                    <span className="text-xl ml-4 flex-shrink-0 text-[#9d4edd]">
+                    <span className="flex-1 leading-relaxed">{faq.q}</span>
+                    <span
+                      className="text-xl ml-4 flex-shrink-0 mt-0.5"
+                      style={{ color: PURPLE }}
+                    >
                       {open ? "−" : "+"}
                     </span>
                   </button>
@@ -997,42 +1106,44 @@ const SondosInsurance = () => {
       </section>
 
       {/* ==================== FINAL CTA ==================== */}
-      <section
-        className="py-24 px-6 relative overflow-hidden"
-        style={{ background: "rgba(90,24,154,0.06)" }}
-      >
+      <section className="py-24 px-6 relative overflow-hidden" style={{ background: purpleGradient }}>
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(90,24,154,0.12) 0%, transparent 70%)",
+            background: `radial-gradient(ellipse 80% 60% at 50% 50%, ${purpleBg(0.12)} 0%, transparent 70%)`,
           }}
         />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <div className="text-6xl mb-6">🛡️</div>
-          <h2
-            className={`${headingFont} text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-[#1a0a2e]`}
-          >
+          <h2 className="text-[clamp(28px,4vw,48px)] font-bold leading-[1.08] tracking-tight mb-6 text-white">
             {t("ins.cta.title1")}
             <br />
-            <span className="text-[#9d4edd]}">{t("ins.cta.title2")}</span>
+            {t("ins.cta.title2")}
           </h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto text-[#4a3a62]">
+          <p className="text-xl mb-10 max-w-2xl mx-auto text-white/80">
             {t("ins.cta.subtitle")}
           </p>
           <div className="flex justify-center">
             <a href="/demo">
               <button
-                className="px-12 py-4 rounded-full font-bold text-lg text-white hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(90,24,154,0.4)] transition-all duration-300"
+                className="px-12 py-4 rounded-full font-bold text-lg text-white hover:-translate-y-1 transition-all duration-300"
                 style={{
-                  background: "linear-gradient(135deg, #5a189a, #7b2fff)",
+                  background: "rgba(255,255,255,0.95)",
+                  color: PURPLE,
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.background = "#fff";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.background =
+                    "rgba(255,255,255,0.95)";
                 }}
               >
                 {t("ins.cta.button")}
               </button>
             </a>
           </div>
-          <div className="flex flex-wrap justify-center gap-6 mt-12 text-sm text-[#8878a0]">
+          <div className="flex flex-wrap justify-center gap-6 mt-12 text-sm text-white/70">
             <span>🔗 {t("ins.cta.badge1")}</span>
             <span>🔒 {t("ins.cta.badge2")}</span>
             <span>📊 {t("ins.cta.badge3")}</span>
