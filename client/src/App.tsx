@@ -41,6 +41,7 @@ import Demo from "@/pages/Demo";
 import Governance from "@/pages/Governance";
 import Policy from "@/pages/Policy";
 import Real from "@/pages/Real";
+import Logistic from "@/pages/Logistic";
 
 
 
@@ -166,6 +167,7 @@ function AppContent() {
         <Route path="/debt-collection" component={DebtCollection} />
         <Route path="/policy" component={Policy} />
         <Route path="/Realstate" component={Real} />
+        <Route path="/Logistic" component={Logistic} />
      
 
       

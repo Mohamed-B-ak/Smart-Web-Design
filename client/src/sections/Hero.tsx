@@ -1,146 +1,291 @@
+"use client";
+
 import { useLanguage } from "@/context/LanguageContext";
 import { ArrowRight, ArrowLeft, Sparkles } from "lucide-react";
-import AnimatedBackground from "./AnimatedBackground";
+
+const CSS = `
+  @keyframes wave {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.6); }
+  }
+
+  .hero-root {
+    font-family: 'din-next-lt-arabic-b4fd9f01e2', sans-serif;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 32px 80px;
+    overflow: hidden;
+    background: #f8f6fb;
+  }
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(103,45,146,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(103,45,146,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 65%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 65%);
+  }
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(103,45,146,0.15) 0%, transparent 70%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 820px;
+    margin: 0 auto;
+    margin-bottom: 48px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(103,45,146,0.08);
+    border: 1px solid rgba(103,45,146,0.2);
+    border-radius: 999px;
+    padding: 10px 22px;
+    margin-bottom: 36px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #672D92;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+  .hero-badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00d68f;
+  }
+  .hero-h1 {
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #672D92;
+    margin-bottom: 20px;
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-weight: 600;
+    color: #1a0a2e;
+    max-width: 580px;
+    margin: 0 auto 12px;
+    line-height: 1.85;
+  }
+  .hero-desc {
+    font-size: clamp(0.88rem, 1.6vw, 1rem);
+    color: #4a3a62;
+    max-width: 680px;
+    margin: 0 auto 40px;
+    line-height: 1.85;
+  }
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #672D92, #7f47ac);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(103,45,146,0.35);
+    font-family: inherit;
+  }
+
+  .hero-dashboard {
+    position: relative;
+    z-index: 10;
+    max-width: 1060px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(103,45,146,0.15);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 0 100px rgba(103,45,146,0.12), 0 40px 80px rgba(0,0,0,0.08);
+  }
+  .hero-dashboard-inner {
+    padding: 28px 32px;
+  }
+  @media (min-width: 768px) {
+    .hero-dashboard-inner { padding: 36px 40px; }
+  }
+  .hero-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .hero-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .hero-dot-r { background: #ff6b6b; }
+  .hero-dot-y { background: #ffa940; }
+  .hero-dot-g { background: #00d68f; }
+  .hero-dots-label {
+    font-size: 0.72rem;
+    color: #8878a0;
+    margin-left: 8px;
+    font-family: monospace;
+  }
+  .hero-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 768px) {
+    .hero-stats-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  }
+  .hero-stat-card {
+    background: rgba(103,45,146,0.06);
+    border: 1px solid rgba(103,45,146,0.1);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .hero-stat-label {
+    font-size: 0.72rem;
+    color: #8878a0;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .hero-stat-val {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a0a2e;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .hero-stat-change {
+    font-size: 0.8rem;
+    color: #00d68f;
+    font-weight: 600;
+  }
+  .hero-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 90px;
+    margin-top: 32px;
+  }
+  .hero-bar {
+    flex: 1;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(to top, rgba(103,45,146,0.6), rgba(127,71,172,0.25));
+    transform-origin: bottom;
+    animation: wave 1.4s ease-in-out infinite;
+  }
+`;
 
 export default function Hero() {
   const { lang, t } = useLanguage();
 
+  const bars = [40, 58, 35, 72, 50, 85, 68, 60, 88, 45, 78, 70, 92, 100, 55, 75, 62, 90, 48, 82];
+
   return (
-    <section
-      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-16 overflow-hidden"
-      data-testid="section-hero"
-    >
-      <AnimatedBackground />
+    <>
+      <style>{CSS}</style>
 
-      {/* GRID BACKGROUND */}
-      <div
-        className="absolute inset-0 z-[1] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(90,24,154,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(90,24,154,.04) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-          maskImage:
-            "radial-gradient(ellipse at center, black 20%, transparent 65%)",
-        }}
-      />
+      <section className="hero-root" data-testid="section-hero">
+        <div className="hero-glow" />
+        <div className="hero-grid-bg" />
 
-      {/* FLOATING BLOBS */}
-      <div
-        className="absolute top-20 left-[10%] w-32 h-32 rounded-full opacity-20 float-gentle"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(90,24,154,0.3), transparent 70%)",
-        }}
-      />
-      <div
-        className="absolute top-40 right-[15%] w-24 h-24 rounded-full opacity-15 float-slow"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(157,78,221,0.3), transparent 70%)",
-        }}
-      />
-      <div
-        className="absolute bottom-32 left-[20%] w-20 h-20 rounded-full opacity-10 float-gentle"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(123,44,191,0.4), transparent 70%)",
-        }}
-      />
+        <div className="hero-content">
+          <div className="hero-badge">
+            <Sparkles style={{ width: 14, height: 14, color: "#672D92" }} />
+            <span className="hero-badge-dot" />
+            {t("hero.badge")}
+          </div>
 
-      {/* HERO CONTENT */}
-      <div className="relative z-10 max-w-[820px] mx-auto">
-        <div className="inline-flex items-center gap-2 px-5 py-2 bg-[rgba(90,24,154,0.08)] border border-[rgba(90,24,154,0.2)] rounded-full text-[13px] font-medium text-[#9d4edd] mb-7 animate-fade-up backdrop-blur-sm">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span className="w-2 h-2 rounded-full bg-[#00d68f]" />
-          {t("hero.badge")}
-        </div>
-
-        <h1 className="font-['Instrument_Sans',sans-serif] text-[clamp(38px,5.5vw,68px)] font-bold leading-[1.08] tracking-tight mb-3 animate-fade-up animation-delay-100">
-          {t("hero.title_new")}
-        </h1>
-
-        <p className="text-[clamp(16px,1.8vw,19px)] font-semibold text-[#1a0a2e] max-w-[580px] mx-auto leading-relaxed mb-4 animate-fade-up animation-delay-150">
-          {t("hero.subtitle_new")}
-        </p>
-
-        <p className="text-[clamp(14px,1.6vw,17px)] text-[#4a3a62] max-w-[680px] mx-auto leading-relaxed mb-9 animate-fade-up animation-delay-200">
-          {t("hero.desc")}
-        </p>
-
-        {/* BUTTONS */}
-        <div className="flex items-center justify-center gap-3.5 mb-12 flex-wrap animate-fade-up animation-delay-300">
-          <a
-            href="/demo"
-            className="group inline-flex items-center gap-2 px-8 py-3.5 text-[15px] font-semibold text-white rounded-full bg-gradient-to-r from-[#5a189a] to-[#9d4edd] hover:opacity-90 transition-all duration-300 shadow-lg"
-            data-testid="button-hero-book"
+          <h1
+            className="hero-h1"
+            style={{ fontFamily: "'din-next-lt-arabic-b4fd9f01e2', sans-serif" }}
           >
+            {t("hero.title_new")}
+          </h1>
+
+          <p className="hero-sub">{t("hero.subtitle_new")}</p>
+
+          <p className="hero-desc">{t("hero.desc")}</p>
+
+          <a href="/demo" className="hero-btn" data-testid="button-hero-book">
             {t("hero.cta_book")}
             {lang === "en" ? (
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight style={{ width: 16, height: 16 }} />
             ) : (
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              <ArrowLeft style={{ width: 16, height: 16 }} />
             )}
           </a>
         </div>
-      </div>
 
-      {/* DASHBOARD CARD */}
-      <div className="relative z-10 max-w-[1060px] w-full mx-auto rounded-3xl overflow-hidden border border-[rgba(90,24,154,0.15)] bg-[rgba(255,255,255,0.85)] backdrop-blur-xl shadow-[0_0_100px_rgba(90,24,154,0.15),0_40px_80px_rgba(0,0,0,0.08)] animate-fade-up animation-delay-500 ai-glow">
-        <div className="p-6 md:p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-3 h-3 rounded-full bg-[#ff6b6b]" />
-            <div className="w-3 h-3 rounded-full bg-[#ffa940]" />
-            <div className="w-3 h-3 rounded-full bg-[#00d68f]" />
-            <span className="text-[12px] text-[#8878a0] ml-2 font-mono">
-              sondos-ai-dashboard
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.1)] rounded-2xl p-5">
-              <p className="text-[12px] text-[#8878a0] uppercase tracking-wider mb-1">
-                {lang === "en" ? "Active Calls" : "مكالمات نشطة"}
-              </p>
-              <p className="text-3xl font-bold text-[#1a0a2e]">1,247</p>
-              <p className="text-[13px] text-[#00d68f] mt-1">+12.5%</p>
+        <div className="hero-dashboard">
+          <div className="hero-dashboard-inner">
+            <div className="hero-dots">
+              <span className="hero-dot hero-dot-r" />
+              <span className="hero-dot hero-dot-y" />
+              <span className="hero-dot hero-dot-g" />
+              <span className="hero-dots-label">sondos-ai-dashboard</span>
             </div>
 
-            <div className="bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.1)] rounded-2xl p-5">
-              <p className="text-[12px] text-[#8878a0] uppercase tracking-wider mb-1">
-                {lang === "en" ? "Resolution Rate" : "نسبة الحل"}
-              </p>
-              <p className="text-3xl font-bold text-[#1a0a2e]">94.8%</p>
-              <p className="text-[13px] text-[#00d68f] mt-1">+3.2%</p>
+            <div className="hero-stats-grid">
+              <div className="hero-stat-card">
+                <p className="hero-stat-label">
+                  {lang === "en" ? "Active Calls" : "مكالمات نشطة"}
+                </p>
+                <p className="hero-stat-val">1,247</p>
+                <p className="hero-stat-change">+12.5%</p>
+              </div>
+
+              <div className="hero-stat-card">
+                <p className="hero-stat-label">
+                  {lang === "en" ? "Resolution Rate" : "نسبة الحل"}
+                </p>
+                <p className="hero-stat-val">94.8%</p>
+                <p className="hero-stat-change">+3.2%</p>
+              </div>
+
+              <div className="hero-stat-card">
+                <p className="hero-stat-label">
+                  {lang === "en" ? "Avg Response" : "متوسط الاستجابة"}
+                </p>
+                <p className="hero-stat-val">0.8s</p>
+                <p className="hero-stat-change">-15%</p>
+              </div>
             </div>
 
-            <div className="bg-[rgba(90,24,154,0.06)] border border-[rgba(90,24,154,0.1)] rounded-2xl p-5">
-              <p className="text-[12px] text-[#8878a0] uppercase tracking-wider mb-1">
-                {lang === "en" ? "Avg Response" : "متوسط الاستجابة"}
-              </p>
-              <p className="text-3xl font-bold text-[#1a0a2e]">0.8s</p>
-              <p className="text-[13px] text-[#00d68f] mt-1">-15%</p>
+            <div className="hero-bars">
+              {bars.map((h, i) => (
+                <div
+                  key={i}
+                  className="hero-bar"
+                  style={{ height: `${h}%`, animationDelay: `${i * 0.08}s` }}
+                />
+              ))}
             </div>
-          </div>
-
-          <div className="mt-6 flex items-end gap-1 h-[80px]">
-            {[
-              40, 58, 35, 72, 50, 85, 68, 60, 88, 45, 78, 70, 92, 100, 55, 75,
-              62, 90, 48, 82,
-            ].map((h, i) => (
-              <div
-                key={i}
-                className="flex-1 rounded-t-sm"
-                style={{
-                  height: `${h}%`,
-                  background: `linear-gradient(to top, rgba(90,24,154,0.6), rgba(157,78,221,0.25))`,
-                  animation: `wave 1.4s ease-in-out infinite`,
-                  animationDelay: `${i * 0.08}s`,
-                }}
-              />
-            ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
