@@ -42,6 +42,7 @@ import Governance from "@/pages/Governance";
 import Policy from "@/pages/Policy";
 import Real from "@/pages/Real";
 import Logistic from "@/pages/Logistic";
+import BookingPage from "@/pages/booking"; 
 
 
 
@@ -177,6 +178,7 @@ function AppContent() {
         </Route>
         <Route path="/integrations" component={IntegrationsPage} />
         <Route path="/Demo" component={Demo} />
+        <Route path="/booking" component={BookingPage} />
         <Route>{() => <PlaceholderPage title="404 - Page Not Found" />}</Route>
       </Switch>
       <Footer />
