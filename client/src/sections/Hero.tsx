@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
-import { ArrowRight, ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowLeft, Sparkles, Calendar } from "lucide-react";
 
 const CSS = `
   @keyframes wave {
@@ -107,6 +107,11 @@ const CSS = `
     cursor: pointer;
     box-shadow: 0 4px 20px rgba(103,45,146,0.35);
     font-family: inherit;
+    transition: transform 0.2s;
+  }
+  
+  .hero-btn:hover {
+    transform: translateY(-2px);
   }
 
   .hero-dashboard {
@@ -229,14 +234,27 @@ export default function Hero() {
 
           <p className="hero-desc">{t("hero.desc")}</p>
 
-          <a href="/demo" className="hero-btn" data-testid="button-hero-book">
-            {t("hero.cta_book")}
-            {lang === "en" ? (
-              <ArrowRight style={{ width: 16, height: 16 }} />
-            ) : (
-              <ArrowLeft style={{ width: 16, height: 16 }} />
-            )}
-          </a>
+          {/* CONTENEUR DES DEUX BOUTONS */}
+          <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
+            
+            {/* BOUTON 1 : DÉMO (Existant) */}
+            <a href="/demo" className="hero-btn" data-testid="button-hero-book">
+              {t("hero.cta_book")}
+              {lang === "en" ? (
+                <ArrowRight style={{ width: 16, height: 16 }} />
+              ) : (
+                <ArrowLeft style={{ width: 16, height: 16 }} />
+              )}
+            </a>
+
+            {/* BOUTON 2 : RÉSERVATION (Nouveau) */}
+            <a href="/booking" className="hero-btn" style={{ background: "white", color: "#672D92", border: "2px solid #672D92" }}>
+              إحجز اجتماعك →
+              <Calendar style={{ width: 16, height: 16 }} />
+            </a>
+
+          </div>
+          {/* FIN CONTENEUR */}
         </div>
 
         <div className="hero-dashboard">
