@@ -2812,6 +2812,27 @@ const translations: Record<Language, Record<string, string>> = {
 "log.cta.badge1": "🔗 SAP & Oracle Integration",
 "log.cta.badge2": "📊 Real-time Dashboard",
 "log.cta.badge3": "🔒 ISO 27001 Certified",
+  // --- Booking ---
+  "booking.sidebar.title": "Book a Call",
+  "booking.sidebar.desc": "Let's discuss how Sondos AI can transform your customer service.",
+  "booking.sidebar.duration": "30 mins",
+  "booking.sidebar.platform": "Google Meet",
+  "booking.step1": "1. Choose Date",
+  "booking.step2": "2. Choose Time",
+  "booking.confirm_title": "Confirm Appointment",
+  "booking.duration_label": "Duration",
+  "booking.form.name": "Full Name",
+  "booking.form.name_placeholder": "John Doe",
+  "booking.form.email": "Email Address",
+  "booking.form.email_placeholder": "john@example.com",
+  "booking.form.submit": "Confirm Booking",
+  "booking.form.loading": "Processing...",
+  "booking.success_title": "Booking Confirmed!",
+  "booking.success_desc": "You will receive an invite via Google Calendar.",
+  "booking.done": "Done",
+  "booking.error": "An error occurred. Please try again.",
+  "common.at": "at",
+  "hero.cta_booking": "Book Your Meeting",
   },
 
   ar: {
@@ -5520,6 +5541,27 @@ const translations: Record<Language, Record<string, string>> = {
 "log.cta.badge1": "🔗 تكامل مع SAP و Oracle",
 "log.cta.badge2": "📊 لوحة تحكم فورية",
 "log.cta.badge3": "🔒 معتمد ISO 27001",       
+  // --- Booking ---
+  "booking.sidebar.title": "حجز مكالمة",
+  "booking.sidebar.desc": "دعنا نناقش كيف يمكن لـ Sondos AI تحويل خدمة العملاء لديك.",
+  "booking.sidebar.duration": "30 دقيقة",
+  "booking.sidebar.platform": "جوجل ميت",
+  "booking.step1": "1. اختر التاريخ",
+  "booking.step2": "2. اختر الوقت",
+  "booking.confirm_title": "تأكيد الموعد",
+  "booking.duration_label": "المدة",
+  "booking.form.name": "الاسم الكامل",
+  "booking.form.name_placeholder": "محمد أحمد",
+  "booking.form.email": "البريد الإلكتروني",
+  "booking.form.email_placeholder": "exemple@gmail.com",
+  "booking.form.submit": "تأكيد الحجز",
+  "booking.form.loading": "جاري المعالجة...",
+  "booking.success_title": "تم تأكيد الحجز!",
+  "booking.success_desc": "ستتلقى دعوة عبر تقويم Google.",
+  "booking.done": "تم",
+  "booking.error": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+  "common.at": "الساعة",
+  "hero.cta_booking": "احجز اجتماعك",
   },
 };
 
@@ -5575,6 +5617,8 @@ const lists: Record<Language, Record<string, string[]>> = {
       "7,000 AI messages",
       "10 simultaneous calls",
     ],
+    "booking.days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    "booking.months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
   },
   ar: {
     "demo.industries": [
@@ -5628,6 +5672,8 @@ const lists: Record<Language, Record<string, string[]>> = {
       "7,000 رسالة AI",
       "10 مكالمات متزامنة",
     ],
+      "booking.days": ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"],
+      "booking.months": ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
   },
 };
 

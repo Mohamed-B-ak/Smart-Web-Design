@@ -1,44 +1,45 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Clock, Video, MapPin, X, Check } from "lucide-react";
-
-// === LE STYLE CSS (VERSION COMPACTE) ===
+import { useLanguage } from "@/context/LanguageContext";
+// === LE STYLE CSS ===
+// J'ai ajouté des variables CSS pour gérer la direction (flex) selon la langue
 const CSS = `
   .booking-root {
     font-family: 'Tajawal', 'Cairo', 'din-next-lt-arabic-b4fd9f01e2', sans-serif;
     min-height: 100vh;
     background: #f8f6fb;
-    padding: 20px 10px; /* Réduit pour prendre moins de marge globale */
+    padding: 20px 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #1a0a2e;
-    direction: rtl;
+    /* La direction (RTL/LTR) est gérée par l'attribut html dir */
   }
 
   .booking-container {
     display: flex;
     width: 100%;
-    max-width: 850px; /* Largeur réduite (était 1000px) */
+    max-width: 850px;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px; /* Bordures un peu moins arrondies */
+    border-radius: 20px;
     box-shadow: 0 15px 40px rgba(103, 45, 146, 0.1);
     overflow: hidden;
     border: 1px solid rgba(103, 45, 146, 0.1);
-    flex-direction: row-reverse; 
+    /* Note: row-reverse place le Main (calendrier) à gauche et Sidebar à droite pour le design par défaut */
   }
 
   /* Sidebar */
   .booking-sidebar {
     background: linear-gradient(135deg, #672D92, #5a237d);
     color: white;
-    padding: 30px 20px; /* Padding réduit */
+    padding: 30px 20px;
     width: 35%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    text-align: right;
+    text-align: right; /* Alignement par défaut, écrasé par dir=rtl si arabe */
   }
 
   .sidebar-detail-item {
@@ -46,7 +47,7 @@ const CSS = `
     align-items: center;
     gap: 10px;
     margin-bottom: 15px;
-    font-size: 0.85rem; /* Texte un peu plus petit */
+    font-size: 0.85rem;
     opacity: 0.9;
   }
 
@@ -64,9 +65,9 @@ const CSS = `
   /* Main Content */
   .booking-main {
     width: 65%;
-    padding: 30px 20px; /* Padding réduit */
+    padding: 30px 20px;
     position: relative;
-    text-align: right;
+    text-align: right; /* Alignement par défaut */
   }
 
   .step-header {
@@ -76,7 +77,7 @@ const CSS = `
     margin-bottom: 20px;
     color: #672D92;
     font-weight: 700;
-    font-size: 0.95rem; /* Titres plus petits */
+    font-size: 0.95rem;
   }
 
   /* Calendar Grid */
@@ -90,7 +91,7 @@ const CSS = `
   .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 4px; /* Espacement réduit (était 8px) */
+    gap: 4px;
     text-align: center;
   }
 
@@ -106,7 +107,7 @@ const CSS = `
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px; /* Carrés plus arrondis mais compacts */
+    border-radius: 8px;
     border: 1px solid transparent;
     background: transparent;
     cursor: pointer;
@@ -144,13 +145,13 @@ const CSS = `
 
   .slots-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colonnes pour réduire la hauteur */
+    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     margin-top: 10px;
   }
 
   .slot-btn {
-    padding: 6px; /* Boutons plus petits */
+    padding: 6px;
     border: 1px solid rgba(103, 45, 146, 0.2);
     border-radius: 6px;
     background: white;
@@ -199,8 +200,7 @@ const CSS = `
     transition: transform 0.3s;
     box-shadow: 0 20px 60px rgba(0,0,0,0.2);
     position: relative;
-    text-align: right;
-    direction: rtl;
+    text-align: right; /* Alignement par défaut */
   }
 
   .modal-overlay.open .modal-content {
@@ -269,21 +269,12 @@ const CSS = `
     color: #8878a0;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
   @media (max-width: 768px) {
     .booking-container {
-      flex-direction: column-reverse; 
+      flex-direction: column-reverse !important; /* Mobile: Sidebar bottom */
       margin: 10px;
     }
-    .booking-sidebar {
-      width: 100%;
-      padding: 20px;
-    }
-    .booking-main {
+    .booking-sidebar, .booking-main {
       width: 100%;
       padding: 20px;
     }
@@ -291,6 +282,8 @@ const CSS = `
 `;
 
 export default function BookingPage() {
+  const { t, tList, lang } = useLanguage();
+  
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
@@ -308,9 +301,11 @@ export default function BookingPage() {
   // --- LOGIQUE CALENDRIER ---
   const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
   const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
-  const startDayIndex = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1; // Lundi = 0
+  const startDayIndex = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
 
-  const monthNames = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+  // Récupération des mois et jours via le contexte
+  const monthNames = tList("booking.months");
+  const dayNames = tList("booking.days");
 
   const nextMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   const prevMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
@@ -368,7 +363,7 @@ export default function BookingPage() {
 
     } catch (error) {
       console.error("Erreur:", error);
-      alert("Une erreur est survenue lors de l'envoi.");
+      alert(t("booking.error"));
     } finally {
       setIsLoading(false);
     }
@@ -381,40 +376,45 @@ export default function BookingPage() {
     return checkDate < today;
   };
 
+  // Formatage de la date sélectionnée pour l'affichage
+  const formattedSelectedDate = selectedDate ? selectedDate.toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+
   return (
     <>
       <style>{CSS}</style>
 
       <div className="booking-root">
-        <div className="booking-container">
+        {/* layout dynamique: row-reverse pour garder le calendrier à gauche et la sidebar à droite */}
+        <div className="booking-container" style={{ flexDirection: lang === 'ar' ? 'row-reverse' : 'row' }}>
+          
           {/* Sidebar */}
-          <div className="booking-sidebar">
+          <div className="booking-sidebar" style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}>
             <div>
-              <h2 style={{ fontSize: '1.25rem', marginBottom: '10px' }}>حجز مكالمة</h2>
-              <p style={{ opacity: 0.8, lineHeight: '1.4', fontSize: '0.9rem' }}>
-                دعنا نناقش كيف يمكن لـ Sondos AI تحويل خدمة العملاء لديك.
+              <h2 style={{ margin: 0, fontSize: '1.2rem' }}>{t("booking.sidebar.title")}</h2>
+              <p style={{ opacity: 0.8, lineHeight: '1.4', fontSize: '0.9rem', marginTop: '8px' }}>
+                {t("booking.sidebar.desc")}
               </p>
             </div>
             
             <div style={{ marginTop: '30px' }}>
               <div className="sidebar-detail-item">
                 <div className="sidebar-icon"><Clock size={16} /></div>
-                <span>30 دقيقة</span>
+                <span>{t("booking.sidebar.duration")}</span>
               </div>
               <div className="sidebar-detail-item">
                 <div className="sidebar-icon"><Video size={16} /></div>
-                <span>جوجل ميت</span>
+                <span>{t("booking.sidebar.platform")}</span>
               </div>
              
             </div>
           </div>
 
           {/* Calendar Area */}
-          <div className="booking-main">
+          <div className="booking-main" style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}>
             <div className="step-header">
-              <span>1. اختر التاريخ</span>
+              <span>{t("booking.step1")}</span>
               <span style={{ fontWeight: 400, color: '#8878a0', fontSize: '0.8rem' }}>
-                {selectedDate ? selectedDate.toLocaleDateString('ar-EG', { day: 'numeric', month: 'long', year: 'numeric' }) : ''}
+                {formattedSelectedDate}
               </span>
             </div>
 
@@ -425,7 +425,7 @@ export default function BookingPage() {
             </div>
 
             <div className="calendar-grid">
-              {['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت', 'الأحد'].map((d, i) => (
+              {dayNames.map((d, i) => (
                 <div key={i} className="day-name">{d}</div>
               ))}
               {Array.from({ length: startDayIndex }).map((_, i) => <div key={`pad-${i}`} />)}
@@ -446,7 +446,7 @@ export default function BookingPage() {
             {/* Time Slots */}
             <div className={`slots-wrapper ${selectedDate ? 'active' : ''}`}>
               <div className="step-header">
-                <span>2. اختر الوقت</span>
+                <span>{t("booking.step2")}</span>
               </div>
               <div className="slots-grid">
                 {timeSlots.map((slot) => (
@@ -464,39 +464,39 @@ export default function BookingPage() {
 
       {/* Modal */}
       <div className={`modal-overlay ${isModalOpen ? 'open' : ''}`}>
-        <div className="modal-content">
+        <div className="modal-content" style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}>
           <button onClick={closeModal} className="close-btn"><X size={20} /></button>
 
           {!isSuccess ? (
             <>
-              <h3 style={{ color: '#672D92', marginTop: 0, marginBottom: '15px', fontSize: '1.1rem' }}>تأكيد الموعد</h3>
+              <h3 style={{ color: '#672D92', marginTop: 0, marginBottom: '15px', fontSize: '1.1rem' }}>{t("booking.confirm_title")}</h3>
               <div style={{ background: '#f4f0fa', padding: '12px', borderRadius: '8px', marginBottom: '15px' }}>
                 <p style={{ margin: 0, fontSize: '0.9rem', color: '#1a0a2e' }}>
-                  {selectedDate?.toLocaleDateString('ar-EG', { weekday: 'long', day: 'numeric', month: 'long' })} الساعة {selectedSlot}
+                  {formattedSelectedDate} {t("common.at")} {selectedSlot}
                 </p>
-                <p style={{ margin: '5px 0 0', fontSize: '0.8rem', color: '#4a3a62' }}>المدة : 30 دقيقة</p>
+                <p style={{ margin: '5px 0 0', fontSize: '0.8rem', color: '#4a3a62' }}>{t("booking.duration_label")}: {t("booking.sidebar.duration")}</p>
               </div>
 
               <form onSubmit={handleSubmit}>
                 <div className="input-group">
-                  <label className="input-label">الاسم الكامل</label>
-                  <input type="text" className="form-input" required placeholder="محمد أحمد" value={name} onChange={(e) => setName(e.target.value)} />
+                  <label className="input-label">{t("booking.form.name")}</label>
+                  <input type="text" className="form-input" required placeholder={t("booking.form.name_placeholder")} value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div className="input-group">
-                  <label className="input-label">البريد الإلكتروني</label>
-                  <input type="email" className="form-input" required placeholder="exemple@gmail.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <label className="input-label">{t("booking.form.email")}</label>
+                  <input type="email" className="form-input" required placeholder={t("booking.form.email_placeholder")} value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <button type="submit" className="submit-btn" disabled={isLoading}>
-                  {isLoading ? "جاري المعالجة..." : "تأكيد الحجز"}
+                  {isLoading ? t("booking.form.loading") : t("booking.form.submit")}
                 </button>
               </form>
             </>
           ) : (
             <div style={{ textAlign: 'center', padding: '15px 0' }}>
               <div style={{ background: '#e6fffa', width: 50, height: 50, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 15px', color: '#00d68f' }}><Check size={28} /></div>
-              <h3 style={{ color: '#1a0a2e', margin: '0 0 10px' }}>تم تأكيد الحجز!</h3>
-              <p style={{ color: '#4a3a62', marginBottom: '20px', fontSize: '0.9rem' }}>ستتلقى دعوة عبر تقويم Google.</p>
-              <button onClick={closeModal} className="submit-btn">تم</button>
+              <h3 style={{ color: '#1a0a2e', margin: '0 0 10px' }}>{t("booking.success_title")}</h3>
+              <p style={{ color: '#4a3a62', marginBottom: '20px', fontSize: '0.9rem' }}>{t("booking.success_desc")}</p>
+              <button onClick={closeModal} className="submit-btn">{t("booking.done")}</button>
             </div>
           )}
         </div>

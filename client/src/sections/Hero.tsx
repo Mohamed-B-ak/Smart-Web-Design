@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import { ArrowRight, ArrowLeft, Sparkles, Calendar } from "lucide-react";
+import AnimatedBackground from './AnimatedBackground'; // IMPORT AJOUTÉ
 
 const CSS = `
   @keyframes wave {
@@ -213,6 +214,11 @@ export default function Hero() {
       <style>{CSS}</style>
 
       <section className="hero-root" data-testid="section-hero">
+        
+        {/* LE COMPOSANT D'ANIMATION EST UTILISÉ ICI */}
+        <AnimatedBackground />
+        {/* ------------------------------------- */}
+
         <div className="hero-glow" />
         <div className="hero-grid-bg" />
 
@@ -248,10 +254,14 @@ export default function Hero() {
             </a>
 
             {/* BOUTON 2 : RÉSERVATION (Nouveau) */}
-            <a href="/booking" className="hero-btn" style={{ background: "white", color: "#672D92", border: "2px solid #672D92" }}>
-              إحجز اجتماعك →
-              <Calendar style={{ width: 16, height: 16 }} />
-            </a>
+           <a href="/booking" className="hero-btn" style={{ background: "white", color: "#672D92", border: "2px solid #672D92" }}>
+    {t("hero.cta_booking")}
+    {lang === "en" ? (
+      <ArrowRight style={{ width: 16, height: 16 }} />
+    ) : (
+      <ArrowLeft style={{ width: 16, height: 16 }} />
+    )}
+  </a>
 
           </div>
           {/* FIN CONTENEUR */}
