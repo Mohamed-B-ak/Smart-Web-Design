@@ -43,6 +43,7 @@ import Policy from "@/pages/Policy";
 import Real from "@/pages/Real";
 import Logistic from "@/pages/Logistic";
 import BookingPage from "@/pages/booking"; 
+import Sondos from "@/pages/Sondos"; 
 
 
 
@@ -169,6 +170,9 @@ function AppContent() {
         <Route path="/policy" component={Policy} />
         <Route path="/Realstate" component={Real} />
         <Route path="/Logistic" component={Logistic} />
+        <Route path="/Sondos" component={Sondos} />
+
+        
      
 
       
