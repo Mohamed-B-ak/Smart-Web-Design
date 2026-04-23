@@ -2,7 +2,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useState, useRef, useEffect } from "react";
 
 const APPS_SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycby8-6zWq47r_o-bMCTMvGo4PciE1qDS2nkm38oTM-_Pl4EQU-NmDAbfjFNy1GZGzZOsPQ/exec"
+"https://script.google.com/macros/s/AKfycbwBKQKtHeblbOWZdCjsxvrp_et9NHdLhttD4cqPgeAfa52mCWR4iDepEP0MfXKsByJU0Q/exec"
 const TOTAL_PHONE_DIGITS = 9;
 
 /* ── shared colour tokens ───────────────────── */

@@ -22,6 +22,8 @@ import Integrations from "@/sections/Integrations";
 import FAQ from "@/sections/FAQ";
 import CTABanner from "@/sections/CTABanner";
 import Footer from "@/sections/Footer";
+import IsoCertifications  from "@/sections/IsoCertifications";
+
 import BlogList from "@/sections/BlogList";
 import BlogPost from "@/sections/BlogPost";
 import Healthcare from "@/pages/Healthcare";
@@ -74,7 +76,9 @@ function HomePage() {
       
       <Integrations />
       <FAQ />
+      <IsoCertifications  /> 
       <CTABanner />
+     
       
     </main>
   );
