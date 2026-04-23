@@ -2833,6 +2833,16 @@ const translations: Record<Language, Record<string, string>> = {
   "booking.error": "An error occurred. Please try again.",
   "common.at": "at",
   "hero.cta_booking": "Book Your Meeting",
+      // ─── ISO Certifications ─────────────────────────────────────────
+    "iso.title": "Trusted by Global Certifications",
+    "iso.subtitle": "Global ISO certifications ensuring the quality and security of our services",
+    "iso.badge": "Valid Certificate",
+    "iso.27001.title": "Information Security",
+    "iso.27001.desc": "International Information Security Management System to protect our customers' data",
+    "iso.9001.title": "Quality Management",
+    "iso.9001.desc": "Global quality standards to improve our services and products",
+    "iso.10002.title": "Customer Satisfaction",
+    "iso.10002.desc": "International standard for customer complaint management and response",
   },
 
   ar: {
@@ -5562,6 +5572,17 @@ const translations: Record<Language, Record<string, string>> = {
   "booking.error": "حدث خطأ. يرجى المحاولة مرة أخرى.",
   "common.at": "الساعة",
   "hero.cta_booking": "احجز اجتماعك",
+      // ─── ISO Certifications ─────────────────────────────────────────
+    "iso.title": "موثوقون بشهاداتٍ عالمية",
+    "iso.subtitle": "شهادات ISO عالمية تضمن جودة وأمان خدماتنا",
+    "iso.badge": "شهادة سارية",
+    "iso.27001.title": "أمن المعلومات",
+    "iso.27001.desc": "نظام إدارة أمن المعلومات الدولي لحماية بيانات عملائنا",
+    "iso.9001.title": "إدارة الجودة",
+    "iso.9001.desc": "معايير الجودة العالمية لتحسين خدماتنا ومنتجاتنا",
+    "iso.10002.title": "رضا العملاء",
+    "iso.10002.desc": "المعيار الدولي لإدارة شكاوى العملاء والاستجابة لها",
+  
   },
 };
 
