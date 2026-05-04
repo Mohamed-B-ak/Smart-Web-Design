@@ -138,7 +138,7 @@ export default function Footer() {
 
             <a href="https://wa.me/966539332954" target="_blank" rel="noopener noreferrer" className="foot-link">
               <Phone />
-              <span dir="ltr">+966 11 510 2700</span>
+              <span dir="ltr">+966 11 520 5416</span>
             </a>
 
             <a href="mailto:info@sondos-ai.com" className="foot-link">

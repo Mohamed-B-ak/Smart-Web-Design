@@ -1,10 +1,8 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useRef, useEffect } from "react";
-import ReCAPTCHA from "react-google-recaptcha"; // Importation de la librairie
 
 const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwBKQKtHeblbOWZdCjsxvrp_et9NHdLhttD4cqPgeAfa52mCWR4iDepEP0MfXKsByJU0Q/exec";
-
+  "https://script.google.com/macros/s/AKfycbzfGs6TH7OQ3qSXBBrRfxjM9YDTsuSjrO2SBAbWMCxfcTU7mTuMWFAOo2liKnq7jOspWA/exec"
 const PURPLE = "#672D92";
 const PURPLE_RGB = "103,45,146";
 const purpleBg = (a: number) => `rgba(${PURPLE_RGB},${a})`;
@@ -12,11 +10,6 @@ const purpleBorder = (a: number) => `rgba(${PURPLE_RGB},${a})`;
 const purpleGradient = `linear-gradient(135deg, ${PURPLE}, #7f47ac)`;
 
 const TOTAL_DIGITS = 9;
-
-// -----------------------------------------------------------------------
-// IMPORTANT: Remplacez cette chaîne par votre VRAIE Clé de Site (Site Key)
-const SITE_KEY = "6LfJfc4sAAAAAIqnE6eVRBxp86gKIWq62ZeA8nHi";
-// -----------------------------------------------------------------------
 
 const isValidSaudiNumber = (phone: string): boolean => {
   if (/^5\d{8}$/.test(phone)) return true;
@@ -45,7 +38,6 @@ export default function Demo() {
 
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null); // Référence au captcha
 
   const [formData, setFormData] = useState({
     name: "",
@@ -55,10 +47,6 @@ export default function Demo() {
     industry: "",
     questions: "",
   });
-
-  // --- État pour le Captcha ---
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const [recaptchaError, setRecaptchaError] = useState("");
 
   const [phoneError, setPhoneError] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -74,13 +62,6 @@ export default function Demo() {
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  // --- Handler quand reCAPTCHA change ---
-  const handleRecaptchaChange = (token: string | null) => {
-    setRecaptchaToken(token);
-    setRecaptchaError("");
-  };
-  // -------------------------------------
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value.replace(/\D/g, "");
@@ -103,13 +84,7 @@ export default function Demo() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // --- NOUVEAU : Vérification stricte du token reCAPTCHA ---
-    if (!recaptchaToken) {
-      setRecaptchaError(isRTL ? "يرجى تأكيد أنك لست روبوت" : "Please confirm you are not a robot");
-      return;
-    }
-    // --------------------------------------------------------
-
+    // Vérification du numéro de téléphone (gardée)
     if (!isValidSaudiNumber(formData.phone)) {
       const msg = isRTL
         ? "يرجى إدخال رقم سعودي صالح"
@@ -126,7 +101,6 @@ export default function Demo() {
       const formattedData = {
         ...formData,
         phone: `+966${formData.phone}`,
-        'g-recaptcha-response': recaptchaToken, // Envoi optionnel du token au backend pour double vérification
       };
 
       const params = new URLSearchParams(formattedData as any).toString();
@@ -135,9 +109,6 @@ export default function Demo() {
       setStatus("success");
       setFormData({ name: "", email: "", phone: "", company: "", industry: "", questions: "" });
       setPhoneError("");
-      setRecaptchaToken(null);
-      // Réinitialiser le captcha visuellement après succès
-      recaptchaRef.current?.reset(); 
     } catch {
       setStatus("error");
     }
@@ -311,22 +282,6 @@ export default function Demo() {
                 onFocus={(e) => { (e.target as HTMLElement).style.borderColor = PURPLE; }}
                 onBlur={(e) => { (e.target as HTMLElement).style.borderColor = purpleBorder(0.15); }} />
             </div>
-
-            {/* --- NOUVEAU : Google reCAPTCHA v2 --- */}
-            <div className="flex flex-col items-center gap-2">
-              <div className="transform scale-90 origin-center">
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey={SITE_KEY}
-                  onChange={handleRecaptchaChange}
-                  hl={lang === "ar" ? "ar" : "en"} // Changement de langue auto
-                />
-              </div>
-              {recaptchaError && (
-                <p className="text-xs mt-1 text-red-500 text-center">{recaptchaError}</p>
-              )}
-            </div>
-            {/* ----------------------------------- */}
 
             {status === "error" && (
               <p className="text-red-500 text-sm text-center">{t("demo.error")}</p>
