@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FeatureCard } from "@/components/FeatureCard";
@@ -14,6 +15,18 @@ import {
 } from "lucide-react";
 
 export default function Home() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://app.sondos-ai.com/embed.js";
+    script.setAttribute("data-assistant-id", "0246ecd2-9447-45bd-b4ae-e046bcae2fff");
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background flex flex-col font-sans">
       <Navbar />
