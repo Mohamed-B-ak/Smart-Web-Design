@@ -1,8 +1,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useRef, useEffect } from "react";
 
-const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzfGs6TH7OQ3qSXBBrRfxjM9YDTsuSjrO2SBAbWMCxfcTU7mTuMWFAOo2liKnq7jOspWA/exec"
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxll13flS5kZ7Pojjf9_x6PEXu4ISbrBFzYI0D9p7G2xvzvnOqLtwh4rPwBdeBgG9B8mg/exec";
 const PURPLE = "#672D92";
 const PURPLE_RGB = "103,45,146";
 const purpleBg = (a: number) => `rgba(${PURPLE_RGB},${a})`;
